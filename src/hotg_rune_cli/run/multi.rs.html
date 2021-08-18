@@ -186,10 +186,50 @@
 <span class="kw">use</span> <span class="ident">hotg_rune_core::Value</span>;
 <span class="kw">use</span> <span class="ident">hotg_rune_runtime</span>::{<span class="ident">Capability</span>, <span class="ident">ParameterError</span>};
 
+<span class="doccomment">/// A [`Capability`] which can be created by from some source object and a</span>
+<span class="doccomment">/// [`Builder`].</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// # Note</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// This exists because of the way capabilities were initially designed and</span>
+<span class="doccomment">/// switching to [an improved API][issue-153] would break every Rune that has</span>
+<span class="doccomment">/// been compiled (which I&#39;m okay with because we have version numbers) as well</span>
+<span class="doccomment">/// as the C++ runtime (which I&#39;m not okay with because un-breaking it requires</span>
+<span class="doccomment">/// a lot of work).</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// The process for setting up a capability is very similar to what you&#39;d do</span>
+<span class="doccomment">/// in an OO language.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// 1. Create a new instance of the object in an incomplete state</span>
+<span class="doccomment">/// 2. Go through each of the fields and set them</span>
+<span class="doccomment">/// 3. Use the object to generate data</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// [issue-153]: https://github.com/hotg-ai/rune/issues/153</span>
+<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">SourceBackedCapability</span>: <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Debug</span> <span class="op">+</span> <span class="ident">Sized</span> <span class="op">+</span> <span class="lifetime">&#39;static</span> {
+    <span class="kw">type</span> <span class="ident">Source</span>: <span class="ident">Debug</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>;
+    <span class="kw">type</span> <span class="ident">Builder</span>: <span class="ident">Builder</span> <span class="op">+</span> <span class="ident">Debug</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>;
+
+    <span class="kw">fn</span> <span class="ident">generate</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">buffer</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">usize</span>, <span class="ident">Error</span><span class="op">&gt;</span>;
+
+    <span class="kw">fn</span> <span class="ident">from_builder</span>(
+        <span class="ident">builder</span>: <span class="ident"><span class="self">Self</span>::Builder</span>,
+        <span class="ident">source</span>: <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Source</span>,
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">Error</span><span class="op">&gt;</span>;
+}
+
+<span class="doccomment">/// A [`Capability`] builder.</span>
+<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Builder</span>: <span class="ident">Default</span> <span class="op">+</span> <span class="ident">Debug</span> {
+    <span class="kw">fn</span> <span class="ident">set_parameter</span>(
+        <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>,
+        <span class="ident">key</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
+        <span class="ident">value</span>: <span class="ident">Value</span>,
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">ParameterError</span><span class="op">&gt;</span>;
+}
+
 <span class="doccomment">/// Get a function for creating new [`Capability`] objects which can be</span>
 <span class="doccomment">/// initialized by switching between different source values based on the</span>
 <span class="doccomment">/// `&quot;source&quot;` parameter (i.e. an image or audio clip).</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new_multiplexer</span><span class="op">&lt;</span><span class="ident">S</span>, <span class="ident">I</span><span class="op">&gt;</span>(
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new_capability_switcher</span><span class="op">&lt;</span><span class="ident">S</span>, <span class="ident">I</span><span class="op">&gt;</span>(
     <span class="ident">sources</span>: <span class="ident">I</span>,
 ) <span class="op">-</span><span class="op">&gt;</span> <span class="kw">impl</span> <span class="ident">Fn</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Capability</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span>
 <span class="kw">where</span>
@@ -214,23 +254,6 @@
 }
 
 <span class="doccomment">/// A [`Capability`] which may be partially initialized.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Note</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// This exists because of the way capabilities were initially designed and</span>
-<span class="doccomment">/// switching to [an improved API][issue-153] would break every Rune that has</span>
-<span class="doccomment">/// been compiled (which I&#39;m okay with because we have version numbers) as well</span>
-<span class="doccomment">/// as the C++ runtime (which I&#39;m not okay with because un-breaking it requires</span>
-<span class="doccomment">/// a lot of work).</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// The process for setting up a capability is very similar to what you&#39;d do</span>
-<span class="doccomment">/// in an OO language.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// 1. Create a new instance of the object in an incomplete state</span>
-<span class="doccomment">/// 2. Go through each of the fields and set them</span>
-<span class="doccomment">/// 3. Use the object to generate data</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// [issue-153]: https://github.com/hotg-ai/rune/issues/153</span>
 <span class="kw">enum</span> <span class="ident">LazilyInitializedCapability</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">SourceBackedCapability</span><span class="op">&gt;</span> {
     <span class="ident">Incomplete</span> {
         <span class="ident">sources</span>: <span class="ident">Arc</span><span class="op">&lt;</span>[<span class="ident">S::Source</span>]<span class="op">&gt;</span>,
@@ -331,29 +354,6 @@
             },
         }
     }
-}
-
-<span class="doccomment">/// A [`Capability`] which can be created by from some source object and a</span>
-<span class="doccomment">/// [`Builder`].</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">SourceBackedCapability</span>: <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Debug</span> <span class="op">+</span> <span class="ident">Sized</span> <span class="op">+</span> <span class="lifetime">&#39;static</span> {
-    <span class="kw">type</span> <span class="ident">Source</span>: <span class="ident">Debug</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>;
-    <span class="kw">type</span> <span class="ident">Builder</span>: <span class="ident">Builder</span> <span class="op">+</span> <span class="ident">Debug</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="ident">Sync</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>;
-
-    <span class="kw">fn</span> <span class="ident">generate</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">buffer</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">usize</span>, <span class="ident">Error</span><span class="op">&gt;</span>;
-
-    <span class="kw">fn</span> <span class="ident">from_builder</span>(
-        <span class="ident">builder</span>: <span class="ident"><span class="self">Self</span>::Builder</span>,
-        <span class="ident">source</span>: <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Source</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">Error</span><span class="op">&gt;</span>;
-}
-
-<span class="doccomment">/// A [`Capability`] builder.</span>
-<span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Builder</span>: <span class="ident">Default</span> <span class="op">+</span> <span class="ident">Debug</span> {
-    <span class="kw">fn</span> <span class="ident">set_parameter</span>(
-        <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>,
-        <span class="ident">key</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
-        <span class="ident">value</span>: <span class="ident">Value</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">ParameterError</span><span class="op">&gt;</span>;
 }
 </pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="hotg_rune_cli" data-search-index-js="../../../search-index.js" data-search-js="../../../search.js"></div>

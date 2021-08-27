@@ -149,8 +149,8 @@
 <span class="kw">mod</span> <span class="ident">result</span>;
 <span class="kw">mod</span> <span class="ident">error</span>;
 <span class="kw">mod</span> <span class="ident">image</span>;
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;wasmer-runtime&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">wasmer_runtime</span>;
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;wasmer-runtime&quot;</span>, <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;wasm3-runtime&quot;</span>))]</span>
+<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">wasm_runtime</span>;
 
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_imports</span>)]</span>
 <span class="kw">use</span> <span class="ident">std::ops::Not</span>;

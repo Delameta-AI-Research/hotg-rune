@@ -413,23 +413,23 @@
 <span id="413">413</span>
 <span id="414">414</span>
 </pre><pre class="rust">
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;wasm3-runtime&quot;</span>)]</span>
 <span class="kw">mod</span> <span class="ident">wasm3_impl</span>;
+
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;wasmer-runtime&quot;</span>)]</span>
 <span class="kw">mod</span> <span class="ident">wasmer_impl</span>;
 
 <span class="kw">use</span> <span class="ident">std</span>::{
     <span class="ident">cell::Cell</span>,
     <span class="ident">collections::HashMap</span>,
-    <span class="ident">convert::TryInto</span>,
     <span class="ident">sync</span>::{
-        <span class="ident">Arc</span>, <span class="ident">Mutex</span>,
+        <span class="ident">Arc</span>,
         <span class="ident">atomic</span>::{<span class="ident">AtomicU32</span>, <span class="ident">Ordering</span>},
     },
 };
 <span class="kw">use</span> <span class="ident">log</span>::{<span class="ident">Level</span>, <span class="ident">Record</span>};
-<span class="kw">use</span> <span class="ident">anyhow</span>::{<span class="ident">Context</span>, <span class="ident">Error</span>};
-<span class="kw">use</span> <span class="ident">hotg_rune_core</span>::{
-    <span class="ident">SerializableRecord</span>, <span class="ident">Shape</span>, <span class="ident">capabilities</span>, <span class="ident">outputs</span>, <span class="ident">TFLITE_MIMETYPE</span>,
-};
+<span class="kw">use</span> <span class="ident">anyhow::Error</span>;
+<span class="kw">use</span> <span class="ident">hotg_rune_core</span>::{<span class="ident">Shape</span>, <span class="ident">capabilities</span>, <span class="ident">outputs</span>, <span class="ident">TFLITE_MIMETYPE</span>};
 <span class="kw">use</span> <span class="ident">hotg_rune_runtime</span>::{<span class="ident">Capability</span>, <span class="ident">Output</span>, <span class="ident">common_outputs::Serial</span>};
 
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::random::Random</span>;

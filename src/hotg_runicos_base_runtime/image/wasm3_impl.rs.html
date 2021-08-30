@@ -811,9 +811,6 @@
 <span id="811">811</span>
 <span id="812">812</span>
 <span id="813">813</span>
-<span id="814">814</span>
-<span id="815">815</span>
-<span id="816">816</span>
 </pre><pre class="rust">
 <span class="kw">use</span> <span class="ident">std</span>::{
     <span class="ident">cell::Cell</span>,
@@ -1579,7 +1576,6 @@
 <span class="kw">fn</span> <span class="ident">runtime_error</span>(<span class="ident">e</span>: <span class="ident">Error</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">RuntimeError</span> { <span class="ident">RuntimeError</span>(<span class="ident">e</span>) }
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">never</span>)]</span> <span class="comment">// TODO: port this over (wasm3 lacks reflection though)</span>
 <span class="kw">mod</span> <span class="ident">tests</span> {
     <span class="kw">use</span> <span class="ident">syn</span>::{<span class="ident">ForeignItem</span>, <span class="ident">ForeignItemFn</span>, <span class="ident">Item</span>};
     <span class="kw">use</span> <span class="ident">hotg_rune_wasm3_runtime::Registrar</span>;
@@ -1604,29 +1600,27 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">all_intrinsics_are_registered</span>() {
-        <span class="kw">let</span> <span class="ident">store</span> <span class="op">=</span> <span class="ident">Store::default</span>();
+        <span class="comment">// Unlike the wasmer-version of this test, we don&#39;t validate function</span>
+        <span class="comment">// signatures here</span>
+        <span class="comment">// However, wasm3 already does this when linking functions to a WASM</span>
+        <span class="comment">// program that imports them, so this should not cause subtle</span>
+        <span class="comment">// bugs in practice (spawning the runtime will just fail).</span>
+
         <span class="kw">let</span> <span class="ident">intrinsics_rs</span> <span class="op">=</span> <span class="macro">include_str!</span>(<span class="string">&quot;../../../wasm/src/intrinsics.rs&quot;</span>);
         <span class="kw">let</span> <span class="ident">intrinsics</span> <span class="op">=</span> <span class="ident">extern_functions</span>(<span class="ident">intrinsics_rs</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">f</span><span class="op">|</span> <span class="ident">f</span>.<span class="ident">sig</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">registrar</span> <span class="op">=</span> <span class="ident">Registrar::new</span>(<span class="kw-2">&amp;</span><span class="ident">store</span>);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">registrar</span> <span class="op">=</span> <span class="ident">Registrar::tracing</span>();
 
         <span class="ident">BaseImage::default</span>().<span class="ident">initialize_imports</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">registrar</span>);
 
-        <span class="kw">let</span> <span class="ident">imports</span> <span class="op">=</span> <span class="ident">registrar</span>.<span class="ident">into_import_object</span>();
+        <span class="kw">let</span> <span class="ident">imports</span> <span class="op">=</span> <span class="ident">registrar</span>.<span class="ident">into_trace</span>();
 
         <span class="kw">for</span> <span class="ident">intrinsic</span> <span class="kw">in</span> <span class="ident">intrinsics</span> {
             <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">intrinsic</span>.<span class="ident">ident</span>.<span class="ident">to_string</span>();
-            <span class="kw">let</span> <span class="ident">got</span> <span class="op">=</span> <span class="ident">imports</span>.<span class="ident">get_export</span>(<span class="string">&quot;env&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">name</span>).<span class="ident">expect</span>(<span class="kw-2">&amp;</span><span class="ident">name</span>);
 
-            <span class="kw">let</span> <span class="ident">got</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">got</span> {
-                <span class="ident">Export::Function</span>(<span class="ident">f</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">f</span>,
-                <span class="ident">other</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(<span class="string">&quot;\&quot;{}\&quot; was a {:?}&quot;</span>, <span class="ident">name</span>, <span class="ident">other</span>),
-            };
-            <span class="kw">let</span> <span class="ident">host_function_signature</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">got</span>.<span class="ident">vm_function</span>.<span class="ident">signature</span>;
-            <span class="macro">assert_eq!</span>(
-                <span class="ident">intrinsic</span>.<span class="ident">inputs</span>.<span class="ident">len</span>(),
-                <span class="ident">host_function_signature</span>.<span class="ident">params</span>().<span class="ident">len</span>(),
-                <span class="string">&quot;parameters for \&quot;{}\&quot; are mismatched&quot;</span>,
-                <span class="ident">name</span>,
+            <span class="macro">assert!</span>(
+                <span class="ident">imports</span>.<span class="ident">contains</span>(<span class="kw-2">&amp;</span>(<span class="string">&quot;env&quot;</span>.<span class="ident">to_string</span>(), <span class="ident">name</span>.<span class="ident">clone</span>())),
+                <span class="string">&quot;wasm3 API is missing function `{}`&quot;</span>,
+                <span class="ident">name</span>
             );
         }
     }

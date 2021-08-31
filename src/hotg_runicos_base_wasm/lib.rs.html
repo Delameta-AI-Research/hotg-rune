@@ -78,6 +78,8 @@
 <span id="78">78</span>
 <span id="79">79</span>
 <span id="80">80</span>
+<span id="81">81</span>
+<span id="82">82</span>
 </pre><pre class="rust">
 <span class="attribute">#![<span class="ident">cfg</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;wasm32&quot;</span>)]</span>
 <span class="attribute">#![<span class="ident">no_std</span>]</span>
@@ -92,15 +94,17 @@
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">intrinsics</span>;
 <span class="kw">mod</span> <span class="ident">logging</span>;
 <span class="kw">mod</span> <span class="ident">model</span>;
+<span class="kw">mod</span> <span class="ident">resources</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">serial</span>;
 <span class="kw">mod</span> <span class="ident">stats_allocator</span>;
 
-<span class="kw">pub</span> <span class="kw">use</span> <span class="self">self</span>::{
+<span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::{
     <span class="ident">capability</span>::{<span class="ident">GenericCapability</span>, <span class="ident">Accelerometer</span>, <span class="ident">Random</span>, <span class="ident">Sound</span>, <span class="ident">Raw</span>, <span class="ident">Image</span>},
     <span class="ident">guards</span>::{<span class="ident">SetupGuard</span>, <span class="ident">PipelineGuard</span>},
     <span class="ident">logging::Logger</span>,
     <span class="ident">model::Model</span>,
     <span class="ident">serial::Serial</span>,
+    <span class="ident">resources::Resource</span>,
 };
 
 <span class="kw">use</span> <span class="ident">core</span>::{<span class="ident">alloc::Layout</span>, <span class="ident">fmt::Write</span>, <span class="ident">panic::PanicInfo</span>};

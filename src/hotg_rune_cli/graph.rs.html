@@ -216,12 +216,19 @@
 <span id="216">216</span>
 <span id="217">217</span>
 <span id="218">218</span>
+<span id="219">219</span>
+<span id="220">220</span>
+<span id="221">221</span>
+<span id="222">222</span>
+<span id="223">223</span>
 </pre><pre class="rust">
 <span class="doccomment">//! Generate a DOT graph using a poor man&#39;s graph generator.</span>
 
 <span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">fs::File</span>, <span class="ident">io::Write</span>, <span class="ident">path::PathBuf</span>};
 <span class="kw">use</span> <span class="ident">anyhow</span>::{<span class="ident">Context</span>, <span class="ident">Error</span>};
-<span class="kw">use</span> <span class="ident">hotg_rune_syntax::hir</span>::{<span class="ident">HirId</span>, <span class="ident">NameTable</span>, <span class="ident">Node</span>, <span class="ident">Rune</span>, <span class="ident">Slot</span>, <span class="ident">Type</span>};
+<span class="kw">use</span> <span class="ident">hotg_rune_syntax::hir</span>::{
+    <span class="ident">HirId</span>, <span class="ident">Model</span>, <span class="ident">ModelFile</span>, <span class="ident">NameTable</span>, <span class="ident">Node</span>, <span class="ident">Rune</span>, <span class="ident">Slot</span>, <span class="ident">Type</span>,
+};
 <span class="kw">use</span> <span class="ident">codespan_reporting::term::termcolor::ColorChoice</span>;
 <span class="kw">use</span> <span class="ident">indexmap::IndexMap</span>;
 
@@ -411,9 +418,12 @@
     <span class="kw">let</span> <span class="ident">qualifier</span> <span class="op">=</span> <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">node</span>.<span class="ident">stage</span> {
         <span class="ident">hotg_rune_syntax::hir::Stage::Source</span>(<span class="ident">s</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">s</span>.<span class="ident">kind</span>.<span class="ident">to_string</span>(),
         <span class="ident">hotg_rune_syntax::hir::Stage::Sink</span>(<span class="ident">s</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">s</span>.<span class="ident">kind</span>.<span class="ident">to_string</span>(),
-        <span class="ident">hotg_rune_syntax::hir::Stage::Model</span>(<span class="ident">m</span>) <span class="op">=</span><span class="op">&gt;</span> {
-            <span class="ident">m</span>.<span class="ident">model_file</span>.<span class="ident">display</span>().<span class="ident">to_string</span>()
-        },
+        <span class="ident">hotg_rune_syntax::hir::Stage::Model</span>(<span class="ident">Model</span> {
+            <span class="ident">model_file</span>: <span class="ident">ModelFile::FromDisk</span>(<span class="ident">path</span>),
+        }) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">path</span>.<span class="ident">display</span>().<span class="ident">to_string</span>(),
+        <span class="ident">hotg_rune_syntax::hir::Stage::Model</span>(<span class="ident">Model</span> {
+            <span class="ident">model_file</span>: <span class="ident">ModelFile::Resource</span>(<span class="ident">resource</span>),
+        }) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">resource</span>.<span class="ident">to_string</span>(),
         <span class="ident">hotg_rune_syntax::hir::Stage::ProcBlock</span>(<span class="ident">p</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">p</span>.<span class="ident">path</span>.<span class="ident">to_string</span>(),
     };
 

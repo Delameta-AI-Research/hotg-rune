@@ -92,6 +92,8 @@
 <span id="92">92</span>
 <span id="93">93</span>
 <span id="94">94</span>
+<span id="95">95</span>
+<span id="96">96</span>
 </pre><pre class="rust">
 <span class="attribute">#![<span class="ident">cfg_attr</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>), <span class="ident">no_std</span>)]</span>
 
@@ -106,6 +108,7 @@
 <span class="kw">mod</span> <span class="ident">pipelines</span>;
 <span class="kw">mod</span> <span class="ident">pixel_format</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">reflect</span>;
+<span class="kw">mod</span> <span class="ident">resources</span>;
 <span class="kw">mod</span> <span class="ident">shape</span>;
 <span class="kw">mod</span> <span class="ident">tensor</span>;
 <span class="kw">mod</span> <span class="ident">tensor_list</span>;
@@ -120,6 +123,7 @@
     <span class="ident">logging::SerializableRecord</span>,
     <span class="ident">shape::Shape</span>,
     <span class="ident">tensor_list</span>::{<span class="ident">TensorList</span>, <span class="ident">TensorListMut</span>},
+    <span class="ident">resources</span>::{<span class="ident">InlineResource</span>, <span class="ident">inline_resource_from_bytes</span>},
 };
 
 <span class="doccomment">/// The mimetype used for a TensorFlow Lite model.</span>

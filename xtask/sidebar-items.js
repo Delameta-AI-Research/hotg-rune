@@ -1,1 +1,1 @@
-initSidebarItems({"enum":[["Command",""]],"fn":[["is_pre_commit",""],["main",""],["project_root",""],["run_pre_commit_hook",""]],"mod":[["bulk_copy",""],["check_manifests",""],["dist",""]]});
+initSidebarItems({"enum":[["Command",""]],"fn":[["main",""],["project_root",""]],"mod":[["bulk_copy",""],["check_manifests",""],["dist",""]]});

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;wasmparser-0.78.2&#x2F;src&#x2F;validator.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>validator.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../wasmparser/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">   1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;wasmparser-0.80.1&#x2F;src&#x2F;validator.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>validator.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../wasmparser/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">   1</span>
 <span id="2">   2</span>
 <span id="3">   3</span>
 <span id="4">   4</span>
@@ -2061,25 +2061,6 @@
 <span id="2061">2061</span>
 <span id="2062">2062</span>
 <span id="2063">2063</span>
-<span id="2064">2064</span>
-<span id="2065">2065</span>
-<span id="2066">2066</span>
-<span id="2067">2067</span>
-<span id="2068">2068</span>
-<span id="2069">2069</span>
-<span id="2070">2070</span>
-<span id="2071">2071</span>
-<span id="2072">2072</span>
-<span id="2073">2073</span>
-<span id="2074">2074</span>
-<span id="2075">2075</span>
-<span id="2076">2076</span>
-<span id="2077">2077</span>
-<span id="2078">2078</span>
-<span id="2079">2079</span>
-<span id="2080">2080</span>
-<span id="2081">2081</span>
-<span id="2082">2082</span>
 </pre><pre class="rust">
 <span class="comment">/* Copyright 2018 Mozilla Foundation
  *
@@ -2097,12 +2078,11 @@
  */</span>
 
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::limits</span>::<span class="kw-2">*</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ResizableLimits64</span>;
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::WasmModuleResources</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Alias</span>, <span class="ident">ExternalKind</span>, <span class="ident">Import</span>, <span class="ident">ImportSectionEntryType</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">BinaryReaderError</span>, <span class="ident">EventType</span>, <span class="ident">GlobalType</span>, <span class="ident">MemoryType</span>, <span class="ident">Range</span>, <span class="prelude-ty">Result</span>, <span class="ident">TableType</span>, <span class="ident">Type</span>};
+<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">BinaryReaderError</span>, <span class="ident">GlobalType</span>, <span class="ident">MemoryType</span>, <span class="ident">Range</span>, <span class="prelude-ty">Result</span>, <span class="ident">TableType</span>, <span class="ident">TagType</span>, <span class="ident">Type</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">DataKind</span>, <span class="ident">ElementItem</span>, <span class="ident">ElementKind</span>, <span class="ident">InitExpr</span>, <span class="ident">Instance</span>, <span class="ident">Operator</span>};
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">FuncType</span>, <span class="ident">ResizableLimits</span>, <span class="ident">SectionReader</span>, <span class="ident">SectionWithLimitedItems</span>};
+<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">FuncType</span>, <span class="ident">SectionReader</span>, <span class="ident">SectionWithLimitedItems</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">FunctionBody</span>, <span class="ident">Parser</span>, <span class="ident">Payload</span>};
 <span class="kw">use</span> <span class="ident">std::collections</span>::{<span class="ident">HashMap</span>, <span class="ident">HashSet</span>};
 <span class="kw">use</span> <span class="ident">std::mem</span>;
@@ -2219,11 +2199,12 @@
     <span class="ident">tables</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">TableType</span><span class="op">&gt;</span>,
     <span class="ident">memories</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">MemoryType</span><span class="op">&gt;</span>,
     <span class="ident">globals</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">GlobalType</span><span class="op">&gt;</span>,
+    <span class="ident">num_imported_globals</span>: <span class="ident">u32</span>,
     <span class="ident">element_types</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Type</span><span class="op">&gt;</span>,
     <span class="ident">data_count</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>,
     <span class="ident">code_type_indexes</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>, <span class="comment">// pointer into `types` above</span>
     <span class="ident">func_types</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>,      <span class="comment">// pointer into `validator.types`</span>
-    <span class="ident">events</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>,          <span class="comment">// pointer into `validator.types`</span>
+    <span class="ident">tags</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>,            <span class="comment">// pointer into `validator.types`</span>
     <span class="ident">submodules</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>,      <span class="comment">// pointer into `validator.types`</span>
     <span class="ident">instances</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>,       <span class="comment">// pointer into `validator.types`</span>
     <span class="ident">function_references</span>: <span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">u32</span><span class="op">&gt;</span>,
@@ -2294,7 +2275,7 @@
     <span class="ident">Function</span>,
     <span class="ident">Table</span>,
     <span class="ident">Memory</span>,
-    <span class="ident">Event</span>,
+    <span class="ident">Tag</span>,
     <span class="ident">Global</span>,
     <span class="ident">Export</span>,
     <span class="ident">Start</span>,
@@ -2340,7 +2321,8 @@
 }
 
 <span class="kw">struct</span> <span class="ident">ModuleType</span> {
-    <span class="ident">type_size</span>: <span class="ident">u32</span>,
+    <span class="ident">imports_size</span>: <span class="ident">u32</span>,
+    <span class="ident">exports_size</span>: <span class="ident">u32</span>,
     <span class="ident">imports</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">EntityType</span><span class="op">&gt;</span>,
     <span class="ident">exports</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">EntityType</span><span class="op">&gt;</span>,
 }
@@ -2359,7 +2341,7 @@
     <span class="ident">Func</span>(<span class="ident">usize</span>),     <span class="comment">// pointer into `validator.types`</span>
     <span class="ident">Module</span>(<span class="ident">usize</span>),   <span class="comment">// pointer into `validator.types`</span>
     <span class="ident">Instance</span>(<span class="ident">usize</span>), <span class="comment">// pointer into `validator.types`</span>
-    <span class="ident">Event</span>(<span class="ident">usize</span>),    <span class="comment">// pointer into `validator.types`</span>
+    <span class="ident">Tag</span>(<span class="ident">usize</span>),      <span class="comment">// pointer into `validator.types`</span>
 }
 
 <span class="doccomment">/// Possible return values from [`Validator::payload`].</span>
@@ -2436,7 +2418,7 @@
             <span class="ident">FunctionSection</span>(<span class="ident">s</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">function_section</span>(<span class="ident">s</span>)<span class="question-mark">?</span>,
             <span class="ident">TableSection</span>(<span class="ident">s</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">table_section</span>(<span class="ident">s</span>)<span class="question-mark">?</span>,
             <span class="ident">MemorySection</span>(<span class="ident">s</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">memory_section</span>(<span class="ident">s</span>)<span class="question-mark">?</span>,
-            <span class="ident">EventSection</span>(<span class="ident">s</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">event_section</span>(<span class="ident">s</span>)<span class="question-mark">?</span>,
+            <span class="ident">TagSection</span>(<span class="ident">s</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">tag_section</span>(<span class="ident">s</span>)<span class="question-mark">?</span>,
             <span class="ident">GlobalSection</span>(<span class="ident">s</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">global_section</span>(<span class="ident">s</span>)<span class="question-mark">?</span>,
             <span class="ident">ExportSection</span>(<span class="ident">s</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">export_section</span>(<span class="ident">s</span>)<span class="question-mark">?</span>,
             <span class="ident">StartSection</span> { <span class="ident">func</span>, <span class="ident">range</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">start_section</span>(<span class="kw-2">*</span><span class="ident">func</span>, <span class="ident">range</span>)<span class="question-mark">?</span>,
@@ -2681,12 +2663,10 @@
                     <span class="kw">let</span> <span class="ident">ty</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">import_entry_type</span>(<span class="kw-2">&amp;</span><span class="ident">e</span>.<span class="ident">ty</span>)<span class="question-mark">?</span>;
                     <span class="ident">exports</span>.<span class="ident">push</span>(<span class="self">self</span>.<span class="ident">offset</span>, <span class="ident">e</span>.<span class="ident">name</span>, <span class="prelude-val">None</span>, <span class="ident">ty</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">types</span>, <span class="string">&quot;export&quot;</span>)<span class="question-mark">?</span>;
                 }
+                <span class="ident">combine_type_sizes</span>(<span class="self">self</span>.<span class="ident">offset</span>, <span class="ident">imports</span>.<span class="ident">type_size</span>, <span class="ident">exports</span>.<span class="ident">type_size</span>)<span class="question-mark">?</span>;
                 <span class="ident">TypeDef::Module</span>(<span class="ident">ModuleType</span> {
-                    <span class="ident">type_size</span>: <span class="ident">combine_type_sizes</span>(
-                        <span class="self">self</span>.<span class="ident">offset</span>,
-                        <span class="ident">imports</span>.<span class="ident">type_size</span>,
-                        <span class="ident">exports</span>.<span class="ident">type_size</span>,
-                    )<span class="question-mark">?</span>,
+                    <span class="ident">imports_size</span>: <span class="ident">imports</span>.<span class="ident">type_size</span>,
+                    <span class="ident">exports_size</span>: <span class="ident">exports</span>.<span class="ident">type_size</span>,
                     <span class="ident">imports</span>: <span class="ident">imports</span>.<span class="ident">set</span>,
                     <span class="ident">exports</span>: <span class="ident">exports</span>.<span class="ident">set</span>,
                 })
@@ -2732,11 +2712,9 @@
                 <span class="self">self</span>.<span class="ident">memory_type</span>(<span class="ident">t</span>)<span class="question-mark">?</span>;
                 <span class="prelude-val">Ok</span>(<span class="ident">EntityType::Memory</span>(<span class="ident">t</span>.<span class="ident">clone</span>()))
             }
-            <span class="ident">ImportSectionEntryType::Event</span>(<span class="ident">t</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="self">self</span>.<span class="ident">event_type</span>(<span class="ident">t</span>)<span class="question-mark">?</span>;
-                <span class="prelude-val">Ok</span>(<span class="ident">EntityType::Event</span>(
-                    <span class="self">self</span>.<span class="ident">cur</span>.<span class="ident">state</span>.<span class="ident">types</span>[<span class="ident">t</span>.<span class="ident">type_index</span> <span class="kw">as</span> <span class="ident">usize</span>],
-                ))
+            <span class="ident">ImportSectionEntryType::Tag</span>(<span class="ident">t</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="self">self</span>.<span class="ident">tag_type</span>(<span class="ident">t</span>)<span class="question-mark">?</span>;
+                <span class="prelude-val">Ok</span>(<span class="ident">EntityType::Tag</span>(<span class="self">self</span>.<span class="ident">cur</span>.<span class="ident">state</span>.<span class="ident">types</span>[<span class="ident">t</span>.<span class="ident">type_index</span> <span class="kw">as</span> <span class="ident">usize</span>]))
             }
             <span class="ident">ImportSectionEntryType::Global</span>(<span class="ident">t</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="self">self</span>.<span class="ident">global_type</span>(<span class="ident">t</span>)<span class="question-mark">?</span>;
@@ -2767,63 +2745,52 @@
             }
             <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="self">self</span>.<span class="ident">create_error</span>(<span class="string">&quot;element is not reference type&quot;</span>),
         }
-        <span class="self">self</span>.<span class="ident">limits</span>(<span class="kw-2">&amp;</span><span class="ident">ty</span>.<span class="ident">limits</span>)<span class="question-mark">?</span>;
-        <span class="kw">if</span> <span class="ident">ty</span>.<span class="ident">limits</span>.<span class="ident">initial</span> <span class="op">&gt;</span> <span class="ident">MAX_WASM_TABLE_ENTRIES</span> <span class="kw">as</span> <span class="ident">u32</span> {
+        <span class="self">self</span>.<span class="ident">limits</span>(<span class="ident">ty</span>.<span class="ident">initial</span>, <span class="ident">ty</span>.<span class="ident">maximum</span>)<span class="question-mark">?</span>;
+        <span class="kw">if</span> <span class="ident">ty</span>.<span class="ident">initial</span> <span class="op">&gt;</span> <span class="ident">MAX_WASM_TABLE_ENTRIES</span> <span class="kw">as</span> <span class="ident">u32</span> {
             <span class="kw">return</span> <span class="self">self</span>.<span class="ident">create_error</span>(<span class="string">&quot;minimum table size is out of bounds&quot;</span>);
         }
         <span class="prelude-val">Ok</span>(())
     }
 
     <span class="kw">fn</span> <span class="ident">memory_type</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ty</span>: <span class="kw-2">&amp;</span><span class="ident">MemoryType</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="kw">match</span> <span class="ident">ty</span> {
-            <span class="ident">MemoryType::M32</span> { <span class="ident">limits</span>, <span class="ident">shared</span> } <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="self">self</span>.<span class="ident">limits</span>(<span class="ident">limits</span>)<span class="question-mark">?</span>;
-                <span class="kw">let</span> <span class="ident">initial</span> <span class="op">=</span> <span class="ident">limits</span>.<span class="ident">initial</span>;
-                <span class="kw">if</span> <span class="ident">initial</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">&gt;</span> <span class="ident">MAX_WASM_MEMORY_PAGES</span> {
-                    <span class="kw">return</span> <span class="self">self</span>.<span class="ident">create_error</span>(<span class="string">&quot;memory size must be at most 65536 pages (4GiB)&quot;</span>);
-                }
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">maximum</span>) <span class="op">=</span> <span class="ident">limits</span>.<span class="ident">maximum</span> {
-                    <span class="kw">if</span> <span class="ident">maximum</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">&gt;</span> <span class="ident">MAX_WASM_MEMORY_PAGES</span> {
-                        <span class="kw">return</span> <span class="self">self</span>.<span class="ident">create_error</span>(<span class="string">&quot;memory size must be at most 65536 pages (4GiB)&quot;</span>);
-                    }
-                }
-                <span class="kw">if</span> <span class="kw-2">*</span><span class="ident">shared</span> {
-                    <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">features</span>.<span class="ident">threads</span> {
-                        <span class="kw">return</span> <span class="self">self</span>.<span class="ident">create_error</span>(<span class="string">&quot;threads must be enabled for shared memories&quot;</span>);
-                    }
-                    <span class="kw">if</span> <span class="ident">limits</span>.<span class="ident">maximum</span>.<span class="ident">is_none</span>() {
-                        <span class="kw">return</span> <span class="self">self</span>.<span class="ident">create_error</span>(<span class="string">&quot;shared memory must have maximum size&quot;</span>);
-                    }
-                }
+        <span class="self">self</span>.<span class="ident">limits</span>(<span class="ident">ty</span>.<span class="ident">initial</span>, <span class="ident">ty</span>.<span class="ident">maximum</span>)<span class="question-mark">?</span>;
+        <span class="kw">let</span> (<span class="ident">true_maximum</span>, <span class="ident">err</span>) <span class="op">=</span> <span class="kw">if</span> <span class="ident">ty</span>.<span class="ident">memory64</span> {
+            <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">features</span>.<span class="ident">memory64</span> {
+                <span class="kw">return</span> <span class="self">self</span>.<span class="ident">create_error</span>(<span class="string">&quot;memory64 must be enabled for 64-bit memories&quot;</span>);
             }
-            <span class="ident">MemoryType::M64</span> { <span class="ident">limits</span>, <span class="ident">shared</span> } <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">features</span>.<span class="ident">memory64</span> {
-                    <span class="kw">return</span> <span class="self">self</span>.<span class="ident">create_error</span>(<span class="string">&quot;memory64 must be enabled for 64-bit memories&quot;</span>);
-                }
-                <span class="self">self</span>.<span class="ident">limits64</span>(<span class="kw-2">&amp;</span><span class="ident">limits</span>)<span class="question-mark">?</span>;
-                <span class="kw">let</span> <span class="ident">initial</span> <span class="op">=</span> <span class="ident">limits</span>.<span class="ident">initial</span>;
-                <span class="kw">if</span> <span class="ident">initial</span> <span class="op">&gt;</span> <span class="ident">MAX_WASM_MEMORY64_PAGES</span> {
-                    <span class="kw">return</span> <span class="self">self</span>.<span class="ident">create_error</span>(<span class="string">&quot;memory initial size too large&quot;</span>);
-                }
-                <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">maximum</span>) <span class="op">=</span> <span class="ident">limits</span>.<span class="ident">maximum</span> {
-                    <span class="kw">if</span> <span class="ident">maximum</span> <span class="op">&gt;</span> <span class="ident">MAX_WASM_MEMORY64_PAGES</span> {
-                        <span class="kw">return</span> <span class="self">self</span>.<span class="ident">create_error</span>(<span class="string">&quot;memory initial size too large&quot;</span>);
-                    }
-                }
-                <span class="kw">if</span> <span class="kw-2">*</span><span class="ident">shared</span> {
-                    <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">features</span>.<span class="ident">threads</span> {
-                        <span class="kw">return</span> <span class="self">self</span>.<span class="ident">create_error</span>(<span class="string">&quot;threads must be enabled for shared memories&quot;</span>);
-                    }
-                    <span class="kw">if</span> <span class="ident">limits</span>.<span class="ident">maximum</span>.<span class="ident">is_none</span>() {
-                        <span class="kw">return</span> <span class="self">self</span>.<span class="ident">create_error</span>(<span class="string">&quot;shared memory must have maximum size&quot;</span>);
-                    }
-                }
+            (
+                <span class="ident">MAX_WASM_MEMORY64_PAGES</span>,
+                <span class="string">&quot;memory size must be at most 2**48 pages&quot;</span>,
+            )
+        } <span class="kw">else</span> {
+            (
+                <span class="ident">MAX_WASM_MEMORY32_PAGES</span>,
+                <span class="string">&quot;memory size must be at most 65536 pages (4GiB)&quot;</span>,
+            )
+        };
+        <span class="kw">if</span> <span class="ident">ty</span>.<span class="ident">initial</span> <span class="op">&gt;</span> <span class="ident">true_maximum</span> {
+            <span class="kw">return</span> <span class="self">self</span>.<span class="ident">create_error</span>(<span class="ident">err</span>);
+        }
+        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">maximum</span>) <span class="op">=</span> <span class="ident">ty</span>.<span class="ident">maximum</span> {
+            <span class="kw">if</span> <span class="ident">maximum</span> <span class="op">&gt;</span> <span class="ident">true_maximum</span> {
+                <span class="kw">return</span> <span class="self">self</span>.<span class="ident">create_error</span>(<span class="ident">err</span>);
+            }
+        }
+        <span class="kw">if</span> <span class="ident">ty</span>.<span class="ident">shared</span> {
+            <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">features</span>.<span class="ident">threads</span> {
+                <span class="kw">return</span> <span class="self">self</span>.<span class="ident">create_error</span>(<span class="string">&quot;threads must be enabled for shared memories&quot;</span>);
+            }
+            <span class="kw">if</span> <span class="ident">ty</span>.<span class="ident">maximum</span>.<span class="ident">is_none</span>() {
+                <span class="kw">return</span> <span class="self">self</span>.<span class="ident">create_error</span>(<span class="string">&quot;shared memory must have maximum size&quot;</span>);
             }
         }
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="kw">fn</span> <span class="ident">event_type</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ty</span>: <span class="kw-2">&amp;</span><span class="ident">EventType</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">tag_type</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ty</span>: <span class="kw-2">&amp;</span><span class="ident">TagType</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+        <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">features</span>.<span class="ident">exceptions</span> {
+            <span class="kw">return</span> <span class="self">self</span>.<span class="ident">create_error</span>(<span class="string">&quot;exceptions proposal not enabled&quot;</span>);
+        }
         <span class="kw">let</span> <span class="ident">ty</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">func_type_at</span>(<span class="ident">ty</span>.<span class="ident">type_index</span>)<span class="question-mark">?</span>;
         <span class="kw">if</span> <span class="ident">ty</span>.<span class="ident">returns</span>.<span class="ident">len</span>() <span class="op">&gt;</span> <span class="number">0</span> {
             <span class="kw">return</span> <span class="self">self</span>.<span class="ident">create_error</span>(<span class="string">&quot;invalid result arity for exception type&quot;</span>);
@@ -2835,18 +2802,12 @@
         <span class="self">self</span>.<span class="ident">value_type</span>(<span class="ident">ty</span>.<span class="ident">content_type</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">limits</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">limits</span>: <span class="kw-2">&amp;</span><span class="ident">ResizableLimits</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">max</span>) <span class="op">=</span> <span class="ident">limits</span>.<span class="ident">maximum</span> {
-            <span class="kw">if</span> <span class="ident">limits</span>.<span class="ident">initial</span> <span class="op">&gt;</span> <span class="ident">max</span> {
-                <span class="kw">return</span> <span class="self">self</span>.<span class="ident">create_error</span>(<span class="string">&quot;size minimum must not be greater than maximum&quot;</span>);
-            }
-        }
-        <span class="prelude-val">Ok</span>(())
-    }
-
-    <span class="kw">fn</span> <span class="ident">limits64</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">limits</span>: <span class="kw-2">&amp;</span><span class="ident">ResizableLimits64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">max</span>) <span class="op">=</span> <span class="ident">limits</span>.<span class="ident">maximum</span> {
-            <span class="kw">if</span> <span class="ident">limits</span>.<span class="ident">initial</span> <span class="op">&gt;</span> <span class="ident">max</span> {
+    <span class="kw">fn</span> <span class="ident">limits</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">initial</span>: <span class="ident">T</span>, <span class="ident">maximum</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span>
+    <span class="kw">where</span>
+        <span class="ident">T</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">u64</span><span class="op">&gt;</span>,
+    {
+        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">max</span>) <span class="op">=</span> <span class="ident">maximum</span> {
+            <span class="kw">if</span> <span class="ident">initial</span>.<span class="ident">into</span>() <span class="op">&gt;</span> <span class="ident">max</span>.<span class="ident">into</span>() {
                 <span class="kw">return</span> <span class="self">self</span>.<span class="ident">create_error</span>(<span class="string">&quot;size minimum must not be greater than maximum&quot;</span>);
             }
         }
@@ -2909,13 +2870,14 @@
                 <span class="ident">state</span>.<span class="ident">memories</span>.<span class="ident">push</span>(<span class="ident">ty</span>);
                 (<span class="ident">state</span>.<span class="ident">memories</span>.<span class="ident">len</span>(), <span class="self">self</span>.<span class="ident">max_memories</span>(), <span class="string">&quot;memories&quot;</span>)
             }
-            <span class="ident">ImportSectionEntryType::Event</span>(<span class="ident">ty</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">ImportSectionEntryType::Tag</span>(<span class="ident">ty</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="ident">ty</span> <span class="op">=</span> <span class="ident">state</span>.<span class="ident">types</span>[<span class="ident">ty</span>.<span class="ident">type_index</span> <span class="kw">as</span> <span class="ident">usize</span>];
-                <span class="ident">state</span>.<span class="ident">events</span>.<span class="ident">push</span>(<span class="ident">ty</span>);
-                (<span class="ident">state</span>.<span class="ident">events</span>.<span class="ident">len</span>(), <span class="ident">MAX_WASM_EVENTS</span>, <span class="string">&quot;events&quot;</span>)
+                <span class="ident">state</span>.<span class="ident">tags</span>.<span class="ident">push</span>(<span class="ident">ty</span>);
+                (<span class="ident">state</span>.<span class="ident">tags</span>.<span class="ident">len</span>(), <span class="ident">MAX_WASM_TAGS</span>, <span class="string">&quot;tags&quot;</span>)
             }
             <span class="ident">ImportSectionEntryType::Global</span>(<span class="ident">ty</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="ident">state</span>.<span class="ident">globals</span>.<span class="ident">push</span>(<span class="ident">ty</span>);
+                <span class="ident">state</span>.<span class="ident">num_imported_globals</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
                 (<span class="ident">state</span>.<span class="ident">globals</span>.<span class="ident">len</span>(), <span class="ident">MAX_WASM_GLOBALS</span>, <span class="string">&quot;globals&quot;</span>)
             }
             <span class="ident">ImportSectionEntryType::Instance</span>(<span class="ident">type_idx</span>) <span class="op">=</span><span class="op">&gt;</span> {
@@ -3001,13 +2963,15 @@
                         <span class="kw">let</span> <span class="ident">ty</span> <span class="op">=</span> <span class="ident">ty</span>.<span class="ident">clone</span>();
                         <span class="self">self</span>.<span class="ident">cur</span>.<span class="ident">state</span>.<span class="ident">assert_mut</span>().<span class="ident">memories</span>.<span class="ident">push</span>(<span class="ident">ty</span>);
                     }
-                    (<span class="ident">EntityType::Event</span>(<span class="ident">ty</span>), <span class="ident">ExternalKind::Event</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                    (<span class="ident">EntityType::Tag</span>(<span class="ident">ty</span>), <span class="ident">ExternalKind::Tag</span>) <span class="op">=</span><span class="op">&gt;</span> {
                         <span class="kw">let</span> <span class="ident">ty</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">ty</span>;
-                        <span class="self">self</span>.<span class="ident">cur</span>.<span class="ident">state</span>.<span class="ident">assert_mut</span>().<span class="ident">events</span>.<span class="ident">push</span>(<span class="ident">ty</span>);
+                        <span class="self">self</span>.<span class="ident">cur</span>.<span class="ident">state</span>.<span class="ident">assert_mut</span>().<span class="ident">tags</span>.<span class="ident">push</span>(<span class="ident">ty</span>);
                     }
                     (<span class="ident">EntityType::Global</span>(<span class="ident">ty</span>), <span class="ident">ExternalKind::Global</span>) <span class="op">=</span><span class="op">&gt;</span> {
                         <span class="kw">let</span> <span class="ident">ty</span> <span class="op">=</span> <span class="ident">ty</span>.<span class="ident">clone</span>();
-                        <span class="self">self</span>.<span class="ident">cur</span>.<span class="ident">state</span>.<span class="ident">assert_mut</span>().<span class="ident">globals</span>.<span class="ident">push</span>(<span class="ident">ty</span>);
+                        <span class="kw">let</span> <span class="ident">state</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">cur</span>.<span class="ident">state</span>.<span class="ident">assert_mut</span>();
+                        <span class="ident">state</span>.<span class="ident">num_imported_globals</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
+                        <span class="ident">state</span>.<span class="ident">globals</span>.<span class="ident">push</span>(<span class="ident">ty</span>);
                     }
                     (<span class="ident">EntityType::Instance</span>(<span class="ident">ty</span>), <span class="ident">ExternalKind::Instance</span>) <span class="op">=</span><span class="op">&gt;</span> {
                         <span class="kw">let</span> <span class="ident">ty</span> <span class="op">=</span> <span class="kw-2">*</span><span class="ident">ty</span>;
@@ -3101,7 +3065,7 @@
         <span class="comment">// accounting for the imports on the original module, but that should be</span>
         <span class="comment">// ok for now since it&#39;s only used to limit the size of larger types.</span>
         <span class="kw">let</span> <span class="ident">instance_ty</span> <span class="op">=</span> <span class="ident">InstanceType</span> {
-            <span class="ident">type_size</span>: <span class="ident">ty</span>.<span class="ident">type_size</span>,
+            <span class="ident">type_size</span>: <span class="ident">ty</span>.<span class="ident">exports_size</span>,
             <span class="ident">exports</span>: <span class="ident">ty</span>.<span class="ident">exports</span>.<span class="ident">clone</span>(),
         };
         <span class="self">self</span>.<span class="ident">cur</span>.<span class="ident">state</span>.<span class="ident">assert_mut</span>().<span class="ident">instances</span>.<span class="ident">push</span>(<span class="self">self</span>.<span class="ident">types</span>.<span class="ident">len</span>());
@@ -3143,7 +3107,7 @@
                     <span class="ident">EntityType::Table</span>(<span class="ident">b</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">b</span>,
                     <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="self">self</span>.<span class="ident">create_error</span>(<span class="string">&quot;item type mismatch&quot;</span>),
                 };
-                <span class="kw">if</span> <span class="ident">a</span>.<span class="ident">element_type</span> <span class="op">=</span><span class="op">=</span> <span class="ident">b</span>.<span class="ident">element_type</span> <span class="op">&amp;&amp;</span> <span class="macro">limits_match!</span>(<span class="kw-2">&amp;</span><span class="ident">a</span>.<span class="ident">limits</span>, <span class="kw-2">&amp;</span><span class="ident">b</span>.<span class="ident">limits</span>) {
+                <span class="kw">if</span> <span class="ident">a</span>.<span class="ident">element_type</span> <span class="op">=</span><span class="op">=</span> <span class="ident">b</span>.<span class="ident">element_type</span> <span class="op">&amp;&amp;</span> <span class="macro">limits_match!</span>(<span class="ident">a</span>, <span class="ident">b</span>) {
                     <span class="prelude-val">Ok</span>(())
                 } <span class="kw">else</span> {
                     <span class="self">self</span>.<span class="ident">create_error</span>(<span class="string">&quot;table type mismatch&quot;</span>)
@@ -3160,34 +3124,23 @@
                     <span class="self">self</span>.<span class="ident">create_error</span>(<span class="string">&quot;func type mismatch&quot;</span>)
                 }
             }
-            <span class="ident">EntityType::Event</span>(<span class="ident">a</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">EntityType::Tag</span>(<span class="ident">a</span>) <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">b</span> {
-                    <span class="ident">EntityType::Event</span>(<span class="ident">b</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">b</span>,
+                    <span class="ident">EntityType::Tag</span>(<span class="ident">b</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">b</span>,
                     <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="self">self</span>.<span class="ident">create_error</span>(<span class="string">&quot;item type mismatch&quot;</span>),
                 };
                 <span class="kw">if</span> <span class="self">self</span>.<span class="ident">types</span>[<span class="kw-2">*</span><span class="ident">a</span>].<span class="ident">unwrap_func</span>() <span class="op">=</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">types</span>[<span class="kw-2">*</span><span class="ident">b</span>].<span class="ident">unwrap_func</span>() {
                     <span class="prelude-val">Ok</span>(())
                 } <span class="kw">else</span> {
-                    <span class="self">self</span>.<span class="ident">create_error</span>(<span class="string">&quot;event type mismatch&quot;</span>)
+                    <span class="self">self</span>.<span class="ident">create_error</span>(<span class="string">&quot;tag type mismatch&quot;</span>)
                 }
             }
-            <span class="ident">EntityType::Memory</span>(<span class="ident">MemoryType::M32</span> { <span class="ident">limits</span>, <span class="ident">shared</span> }) <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="kw">let</span> (<span class="ident">b_limits</span>, <span class="ident">b_shared</span>) <span class="op">=</span> <span class="kw">match</span> <span class="ident">b</span> {
-                    <span class="ident">EntityType::Memory</span>(<span class="ident">MemoryType::M32</span> { <span class="ident">limits</span>, <span class="ident">shared</span> }) <span class="op">=</span><span class="op">&gt;</span> (<span class="ident">limits</span>, <span class="ident">shared</span>),
+            <span class="ident">EntityType::Memory</span>(<span class="ident">a</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="kw">let</span> <span class="ident">b</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">b</span> {
+                    <span class="ident">EntityType::Memory</span>(<span class="ident">b</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">b</span>,
                     <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="self">self</span>.<span class="ident">create_error</span>(<span class="string">&quot;item type mismatch&quot;</span>),
                 };
-                <span class="kw">if</span> <span class="macro">limits_match!</span>(<span class="ident">limits</span>, <span class="ident">b_limits</span>) <span class="op">&amp;&amp;</span> <span class="ident">shared</span> <span class="op">=</span><span class="op">=</span> <span class="ident">b_shared</span> {
-                    <span class="prelude-val">Ok</span>(())
-                } <span class="kw">else</span> {
-                    <span class="self">self</span>.<span class="ident">create_error</span>(<span class="string">&quot;memory type mismatch&quot;</span>)
-                }
-            }
-            <span class="ident">EntityType::Memory</span>(<span class="ident">MemoryType::M64</span> { <span class="ident">limits</span>, <span class="ident">shared</span> }) <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="kw">let</span> (<span class="ident">b_limits</span>, <span class="ident">b_shared</span>) <span class="op">=</span> <span class="kw">match</span> <span class="ident">b</span> {
-                    <span class="ident">EntityType::Memory</span>(<span class="ident">MemoryType::M64</span> { <span class="ident">limits</span>, <span class="ident">shared</span> }) <span class="op">=</span><span class="op">&gt;</span> (<span class="ident">limits</span>, <span class="ident">shared</span>),
-                    <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="self">self</span>.<span class="ident">create_error</span>(<span class="string">&quot;item type mismatch&quot;</span>),
-                };
-                <span class="kw">if</span> <span class="macro">limits_match!</span>(<span class="ident">limits</span>, <span class="ident">b_limits</span>) <span class="op">&amp;&amp;</span> <span class="ident">shared</span> <span class="op">=</span><span class="op">=</span> <span class="ident">b_shared</span> {
+                <span class="kw">if</span> <span class="macro">limits_match!</span>(<span class="ident">a</span>, <span class="ident">b</span>) <span class="op">&amp;&amp;</span> <span class="ident">a</span>.<span class="ident">shared</span> <span class="op">=</span><span class="op">=</span> <span class="ident">b</span>.<span class="ident">shared</span> <span class="op">&amp;&amp;</span> <span class="ident">a</span>.<span class="ident">memory64</span> <span class="op">=</span><span class="op">=</span> <span class="ident">b</span>.<span class="ident">memory64</span> {
                     <span class="prelude-val">Ok</span>(())
                 } <span class="kw">else</span> {
                     <span class="self">self</span>.<span class="ident">create_error</span>(<span class="string">&quot;memory type mismatch&quot;</span>)
@@ -3299,17 +3252,20 @@
         })
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">event_section</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">section</span>: <span class="kw-2">&amp;</span><span class="ident"><span class="kw">crate</span>::EventSectionReader</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">tag_section</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">section</span>: <span class="kw-2">&amp;</span><span class="ident"><span class="kw">crate</span>::TagSectionReader</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+        <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">features</span>.<span class="ident">exceptions</span> {
+            <span class="kw">return</span> <span class="self">self</span>.<span class="ident">create_error</span>(<span class="string">&quot;exceptions proposal not enabled&quot;</span>);
+        }
         <span class="self">self</span>.<span class="ident">check_max</span>(
-            <span class="self">self</span>.<span class="ident">cur</span>.<span class="ident">state</span>.<span class="ident">events</span>.<span class="ident">len</span>(),
+            <span class="self">self</span>.<span class="ident">cur</span>.<span class="ident">state</span>.<span class="ident">tags</span>.<span class="ident">len</span>(),
             <span class="ident">section</span>.<span class="ident">get_count</span>(),
-            <span class="ident">MAX_WASM_EVENTS</span>,
-            <span class="string">&quot;events&quot;</span>,
+            <span class="ident">MAX_WASM_TAGS</span>,
+            <span class="string">&quot;tags&quot;</span>,
         )<span class="question-mark">?</span>;
-        <span class="self">self</span>.<span class="ident">section</span>(<span class="ident">Order::Event</span>, <span class="ident">section</span>, <span class="op">|</span><span class="ident">me</span>, <span class="ident">ty</span><span class="op">|</span> {
-            <span class="ident">me</span>.<span class="ident">event_type</span>(<span class="kw-2">&amp;</span><span class="ident">ty</span>)<span class="question-mark">?</span>;
+        <span class="self">self</span>.<span class="ident">section</span>(<span class="ident">Order::Tag</span>, <span class="ident">section</span>, <span class="op">|</span><span class="ident">me</span>, <span class="ident">ty</span><span class="op">|</span> {
+            <span class="ident">me</span>.<span class="ident">tag_type</span>(<span class="kw-2">&amp;</span><span class="ident">ty</span>)<span class="question-mark">?</span>;
             <span class="kw">let</span> <span class="ident">state</span> <span class="op">=</span> <span class="ident">me</span>.<span class="ident">cur</span>.<span class="ident">state</span>.<span class="ident">assert_mut</span>();
-            <span class="ident">state</span>.<span class="ident">events</span>.<span class="ident">push</span>(<span class="ident">state</span>.<span class="ident">types</span>[<span class="ident">ty</span>.<span class="ident">type_index</span> <span class="kw">as</span> <span class="ident">usize</span>]);
+            <span class="ident">state</span>.<span class="ident">tags</span>.<span class="ident">push</span>(<span class="ident">state</span>.<span class="ident">types</span>[<span class="ident">ty</span>.<span class="ident">type_index</span> <span class="kw">as</span> <span class="ident">usize</span>]);
             <span class="prelude-val">Ok</span>(())
         })
     }
@@ -3348,6 +3304,11 @@
             <span class="ident">Operator::V128Const</span> { .. } <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Type::V128</span>,
             <span class="ident">Operator::GlobalGet</span> { <span class="ident">global_index</span> } <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="ident">global</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">get_global</span>(<span class="ident">global_index</span>)<span class="question-mark">?</span>;
+                <span class="kw">if</span> <span class="ident">global_index</span> <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">cur</span>.<span class="ident">state</span>.<span class="ident">num_imported_globals</span> {
+                    <span class="kw">return</span> <span class="self">self</span>.<span class="ident">create_error</span>(
+                        <span class="string">&quot;constant expression required: global.get of locally defined global&quot;</span>,
+                    );
+                }
                 <span class="kw">if</span> <span class="ident">global</span>.<span class="ident">mutable</span> {
                     <span class="kw">return</span> <span class="self">self</span>.<span class="ident">create_error</span>(
                         <span class="string">&quot;constant expression required: global.get of mutable global&quot;</span>,
@@ -3454,9 +3415,9 @@
                 <span class="ident">check</span>(<span class="string">&quot;global&quot;</span>, <span class="self">self</span>.<span class="ident">cur</span>.<span class="ident">state</span>.<span class="ident">globals</span>.<span class="ident">len</span>())<span class="question-mark">?</span>;
                 <span class="ident">EntityType::Global</span>(<span class="self">self</span>.<span class="ident">cur</span>.<span class="ident">state</span>.<span class="ident">globals</span>[<span class="ident">index</span> <span class="kw">as</span> <span class="ident">usize</span>].<span class="ident">clone</span>())
             }
-            <span class="ident">ExternalKind::Event</span> <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="ident">check</span>(<span class="string">&quot;event&quot;</span>, <span class="self">self</span>.<span class="ident">cur</span>.<span class="ident">state</span>.<span class="ident">events</span>.<span class="ident">len</span>())<span class="question-mark">?</span>;
-                <span class="ident">EntityType::Event</span>(<span class="self">self</span>.<span class="ident">cur</span>.<span class="ident">state</span>.<span class="ident">events</span>[<span class="ident">index</span> <span class="kw">as</span> <span class="ident">usize</span>])
+            <span class="ident">ExternalKind::Tag</span> <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="ident">check</span>(<span class="string">&quot;tag&quot;</span>, <span class="self">self</span>.<span class="ident">cur</span>.<span class="ident">state</span>.<span class="ident">tags</span>.<span class="ident">len</span>())<span class="question-mark">?</span>;
+                <span class="ident">EntityType::Tag</span>(<span class="self">self</span>.<span class="ident">cur</span>.<span class="ident">state</span>.<span class="ident">tags</span>[<span class="ident">index</span> <span class="kw">as</span> <span class="ident">usize</span>])
             }
             <span class="ident">ExternalKind::Module</span> <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="ident">check</span>(<span class="string">&quot;module&quot;</span>, <span class="self">self</span>.<span class="ident">cur</span>.<span class="ident">state</span>.<span class="ident">submodules</span>.<span class="ident">len</span>())<span class="question-mark">?</span>;
@@ -3646,7 +3607,7 @@
         <span class="comment">// size. This is primarily here for the module linking proposal, and</span>
         <span class="comment">// we&#39;ll record this in the module type below if we&#39;re part of a nested</span>
         <span class="comment">// module.</span>
-        <span class="kw">let</span> <span class="ident">type_size</span> <span class="op">=</span> <span class="ident">combine_type_sizes</span>(
+        <span class="ident">combine_type_sizes</span>(
             <span class="self">self</span>.<span class="ident">offset</span>,
             <span class="self">self</span>.<span class="ident">cur</span>.<span class="ident">state</span>.<span class="ident">imports</span>.<span class="ident">type_size</span>,
             <span class="self">self</span>.<span class="ident">cur</span>.<span class="ident">state</span>.<span class="ident">exports</span>.<span class="ident">type_size</span>,
@@ -3659,7 +3620,8 @@
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">mut</span> <span class="ident">parent</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">parents</span>.<span class="ident">pop</span>() {
             <span class="kw">let</span> <span class="ident">module_type</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">types</span>.<span class="ident">len</span>();
             <span class="self">self</span>.<span class="ident">types</span>.<span class="ident">push</span>(<span class="ident">TypeDef::Module</span>(<span class="ident">ModuleType</span> {
-                <span class="ident">type_size</span>,
+                <span class="ident">imports_size</span>: <span class="self">self</span>.<span class="ident">cur</span>.<span class="ident">state</span>.<span class="ident">imports</span>.<span class="ident">type_size</span>,
+                <span class="ident">exports_size</span>: <span class="self">self</span>.<span class="ident">cur</span>.<span class="ident">state</span>.<span class="ident">exports</span>.<span class="ident">type_size</span>,
                 <span class="ident">imports</span>: <span class="self">self</span>.<span class="ident">cur</span>.<span class="ident">state</span>.<span class="ident">imports</span>.<span class="ident">set</span>.<span class="ident">clone</span>(),
                 <span class="ident">exports</span>: <span class="self">self</span>.<span class="ident">cur</span>.<span class="ident">state</span>.<span class="ident">exports</span>.<span class="ident">set</span>.<span class="ident">clone</span>(),
             }));
@@ -3681,8 +3643,8 @@
         <span class="self">self</span>.<span class="ident">cur</span>.<span class="ident">state</span>.<span class="ident">memory_at</span>(<span class="ident">at</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">event_at</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">at</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::FuncType</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">cur</span>.<span class="ident">state</span>.<span class="ident">event_at</span>(<span class="ident">at</span>)
+    <span class="kw">fn</span> <span class="ident">tag_at</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">at</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::FuncType</span><span class="op">&gt;</span> {
+        <span class="self">self</span>.<span class="ident">cur</span>.<span class="ident">state</span>.<span class="ident">tag_at</span>(<span class="ident">at</span>)
     }
 
     <span class="kw">fn</span> <span class="ident">global_at</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">at</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">GlobalType</span><span class="op">&gt;</span> {
@@ -3765,9 +3727,9 @@
         <span class="self">self</span>.<span class="ident">memories</span>.<span class="ident">get</span>(<span class="ident">at</span> <span class="kw">as</span> <span class="ident">usize</span>).<span class="ident">cloned</span>()
     }
 
-    <span class="kw">fn</span> <span class="ident">event_at</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">at</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::FuncType</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">tag_at</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">at</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::FuncType</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">types</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">all_types</span>.<span class="ident">as_ref</span>().<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">i</span> <span class="op">=</span> <span class="kw-2">*</span><span class="self">self</span>.<span class="ident">events</span>.<span class="ident">get</span>(<span class="ident">at</span> <span class="kw">as</span> <span class="ident">usize</span>)<span class="question-mark">?</span>;
+        <span class="kw">let</span> <span class="ident">i</span> <span class="op">=</span> <span class="kw-2">*</span><span class="self">self</span>.<span class="ident">tags</span>.<span class="ident">get</span>(<span class="ident">at</span> <span class="kw">as</span> <span class="ident">usize</span>)<span class="question-mark">?</span>;
         <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">types</span>[<span class="ident">i</span>] {
             <span class="ident">TypeDef::Func</span>(<span class="ident">f</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">f</span>),
             <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
@@ -3827,8 +3789,8 @@
         <span class="self">self</span>.<span class="number">0</span>.<span class="ident">memory_at</span>(<span class="ident">at</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">event_at</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">at</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::FuncType</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="number">0</span>.<span class="ident">event_at</span>(<span class="ident">at</span>)
+    <span class="kw">fn</span> <span class="ident">tag_at</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">at</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::FuncType</span><span class="op">&gt;</span> {
+        <span class="self">self</span>.<span class="number">0</span>.<span class="ident">tag_at</span>(<span class="ident">at</span>)
     }
 
     <span class="kw">fn</span> <span class="ident">global_at</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">at</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">GlobalType</span><span class="op">&gt;</span> {
@@ -3943,7 +3905,8 @@
         <span class="ident">types</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">SnapshotList</span><span class="op">&lt;</span><span class="ident">TypeDef</span><span class="op">&gt;</span>,
         <span class="ident">desc</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">type_size</span> <span class="op">=</span> <span class="ident">combine_type_sizes</span>(<span class="ident">offset</span>, <span class="self">self</span>.<span class="ident">type_size</span>, <span class="ident">ty</span>.<span class="ident">size</span>(<span class="ident">types</span>))<span class="question-mark">?</span>;
+        <span class="self">self</span>.<span class="ident">type_size</span> <span class="op">=</span>
+            <span class="ident">combine_type_sizes</span>(<span class="ident">offset</span>, <span class="self">self</span>.<span class="ident">type_size</span>, <span class="ident">ty</span>.<span class="ident">size</span>(<span class="ident">types</span>).<span class="ident">saturating_add</span>(<span class="number">1</span>))<span class="question-mark">?</span>;
         <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">name</span> {
             <span class="prelude-val">Some</span>(<span class="ident">name</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">name</span>,
             <span class="comment">// If the `name` is not provided then this is a module-linking style</span>
@@ -4020,7 +3983,7 @@
 
 <span class="kw">impl</span> <span class="ident">EntityType</span> {
     <span class="kw">fn</span> <span class="ident">size</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">list</span>: <span class="kw-2">&amp;</span><span class="ident">SnapshotList</span><span class="op">&lt;</span><span class="ident">TypeDef</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span> {
-        <span class="kw">let</span> <span class="ident">recursive_size</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span> {
+        <span class="kw">match</span> <span class="self">self</span> {
             <span class="comment">// Note that this function computes the size of the *type*, not the</span>
             <span class="comment">// size of the value, so these &quot;leaves&quot; all count as 1</span>
             <span class="ident">EntityType::Global</span>(<span class="kw">_</span>) <span class="op">|</span> <span class="ident">EntityType::Memory</span>(<span class="kw">_</span>) <span class="op">|</span> <span class="ident">EntityType::Table</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="number">1</span>,
@@ -4030,13 +3993,12 @@
             <span class="ident">EntityType::Func</span>(<span class="ident">i</span>)
             <span class="op">|</span> <span class="ident">EntityType::Module</span>(<span class="ident">i</span>)
             <span class="op">|</span> <span class="ident">EntityType::Instance</span>(<span class="ident">i</span>)
-            <span class="op">|</span> <span class="ident">EntityType::Event</span>(<span class="ident">i</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">list</span>[<span class="kw-2">*</span><span class="ident">i</span>] {
-                <span class="ident">TypeDef::Func</span>(<span class="ident">f</span>) <span class="op">=</span><span class="op">&gt;</span> (<span class="ident">f</span>.<span class="ident">params</span>.<span class="ident">len</span>() <span class="op">+</span> <span class="ident">f</span>.<span class="ident">returns</span>.<span class="ident">len</span>()) <span class="kw">as</span> <span class="ident">u32</span>,
-                <span class="ident">TypeDef::Module</span>(<span class="ident">m</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">m</span>.<span class="ident">type_size</span>,
+            <span class="op">|</span> <span class="ident">EntityType::Tag</span>(<span class="ident">i</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">list</span>[<span class="kw-2">*</span><span class="ident">i</span>] {
+                <span class="ident">TypeDef::Func</span>(<span class="ident">f</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="number">1</span> <span class="op">+</span> (<span class="ident">f</span>.<span class="ident">params</span>.<span class="ident">len</span>() <span class="op">+</span> <span class="ident">f</span>.<span class="ident">returns</span>.<span class="ident">len</span>()) <span class="kw">as</span> <span class="ident">u32</span>,
+                <span class="ident">TypeDef::Module</span>(<span class="ident">m</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">m</span>.<span class="ident">imports_size</span> <span class="op">+</span> <span class="ident">m</span>.<span class="ident">exports_size</span>,
                 <span class="ident">TypeDef::Instance</span>(<span class="ident">i</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">i</span>.<span class="ident">type_size</span>,
             },
-        };
-        <span class="ident">recursive_size</span>.<span class="ident">saturating_add</span>(<span class="number">1</span>)
+        }
     }
 }
 

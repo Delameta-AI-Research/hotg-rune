@@ -345,6 +345,7 @@
 <span id="345">345</span>
 <span id="346">346</span>
 <span id="347">347</span>
+<span id="348">348</span>
 </pre><pre class="rust">
 <span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">collections::HashMap</span>, <span class="ident">path::Path</span>};
 <span class="kw">use</span> <span class="ident">cargo_toml</span>::{
@@ -377,7 +378,8 @@
         <span class="ident">workspace</span>: <span class="prelude-val">Some</span>(<span class="ident">Workspace</span> {
             <span class="ident">members</span>: <span class="macro">vec!</span>[<span class="ident">String::from</span>(<span class="string">&quot;.&quot;</span>)],
             <span class="ident">default_members</span>: <span class="macro">vec!</span>[<span class="ident">String::from</span>(<span class="string">&quot;.&quot;</span>)],
-            ..<span class="ident">Default::default</span>()
+            <span class="ident">exclude</span>: <span class="ident">Vec::new</span>(),
+            <span class="ident">metadata</span>: <span class="prelude-val">None</span>,
         }),
         ..<span class="ident">empty_manifest</span>()
     }

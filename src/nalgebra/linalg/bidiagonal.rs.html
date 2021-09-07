@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;nalgebra-0.26.2&#x2F;src&#x2F;linalg&#x2F;bidiagonal.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>bidiagonal.rs - source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="https:&#x2F;&#x2F;nalgebra.org&#x2F;img&#x2F;favicon.ico"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../nalgebra/index.html'><div class='logo-container rust-logo'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;nalgebra-0.29.0&#x2F;src&#x2F;linalg&#x2F;bidiagonal.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>bidiagonal.rs - source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="https:&#x2F;&#x2F;nalgebra.org&#x2F;img&#x2F;favicon.ico"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../nalgebra/index.html'><div class='logo-container rust-logo'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -366,6 +366,15 @@
 <span id="366">366</span>
 <span id="367">367</span>
 <span id="368">368</span>
+<span id="369">369</span>
+<span id="370">370</span>
+<span id="371">371</span>
+<span id="372">372</span>
+<span id="373">373</span>
+<span id="374">374</span>
+<span id="375">375</span>
+<span id="376">376</span>
+<span id="377">377</span>
 </pre><pre class="rust">
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde-serialize-no-std&quot;</span>)]</span>
 <span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Serialize</span>};
@@ -373,11 +382,11 @@
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::allocator::Allocator</span>;
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::base</span>::{<span class="ident">DefaultAllocator</span>, <span class="ident">Matrix</span>, <span class="ident">OMatrix</span>, <span class="ident">OVector</span>, <span class="ident">Unit</span>};
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::dimension</span>::{<span class="ident">Const</span>, <span class="ident">Dim</span>, <span class="ident">DimDiff</span>, <span class="ident">DimMin</span>, <span class="ident">DimMinimum</span>, <span class="ident">DimSub</span>, <span class="ident">U1</span>};
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::storage::Storage</span>;
 <span class="kw">use</span> <span class="ident">simba::scalar::ComplexField</span>;
 
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::geometry::Reflection</span>;
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::linalg::householder</span>;
+<span class="kw">use</span> <span class="ident">std::mem::MaybeUninit</span>;
 
 <span class="doccomment">/// The bidiagonalization of a general matrix.</span>
 <span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde-serialize-no-std&quot;</span>, <span class="ident">derive</span>(<span class="ident">Serialize</span>, <span class="ident">Deserialize</span>))]</span>
@@ -442,7 +451,7 @@
 {
     <span class="doccomment">/// Computes the Bidiagonal decomposition using householder reflections.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="kw-2">mut</span> <span class="ident">matrix</span>: <span class="ident">OMatrix</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R</span>, <span class="ident">C</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="kw">let</span> (<span class="ident">nrows</span>, <span class="ident">ncols</span>) <span class="op">=</span> <span class="ident">matrix</span>.<span class="ident">data</span>.<span class="ident">shape</span>();
+        <span class="kw">let</span> (<span class="ident">nrows</span>, <span class="ident">ncols</span>) <span class="op">=</span> <span class="ident">matrix</span>.<span class="ident">shape_generic</span>();
         <span class="kw">let</span> <span class="ident">min_nrows_ncols</span> <span class="op">=</span> <span class="ident">nrows</span>.<span class="ident">min</span>(<span class="ident">ncols</span>);
         <span class="kw">let</span> <span class="ident">dim</span> <span class="op">=</span> <span class="ident">min_nrows_ncols</span>.<span class="ident">value</span>();
         <span class="macro">assert!</span>(
@@ -450,67 +459,64 @@
             <span class="string">&quot;Cannot compute the bidiagonalization of an empty matrix.&quot;</span>
         );
 
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">diagonal</span> <span class="op">=</span>
-            <span class="kw">unsafe</span> { <span class="macro">crate::unimplemented_or_uninitialized_generic!</span>(<span class="ident">min_nrows_ncols</span>, <span class="ident">Const</span>::<span class="op">&lt;</span><span class="number">1</span><span class="op">&gt;</span>) };
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">off_diagonal</span> <span class="op">=</span> <span class="kw">unsafe</span> {
-            <span class="macro">crate::unimplemented_or_uninitialized_generic!</span>(
-                <span class="ident">min_nrows_ncols</span>.<span class="ident">sub</span>(<span class="ident">Const</span>::<span class="op">&lt;</span><span class="number">1</span><span class="op">&gt;</span>),
-                <span class="ident">Const</span>::<span class="op">&lt;</span><span class="number">1</span><span class="op">&gt;</span>
-            )
-        };
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">axis_packed</span> <span class="op">=</span>
-            <span class="kw">unsafe</span> { <span class="macro">crate::unimplemented_or_uninitialized_generic!</span>(<span class="ident">ncols</span>, <span class="ident">Const</span>::<span class="op">&lt;</span><span class="number">1</span><span class="op">&gt;</span>) };
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">work</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="macro">crate::unimplemented_or_uninitialized_generic!</span>(<span class="ident">nrows</span>, <span class="ident">Const</span>::<span class="op">&lt;</span><span class="number">1</span><span class="op">&gt;</span>) };
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">diagonal</span> <span class="op">=</span> <span class="ident">Matrix::uninit</span>(<span class="ident">min_nrows_ncols</span>, <span class="ident">Const</span>::<span class="op">&lt;</span><span class="number">1</span><span class="op">&gt;</span>);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">off_diagonal</span> <span class="op">=</span> <span class="ident">Matrix::uninit</span>(<span class="ident">min_nrows_ncols</span>.<span class="ident">sub</span>(<span class="ident">Const</span>::<span class="op">&lt;</span><span class="number">1</span><span class="op">&gt;</span>), <span class="ident">Const</span>::<span class="op">&lt;</span><span class="number">1</span><span class="op">&gt;</span>);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">axis_packed</span> <span class="op">=</span> <span class="ident">Matrix::zeros_generic</span>(<span class="ident">ncols</span>, <span class="ident">Const</span>::<span class="op">&lt;</span><span class="number">1</span><span class="op">&gt;</span>);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">work</span> <span class="op">=</span> <span class="ident">Matrix::zeros_generic</span>(<span class="ident">nrows</span>, <span class="ident">Const</span>::<span class="op">&lt;</span><span class="number">1</span><span class="op">&gt;</span>);
 
         <span class="kw">let</span> <span class="ident">upper_diagonal</span> <span class="op">=</span> <span class="ident">nrows</span>.<span class="ident">value</span>() <span class="op">&gt;</span><span class="op">=</span> <span class="ident">ncols</span>.<span class="ident">value</span>();
         <span class="kw">if</span> <span class="ident">upper_diagonal</span> {
             <span class="kw">for</span> <span class="ident">ite</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">dim</span> <span class="op">-</span> <span class="number">1</span> {
-                <span class="ident">householder::clear_column_unchecked</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">matrix</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">diagonal</span>[<span class="ident">ite</span>], <span class="ident">ite</span>, <span class="number">0</span>, <span class="prelude-val">None</span>);
-                <span class="ident">householder::clear_row_unchecked</span>(
+                <span class="ident">diagonal</span>[<span class="ident">ite</span>] <span class="op">=</span> <span class="ident">MaybeUninit::new</span>(<span class="ident">householder::clear_column_unchecked</span>(
                     <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">matrix</span>,
-                    <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">off_diagonal</span>[<span class="ident">ite</span>],
+                    <span class="ident">ite</span>,
+                    <span class="number">0</span>,
+                    <span class="prelude-val">None</span>,
+                ));
+                <span class="ident">off_diagonal</span>[<span class="ident">ite</span>] <span class="op">=</span> <span class="ident">MaybeUninit::new</span>(<span class="ident">householder::clear_row_unchecked</span>(
+                    <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">matrix</span>,
                     <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">axis_packed</span>,
                     <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">work</span>,
                     <span class="ident">ite</span>,
                     <span class="number">1</span>,
-                );
+                ));
             }
 
-            <span class="ident">householder::clear_column_unchecked</span>(
+            <span class="ident">diagonal</span>[<span class="ident">dim</span> <span class="op">-</span> <span class="number">1</span>] <span class="op">=</span> <span class="ident">MaybeUninit::new</span>(<span class="ident">householder::clear_column_unchecked</span>(
                 <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">matrix</span>,
-                <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">diagonal</span>[<span class="ident">dim</span> <span class="op">-</span> <span class="number">1</span>],
                 <span class="ident">dim</span> <span class="op">-</span> <span class="number">1</span>,
                 <span class="number">0</span>,
                 <span class="prelude-val">None</span>,
-            );
+            ));
         } <span class="kw">else</span> {
             <span class="kw">for</span> <span class="ident">ite</span> <span class="kw">in</span> <span class="number">0</span>..<span class="ident">dim</span> <span class="op">-</span> <span class="number">1</span> {
-                <span class="ident">householder::clear_row_unchecked</span>(
+                <span class="ident">diagonal</span>[<span class="ident">ite</span>] <span class="op">=</span> <span class="ident">MaybeUninit::new</span>(<span class="ident">householder::clear_row_unchecked</span>(
                     <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">matrix</span>,
-                    <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">diagonal</span>[<span class="ident">ite</span>],
                     <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">axis_packed</span>,
                     <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">work</span>,
                     <span class="ident">ite</span>,
                     <span class="number">0</span>,
-                );
-                <span class="ident">householder::clear_column_unchecked</span>(
+                ));
+                <span class="ident">off_diagonal</span>[<span class="ident">ite</span>] <span class="op">=</span> <span class="ident">MaybeUninit::new</span>(<span class="ident">householder::clear_column_unchecked</span>(
                     <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">matrix</span>,
-                    <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">off_diagonal</span>[<span class="ident">ite</span>],
                     <span class="ident">ite</span>,
                     <span class="number">1</span>,
                     <span class="prelude-val">None</span>,
-                );
+                ));
             }
 
-            <span class="ident">householder::clear_row_unchecked</span>(
+            <span class="ident">diagonal</span>[<span class="ident">dim</span> <span class="op">-</span> <span class="number">1</span>] <span class="op">=</span> <span class="ident">MaybeUninit::new</span>(<span class="ident">householder::clear_row_unchecked</span>(
                 <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">matrix</span>,
-                <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">diagonal</span>[<span class="ident">dim</span> <span class="op">-</span> <span class="number">1</span>],
                 <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">axis_packed</span>,
                 <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">work</span>,
                 <span class="ident">dim</span> <span class="op">-</span> <span class="number">1</span>,
                 <span class="number">0</span>,
-            );
+            ));
         }
+
+        <span class="comment">// Safety: diagonal and off_diagonal have been fully initialized.</span>
+        <span class="kw">let</span> (<span class="ident">diagonal</span>, <span class="ident">off_diagonal</span>) <span class="op">=</span>
+            <span class="kw">unsafe</span> { (<span class="ident">diagonal</span>.<span class="ident">assume_init</span>(), <span class="ident">off_diagonal</span>.<span class="ident">assume_init</span>()) };
 
         <span class="ident">Bidiagonal</span> {
             <span class="ident">uv</span>: <span class="ident">matrix</span>,
@@ -522,6 +528,7 @@
 
     <span class="doccomment">/// Indicates whether this decomposition contains an upper-diagonal matrix.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_upper_diagonal</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">upper_diagonal</span>
     }
@@ -557,30 +564,40 @@
 
     <span class="doccomment">/// Retrieves the upper trapezoidal submatrix `R` of this decomposition.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">d</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">OMatrix</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">DimMinimum</span><span class="op">&lt;</span><span class="ident">R</span>, <span class="ident">C</span><span class="op">&gt;</span>, <span class="ident">DimMinimum</span><span class="op">&lt;</span><span class="ident">R</span>, <span class="ident">C</span><span class="op">&gt;</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">DefaultAllocator</span>: <span class="ident">Allocator</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">DimMinimum</span><span class="op">&lt;</span><span class="ident">R</span>, <span class="ident">C</span><span class="op">&gt;</span>, <span class="ident">DimMinimum</span><span class="op">&lt;</span><span class="ident">R</span>, <span class="ident">C</span><span class="op">&gt;</span><span class="op">&gt;</span>,
     {
-        <span class="kw">let</span> (<span class="ident">nrows</span>, <span class="ident">ncols</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">uv</span>.<span class="ident">data</span>.<span class="ident">shape</span>();
+        <span class="kw">let</span> (<span class="ident">nrows</span>, <span class="ident">ncols</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">uv</span>.<span class="ident">shape_generic</span>();
 
         <span class="kw">let</span> <span class="ident">d</span> <span class="op">=</span> <span class="ident">nrows</span>.<span class="ident">min</span>(<span class="ident">ncols</span>);
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">OMatrix::identity_generic</span>(<span class="ident">d</span>, <span class="ident">d</span>);
-        <span class="ident">res</span>.<span class="ident">set_partial_diagonal</span>(<span class="self">self</span>.<span class="ident">diagonal</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">T::from_real</span>(<span class="ident">e</span>.<span class="ident">modulus</span>())));
+        <span class="ident">res</span>.<span class="ident">set_partial_diagonal</span>(
+            <span class="self">self</span>.<span class="ident">diagonal</span>
+                .<span class="ident">iter</span>()
+                .<span class="ident">map</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">T::from_real</span>(<span class="ident">e</span>.<span class="ident">clone</span>().<span class="ident">modulus</span>())),
+        );
 
         <span class="kw">let</span> <span class="ident">start</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">axis_shift</span>();
         <span class="ident">res</span>.<span class="ident">slice_mut</span>(<span class="ident">start</span>, (<span class="ident">d</span>.<span class="ident">value</span>() <span class="op">-</span> <span class="number">1</span>, <span class="ident">d</span>.<span class="ident">value</span>() <span class="op">-</span> <span class="number">1</span>))
-            .<span class="ident">set_partial_diagonal</span>(<span class="self">self</span>.<span class="ident">off_diagonal</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">T::from_real</span>(<span class="ident">e</span>.<span class="ident">modulus</span>())));
+            .<span class="ident">set_partial_diagonal</span>(
+                <span class="self">self</span>.<span class="ident">off_diagonal</span>
+                    .<span class="ident">iter</span>()
+                    .<span class="ident">map</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">T::from_real</span>(<span class="ident">e</span>.<span class="ident">clone</span>().<span class="ident">modulus</span>())),
+            );
         <span class="ident">res</span>
     }
 
     <span class="doccomment">/// Computes the orthogonal matrix `U` of this `U * D * V` decomposition.</span>
     <span class="comment">// TODO: code duplication with householder::assemble_q.</span>
     <span class="comment">// Except that we are returning a rectangular matrix here.</span>
+    <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">u</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">OMatrix</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R</span>, <span class="ident">DimMinimum</span><span class="op">&lt;</span><span class="ident">R</span>, <span class="ident">C</span><span class="op">&gt;</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">DefaultAllocator</span>: <span class="ident">Allocator</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">R</span>, <span class="ident">DimMinimum</span><span class="op">&lt;</span><span class="ident">R</span>, <span class="ident">C</span><span class="op">&gt;</span><span class="op">&gt;</span>,
     {
-        <span class="kw">let</span> (<span class="ident">nrows</span>, <span class="ident">ncols</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">uv</span>.<span class="ident">data</span>.<span class="ident">shape</span>();
+        <span class="kw">let</span> (<span class="ident">nrows</span>, <span class="ident">ncols</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">uv</span>.<span class="ident">shape_generic</span>();
 
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">Matrix::identity_generic</span>(<span class="ident">nrows</span>, <span class="ident">nrows</span>.<span class="ident">min</span>(<span class="ident">ncols</span>));
         <span class="kw">let</span> <span class="ident">dim</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">diagonal</span>.<span class="ident">len</span>();
@@ -594,9 +611,9 @@
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">res_rows</span> <span class="op">=</span> <span class="ident">res</span>.<span class="ident">slice_range_mut</span>(<span class="ident">i</span> <span class="op">+</span> <span class="ident">shift</span>.., <span class="ident">i</span>..);
 
             <span class="kw">let</span> <span class="ident">sign</span> <span class="op">=</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">upper_diagonal</span> {
-                <span class="self">self</span>.<span class="ident">diagonal</span>[<span class="ident">i</span>].<span class="ident">signum</span>()
+                <span class="self">self</span>.<span class="ident">diagonal</span>[<span class="ident">i</span>].<span class="ident">clone</span>().<span class="ident">signum</span>()
             } <span class="kw">else</span> {
-                <span class="self">self</span>.<span class="ident">off_diagonal</span>[<span class="ident">i</span>].<span class="ident">signum</span>()
+                <span class="self">self</span>.<span class="ident">off_diagonal</span>[<span class="ident">i</span>].<span class="ident">clone</span>().<span class="ident">signum</span>()
             };
 
             <span class="ident">refl</span>.<span class="ident">reflect_with_sign</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">res_rows</span>, <span class="ident">sign</span>);
@@ -606,18 +623,17 @@
     }
 
     <span class="doccomment">/// Computes the orthogonal matrix `V_t` of this `U * D * V_t` decomposition.</span>
+    <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">v_t</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">OMatrix</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">DimMinimum</span><span class="op">&lt;</span><span class="ident">R</span>, <span class="ident">C</span><span class="op">&gt;</span>, <span class="ident">C</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">DefaultAllocator</span>: <span class="ident">Allocator</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">DimMinimum</span><span class="op">&lt;</span><span class="ident">R</span>, <span class="ident">C</span><span class="op">&gt;</span>, <span class="ident">C</span><span class="op">&gt;</span>,
     {
-        <span class="kw">let</span> (<span class="ident">nrows</span>, <span class="ident">ncols</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">uv</span>.<span class="ident">data</span>.<span class="ident">shape</span>();
+        <span class="kw">let</span> (<span class="ident">nrows</span>, <span class="ident">ncols</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">uv</span>.<span class="ident">shape_generic</span>();
         <span class="kw">let</span> <span class="ident">min_nrows_ncols</span> <span class="op">=</span> <span class="ident">nrows</span>.<span class="ident">min</span>(<span class="ident">ncols</span>);
 
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">res</span> <span class="op">=</span> <span class="ident">Matrix::identity_generic</span>(<span class="ident">min_nrows_ncols</span>, <span class="ident">ncols</span>);
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">work</span> <span class="op">=</span>
-            <span class="kw">unsafe</span> { <span class="macro">crate::unimplemented_or_uninitialized_generic!</span>(<span class="ident">min_nrows_ncols</span>, <span class="ident">Const</span>::<span class="op">&lt;</span><span class="number">1</span><span class="op">&gt;</span>) };
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">axis_packed</span> <span class="op">=</span>
-            <span class="kw">unsafe</span> { <span class="macro">crate::unimplemented_or_uninitialized_generic!</span>(<span class="ident">ncols</span>, <span class="ident">Const</span>::<span class="op">&lt;</span><span class="number">1</span><span class="op">&gt;</span>) };
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">work</span> <span class="op">=</span> <span class="ident">Matrix::zeros_generic</span>(<span class="ident">min_nrows_ncols</span>, <span class="ident">Const</span>::<span class="op">&lt;</span><span class="number">1</span><span class="op">&gt;</span>);
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">axis_packed</span> <span class="op">=</span> <span class="ident">Matrix::zeros_generic</span>(<span class="ident">ncols</span>, <span class="ident">Const</span>::<span class="op">&lt;</span><span class="number">1</span><span class="op">&gt;</span>);
 
         <span class="kw">let</span> <span class="ident">shift</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">axis_shift</span>().<span class="number">1</span>;
 
@@ -631,9 +647,9 @@
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">res_rows</span> <span class="op">=</span> <span class="ident">res</span>.<span class="ident">slice_range_mut</span>(<span class="ident">i</span>.., <span class="ident">i</span> <span class="op">+</span> <span class="ident">shift</span>..);
 
             <span class="kw">let</span> <span class="ident">sign</span> <span class="op">=</span> <span class="kw">if</span> <span class="self">self</span>.<span class="ident">upper_diagonal</span> {
-                <span class="self">self</span>.<span class="ident">off_diagonal</span>[<span class="ident">i</span>].<span class="ident">signum</span>()
+                <span class="self">self</span>.<span class="ident">off_diagonal</span>[<span class="ident">i</span>].<span class="ident">clone</span>().<span class="ident">signum</span>()
             } <span class="kw">else</span> {
-                <span class="self">self</span>.<span class="ident">diagonal</span>[<span class="ident">i</span>].<span class="ident">signum</span>()
+                <span class="self">self</span>.<span class="ident">diagonal</span>[<span class="ident">i</span>].<span class="ident">clone</span>().<span class="ident">signum</span>()
             };
 
             <span class="ident">refl</span>.<span class="ident">reflect_rows_with_sign</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">res_rows</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">work</span>.<span class="ident">rows_range_mut</span>(<span class="ident">i</span>..), <span class="ident">sign</span>);
@@ -643,6 +659,7 @@
     }
 
     <span class="doccomment">/// The diagonal part of this decomposed matrix.</span>
+    <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">diagonal</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">OVector</span><span class="op">&lt;</span><span class="ident">T::RealField</span>, <span class="ident">DimMinimum</span><span class="op">&lt;</span><span class="ident">R</span>, <span class="ident">C</span><span class="op">&gt;</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">DefaultAllocator</span>: <span class="ident">Allocator</span><span class="op">&lt;</span><span class="ident">T::RealField</span>, <span class="ident">DimMinimum</span><span class="op">&lt;</span><span class="ident">R</span>, <span class="ident">C</span><span class="op">&gt;</span><span class="op">&gt;</span>,
@@ -651,6 +668,7 @@
     }
 
     <span class="doccomment">/// The off-diagonal part of this decomposed matrix.</span>
+    <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">off_diagonal</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">OVector</span><span class="op">&lt;</span><span class="ident">T::RealField</span>, <span class="ident">DimDiff</span><span class="op">&lt;</span><span class="ident">DimMinimum</span><span class="op">&lt;</span><span class="ident">R</span>, <span class="ident">C</span><span class="op">&gt;</span>, <span class="ident">U1</span><span class="op">&gt;</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">DefaultAllocator</span>: <span class="ident">Allocator</span><span class="op">&lt;</span><span class="ident">T::RealField</span>, <span class="ident">DimDiff</span><span class="op">&lt;</span><span class="ident">DimMinimum</span><span class="op">&lt;</span><span class="ident">R</span>, <span class="ident">C</span><span class="op">&gt;</span>, <span class="ident">U1</span><span class="op">&gt;</span><span class="op">&gt;</span>,
@@ -716,7 +734,7 @@
 <span class="comment">//         assert!(self.uv.is_square(), &quot;Bidiagonal inverse: unable to compute the inverse of a non-square matrix.&quot;);</span>
 <span class="comment">//</span>
 <span class="comment">//         // TODO: is there a less naive method ?</span>
-<span class="comment">//         let (nrows, ncols) = self.uv.data.shape();</span>
+<span class="comment">//         let (nrows, ncols) = self.uv.shape_generic();</span>
 <span class="comment">//         let mut res = OMatrix::identity_generic(nrows, ncols);</span>
 <span class="comment">//         self.solve_mut(&amp;mut res);</span>
 <span class="comment">//         res</span>

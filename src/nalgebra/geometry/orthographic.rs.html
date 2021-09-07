@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;nalgebra-0.26.2&#x2F;src&#x2F;geometry&#x2F;orthographic.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>orthographic.rs - source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="https:&#x2F;&#x2F;nalgebra.org&#x2F;img&#x2F;favicon.ico"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../nalgebra/index.html'><div class='logo-container rust-logo'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;nalgebra-0.29.0&#x2F;src&#x2F;geometry&#x2F;orthographic.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>orthographic.rs - source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="shortcut icon" href="https:&#x2F;&#x2F;nalgebra.org&#x2F;img&#x2F;favicon.ico"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../nalgebra/index.html'><div class='logo-container rust-logo'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -729,6 +729,38 @@
 <span id="729">729</span>
 <span id="730">730</span>
 <span id="731">731</span>
+<span id="732">732</span>
+<span id="733">733</span>
+<span id="734">734</span>
+<span id="735">735</span>
+<span id="736">736</span>
+<span id="737">737</span>
+<span id="738">738</span>
+<span id="739">739</span>
+<span id="740">740</span>
+<span id="741">741</span>
+<span id="742">742</span>
+<span id="743">743</span>
+<span id="744">744</span>
+<span id="745">745</span>
+<span id="746">746</span>
+<span id="747">747</span>
+<span id="748">748</span>
+<span id="749">749</span>
+<span id="750">750</span>
+<span id="751">751</span>
+<span id="752">752</span>
+<span id="753">753</span>
+<span id="754">754</span>
+<span id="755">755</span>
+<span id="756">756</span>
+<span id="757">757</span>
+<span id="758">758</span>
+<span id="759">759</span>
+<span id="760">760</span>
+<span id="761">761</span>
+<span id="762">762</span>
+<span id="763">763</span>
 </pre><pre class="rust">
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;arbitrary&quot;</span>)]</span>
 <span class="kw">use</span> <span class="ident">quickcheck</span>::{<span class="ident">Arbitrary</span>, <span class="ident">Gen</span>};
@@ -740,7 +772,6 @@
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde-serialize-no-std&quot;</span>)]</span>
 <span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Deserializer</span>, <span class="ident">Serialize</span>, <span class="ident">Serializer</span>};
 <span class="kw">use</span> <span class="ident">std::fmt</span>;
-<span class="kw">use</span> <span class="ident">std::mem</span>;
 
 <span class="kw">use</span> <span class="ident">simba::scalar::RealField</span>;
 
@@ -751,21 +782,22 @@
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::geometry</span>::{<span class="ident">Point3</span>, <span class="ident">Projective3</span>};
 
 <span class="doccomment">/// A 3D orthographic projection stored as a homogeneous 4x4 matrix.</span>
-<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Orthographic3</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">RealField</span><span class="op">&gt;</span> {
+<span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Orthographic3</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="ident">matrix</span>: <span class="ident">Matrix4</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
 }
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">RealField</span><span class="op">&gt;</span> <span class="ident">Copy</span> <span class="kw">for</span> <span class="ident">Orthographic3</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {}
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">RealField</span> <span class="op">+</span> <span class="ident">Copy</span><span class="op">&gt;</span> <span class="ident">Copy</span> <span class="kw">for</span> <span class="ident">Orthographic3</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {}
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">RealField</span><span class="op">&gt;</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">Orthographic3</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="ident"><span class="self">Self</span>::from_matrix_unchecked</span>(<span class="self">self</span>.<span class="ident">matrix</span>)
+        <span class="ident"><span class="self">Self</span>::from_matrix_unchecked</span>(<span class="self">self</span>.<span class="ident">matrix</span>.<span class="ident">clone</span>())
     }
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">RealField</span><span class="op">&gt;</span> <span class="ident">fmt::Debug</span> <span class="kw">for</span> <span class="ident">Orthographic3</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">fmt::Error</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">fmt::Error</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">matrix</span>.<span class="ident">fmt</span>(<span class="ident">f</span>)
     }
 }
@@ -775,6 +807,22 @@
     <span class="kw">fn</span> <span class="ident">eq</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">right</span>: <span class="kw-2">&amp;</span><span class="self">Self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">matrix</span> <span class="op">=</span><span class="op">=</span> <span class="ident">right</span>.<span class="ident">matrix</span>
     }
+}
+
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;bytemuck&quot;</span>)]</span>
+<span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">bytemuck::Zeroable</span> <span class="kw">for</span> <span class="ident">Orthographic3</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
+<span class="kw">where</span>
+    <span class="ident">T</span>: <span class="ident">RealField</span> <span class="op">+</span> <span class="ident">bytemuck::Zeroable</span>,
+    <span class="ident">Matrix4</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>: <span class="ident">bytemuck::Zeroable</span>,
+{
+}
+
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;bytemuck&quot;</span>)]</span>
+<span class="kw">unsafe</span> <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">bytemuck::Pod</span> <span class="kw">for</span> <span class="ident">Orthographic3</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
+<span class="kw">where</span>
+    <span class="ident">T</span>: <span class="ident">RealField</span> <span class="op">+</span> <span class="ident">bytemuck::Pod</span>,
+    <span class="ident">Matrix4</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>: <span class="ident">bytemuck::Pod</span>,
+{
 }
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;serde-serialize-no-std&quot;</span>)]</span>
@@ -799,6 +847,30 @@
     }
 }
 
+<span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Orthographic3</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
+    <span class="doccomment">/// Wraps the given matrix to interpret it as a 3D orthographic matrix.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// It is not checked whether or not the given matrix actually represents an orthographic</span>
+    <span class="doccomment">/// projection.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Example</span>
+    <span class="doccomment">/// ```</span>
+    <span class="doccomment">/// # use nalgebra::{Orthographic3, Point3, Matrix4};</span>
+    <span class="doccomment">/// let mat = Matrix4::new(</span>
+    <span class="doccomment">///     2.0 / 9.0, 0.0,        0.0,         -11.0 / 9.0,</span>
+    <span class="doccomment">///     0.0,       2.0 / 18.0, 0.0,         -22.0 / 18.0,</span>
+    <span class="doccomment">///     0.0,       0.0,       -2.0 / 999.9, -1000.1 / 999.9,</span>
+    <span class="doccomment">///     0.0,       0.0,        0.0,         1.0</span>
+    <span class="doccomment">/// );</span>
+    <span class="doccomment">/// let proj = Orthographic3::from_matrix_unchecked(mat);</span>
+    <span class="doccomment">/// assert_eq!(proj, Orthographic3::new(1.0, 10.0, 2.0, 20.0, 0.1, 1000.0));</span>
+    <span class="doccomment">/// ```</span>
+    <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">from_matrix_unchecked</span>(<span class="ident">matrix</span>: <span class="ident">Matrix4</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+        <span class="self">Self</span> { <span class="ident">matrix</span> }
+    }
+}
+
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">RealField</span><span class="op">&gt;</span> <span class="ident">Orthographic3</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Creates a new orthographic projection matrix.</span>
     <span class="doccomment">///</span>
@@ -810,7 +882,7 @@
     <span class="doccomment">/// # use nalgebra::{Orthographic3, Point3};</span>
     <span class="doccomment">/// let proj = Orthographic3::new(1.0, 10.0, 2.0, 20.0, 0.1, 1000.0);</span>
     <span class="doccomment">/// // Check this projection actually transforms the view cuboid into the double-unit cube.</span>
-    <span class="doccomment">/// // See https://www.nalgebra.org/projections/#orthographic-projection for more details.</span>
+    <span class="doccomment">/// // See https://www.nalgebra.org/docs/user_guide/projections#orthographic-projection for more details.</span>
     <span class="doccomment">/// let p1 = Point3::new(1.0, 2.0, -0.1);</span>
     <span class="doccomment">/// let p2 = Point3::new(1.0, 2.0, -1000.0);</span>
     <span class="doccomment">/// let p3 = Point3::new(1.0, 20.0, -0.1);</span>
@@ -854,28 +926,6 @@
         <span class="ident">res</span>
     }
 
-    <span class="doccomment">/// Wraps the given matrix to interpret it as a 3D orthographic matrix.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// It is not checked whether or not the given matrix actually represents an orthographic</span>
-    <span class="doccomment">/// projection.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Example</span>
-    <span class="doccomment">/// ```</span>
-    <span class="doccomment">/// # use nalgebra::{Orthographic3, Point3, Matrix4};</span>
-    <span class="doccomment">/// let mat = Matrix4::new(</span>
-    <span class="doccomment">///     2.0 / 9.0, 0.0,        0.0,         -11.0 / 9.0,</span>
-    <span class="doccomment">///     0.0,       2.0 / 18.0, 0.0,         -22.0 / 18.0,</span>
-    <span class="doccomment">///     0.0,       0.0,       -2.0 / 999.9, -1000.1 / 999.9,</span>
-    <span class="doccomment">///     0.0,       0.0,        0.0,         1.0</span>
-    <span class="doccomment">/// );</span>
-    <span class="doccomment">/// let proj = Orthographic3::from_matrix_unchecked(mat);</span>
-    <span class="doccomment">/// assert_eq!(proj, Orthographic3::new(1.0, 10.0, 2.0, 20.0, 0.1, 1000.0));</span>
-    <span class="doccomment">/// ```</span>
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_matrix_unchecked</span>(<span class="ident">matrix</span>: <span class="ident">Matrix4</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="self">Self</span> { <span class="ident">matrix</span> }
-    }
-
     <span class="doccomment">/// Creates a new orthographic projection matrix from an aspect ratio and the vertical field of view.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_fov</span>(<span class="ident">aspect</span>: <span class="ident">T</span>, <span class="ident">vfov</span>: <span class="ident">T</span>, <span class="ident">znear</span>: <span class="ident">T</span>, <span class="ident">zfar</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
@@ -889,13 +939,13 @@
         );
 
         <span class="kw">let</span> <span class="ident">half</span>: <span class="ident">T</span> <span class="op">=</span> <span class="ident"><span class="kw">crate</span>::convert</span>(<span class="number">0.5</span>);
-        <span class="kw">let</span> <span class="ident">width</span> <span class="op">=</span> <span class="ident">zfar</span> <span class="op">*</span> (<span class="ident">vfov</span> <span class="op">*</span> <span class="ident">half</span>).<span class="ident">tan</span>();
-        <span class="kw">let</span> <span class="ident">height</span> <span class="op">=</span> <span class="ident">width</span> <span class="op">/</span> <span class="ident">aspect</span>;
+        <span class="kw">let</span> <span class="ident">width</span> <span class="op">=</span> <span class="ident">zfar</span>.<span class="ident">clone</span>() <span class="op">*</span> (<span class="ident">vfov</span>.<span class="ident">clone</span>() <span class="op">*</span> <span class="ident">half</span>.<span class="ident">clone</span>()).<span class="ident">tan</span>();
+        <span class="kw">let</span> <span class="ident">height</span> <span class="op">=</span> <span class="ident">width</span>.<span class="ident">clone</span>() <span class="op">/</span> <span class="ident">aspect</span>;
 
         <span class="ident"><span class="self">Self</span>::new</span>(
-            <span class="op">-</span><span class="ident">width</span> <span class="op">*</span> <span class="ident">half</span>,
-            <span class="ident">width</span> <span class="op">*</span> <span class="ident">half</span>,
-            <span class="op">-</span><span class="ident">height</span> <span class="op">*</span> <span class="ident">half</span>,
+            <span class="op">-</span><span class="ident">width</span>.<span class="ident">clone</span>() <span class="op">*</span> <span class="ident">half</span>.<span class="ident">clone</span>(),
+            <span class="ident">width</span> <span class="op">*</span> <span class="ident">half</span>.<span class="ident">clone</span>(),
+            <span class="op">-</span><span class="ident">height</span>.<span class="ident">clone</span>() <span class="op">*</span> <span class="ident">half</span>.<span class="ident">clone</span>(),
             <span class="ident">height</span> <span class="op">*</span> <span class="ident">half</span>,
             <span class="ident">znear</span>,
             <span class="ident">zfar</span>,
@@ -920,20 +970,21 @@
     <span class="doccomment">/// assert_relative_eq!(proj.as_matrix() * inv, Matrix4::identity());</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">inverse</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Matrix4</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">res</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">to_homogeneous</span>();
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">res</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">clone</span>().<span class="ident">to_homogeneous</span>();
 
-        <span class="kw">let</span> <span class="ident">inv_m11</span> <span class="op">=</span> <span class="ident">T::one</span>() <span class="op">/</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">0</span>, <span class="number">0</span>)];
-        <span class="kw">let</span> <span class="ident">inv_m22</span> <span class="op">=</span> <span class="ident">T::one</span>() <span class="op">/</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">1</span>, <span class="number">1</span>)];
-        <span class="kw">let</span> <span class="ident">inv_m33</span> <span class="op">=</span> <span class="ident">T::one</span>() <span class="op">/</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">2</span>, <span class="number">2</span>)];
+        <span class="kw">let</span> <span class="ident">inv_m11</span> <span class="op">=</span> <span class="ident">T::one</span>() <span class="op">/</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">0</span>, <span class="number">0</span>)].<span class="ident">clone</span>();
+        <span class="kw">let</span> <span class="ident">inv_m22</span> <span class="op">=</span> <span class="ident">T::one</span>() <span class="op">/</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">1</span>, <span class="number">1</span>)].<span class="ident">clone</span>();
+        <span class="kw">let</span> <span class="ident">inv_m33</span> <span class="op">=</span> <span class="ident">T::one</span>() <span class="op">/</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">2</span>, <span class="number">2</span>)].<span class="ident">clone</span>();
 
-        <span class="ident">res</span>[(<span class="number">0</span>, <span class="number">0</span>)] <span class="op">=</span> <span class="ident">inv_m11</span>;
-        <span class="ident">res</span>[(<span class="number">1</span>, <span class="number">1</span>)] <span class="op">=</span> <span class="ident">inv_m22</span>;
-        <span class="ident">res</span>[(<span class="number">2</span>, <span class="number">2</span>)] <span class="op">=</span> <span class="ident">inv_m33</span>;
+        <span class="ident">res</span>[(<span class="number">0</span>, <span class="number">0</span>)] <span class="op">=</span> <span class="ident">inv_m11</span>.<span class="ident">clone</span>();
+        <span class="ident">res</span>[(<span class="number">1</span>, <span class="number">1</span>)] <span class="op">=</span> <span class="ident">inv_m22</span>.<span class="ident">clone</span>();
+        <span class="ident">res</span>[(<span class="number">2</span>, <span class="number">2</span>)] <span class="op">=</span> <span class="ident">inv_m33</span>.<span class="ident">clone</span>();
 
-        <span class="ident">res</span>[(<span class="number">0</span>, <span class="number">3</span>)] <span class="op">=</span> <span class="op">-</span><span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">0</span>, <span class="number">3</span>)] <span class="op">*</span> <span class="ident">inv_m11</span>;
-        <span class="ident">res</span>[(<span class="number">1</span>, <span class="number">3</span>)] <span class="op">=</span> <span class="op">-</span><span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">1</span>, <span class="number">3</span>)] <span class="op">*</span> <span class="ident">inv_m22</span>;
-        <span class="ident">res</span>[(<span class="number">2</span>, <span class="number">3</span>)] <span class="op">=</span> <span class="op">-</span><span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">2</span>, <span class="number">3</span>)] <span class="op">*</span> <span class="ident">inv_m33</span>;
+        <span class="ident">res</span>[(<span class="number">0</span>, <span class="number">3</span>)] <span class="op">=</span> <span class="op">-</span><span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">0</span>, <span class="number">3</span>)].<span class="ident">clone</span>() <span class="op">*</span> <span class="ident">inv_m11</span>;
+        <span class="ident">res</span>[(<span class="number">1</span>, <span class="number">3</span>)] <span class="op">=</span> <span class="op">-</span><span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">1</span>, <span class="number">3</span>)].<span class="ident">clone</span>() <span class="op">*</span> <span class="ident">inv_m22</span>;
+        <span class="ident">res</span>[(<span class="number">2</span>, <span class="number">3</span>)] <span class="op">=</span> <span class="op">-</span><span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">2</span>, <span class="number">3</span>)].<span class="ident">clone</span>() <span class="op">*</span> <span class="ident">inv_m33</span>;
 
         <span class="ident">res</span>
     }
@@ -953,7 +1004,8 @@
     <span class="doccomment">/// assert_eq!(proj.to_homogeneous(), expected);</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_homogeneous</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Matrix4</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
+    <span class="attribute">#[<span class="ident">must_use</span>]</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_homogeneous</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Matrix4</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">matrix</span>
     }
 
@@ -972,6 +1024,7 @@
     <span class="doccomment">/// assert_eq!(*proj.as_matrix(), expected);</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_matrix</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">Matrix4</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
         <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">matrix</span>
     }
@@ -985,8 +1038,9 @@
     <span class="doccomment">/// assert_eq!(proj.as_projective().to_homogeneous(), proj.to_homogeneous());</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_projective</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">Projective3</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
-        <span class="kw">unsafe</span> { <span class="ident">mem::transmute</span>(<span class="self">self</span>) }
+        <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">*</span>(<span class="self">self</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">Orthographic3</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">Projective3</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) }
     }
 
     <span class="doccomment">/// This transformation seen as a `Projective3`.</span>
@@ -998,7 +1052,8 @@
     <span class="doccomment">/// assert_eq!(proj.to_projective().to_homogeneous(), proj.to_homogeneous());</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_projective</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Projective3</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
+    <span class="attribute">#[<span class="ident">must_use</span>]</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_projective</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Projective3</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
         <span class="ident">Projective3::from_matrix_unchecked</span>(<span class="self">self</span>.<span class="ident">matrix</span>)
     }
 
@@ -1023,7 +1078,7 @@
     }
 
     <span class="doccomment">/// Retrieves the underlying homogeneous matrix.</span>
-    <span class="doccomment">/// Deprecated: Use [Orthographic3::into_inner] instead.</span>
+    <span class="doccomment">/// Deprecated: Use [`Orthographic3::into_inner`] instead.</span>
     <span class="attribute">#[<span class="ident">deprecated</span>(<span class="ident">note</span> <span class="op">=</span> <span class="string">&quot;use `.into_inner()` instead&quot;</span>)]</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">unwrap</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Matrix4</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
@@ -1042,8 +1097,9 @@
     <span class="doccomment">/// assert_relative_eq!(proj.left(), 10.0, epsilon = 1.0e-6);</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">left</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span> {
-        (<span class="op">-</span><span class="ident">T::one</span>() <span class="op">-</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">0</span>, <span class="number">3</span>)]) <span class="op">/</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">0</span>, <span class="number">0</span>)]
+        (<span class="op">-</span><span class="ident">T::one</span>() <span class="op">-</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">0</span>, <span class="number">3</span>)].<span class="ident">clone</span>()) <span class="op">/</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">0</span>, <span class="number">0</span>)].<span class="ident">clone</span>()
     }
 
     <span class="doccomment">/// The right offset of the view cuboid.</span>
@@ -1058,8 +1114,9 @@
     <span class="doccomment">/// assert_relative_eq!(proj.right(), 1.0, epsilon = 1.0e-6);</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">right</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span> {
-        (<span class="ident">T::one</span>() <span class="op">-</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">0</span>, <span class="number">3</span>)]) <span class="op">/</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">0</span>, <span class="number">0</span>)]
+        (<span class="ident">T::one</span>() <span class="op">-</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">0</span>, <span class="number">3</span>)].<span class="ident">clone</span>()) <span class="op">/</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">0</span>, <span class="number">0</span>)].<span class="ident">clone</span>()
     }
 
     <span class="doccomment">/// The bottom offset of the view cuboid.</span>
@@ -1074,8 +1131,9 @@
     <span class="doccomment">/// assert_relative_eq!(proj.bottom(), 20.0, epsilon = 1.0e-6);</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">bottom</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span> {
-        (<span class="op">-</span><span class="ident">T::one</span>() <span class="op">-</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">1</span>, <span class="number">3</span>)]) <span class="op">/</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">1</span>, <span class="number">1</span>)]
+        (<span class="op">-</span><span class="ident">T::one</span>() <span class="op">-</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">1</span>, <span class="number">3</span>)].<span class="ident">clone</span>()) <span class="op">/</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">1</span>, <span class="number">1</span>)].<span class="ident">clone</span>()
     }
 
     <span class="doccomment">/// The top offset of the view cuboid.</span>
@@ -1090,8 +1148,9 @@
     <span class="doccomment">/// assert_relative_eq!(proj.top(), 2.0, epsilon = 1.0e-6);</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">top</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span> {
-        (<span class="ident">T::one</span>() <span class="op">-</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">1</span>, <span class="number">3</span>)]) <span class="op">/</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">1</span>, <span class="number">1</span>)]
+        (<span class="ident">T::one</span>() <span class="op">-</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">1</span>, <span class="number">3</span>)].<span class="ident">clone</span>()) <span class="op">/</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">1</span>, <span class="number">1</span>)].<span class="ident">clone</span>()
     }
 
     <span class="doccomment">/// The near plane offset of the view cuboid.</span>
@@ -1106,8 +1165,9 @@
     <span class="doccomment">/// assert_relative_eq!(proj.znear(), 1000.0, epsilon = 1.0e-6);</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">znear</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span> {
-        (<span class="ident">T::one</span>() <span class="op">+</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">2</span>, <span class="number">3</span>)]) <span class="op">/</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">2</span>, <span class="number">2</span>)]
+        (<span class="ident">T::one</span>() <span class="op">+</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">2</span>, <span class="number">3</span>)].<span class="ident">clone</span>()) <span class="op">/</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">2</span>, <span class="number">2</span>)].<span class="ident">clone</span>()
     }
 
     <span class="doccomment">/// The far plane offset of the view cuboid.</span>
@@ -1122,8 +1182,9 @@
     <span class="doccomment">/// assert_relative_eq!(proj.zfar(), 0.1, epsilon = 1.0e-6);</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">zfar</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span> {
-        (<span class="op">-</span><span class="ident">T::one</span>() <span class="op">+</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">2</span>, <span class="number">3</span>)]) <span class="op">/</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">2</span>, <span class="number">2</span>)]
+        (<span class="op">-</span><span class="ident">T::one</span>() <span class="op">+</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">2</span>, <span class="number">3</span>)].<span class="ident">clone</span>()) <span class="op">/</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">2</span>, <span class="number">2</span>)].<span class="ident">clone</span>()
     }
 
     <span class="comment">// TODO: when we get specialization, specialize the Mul impl instead.</span>
@@ -1154,11 +1215,12 @@
     <span class="doccomment">/// assert_relative_eq!(proj.project_point(&amp;p8), Point3::new( 1.0,  1.0,  1.0));</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">project_point</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">p</span>: <span class="kw-2">&amp;</span><span class="ident">Point3</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Point3</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
         <span class="ident">Point3::new</span>(
-            <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">0</span>, <span class="number">0</span>)] <span class="op">*</span> <span class="ident">p</span>[<span class="number">0</span>] <span class="op">+</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">0</span>, <span class="number">3</span>)],
-            <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">1</span>, <span class="number">1</span>)] <span class="op">*</span> <span class="ident">p</span>[<span class="number">1</span>] <span class="op">+</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">1</span>, <span class="number">3</span>)],
-            <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">2</span>, <span class="number">2</span>)] <span class="op">*</span> <span class="ident">p</span>[<span class="number">2</span>] <span class="op">+</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">2</span>, <span class="number">3</span>)],
+            <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">0</span>, <span class="number">0</span>)].<span class="ident">clone</span>() <span class="op">*</span> <span class="ident">p</span>[<span class="number">0</span>].<span class="ident">clone</span>() <span class="op">+</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">0</span>, <span class="number">3</span>)].<span class="ident">clone</span>(),
+            <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">1</span>, <span class="number">1</span>)].<span class="ident">clone</span>() <span class="op">*</span> <span class="ident">p</span>[<span class="number">1</span>].<span class="ident">clone</span>() <span class="op">+</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">1</span>, <span class="number">3</span>)].<span class="ident">clone</span>(),
+            <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">2</span>, <span class="number">2</span>)].<span class="ident">clone</span>() <span class="op">*</span> <span class="ident">p</span>[<span class="number">2</span>].<span class="ident">clone</span>() <span class="op">+</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">2</span>, <span class="number">3</span>)].<span class="ident">clone</span>(),
         )
     }
 
@@ -1189,11 +1251,12 @@
     <span class="doccomment">/// assert_relative_eq!(proj.unproject_point(&amp;p8), Point3::new(10.0, 20.0, -1000.0), epsilon = 1.0e-6);</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">unproject_point</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">p</span>: <span class="kw-2">&amp;</span><span class="ident">Point3</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Point3</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> {
         <span class="ident">Point3::new</span>(
-            (<span class="ident">p</span>[<span class="number">0</span>] <span class="op">-</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">0</span>, <span class="number">3</span>)]) <span class="op">/</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">0</span>, <span class="number">0</span>)],
-            (<span class="ident">p</span>[<span class="number">1</span>] <span class="op">-</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">1</span>, <span class="number">3</span>)]) <span class="op">/</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">1</span>, <span class="number">1</span>)],
-            (<span class="ident">p</span>[<span class="number">2</span>] <span class="op">-</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">2</span>, <span class="number">3</span>)]) <span class="op">/</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">2</span>, <span class="number">2</span>)],
+            (<span class="ident">p</span>[<span class="number">0</span>].<span class="ident">clone</span>() <span class="op">-</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">0</span>, <span class="number">3</span>)].<span class="ident">clone</span>()) <span class="op">/</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">0</span>, <span class="number">0</span>)].<span class="ident">clone</span>(),
+            (<span class="ident">p</span>[<span class="number">1</span>].<span class="ident">clone</span>() <span class="op">-</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">1</span>, <span class="number">3</span>)].<span class="ident">clone</span>()) <span class="op">/</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">1</span>, <span class="number">1</span>)].<span class="ident">clone</span>(),
+            (<span class="ident">p</span>[<span class="number">2</span>].<span class="ident">clone</span>() <span class="op">-</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">2</span>, <span class="number">3</span>)].<span class="ident">clone</span>()) <span class="op">/</span> <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">2</span>, <span class="number">2</span>)].<span class="ident">clone</span>(),
         )
     }
 
@@ -1217,14 +1280,15 @@
     <span class="doccomment">/// assert_relative_eq!(proj.project_vector(&amp;v3), Vector3::z() * -2.0 / 999.9);</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
+    <span class="attribute">#[<span class="ident">must_use</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">project_vector</span><span class="op">&lt;</span><span class="ident">SB</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">p</span>: <span class="kw-2">&amp;</span><span class="ident">Vector</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U3</span>, <span class="ident">SB</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vector3</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">SB</span>: <span class="ident">Storage</span><span class="op">&lt;</span><span class="ident">T</span>, <span class="ident">U3</span><span class="op">&gt;</span>,
     {
         <span class="ident">Vector3::new</span>(
-            <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">0</span>, <span class="number">0</span>)] <span class="op">*</span> <span class="ident">p</span>[<span class="number">0</span>],
-            <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">1</span>, <span class="number">1</span>)] <span class="op">*</span> <span class="ident">p</span>[<span class="number">1</span>],
-            <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">2</span>, <span class="number">2</span>)] <span class="op">*</span> <span class="ident">p</span>[<span class="number">2</span>],
+            <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">0</span>, <span class="number">0</span>)].<span class="ident">clone</span>() <span class="op">*</span> <span class="ident">p</span>[<span class="number">0</span>].<span class="ident">clone</span>(),
+            <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">1</span>, <span class="number">1</span>)].<span class="ident">clone</span>() <span class="op">*</span> <span class="ident">p</span>[<span class="number">1</span>].<span class="ident">clone</span>(),
+            <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">2</span>, <span class="number">2</span>)].<span class="ident">clone</span>() <span class="op">*</span> <span class="ident">p</span>[<span class="number">2</span>].<span class="ident">clone</span>(),
         )
     }
 
@@ -1363,8 +1427,8 @@
             <span class="ident">left</span> <span class="op">!</span><span class="op">=</span> <span class="ident">right</span>,
             <span class="string">&quot;The left corner must not be equal to the right corner.&quot;</span>
         );
-        <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">0</span>, <span class="number">0</span>)] <span class="op">=</span> <span class="ident"><span class="kw">crate</span>::convert</span>::<span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="number">2.0</span>) <span class="op">/</span> (<span class="ident">right</span> <span class="op">-</span> <span class="ident">left</span>);
-        <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">0</span>, <span class="number">3</span>)] <span class="op">=</span> <span class="op">-</span>(<span class="ident">right</span> <span class="op">+</span> <span class="ident">left</span>) <span class="op">/</span> (<span class="ident">right</span> <span class="op">-</span> <span class="ident">left</span>);
+        <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">0</span>, <span class="number">0</span>)] <span class="op">=</span> <span class="ident"><span class="kw">crate</span>::convert</span>::<span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="number">2.0</span>) <span class="op">/</span> (<span class="ident">right</span>.<span class="ident">clone</span>() <span class="op">-</span> <span class="ident">left</span>.<span class="ident">clone</span>());
+        <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">0</span>, <span class="number">3</span>)] <span class="op">=</span> <span class="op">-</span>(<span class="ident">right</span>.<span class="ident">clone</span>() <span class="op">+</span> <span class="ident">left</span>.<span class="ident">clone</span>()) <span class="op">/</span> (<span class="ident">right</span> <span class="op">-</span> <span class="ident">left</span>);
     }
 
     <span class="doccomment">/// Sets the view cuboid offsets along the `y` axis.</span>
@@ -1384,12 +1448,12 @@
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_bottom_and_top</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">bottom</span>: <span class="ident">T</span>, <span class="ident">top</span>: <span class="ident">T</span>) {
-        <span class="macro">assert!</span>(
-            <span class="ident">bottom</span> <span class="op">!</span><span class="op">=</span> <span class="ident">top</span>,
+        <span class="macro">assert_ne!</span>(
+            <span class="ident">bottom</span>, <span class="ident">top</span>,
             <span class="string">&quot;The top corner must not be equal to the bottom corner.&quot;</span>
         );
-        <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">1</span>, <span class="number">1</span>)] <span class="op">=</span> <span class="ident"><span class="kw">crate</span>::convert</span>::<span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="number">2.0</span>) <span class="op">/</span> (<span class="ident">top</span> <span class="op">-</span> <span class="ident">bottom</span>);
-        <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">1</span>, <span class="number">3</span>)] <span class="op">=</span> <span class="op">-</span>(<span class="ident">top</span> <span class="op">+</span> <span class="ident">bottom</span>) <span class="op">/</span> (<span class="ident">top</span> <span class="op">-</span> <span class="ident">bottom</span>);
+        <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">1</span>, <span class="number">1</span>)] <span class="op">=</span> <span class="ident"><span class="kw">crate</span>::convert</span>::<span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="number">2.0</span>) <span class="op">/</span> (<span class="ident">top</span>.<span class="ident">clone</span>() <span class="op">-</span> <span class="ident">bottom</span>.<span class="ident">clone</span>());
+        <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">1</span>, <span class="number">3</span>)] <span class="op">=</span> <span class="op">-</span>(<span class="ident">top</span>.<span class="ident">clone</span>() <span class="op">+</span> <span class="ident">bottom</span>.<span class="ident">clone</span>()) <span class="op">/</span> (<span class="ident">top</span> <span class="op">-</span> <span class="ident">bottom</span>);
     }
 
     <span class="doccomment">/// Sets the near and far plane offsets of the view cuboid.</span>
@@ -1413,8 +1477,8 @@
             <span class="ident">zfar</span> <span class="op">!</span><span class="op">=</span> <span class="ident">znear</span>,
             <span class="string">&quot;The near-plane and far-plane must not be superimposed.&quot;</span>
         );
-        <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">2</span>, <span class="number">2</span>)] <span class="op">=</span> <span class="op">-</span><span class="ident"><span class="kw">crate</span>::convert</span>::<span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="number">2.0</span>) <span class="op">/</span> (<span class="ident">zfar</span> <span class="op">-</span> <span class="ident">znear</span>);
-        <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">2</span>, <span class="number">3</span>)] <span class="op">=</span> <span class="op">-</span>(<span class="ident">zfar</span> <span class="op">+</span> <span class="ident">znear</span>) <span class="op">/</span> (<span class="ident">zfar</span> <span class="op">-</span> <span class="ident">znear</span>);
+        <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">2</span>, <span class="number">2</span>)] <span class="op">=</span> <span class="op">-</span><span class="ident"><span class="kw">crate</span>::convert</span>::<span class="op">&lt;</span><span class="kw">_</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="number">2.0</span>) <span class="op">/</span> (<span class="ident">zfar</span>.<span class="ident">clone</span>() <span class="op">-</span> <span class="ident">znear</span>.<span class="ident">clone</span>());
+        <span class="self">self</span>.<span class="ident">matrix</span>[(<span class="number">2</span>, <span class="number">3</span>)] <span class="op">=</span> <span class="op">-</span>(<span class="ident">zfar</span>.<span class="ident">clone</span>() <span class="op">+</span> <span class="ident">znear</span>.<span class="ident">clone</span>()) <span class="op">/</span> (<span class="ident">zfar</span> <span class="op">-</span> <span class="ident">znear</span>);
     }
 }
 

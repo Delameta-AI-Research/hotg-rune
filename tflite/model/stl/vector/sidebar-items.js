@@ -1,1 +1,0 @@
-initSidebarItems({"struct":[["Vector",""],["VectorOfBool",""],["VectorOfUniquePtr",""]],"trait":[["VectorErase",""],["VectorExtract",""],["VectorInsert",""],["VectorSlice",""]]});

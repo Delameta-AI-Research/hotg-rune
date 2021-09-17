@@ -401,49 +401,6 @@
 <span id="401">401</span>
 <span id="402">402</span>
 <span id="403">403</span>
-<span id="404">404</span>
-<span id="405">405</span>
-<span id="406">406</span>
-<span id="407">407</span>
-<span id="408">408</span>
-<span id="409">409</span>
-<span id="410">410</span>
-<span id="411">411</span>
-<span id="412">412</span>
-<span id="413">413</span>
-<span id="414">414</span>
-<span id="415">415</span>
-<span id="416">416</span>
-<span id="417">417</span>
-<span id="418">418</span>
-<span id="419">419</span>
-<span id="420">420</span>
-<span id="421">421</span>
-<span id="422">422</span>
-<span id="423">423</span>
-<span id="424">424</span>
-<span id="425">425</span>
-<span id="426">426</span>
-<span id="427">427</span>
-<span id="428">428</span>
-<span id="429">429</span>
-<span id="430">430</span>
-<span id="431">431</span>
-<span id="432">432</span>
-<span id="433">433</span>
-<span id="434">434</span>
-<span id="435">435</span>
-<span id="436">436</span>
-<span id="437">437</span>
-<span id="438">438</span>
-<span id="439">439</span>
-<span id="440">440</span>
-<span id="441">441</span>
-<span id="442">442</span>
-<span id="443">443</span>
-<span id="444">444</span>
-<span id="445">445</span>
-<span id="446">446</span>
 </pre><pre class="rust">
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;wasm3-runtime&quot;</span>)]</span>
 <span class="kw">mod</span> <span class="ident">wasm3_impl</span>;
@@ -498,8 +455,7 @@
                 <span class="prelude-val">Ok</span>(<span class="ident">Box::new</span>(<span class="ident">Random::from_os</span>()) <span class="kw">as</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Capability</span><span class="op">&gt;</span>)
             });
 
-        <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;tflite&quot;</span>)]</span>
-        <span class="ident">image</span>.<span class="ident">register_model</span>(<span class="ident">TFLITE_MIMETYPE</span>, <span class="ident">tf::initialize_model</span>);
+        <span class="ident">image</span>.<span class="ident">register_model</span>(<span class="ident">TFLITE_MIMETYPE</span>, <span class="ident">runecoral::new_model</span>);
 
         <span class="ident">image</span>
     }
@@ -677,51 +633,114 @@
     }
 }
 
-<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;tflite&quot;</span>)]</span>
-<span class="kw">mod</span> <span class="ident">tf</span> {
+<span class="kw">mod</span> <span class="ident">runecoral</span> {
     <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
-    <span class="kw">use</span> <span class="ident">anyhow::Context</span>;
-    <span class="kw">use</span> <span class="ident">log::Level</span>;
+    <span class="kw">use</span> <span class="ident">anyhow</span>::{<span class="ident">Context</span>, <span class="ident">Error</span>};
     <span class="kw">use</span> <span class="ident">hotg_rune_core::reflect::Type</span>;
-    <span class="kw">use</span> <span class="ident">tflite</span>::{
-        <span class="ident">FlatBufferModel</span>, <span class="ident">Interpreter</span>, <span class="ident">InterpreterBuilder</span>,
-        <span class="ident">context</span>::{<span class="ident">ElementKind</span>, <span class="ident">TensorInfo</span>},
-        <span class="ident">ops::builtin::BuiltinOpResolver</span>,
+    <span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">borrow::Cow</span>, <span class="ident">cell::Cell</span>, <span class="ident">convert::TryInto</span>, <span class="ident">ffi::CStr</span>, <span class="ident">sync::Mutex</span>};
+    <span class="kw">use</span> <span class="ident">hotg_runecoral</span>::{
+        <span class="ident">ElementType</span>, <span class="ident">InferenceContext</span>, <span class="ident">Tensor</span>, <span class="ident">TensorDescriptor</span>, <span class="ident">TensorMut</span>,
+        <span class="ident">AccelerationBackend</span>,
     };
 
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">initialize_model</span>(
-        <span class="ident">raw</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">new_model</span>(
+        <span class="ident">model_bytes</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
         <span class="ident">inputs</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span>[<span class="ident">Shape</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>]<span class="op">&gt;</span>,
         <span class="ident">outputs</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span>[<span class="ident">Shape</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>]<span class="op">&gt;</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident"><span class="kw">super</span>::Model</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">model</span> <span class="op">=</span> <span class="ident">TensorFlowLiteModel::load</span>(<span class="ident">raw</span>)<span class="question-mark">?</span>;
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Model</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="kw">let</span> <span class="ident">inputs</span> <span class="op">=</span> <span class="ident">inputs</span>.<span class="ident">context</span>(<span class="string">&quot;The input shapes must be provided&quot;</span>)<span class="question-mark">?</span>;
+        <span class="kw">let</span> <span class="ident">outputs</span> <span class="op">=</span> <span class="ident">outputs</span>.<span class="ident">context</span>(<span class="string">&quot;The output shapes must be provided&quot;</span>)<span class="question-mark">?</span>;
 
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">shapes</span>) <span class="op">=</span> <span class="ident">inputs</span> {
-            <span class="ident">ensure_shapes_equal</span>(<span class="ident">shapes</span>, <span class="ident">model</span>.<span class="ident">input_shapes</span>())
-                .<span class="ident">context</span>(<span class="string">&quot;Invalid inputs&quot;</span>)<span class="question-mark">?</span>;
-        }
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">shapes</span>) <span class="op">=</span> <span class="ident">outputs</span> {
-            <span class="ident">ensure_shapes_equal</span>(<span class="ident">shapes</span>, <span class="ident">model</span>.<span class="ident">output_shapes</span>())
-                .<span class="ident">context</span>(<span class="string">&quot;Invalid outputs&quot;</span>)<span class="question-mark">?</span>;
-        }
+        <span class="kw">let</span> <span class="ident">input_descriptors</span> <span class="op">=</span> <span class="ident">inputs</span>
+            .<span class="ident">iter</span>()
+            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">descriptor</span>(<span class="ident">s</span>))
+            .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span><span class="op">&gt;</span>()
+            .<span class="ident">context</span>(<span class="string">&quot;Invalid input&quot;</span>)<span class="question-mark">?</span>;
+        <span class="kw">let</span> <span class="ident">output_descriptors</span> <span class="op">=</span> <span class="ident">outputs</span>
+            .<span class="ident">iter</span>()
+            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">descriptor</span>(<span class="ident">s</span>))
+            .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span><span class="op">&gt;</span>()
+            .<span class="ident">context</span>(<span class="string">&quot;Invalid output&quot;</span>)<span class="question-mark">?</span>;
 
-        <span class="prelude-val">Ok</span>(<span class="ident">Box::new</span>(<span class="ident">model</span>))
+        <span class="kw">let</span> <span class="ident">ctx</span> <span class="op">=</span> <span class="ident">InferenceContext::create_context</span>(
+            <span class="ident">TFLITE_MIMETYPE</span>,
+            <span class="ident">model_bytes</span>,
+            <span class="ident">AccelerationBackend::NONE</span>,
+        )
+        .<span class="ident">context</span>(<span class="string">&quot;Unable to create the inference context&quot;</span>)<span class="question-mark">?</span>;
+
+        <span class="ident">ensure_shapes_equal</span>(<span class="kw-2">&amp;</span><span class="ident">input_descriptors</span>, <span class="kw-2">&amp;</span><span class="ident">ctx</span>.<span class="ident">inputs</span>().<span class="ident">collect</span>())<span class="question-mark">?</span>;
+        <span class="ident">ensure_shapes_equal</span>(<span class="kw-2">&amp;</span><span class="ident">output_descriptors</span>, <span class="kw-2">&amp;</span><span class="ident">ctx</span>.<span class="ident">outputs</span>().<span class="ident">collect</span>())<span class="question-mark">?</span>;
+
+        <span class="prelude-val">Ok</span>(<span class="ident">Box::new</span>(<span class="ident">RuneCoralModel</span> {
+            <span class="ident">ctx</span>: <span class="ident">Mutex::new</span>(<span class="ident">ctx</span>),
+            <span class="ident">inputs</span>: <span class="ident">inputs</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">to_owned</span>()).<span class="ident">collect</span>(),
+            <span class="ident">input_descriptors</span>,
+            <span class="ident">outputs</span>: <span class="ident">outputs</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">to_owned</span>()).<span class="ident">collect</span>(),
+            <span class="ident">output_descriptors</span>,
+        }))
+    }
+
+    <span class="kw">fn</span> <span class="ident">descriptor</span>(<span class="ident">s</span>: <span class="kw-2">&amp;</span><span class="ident">Shape</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">TensorDescriptor</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="kw">let</span> <span class="ident">dimensions</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">i32</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">s</span>
+            .<span class="ident">dimensions</span>()
+            .<span class="ident">iter</span>()
+            .<span class="ident">copied</span>()
+            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">d</span><span class="op">|</span> <span class="ident">d</span>.<span class="ident">try_into</span>().<span class="ident">unwrap</span>())
+            .<span class="ident">collect</span>();
+
+        <span class="prelude-val">Ok</span>(<span class="ident">TensorDescriptor</span> {
+            <span class="ident">name</span>: <span class="ident">CStr::from_bytes_with_nul</span>(<span class="string">b&quot;\0&quot;</span>).<span class="ident">unwrap</span>(),
+            <span class="ident">element_type</span>: <span class="ident">element_type</span>(<span class="ident">s</span>.<span class="ident">element_type</span>())<span class="question-mark">?</span>,
+            <span class="ident">shape</span>: <span class="ident">Cow::Owned</span>(<span class="ident">dimensions</span>),
+        })
+    }
+
+    <span class="kw">struct</span> <span class="ident">RuneCoralModel</span> {
+        <span class="ident">ctx</span>: <span class="ident">Mutex</span><span class="op">&lt;</span><span class="ident">InferenceContext</span><span class="op">&gt;</span>,
+        <span class="ident">inputs</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Shape</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+        <span class="ident">input_descriptors</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">TensorDescriptor</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+        <span class="ident">outputs</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Shape</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+        <span class="ident">output_descriptors</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">TensorDescriptor</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+    }
+
+    <span class="kw">fn</span> <span class="ident">element_type</span>(<span class="ident">rune_type</span>: <span class="kw-2">&amp;</span><span class="ident">Type</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ElementType</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+        <span class="prelude-val">Ok</span>(<span class="kw">match</span> <span class="kw-2">*</span><span class="ident">rune_type</span> {
+            <span class="ident">Type::i8</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ElementType::Int8</span>,
+            <span class="ident">Type::u8</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ElementType::UInt8</span>,
+            <span class="ident">Type::i16</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ElementType::Int16</span>,
+            <span class="ident">Type::i32</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ElementType::Int32</span>,
+            <span class="ident">Type::i64</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ElementType::Int64</span>,
+            <span class="ident">Type::f32</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ElementType::Float32</span>,
+            <span class="ident">Type::f64</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ElementType::Float64</span>,
+            <span class="ident">Type::str</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ElementType::String</span>,
+            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="macro">anyhow::bail!</span>(
+                    <span class="string">&quot;librunecoral doesn&#39;t support {:?} tensors&quot;</span>,
+                    <span class="ident">rune_type</span>
+                )
+            },
+        })
     }
 
     <span class="kw">fn</span> <span class="ident">ensure_shapes_equal</span>(
-        <span class="ident">from_rune</span>: <span class="kw-2">&amp;</span>[<span class="ident">Shape</span>],
-        <span class="ident">from_model</span>: <span class="kw-2">&amp;</span>[<span class="ident">Shape</span>],
+        <span class="ident">from_rune</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">TensorDescriptor</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+        <span class="ident">from_model</span>: <span class="kw-2">&amp;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">TensorDescriptor</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span><span class="op">&gt;</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="ident">from_rune</span> <span class="op">=</span><span class="op">=</span> <span class="ident">from_model</span> {
+        <span class="kw">if</span> <span class="ident">from_rune</span>.<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="ident">from_model</span>.<span class="ident">len</span>()
+            <span class="op">&amp;&amp;</span> <span class="ident">from_rune</span>.<span class="ident">iter</span>().<span class="ident">zip</span>(<span class="ident">from_model</span>.<span class="ident">iter</span>()).<span class="ident">all</span>(<span class="op">|</span>(<span class="ident">x</span>, <span class="ident">y</span>)<span class="op">|</span> {
+                <span class="ident">x</span>.<span class="ident">element_type</span> <span class="op">=</span><span class="op">=</span> <span class="ident">y</span>.<span class="ident">element_type</span> <span class="op">&amp;&amp;</span> <span class="ident">x</span>.<span class="ident">shape</span> <span class="op">=</span><span class="op">=</span> <span class="ident">y</span>.<span class="ident">shape</span>
+            })
+        {
             <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
         }
 
-        <span class="kw">fn</span> <span class="ident">pretty_shapes</span>(<span class="ident">shapes</span>: <span class="kw-2">&amp;</span>[<span class="ident">Shape</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">String</span> {
+        <span class="kw">fn</span> <span class="ident">pretty_shapes</span>(<span class="ident">descriptors</span>: <span class="kw-2">&amp;</span>[<span class="ident">TensorDescriptor</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">String</span> {
             <span class="macro">format!</span>(
                 <span class="string">&quot;[{}]&quot;</span>,
-                <span class="ident">shapes</span>
+                <span class="ident">descriptors</span>
                     .<span class="ident">iter</span>()
-                    .<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">s</span>.<span class="ident">to_string</span>())
+                    .<span class="ident">map</span>(<span class="op">|</span><span class="ident">d</span><span class="op">|</span> <span class="macro">format!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">d</span>))
                     .<span class="ident">collect</span>::<span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span><span class="op">&gt;</span>()
                     .<span class="ident">join</span>(<span class="string">&quot;, &quot;</span>)
             )
@@ -734,154 +753,49 @@
         );
     }
 
-    <span class="kw">struct</span> <span class="ident">TensorFlowLiteModel</span> {
-        <span class="ident">interpreter</span>: <span class="ident">Interpreter</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span>, <span class="ident">BuiltinOpResolver</span><span class="op">&gt;</span>,
-        <span class="ident">inputs</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Shape</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-        <span class="ident">outputs</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Shape</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;</span><span class="op">&gt;</span>,
-    }
-
-    <span class="kw">impl</span> <span class="ident">TensorFlowLiteModel</span> {
-        <span class="kw">fn</span> <span class="ident">load</span>(<span class="ident">model_bytes</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-            <span class="kw">let</span> <span class="ident">model</span> <span class="op">=</span>
-                <span class="ident">FlatBufferModel::build_from_buffer</span>(<span class="ident">model_bytes</span>.<span class="ident">to_vec</span>())
-                    .<span class="ident">context</span>(<span class="string">&quot;Unable to build the model&quot;</span>)<span class="question-mark">?</span>;
-
-            <span class="kw">let</span> <span class="ident">resolver</span> <span class="op">=</span> <span class="ident">BuiltinOpResolver::default</span>();
-
-            <span class="kw">let</span> <span class="ident">builder</span> <span class="op">=</span> <span class="ident">InterpreterBuilder::new</span>(<span class="ident">model</span>, <span class="ident">resolver</span>)
-                .<span class="ident">context</span>(<span class="string">&quot;Unable to create a model interpreter builder&quot;</span>)<span class="question-mark">?</span>;
-            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">interpreter</span> <span class="op">=</span> <span class="ident">builder</span>
-                .<span class="ident">build</span>()
-                .<span class="ident">context</span>(<span class="string">&quot;Unable to initialize the model interpreter&quot;</span>)<span class="question-mark">?</span>;
-
-            <span class="ident">log_interpreter</span>(<span class="kw-2">&amp;</span><span class="ident">interpreter</span>);
-
-            <span class="ident">interpreter</span>
-                .<span class="ident">allocate_tensors</span>()
-                .<span class="ident">context</span>(<span class="string">&quot;Unable to allocate tensors&quot;</span>)<span class="question-mark">?</span>;
-
-            <span class="kw">let</span> <span class="ident">inputs</span> <span class="op">=</span> <span class="ident">tensor_shapes</span>(<span class="kw-2">&amp;</span><span class="ident">interpreter</span>, <span class="ident">interpreter</span>.<span class="ident">inputs</span>())
-                .<span class="ident">context</span>(<span class="string">&quot;Invalid input types&quot;</span>)<span class="question-mark">?</span>;
-            <span class="kw">let</span> <span class="ident">outputs</span> <span class="op">=</span> <span class="ident">tensor_shapes</span>(<span class="kw-2">&amp;</span><span class="ident">interpreter</span>, <span class="ident">interpreter</span>.<span class="ident">outputs</span>())
-                .<span class="ident">context</span>(<span class="string">&quot;Invalid output types&quot;</span>)<span class="question-mark">?</span>;
-
-            <span class="prelude-val">Ok</span>(<span class="ident">TensorFlowLiteModel</span> {
-                <span class="ident">interpreter</span>,
-                <span class="ident">inputs</span>,
-                <span class="ident">outputs</span>,
-            })
-        }
-    }
-
-    <span class="kw">fn</span> <span class="ident">tensor_shapes</span>(
-        <span class="ident">interpreter</span>: <span class="kw-2">&amp;</span><span class="ident">Interpreter</span><span class="op">&lt;</span><span class="ident">BuiltinOpResolver</span><span class="op">&gt;</span>,
-        <span class="ident">tensor_indices</span>: <span class="kw-2">&amp;</span>[<span class="ident">i32</span>],
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Shape</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">tensors</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
-
-        <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">tensor_index</span>) <span class="kw">in</span> <span class="ident">tensor_indices</span>.<span class="ident">iter</span>().<span class="ident">copied</span>().<span class="ident">enumerate</span>() {
-            <span class="kw">let</span> <span class="ident">tensor_info</span> <span class="op">=</span>
-                <span class="ident">interpreter</span>.<span class="ident">tensor_info</span>(<span class="ident">tensor_index</span>).<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> {
-                    <span class="macro">format!</span>(<span class="string">&quot;Unable to find tensor #{}&quot;</span>, <span class="ident">tensor_index</span>)
-                })<span class="question-mark">?</span>;
-            <span class="kw">let</span> <span class="ident">shape</span> <span class="op">=</span> <span class="ident">tensor_shape</span>(<span class="kw-2">&amp;</span><span class="ident">tensor_info</span>)
-                .<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">format!</span>(<span class="string">&quot;Tensor {} is invalid&quot;</span>, <span class="ident">i</span>))<span class="question-mark">?</span>
-                .<span class="ident">to_owned</span>();
-
-            <span class="ident">tensors</span>.<span class="ident">push</span>(<span class="ident">shape</span>);
-        }
-
-        <span class="prelude-val">Ok</span>(<span class="ident">tensors</span>)
-    }
-
-    <span class="kw">fn</span> <span class="ident">tensor_shape</span>(<span class="ident">tensor</span>: <span class="kw-2">&amp;</span><span class="ident">TensorInfo</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Shape</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">element_type</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">tensor</span>.<span class="ident">element_kind</span> {
-            <span class="ident">ElementKind::kTfLiteFloat32</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Type::f32</span>,
-            <span class="ident">ElementKind::kTfLiteInt32</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Type::i32</span>,
-            <span class="ident">ElementKind::kTfLiteUInt8</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Type::u8</span>,
-            <span class="ident">ElementKind::kTfLiteInt64</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Type::i64</span>,
-            <span class="ident">ElementKind::kTfLiteString</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Type::String</span>,
-            <span class="ident">ElementKind::kTfLiteInt16</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Type::i16</span>,
-            <span class="ident">ElementKind::kTfLiteInt8</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Type::i8</span>,
-            <span class="ident">other</span> <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">anyhow::bail!</span>(<span class="string">&quot;Unsupported element type: {:?}&quot;</span>, <span class="ident">other</span>);
-            },
-        };
-
-        <span class="prelude-val">Ok</span>(<span class="ident">Shape::new</span>(<span class="ident">element_type</span>, <span class="ident">tensor</span>.<span class="ident">dims</span>.<span class="ident">as_slice</span>()))
-    }
-
-    <span class="kw">fn</span> <span class="ident">log_interpreter</span>(<span class="ident">interpreter</span>: <span class="kw-2">&amp;</span><span class="ident">Interpreter</span><span class="op">&lt;</span><span class="ident">BuiltinOpResolver</span><span class="op">&gt;</span>) {
-        <span class="kw">if</span> <span class="op">!</span><span class="macro">log::log_enabled!</span>(<span class="ident">Level::Debug</span>) {
-            <span class="kw">return</span>;
-        }
-        <span class="kw">let</span> <span class="ident">inputs</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">interpreter</span>
-            .<span class="ident">inputs</span>()
-            .<span class="ident">iter</span>()
-            .<span class="ident">filter_map</span>(<span class="op">|</span><span class="ident">ix</span><span class="op">|</span> <span class="ident">interpreter</span>.<span class="ident">tensor_info</span>(<span class="kw-2">*</span><span class="ident">ix</span>))
-            .<span class="ident">collect</span>();
-
-        <span class="kw">let</span> <span class="ident">outputs</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">interpreter</span>
-            .<span class="ident">outputs</span>()
-            .<span class="ident">iter</span>()
-            .<span class="ident">filter_map</span>(<span class="op">|</span><span class="ident">ix</span><span class="op">|</span> <span class="ident">interpreter</span>.<span class="ident">tensor_info</span>(<span class="kw-2">*</span><span class="ident">ix</span>))
-            .<span class="ident">collect</span>();
-
-        <span class="macro">log::debug!</span>(
-            <span class="string">&quot;Loaded model with inputs {:?} and outputs {:?}&quot;</span>,
-            <span class="ident">inputs</span>,
-            <span class="ident">outputs</span>
-        );
-    }
-
-    <span class="kw">impl</span> <span class="ident"><span class="kw">super</span>::Model</span> <span class="kw">for</span> <span class="ident">TensorFlowLiteModel</span> {
+    <span class="kw">impl</span> <span class="ident"><span class="kw">super</span>::Model</span> <span class="kw">for</span> <span class="ident">RuneCoralModel</span> {
         <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">infer</span>(
             <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>,
             <span class="ident">inputs</span>: <span class="kw-2">&amp;</span>[<span class="kw-2">&amp;</span>[<span class="ident">Cell</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>]],
             <span class="ident">outputs</span>: <span class="kw-2">&amp;</span>[<span class="kw-2">&amp;</span>[<span class="ident">Cell</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>]],
         ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
-            <span class="kw">let</span> <span class="ident">interpreter</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">interpreter</span>;
+            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ctx</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">ctx</span>.<span class="ident">lock</span>().<span class="ident">expect</span>(<span class="string">&quot;Lock was poisoned&quot;</span>);
 
-            <span class="macro">anyhow::ensure!</span>(
-                <span class="ident">interpreter</span>.<span class="ident">inputs</span>().<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="ident">inputs</span>.<span class="ident">len</span>(),
-                <span class="string">&quot;The model supports {} inputs but {} were provided&quot;</span>,
-                <span class="ident">interpreter</span>.<span class="ident">inputs</span>().<span class="ident">len</span>(),
-                <span class="ident">inputs</span>.<span class="ident">len</span>(),
-            );
-            <span class="macro">anyhow::ensure!</span>(
-                <span class="ident">interpreter</span>.<span class="ident">outputs</span>().<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="ident">outputs</span>.<span class="ident">len</span>(),
-                <span class="string">&quot;The model supports {} inputs but {} were provided&quot;</span>,
-                <span class="ident">interpreter</span>.<span class="ident">outputs</span>().<span class="ident">len</span>(),
-                <span class="ident">outputs</span>.<span class="ident">len</span>(),
-            );
+            <span class="kw">let</span> <span class="ident">inputs</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Tensor</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">=</span> <span class="self">self</span>
+                .<span class="ident">input_descriptors</span>
+                .<span class="ident">iter</span>()
+                .<span class="ident">zip</span>(<span class="ident">inputs</span>)
+                .<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">desc</span>, <span class="ident">data</span>)<span class="op">|</span> <span class="ident">Tensor</span> {
+                    <span class="ident">element_type</span>: <span class="ident">desc</span>.<span class="ident">element_type</span>,
+                    <span class="ident">shape</span>: <span class="ident">Cow::Borrowed</span>(<span class="kw-2">&amp;</span><span class="ident">desc</span>.<span class="ident">shape</span>),
+                    <span class="comment">// Safety:</span>
+                    <span class="ident">buffer</span>: <span class="kw">unsafe</span> {
+                        <span class="ident">std::slice::from_raw_parts</span>(
+                            <span class="ident">data</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">u8</span>,
+                            <span class="ident">data</span>.<span class="ident">len</span>(),
+                        )
+                    },
+                })
+                .<span class="ident">collect</span>();
 
-            <span class="kw">let</span> <span class="ident">input_indices</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">interpreter</span>.<span class="ident">inputs</span>().<span class="ident">to_vec</span>();
+            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">outputs</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">TensorMut</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">=</span> <span class="self">self</span>
+                .<span class="ident">output_descriptors</span>
+                .<span class="ident">iter</span>()
+                .<span class="ident">zip</span>(<span class="ident">outputs</span>)
+                .<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">desc</span>, <span class="ident">data</span>)<span class="op">|</span> <span class="ident">TensorMut</span> {
+                    <span class="ident">element_type</span>: <span class="ident">desc</span>.<span class="ident">element_type</span>,
+                    <span class="ident">shape</span>: <span class="ident">Cow::Borrowed</span>(<span class="kw-2">&amp;</span><span class="ident">desc</span>.<span class="ident">shape</span>),
+                    <span class="ident">buffer</span>: <span class="kw">unsafe</span> {
+                        <span class="ident">std::slice::from_raw_parts_mut</span>(
+                            <span class="ident">data</span>.<span class="ident">as_ptr</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">Cell</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>,
+                            <span class="ident">data</span>.<span class="ident">len</span>(),
+                        )
+                    },
+                })
+                .<span class="ident">collect</span>();
 
-            <span class="kw">for</span> (<span class="kw-2">&amp;</span><span class="ident">ix</span>, <span class="kw-2">&amp;</span><span class="ident">input</span>) <span class="kw">in</span> <span class="ident">input_indices</span>.<span class="ident">iter</span>().<span class="ident">zip</span>(<span class="ident">inputs</span>) {
-                <span class="kw">let</span> <span class="ident">buffer</span> <span class="op">=</span> <span class="ident">interpreter</span>
-                    .<span class="ident">tensor_buffer_mut</span>(<span class="ident">ix</span>)
-                    .<span class="ident">context</span>(<span class="string">&quot;Unable to get the input buffer&quot;</span>)<span class="question-mark">?</span>;
-
-                <span class="comment">// FIXME: Figure out how to tell TensorFlow Lite to use the</span>
-                <span class="comment">// input buffers directly instead of copying.</span>
-                <span class="kw">for</span> (<span class="ident">src</span>, <span class="ident">dest</span>) <span class="kw">in</span> <span class="ident">input</span>.<span class="ident">iter</span>().<span class="ident">zip</span>(<span class="ident">buffer</span>) {
-                    <span class="kw-2">*</span><span class="ident">dest</span> <span class="op">=</span> <span class="ident">src</span>.<span class="ident">get</span>();
-                }
-            }
-
-            <span class="ident">interpreter</span>.<span class="ident">invoke</span>().<span class="ident">context</span>(<span class="string">&quot;Calling the model failed&quot;</span>)<span class="question-mark">?</span>;
-
-            <span class="kw">for</span> (<span class="kw-2">&amp;</span><span class="ident">ix</span>, <span class="ident">output</span>) <span class="kw">in</span> <span class="ident">interpreter</span>.<span class="ident">outputs</span>().<span class="ident">iter</span>().<span class="ident">zip</span>(<span class="ident">outputs</span>) {
-                <span class="kw">let</span> <span class="ident">buffer</span> <span class="op">=</span> <span class="ident">interpreter</span>
-                    .<span class="ident">tensor_buffer</span>(<span class="ident">ix</span>)
-                    .<span class="ident">context</span>(<span class="string">&quot;Unable to get the output buffer&quot;</span>)<span class="question-mark">?</span>;
-
-                <span class="comment">// FIXME: Figure out how to tell TensorFlow Lite to use the</span>
-                <span class="comment">// output buffers directly instead of copying.</span>
-                <span class="kw">for</span> (<span class="ident">src</span>, <span class="ident">dest</span>) <span class="kw">in</span> <span class="ident">buffer</span>.<span class="ident">iter</span>().<span class="ident">zip</span>(<span class="kw-2">*</span><span class="ident">output</span>) {
-                    <span class="ident">dest</span>.<span class="ident">set</span>(<span class="kw-2">*</span><span class="ident">src</span>);
-                }
-            }
+            <span class="ident">ctx</span>.<span class="ident">infer</span>(<span class="kw-2">&amp;</span><span class="ident">inputs</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">outputs</span>)
+                .<span class="ident">context</span>(<span class="string">&quot;Inference failed&quot;</span>)<span class="question-mark">?</span>;
 
             <span class="prelude-val">Ok</span>(())
         }

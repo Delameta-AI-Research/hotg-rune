@@ -1,1 +1,0 @@
-initSidebarItems({"macro":[["cpp","This macro is used to embed arbitrary C++ code."],["cpp_class","This macro allows wrapping a relocatable C++ struct or class that might have a destructor or copy constructor, implementing the `Drop` and `Clone` trait appropriately."]]});

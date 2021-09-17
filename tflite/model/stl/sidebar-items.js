@@ -1,1 +1,0 @@
-initSidebarItems({"mod":[["memory",""],["memory_impl",""],["string",""],["vector",""],["vector_impl",""]]});

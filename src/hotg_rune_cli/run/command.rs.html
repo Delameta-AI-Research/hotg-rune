@@ -229,18 +229,6 @@
 <span id="229">229</span>
 <span id="230">230</span>
 <span id="231">231</span>
-<span id="232">232</span>
-<span id="233">233</span>
-<span id="234">234</span>
-<span id="235">235</span>
-<span id="236">236</span>
-<span id="237">237</span>
-<span id="238">238</span>
-<span id="239">239</span>
-<span id="240">240</span>
-<span id="241">241</span>
-<span id="242">242</span>
-<span id="243">243</span>
 </pre><pre class="rust">
 <span class="kw">use</span> <span class="ident">regex::Regex</span>;
 <span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">path::PathBuf</span>, <span class="ident">str::FromStr</span>};
@@ -251,7 +239,7 @@
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::run</span>::{
     <span class="ident">Accelerometer</span>, <span class="ident">Image</span>, <span class="ident">Raw</span>, <span class="ident">Sound</span>, <span class="ident">accelerometer::Samples</span>,
     <span class="ident">image::ImageSource</span>, <span class="ident">multi::SourceBackedCapability</span>, <span class="ident">new_capability_switcher</span>,
-    <span class="ident">resources</span>, <span class="ident">runecoral_inference</span>, <span class="ident">sound::AudioClip</span>,
+    <span class="ident">resources</span>, <span class="ident">sound::AudioClip</span>,
 };
 <span class="kw">use</span> <span class="ident">hotg_runicos_base_runtime</span>::{<span class="ident">BaseImage</span>, <span class="ident">CapabilityFactory</span>, <span class="ident">Random</span>};
 
@@ -292,12 +280,6 @@
         <span class="ident">help</span> <span class="op">=</span> <span class="string">&quot;Seed the runtime&#39;s Random Number Generator&quot;</span>
     )]
     <span class="ident">random</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u64</span><span class="op">&gt;</span>,
-    <span class="attribute">#[<span class="ident">structopt</span>(
-        <span class="ident">long</span>,
-        <span class="ident">env</span>,
-        <span class="ident">help</span> <span class="op">=</span> <span class="string">&quot;The librunecoral.so library to use for hardware acceleration&quot;</span>
-    )]</span>
-    <span class="ident">librunecoral</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span>,
     <span class="attribute">#[<span class="ident">structopt</span>(
         <span class="ident">long</span>,
         <span class="ident">help</span> <span class="op">=</span> <span class="string">&quot;Use the wasm3 WebAssembly engine instead of Wasmer&quot;</span>
@@ -364,12 +346,6 @@
         <span class="ident">resources::load_from_custom_sections</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">img</span>, <span class="ident">rune</span>);
         <span class="ident">resources::load_from_files</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">img</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">file_resources</span>);
         <span class="ident">resources::load_from_strings</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">img</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">string_resources</span>);
-
-        <span class="ident">runecoral_inference::override_model_handler</span>(
-            <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">img</span>,
-            <span class="self">self</span>.<span class="ident">librunecoral</span>.<span class="ident">as_deref</span>(),
-        )
-        .<span class="ident">context</span>(<span class="string">&quot;Unable to register the librunecoral inference backend&quot;</span>)<span class="question-mark">?</span>;
 
         <span class="prelude-val">Ok</span>(<span class="ident">img</span>)
     }

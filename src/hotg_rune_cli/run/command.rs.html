@@ -343,7 +343,7 @@
 
         <span class="self">self</span>.<span class="ident">register_capabilities</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">img</span>)<span class="question-mark">?</span>;
 
-        <span class="ident">resources::load_from_custom_sections</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">img</span>, <span class="ident">rune</span>);
+        <span class="ident">resources::load_from_custom_sections</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">img</span>, <span class="ident">rune</span>)<span class="question-mark">?</span>;
         <span class="ident">resources::load_from_files</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">img</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">file_resources</span>);
         <span class="ident">resources::load_from_strings</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">img</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">string_resources</span>);
 

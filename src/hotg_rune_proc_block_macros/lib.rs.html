@@ -159,7 +159,7 @@
 <span class="doccomment">/// use hotg_rune_core::Tensor;</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// #[derive(Default, hotg_rune_proc_block_macros::ProcBlock)]</span>
-<span class="doccomment">/// #[transform(input = f32, output = f32)]</span>
+<span class="doccomment">/// #[transform(inputs = f32, outputs = f32)]</span>
 <span class="doccomment">/// struct Foo { }</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// impl Transform&lt;Tensor&lt;f32&gt;&gt; for Foo {</span>
@@ -176,7 +176,7 @@
 <span class="doccomment">/// use hotg_rune_core::Tensor;</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// #[derive(Default, hotg_rune_proc_block_macros::ProcBlock)]  // Error: the trait bound `Foo: hotg_rune_proc_blocks::Transform&lt;Tensor&lt;f32&gt;&gt;` is not satisfied</span>
-<span class="doccomment">/// #[transform(input = f32, output = f32)]</span>
+<span class="doccomment">/// #[transform(inputs = f32, outputs = f32)]</span>
 <span class="doccomment">/// struct Foo { }</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// // impl Transform&lt;Tensor&lt;f32&gt;&gt; for Foo {</span>
@@ -193,8 +193,8 @@
 <span class="doccomment">/// use hotg_rune_core::Tensor;</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// #[derive(Default, hotg_rune_proc_block_macros::ProcBlock)]</span>
-<span class="doccomment">/// #[transform(input = [f32; _], output = [u8; 1920])]</span>
-<span class="doccomment">/// #[transform(input = str, output = [i16; 2])]</span>
+<span class="doccomment">/// #[transform(inputs = [f32; _], outputs = [u8; 1920])]</span>
+<span class="doccomment">/// #[transform(inputs = str, outputs = [i16; 2])]</span>
 <span class="doccomment">/// struct Foo { }</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// impl Transform&lt;Tensor&lt;f32&gt;&gt; for Foo {</span>

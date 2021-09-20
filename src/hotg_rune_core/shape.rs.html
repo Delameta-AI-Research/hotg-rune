@@ -180,6 +180,8 @@
 <span id="180">180</span>
 <span id="181">181</span>
 <span id="182">182</span>
+<span id="183">183</span>
+<span id="184">184</span>
 </pre><pre class="rust">
 <span class="kw">use</span> <span class="ident">alloc</span>::{
     <span class="ident">borrow::Cow</span>,
@@ -194,7 +196,9 @@
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::reflect::Type</span>;
 
 <span class="doccomment">/// A tensor&#39;s shape.</span>
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">Hash</span>)]</span>
+<span class="attribute">#[<span class="ident">derive</span>(
+    <span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">Hash</span>, <span class="ident">serde::Serialize</span>, <span class="ident">serde::Deserialize</span>,
+)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Shape</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
     <span class="ident">element_type</span>: <span class="ident">Type</span>,
     <span class="ident">dimensions</span>: <span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, [<span class="ident">usize</span>]<span class="op">&gt;</span>,

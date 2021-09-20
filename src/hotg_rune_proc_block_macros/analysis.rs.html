@@ -563,22 +563,124 @@
 <span id="563">563</span>
 <span id="564">564</span>
 <span id="565">565</span>
+<span id="566">566</span>
+<span id="567">567</span>
+<span id="568">568</span>
+<span id="569">569</span>
+<span id="570">570</span>
+<span id="571">571</span>
+<span id="572">572</span>
+<span id="573">573</span>
+<span id="574">574</span>
+<span id="575">575</span>
+<span id="576">576</span>
+<span id="577">577</span>
+<span id="578">578</span>
+<span id="579">579</span>
+<span id="580">580</span>
+<span id="581">581</span>
+<span id="582">582</span>
+<span id="583">583</span>
+<span id="584">584</span>
+<span id="585">585</span>
+<span id="586">586</span>
+<span id="587">587</span>
+<span id="588">588</span>
+<span id="589">589</span>
+<span id="590">590</span>
+<span id="591">591</span>
+<span id="592">592</span>
+<span id="593">593</span>
+<span id="594">594</span>
+<span id="595">595</span>
+<span id="596">596</span>
+<span id="597">597</span>
+<span id="598">598</span>
+<span id="599">599</span>
+<span id="600">600</span>
+<span id="601">601</span>
+<span id="602">602</span>
+<span id="603">603</span>
+<span id="604">604</span>
+<span id="605">605</span>
+<span id="606">606</span>
+<span id="607">607</span>
+<span id="608">608</span>
+<span id="609">609</span>
+<span id="610">610</span>
+<span id="611">611</span>
+<span id="612">612</span>
+<span id="613">613</span>
+<span id="614">614</span>
+<span id="615">615</span>
+<span id="616">616</span>
+<span id="617">617</span>
+<span id="618">618</span>
+<span id="619">619</span>
+<span id="620">620</span>
+<span id="621">621</span>
+<span id="622">622</span>
+<span id="623">623</span>
+<span id="624">624</span>
+<span id="625">625</span>
+<span id="626">626</span>
+<span id="627">627</span>
+<span id="628">628</span>
+<span id="629">629</span>
+<span id="630">630</span>
+<span id="631">631</span>
+<span id="632">632</span>
+<span id="633">633</span>
+<span id="634">634</span>
+<span id="635">635</span>
+<span id="636">636</span>
+<span id="637">637</span>
+<span id="638">638</span>
+<span id="639">639</span>
+<span id="640">640</span>
+<span id="641">641</span>
+<span id="642">642</span>
+<span id="643">643</span>
+<span id="644">644</span>
+<span id="645">645</span>
+<span id="646">646</span>
+<span id="647">647</span>
+<span id="648">648</span>
+<span id="649">649</span>
+<span id="650">650</span>
+<span id="651">651</span>
+<span id="652">652</span>
+<span id="653">653</span>
+<span id="654">654</span>
+<span id="655">655</span>
+<span id="656">656</span>
+<span id="657">657</span>
+<span id="658">658</span>
+<span id="659">659</span>
+<span id="660">660</span>
+<span id="661">661</span>
+<span id="662">662</span>
+<span id="663">663</span>
+<span id="664">664</span>
+<span id="665">665</span>
+<span id="666">666</span>
+<span id="667">667</span>
 </pre><pre class="rust">
-<span class="kw">use</span> <span class="ident">proc_macro2</span>::{<span class="ident">Ident</span>, <span class="ident">Span</span>};
+<span class="kw">use</span> <span class="ident">proc_macro2</span>::{<span class="ident">Ident</span>, <span class="ident">Span</span>, <span class="ident">Group</span>};
 <span class="kw">use</span> <span class="ident">hotg_rune_core::reflect::Type</span>;
 <span class="kw">use</span> <span class="ident">quote::quote</span>;
 <span class="kw">use</span> <span class="ident">syn</span>::{
     <span class="ident">Attribute</span>, <span class="ident">DeriveInput</span>, <span class="ident">Error</span>, <span class="ident">ExprLit</span>, <span class="ident">Lit</span>, <span class="ident">LitStr</span>, <span class="ident">Path</span>, <span class="ident">Token</span>,
     <span class="ident">TypeArray</span>, <span class="ident">TypePath</span>, <span class="ident">TypeReference</span>,
-    <span class="ident">parse</span>::{<span class="ident">Parse</span>, <span class="ident">ParseStream</span>},
+    <span class="ident">parse</span>::{<span class="ident">Parse</span>, <span class="ident">ParseStream</span>, <span class="ident">Parser</span>},
     <span class="ident">punctuated::Punctuated</span>,
     <span class="ident">spanned::Spanned</span>,
 };
 
 <span class="kw">use</span> <span class="kw">crate</span>::{
     <span class="ident">descriptor</span>::{
-        <span class="ident">ProcBlockDescriptor</span>, <span class="ident">TransformDescriptor</span>, <span class="ident">Dimension</span>, <span class="ident">Dimensions</span>,
-        <span class="ident">TensorDescriptor</span>,
+        <span class="ident">Dimension</span>, <span class="ident">Dimensions</span>, <span class="ident">ProcBlockDescriptor</span>, <span class="ident">TensorDescriptor</span>,
+        <span class="ident">TensorDescriptors</span>, <span class="ident">TransformDescriptor</span>,
     },
     <span class="ident">types</span>::{
         <span class="ident">Assertions</span>, <span class="ident">CustomSection</span>, <span class="ident">DeriveOutput</span>, <span class="ident">ProcBlockImpl</span>, <span class="ident">Setter</span>,
@@ -635,14 +737,18 @@
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">assertions</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
 
     <span class="kw">for</span> <span class="ident">transform</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">transforms</span> {
-        <span class="kw">let</span> <span class="ident">TransformDescriptor</span> { <span class="ident">input</span>, <span class="ident">output</span> } <span class="op">=</span> <span class="ident">transform</span>;
-        <span class="kw">let</span> <span class="ident">input</span> <span class="op">=</span> <span class="ident">to_rust_tensor</span>(<span class="ident">exports</span>, <span class="kw-2">&amp;</span><span class="ident">input</span>.<span class="ident">element_type</span>);
-        <span class="kw">let</span> <span class="ident">output</span> <span class="op">=</span> <span class="ident">to_rust_tensor</span>(<span class="ident">exports</span>, <span class="kw-2">&amp;</span><span class="ident">output</span>.<span class="ident">element_type</span>);
+        <span class="kw">let</span> <span class="ident">TransformDescriptor</span> { <span class="ident">inputs</span>, <span class="ident">outputs</span> } <span class="op">=</span> <span class="ident">transform</span>;
+        <span class="kw">let</span> <span class="ident">inputs</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">inputs</span>
+            .<span class="ident">iter</span>()
+            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">t</span><span class="op">|</span> <span class="ident">to_rust_tensor</span>(<span class="ident">exports</span>, <span class="kw-2">&amp;</span><span class="ident">t</span>.<span class="ident">element_type</span>))
+            .<span class="ident">collect</span>();
+        <span class="kw">let</span> <span class="ident">outputs</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">outputs</span>
+            .<span class="ident">iter</span>()
+            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">t</span><span class="op">|</span> <span class="ident">to_rust_tensor</span>(<span class="ident">exports</span>, <span class="kw-2">&amp;</span><span class="ident">t</span>.<span class="ident">element_type</span>))
+            .<span class="ident">collect</span>();
 
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>((<span class="ident">input</span>, <span class="ident">output</span>)) <span class="op">=</span> <span class="ident">input</span>.<span class="ident">zip</span>(<span class="ident">output</span>) {
-            <span class="kw">let</span> <span class="ident">assert</span> <span class="op">=</span> <span class="ident">TransformAssertion</span> { <span class="ident">input</span>, <span class="ident">output</span> };
-            <span class="ident">assertions</span>.<span class="ident">push</span>(<span class="ident">assert</span>);
-        }
+        <span class="kw">let</span> <span class="ident">assert</span> <span class="op">=</span> <span class="ident">TransformAssertion</span> { <span class="ident">inputs</span>, <span class="ident">outputs</span> };
+        <span class="ident">assertions</span>.<span class="ident">push</span>(<span class="ident">assert</span>);
     }
 
     <span class="prelude-val">Ok</span>((
@@ -656,23 +762,23 @@
     ))
 }
 
-<span class="kw">fn</span> <span class="ident">to_rust_tensor</span>(<span class="ident">exports</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>, <span class="ident">ty</span>: <span class="kw-2">&amp;</span><span class="ident">Type</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">syn::Type</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">to_rust_tensor</span>(<span class="ident">exports</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>, <span class="ident">ty</span>: <span class="kw-2">&amp;</span><span class="ident">Type</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">syn::Type</span> {
     <span class="comment">// Note: the rust type name for a string isn&#39;t defined unambiguously (you</span>
     <span class="comment">// could use str, &amp;str, &amp;&#39;static str, String, etc.) so we handle it</span>
     <span class="comment">// specially.</span>
     <span class="kw">let</span> <span class="ident">tokens</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">ty</span> {
         <span class="ident">Type::String</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote!</span>(#<span class="ident">exports::Tensor</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span><span class="op">&gt;</span>),
         <span class="ident">everything_else</span> <span class="op">=</span><span class="op">&gt;</span> {
-            <span class="kw">let</span> <span class="ident">rust_type</span> <span class="op">=</span>
-                <span class="ident">Ident::new</span>(<span class="ident">everything_else</span>.<span class="ident">rust_name</span>()<span class="question-mark">?</span>, <span class="ident">Span::call_site</span>());
+            <span class="kw">let</span> <span class="ident">rust_name</span> <span class="op">=</span> <span class="ident">everything_else</span>
+                .<span class="ident">rust_name</span>()
+                .<span class="ident">expect</span>(<span class="string">&quot;Unable to determine the Rust name for this type&quot;</span>);
+            <span class="kw">let</span> <span class="ident">rust_type</span> <span class="op">=</span> <span class="ident">Ident::new</span>(<span class="ident">rust_name</span>, <span class="ident">Span::call_site</span>());
             <span class="macro">quote!</span>(#<span class="ident">exports::Tensor</span><span class="op">&lt;</span>#<span class="ident">rust_type</span><span class="op">&gt;</span>)
         },
     };
 
-    <span class="prelude-val">Some</span>(
-        <span class="ident">syn::parse2</span>(<span class="ident">tokens</span>)
-            .<span class="ident">expect</span>(<span class="string">&quot;We should always be able to parse a tensor&quot;</span>),
-    )
+    <span class="ident">syn::parse2</span>(<span class="ident">tokens</span>)
+        .<span class="ident">expect</span>(<span class="string">&quot;We should always be able to parse a tensor type&quot;</span>)
 }
 
 <span class="kw">fn</span> <span class="ident">transforms</span>(
@@ -683,8 +789,11 @@
     <span class="kw">for</span> <span class="ident">attr</span> <span class="kw">in</span> <span class="ident">attrs</span> {
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">name</span>) <span class="op">=</span> <span class="ident">attr</span>.<span class="ident">path</span>.<span class="ident">get_ident</span>() {
             <span class="kw">if</span> <span class="ident">name</span> <span class="op">=</span><span class="op">=</span> <span class="string">&quot;transform&quot;</span> {
-                <span class="kw">let</span> <span class="ident">transform</span>: <span class="ident">TransformDescriptor</span> <span class="op">=</span>
+                <span class="kw">let</span> <span class="ident">parenthesized_key_values</span>: <span class="ident">Group</span> <span class="op">=</span>
                     <span class="ident">syn::parse2</span>(<span class="ident">attr</span>.<span class="ident">tokens</span>.<span class="ident">clone</span>())<span class="question-mark">?</span>;
+
+                <span class="kw">let</span> <span class="ident">transform</span> <span class="op">=</span> <span class="ident">parse_transform_descriptor</span>
+                    .<span class="ident">parse2</span>(<span class="ident">parenthesized_key_values</span>.<span class="ident">stream</span>())<span class="question-mark">?</span>;
                 <span class="ident">transforms</span>.<span class="ident">push</span>(<span class="ident">transform</span>);
             }
         }
@@ -693,67 +802,89 @@
     <span class="prelude-val">Ok</span>(<span class="ident">transforms</span>)
 }
 
-<span class="kw">impl</span> <span class="ident">Parse</span> <span class="kw">for</span> <span class="ident">TransformDescriptor</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">tokens</span>: <span class="ident">ParseStream</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+<span class="doccomment">/// Parse the `inputs = ..., outputs = ...` from</span>
+<span class="doccomment">/// `#[transform(inputs =..., outputs = ...)]`.</span>
+<span class="kw">fn</span> <span class="ident">parse_transform_descriptor</span>(
+    <span class="ident">tokens</span>: <span class="ident">ParseStream</span>,
+) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">TransformDescriptor</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="kw">let</span> <span class="ident">ident</span>: <span class="ident">Ident</span> <span class="op">=</span> <span class="ident">tokens</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>;
+    <span class="kw">if</span> <span class="ident">ident</span> <span class="op">!</span><span class="op">=</span> <span class="string">&quot;inputs&quot;</span> {
+        <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::new</span>(<span class="ident">ident</span>.<span class="ident">span</span>(), <span class="string">&quot;Expected \&quot;inputs\&quot;&quot;</span>));
+    }
+    <span class="kw">let</span> <span class="kw">_</span>: <span class="macro">Token!</span>[<span class="op">=</span>] <span class="op">=</span> <span class="ident">tokens</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>;
+    <span class="kw">let</span> <span class="ident">inputs</span> <span class="op">=</span> <span class="ident">parse_tensor_descriptors</span>(<span class="kw-2">&amp;</span><span class="ident">tokens</span>)<span class="question-mark">?</span>;
+    <span class="kw">let</span> <span class="kw">_</span>: <span class="macro">Token!</span>[,] <span class="op">=</span> <span class="ident">tokens</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>;
+
+    <span class="kw">let</span> <span class="ident">ident</span>: <span class="ident">Ident</span> <span class="op">=</span> <span class="ident">tokens</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>;
+    <span class="kw">if</span> <span class="ident">ident</span> <span class="op">!</span><span class="op">=</span> <span class="string">&quot;outputs&quot;</span> {
+        <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::new</span>(<span class="ident">ident</span>.<span class="ident">span</span>(), <span class="string">&quot;Expected \&quot;outputs\&quot;&quot;</span>));
+    }
+    <span class="kw">let</span> <span class="kw">_</span>: <span class="macro">Token!</span>[<span class="op">=</span>] <span class="op">=</span> <span class="ident">tokens</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>;
+    <span class="kw">let</span> <span class="ident">outputs</span> <span class="op">=</span> <span class="ident">parse_tensor_descriptors</span>(<span class="kw-2">&amp;</span><span class="ident">tokens</span>)<span class="question-mark">?</span>;
+
+    <span class="prelude-val">Ok</span>(<span class="ident">TransformDescriptor</span> { <span class="ident">inputs</span>, <span class="ident">outputs</span> })
+}
+
+<span class="doccomment">/// Parse either a single tensor descriptor (`[f32; 1]`) or multiple tensor</span>
+<span class="doccomment">/// descriptors inside parens (`([f32; 1], [u8; 1024])`).</span>
+<span class="kw">fn</span> <span class="ident">parse_tensor_descriptors</span>(
+    <span class="ident">tokens</span>: <span class="ident">ParseStream</span>,
+) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">TensorDescriptors</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="kw">if</span> <span class="ident">tokens</span>.<span class="ident">peek</span>(<span class="ident">syn::token::Paren</span>) {
+        <span class="comment">// We&#39;ve got multiple comma-separated tensor descriptors in a tuple.</span>
         <span class="kw">let</span> <span class="ident">inner</span>;
         <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="macro">syn::parenthesized!</span>(<span class="ident">inner</span> <span class="kw">in</span> <span class="ident">tokens</span>);
-        <span class="kw">let</span> <span class="ident">tokens</span> <span class="op">=</span> <span class="ident">inner</span>;
+        <span class="kw">let</span> <span class="ident">comma_separated_tensors</span>: <span class="ident">Punctuated</span><span class="op">&lt;</span>
+            <span class="ident">TensorDescriptor</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;</span>,
+            <span class="macro">Token!</span>[,],
+        <span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Punctuated::parse_separated_nonempty_with</span>(
+            <span class="kw-2">&amp;</span><span class="ident">inner</span>,
+            <span class="ident">parse_tensor_descriptor</span>,
+        )<span class="question-mark">?</span>;
 
-        <span class="kw">let</span> <span class="ident">ident</span>: <span class="ident">Ident</span> <span class="op">=</span> <span class="ident">tokens</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>;
-        <span class="kw">if</span> <span class="ident">ident</span> <span class="op">!</span><span class="op">=</span> <span class="string">&quot;input&quot;</span> {
-            <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::new</span>(<span class="ident">ident</span>.<span class="ident">span</span>(), <span class="string">&quot;Expected \&quot;input\&quot;&quot;</span>));
-        }
-        <span class="kw">let</span> <span class="kw">_</span>: <span class="macro">Token!</span>[<span class="op">=</span>] <span class="op">=</span> <span class="ident">tokens</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">input</span> <span class="op">=</span> <span class="ident">tokens</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="kw">_</span>: <span class="macro">Token!</span>[,] <span class="op">=</span> <span class="ident">tokens</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>;
-
-        <span class="kw">let</span> <span class="ident">ident</span>: <span class="ident">Ident</span> <span class="op">=</span> <span class="ident">tokens</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>;
-        <span class="kw">if</span> <span class="ident">ident</span> <span class="op">!</span><span class="op">=</span> <span class="string">&quot;output&quot;</span> {
-            <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::new</span>(<span class="ident">ident</span>.<span class="ident">span</span>(), <span class="string">&quot;Expected \&quot;output\&quot;&quot;</span>));
-        }
-        <span class="kw">let</span> <span class="kw">_</span>: <span class="macro">Token!</span>[<span class="op">=</span>] <span class="op">=</span> <span class="ident">tokens</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">output</span> <span class="op">=</span> <span class="ident">tokens</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>;
-
-        <span class="prelude-val">Ok</span>(<span class="ident">TransformDescriptor</span> { <span class="ident">input</span>, <span class="ident">output</span> })
+        <span class="prelude-val">Ok</span>(<span class="ident">comma_separated_tensors</span>.<span class="ident">into_iter</span>().<span class="ident">collect</span>())
+    } <span class="kw">else</span> {
+        <span class="comment">// They&#39;ve specified just one input</span>
+        <span class="ident">parse_tensor_descriptor</span>(<span class="ident">tokens</span>).<span class="ident">map</span>(<span class="ident">Into::into</span>)
     }
 }
 
-<span class="kw">impl</span> <span class="ident">Parse</span> <span class="kw">for</span> <span class="ident">TensorDescriptor</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">input</span>: <span class="ident">ParseStream</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
-        <span class="kw">if</span> <span class="ident">input</span>.<span class="ident">peek</span>(<span class="ident">syn::token::Bracket</span>) {
-            <span class="kw">let</span> <span class="ident">TypeArray</span> { <span class="ident">elem</span>, <span class="ident">len</span>, .. } <span class="op">=</span> <span class="ident">input</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>;
+<span class="kw">fn</span> <span class="ident">parse_tensor_descriptor</span>(
+    <span class="ident">input</span>: <span class="ident">ParseStream</span>,
+) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">TensorDescriptor</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="kw">if</span> <span class="ident">input</span>.<span class="ident">peek</span>(<span class="ident">syn::token::Bracket</span>) {
+        <span class="kw">let</span> <span class="ident">TypeArray</span> { <span class="ident">elem</span>, <span class="ident">len</span>, .. } <span class="op">=</span> <span class="ident">input</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>;
 
-            <span class="kw">let</span> <span class="ident">element_type</span> <span class="op">=</span> <span class="ident">known_type_from_syn_type</span>(<span class="kw-2">&amp;</span><span class="ident">elem</span>)<span class="question-mark">?</span>;
-            <span class="kw">let</span> <span class="ident">dimensions</span> <span class="op">=</span> <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">len</span> {
-                <span class="ident">syn::Expr::Lit</span>(<span class="ident">ExprLit</span> {
-                    <span class="ident">lit</span>: <span class="ident">Lit::Int</span>(<span class="ident">int</span>), ..
-                }) <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="kw">let</span> <span class="ident">rank</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="ident">int</span>.<span class="ident">base10_parse</span>()<span class="question-mark">?</span>;
-                    <span class="ident">Dimensions::from</span>(<span class="macro">vec!</span>[<span class="ident">Dimension::Any</span>; <span class="ident">rank</span>])
-                },
-                <span class="ident">syn::Expr::Verbatim</span>(<span class="ident">v</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="kw">let</span> <span class="kw">_</span>: <span class="macro">Token!</span>[<span class="kw">_</span>] <span class="op">=</span> <span class="ident">syn::parse2</span>(<span class="ident">v</span>.<span class="ident">clone</span>())<span class="question-mark">?</span>;
-                    <span class="ident">Dimensions::Arbitrary</span>
-                },
-                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::new</span>(
-                        <span class="ident">len</span>.<span class="ident">span</span>(),
-                        <span class="string">&quot;Expected a constant length&quot;</span>,
-                    ))
-                },
-            };
+        <span class="kw">let</span> <span class="ident">element_type</span> <span class="op">=</span> <span class="ident">known_type_from_syn_type</span>(<span class="kw-2">&amp;</span><span class="ident">elem</span>)<span class="question-mark">?</span>;
+        <span class="kw">let</span> <span class="ident">dimensions</span> <span class="op">=</span> <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">len</span> {
+            <span class="ident">syn::Expr::Lit</span>(<span class="ident">ExprLit</span> {
+                <span class="ident">lit</span>: <span class="ident">Lit::Int</span>(<span class="ident">int</span>), ..
+            }) <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="kw">let</span> <span class="ident">rank</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="ident">int</span>.<span class="ident">base10_parse</span>()<span class="question-mark">?</span>;
+                <span class="ident">Dimensions::from</span>(<span class="macro">vec!</span>[<span class="ident">Dimension::Any</span>; <span class="ident">rank</span>])
+            },
+            <span class="ident">syn::Expr::Verbatim</span>(<span class="ident">v</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="kw">let</span> <span class="kw">_</span>: <span class="macro">Token!</span>[<span class="kw">_</span>] <span class="op">=</span> <span class="ident">syn::parse2</span>(<span class="ident">v</span>.<span class="ident">clone</span>())<span class="question-mark">?</span>;
+                <span class="ident">Dimensions::Arbitrary</span>
+            },
+            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::new</span>(
+                    <span class="ident">len</span>.<span class="ident">span</span>(),
+                    <span class="string">&quot;Expected a constant length&quot;</span>,
+                ))
+            },
+        };
 
-            <span class="prelude-val">Ok</span>(<span class="ident">TensorDescriptor</span> {
-                <span class="ident">element_type</span>,
-                <span class="ident">dimensions</span>,
-            })
-        } <span class="kw">else</span> {
-            <span class="kw">let</span> <span class="ident">element</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>;
-            <span class="prelude-val">Ok</span>(<span class="ident">TensorDescriptor</span> {
-                <span class="ident">element_type</span>: <span class="ident">known_type_from_syn_type</span>(<span class="kw-2">&amp;</span><span class="ident">element</span>)<span class="question-mark">?</span>,
-                <span class="ident">dimensions</span>: <span class="macro">vec!</span>[<span class="ident">Dimension::Value</span>(<span class="number">1</span>)].<span class="ident">into</span>(),
-            })
-        }
+        <span class="prelude-val">Ok</span>(<span class="ident">TensorDescriptor</span> {
+            <span class="ident">element_type</span>,
+            <span class="ident">dimensions</span>,
+        })
+    } <span class="kw">else</span> {
+        <span class="kw">let</span> <span class="ident">element</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>;
+        <span class="prelude-val">Ok</span>(<span class="ident">TensorDescriptor</span> {
+            <span class="ident">element_type</span>: <span class="ident">known_type_from_syn_type</span>(<span class="kw-2">&amp;</span><span class="ident">element</span>)<span class="question-mark">?</span>,
+            <span class="ident">dimensions</span>: <span class="macro">vec!</span>[<span class="ident">Dimension::Value</span>(<span class="number">1</span>)].<span class="ident">into</span>(),
+        })
     }
 }
 
@@ -974,32 +1105,36 @@
             <span class="doccomment">///</span>
             <span class="doccomment">/// Detailed description.</span>
             <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">ProcBlock</span>)]</span>
-            <span class="attribute">#[<span class="ident">transform</span>(<span class="ident">input</span> <span class="op">=</span> <span class="ident">f32</span>, <span class="ident">output</span> <span class="op">=</span> [<span class="ident">u8</span>; <span class="number">3</span>]</span>)]
-            <span class="attribute">#[<span class="ident">transform</span>(<span class="ident">input</span> <span class="op">=</span> <span class="ident">f32</span>, <span class="ident">output</span> <span class="op">=</span> [<span class="ident">u8</span>; <span class="number">2</span>]</span>)]
+            <span class="attribute">#[<span class="ident">transform</span>(<span class="ident">inputs</span> <span class="op">=</span> <span class="ident">f32</span>, <span class="ident">outputs</span> <span class="op">=</span> [<span class="ident">u8</span>; <span class="number">3</span>]</span>)]
+            <span class="attribute">#[<span class="ident">transform</span>(<span class="ident">inputs</span> <span class="op">=</span> <span class="ident">f32</span>, <span class="ident">outputs</span> <span class="op">=</span> [<span class="ident">u8</span>; <span class="number">2</span>]</span>)]
             <span class="kw">struct</span> <span class="ident">Proc</span> {}
         };
         <span class="kw">let</span> <span class="ident">input</span>: <span class="ident">DeriveInput</span> <span class="op">=</span> <span class="ident">syn::parse2</span>(<span class="ident">tokens</span>).<span class="ident">unwrap</span>();
         <span class="kw">let</span> <span class="ident">expected_description</span> <span class="op">=</span> <span class="string">&quot;One-line summary.\n\nDetailed description.&quot;</span>;
         <span class="kw">let</span> <span class="ident">expected_transforms</span> <span class="op">=</span> <span class="kw-2">&amp;</span>[
             <span class="ident">TransformDescriptor</span> {
-                <span class="ident">input</span>: <span class="ident">TensorDescriptor</span> {
+                <span class="ident">inputs</span>: <span class="ident">TensorDescriptor</span> {
                     <span class="ident">element_type</span>: <span class="ident">Type::f32</span>,
                     <span class="ident">dimensions</span>: <span class="macro">vec!</span>[<span class="ident">Dimension::Value</span>(<span class="number">1</span>)].<span class="ident">into</span>(),
-                },
-                <span class="ident">output</span>: <span class="ident">TensorDescriptor</span> {
+                }
+                .<span class="ident">into</span>(),
+                <span class="ident">outputs</span>: <span class="ident">TensorDescriptor</span> {
                     <span class="ident">element_type</span>: <span class="ident">Type::u8</span>,
                     <span class="ident">dimensions</span>: <span class="macro">vec!</span>[<span class="ident">Dimension::Any</span>; <span class="number">3</span>].<span class="ident">into</span>(),
-                },
+                }
+                .<span class="ident">into</span>(),
             },
             <span class="ident">TransformDescriptor</span> {
-                <span class="ident">input</span>: <span class="ident">TensorDescriptor</span> {
+                <span class="ident">inputs</span>: <span class="ident">TensorDescriptor</span> {
                     <span class="ident">element_type</span>: <span class="ident">Type::f32</span>,
                     <span class="ident">dimensions</span>: <span class="macro">vec!</span>[<span class="ident">Dimension::Value</span>(<span class="number">1</span>)].<span class="ident">into</span>(),
-                },
-                <span class="ident">output</span>: <span class="ident">TensorDescriptor</span> {
+                }
+                .<span class="ident">into</span>(),
+                <span class="ident">outputs</span>: <span class="ident">TensorDescriptor</span> {
                     <span class="ident">element_type</span>: <span class="ident">Type::u8</span>,
                     <span class="ident">dimensions</span>: <span class="macro">vec!</span>[<span class="ident">Dimension::Any</span>; <span class="number">2</span>].<span class="ident">into</span>(),
-                },
+                }
+                .<span class="ident">into</span>(),
             },
         ];
         <span class="kw">let</span> <span class="ident">exports</span>: <span class="ident">Path</span> <span class="op">=</span>
@@ -1009,24 +1144,24 @@
             <span class="ident">exports</span>: <span class="ident">exports</span>.<span class="ident">clone</span>(),
             <span class="ident">assertions</span>: <span class="macro">vec!</span>[
                 <span class="ident">TransformAssertion</span> {
-                    <span class="ident">input</span>: <span class="ident">syn::parse_str</span>(
+                    <span class="ident">inputs</span>: <span class="macro">vec!</span>[<span class="ident">syn::parse_str</span>(
                         <span class="string">&quot;hotg_rune_proc_blocks::internal::Tensor&lt;f32&gt;&quot;</span>,
                     )
-                    .<span class="ident">unwrap</span>(),
-                    <span class="ident">output</span>: <span class="ident">syn::parse_str</span>(
+                    .<span class="ident">unwrap</span>()],
+                    <span class="ident">outputs</span>: <span class="macro">vec!</span>[<span class="ident">syn::parse_str</span>(
                         <span class="string">&quot;hotg_rune_proc_blocks::internal::Tensor&lt;u8&gt;&quot;</span>,
                     )
-                    .<span class="ident">unwrap</span>(),
+                    .<span class="ident">unwrap</span>()],
                 },
                 <span class="ident">TransformAssertion</span> {
-                    <span class="ident">input</span>: <span class="ident">syn::parse_str</span>(
+                    <span class="ident">inputs</span>: <span class="macro">vec!</span>[<span class="ident">syn::parse_str</span>(
                         <span class="string">&quot;hotg_rune_proc_blocks::internal::Tensor&lt;f32&gt;&quot;</span>,
                     )
-                    .<span class="ident">unwrap</span>(),
-                    <span class="ident">output</span>: <span class="ident">syn::parse_str</span>(
+                    .<span class="ident">unwrap</span>()],
+                    <span class="ident">outputs</span>: <span class="macro">vec!</span>[<span class="ident">syn::parse_str</span>(
                         <span class="string">&quot;hotg_rune_proc_blocks::internal::Tensor&lt;u8&gt;&quot;</span>,
                     )
-                    .<span class="ident">unwrap</span>(),
+                    .<span class="ident">unwrap</span>()],
                 },
             ],
         };
@@ -1080,7 +1215,7 @@
 
         <span class="kw">for</span> (<span class="ident">input</span>, <span class="ident">should_be</span>) <span class="kw">in</span> <span class="ident">inputs</span> {
             <span class="kw">let</span> <span class="ident">should_be</span>: <span class="ident">syn::Type</span> <span class="op">=</span> <span class="ident">syn::parse2</span>(<span class="ident">should_be</span>).<span class="ident">unwrap</span>();
-            <span class="kw">let</span> <span class="ident">got</span> <span class="op">=</span> <span class="ident">to_rust_tensor</span>(<span class="kw-2">&amp;</span><span class="ident">exports</span>, <span class="kw-2">&amp;</span><span class="ident">input</span>).<span class="ident">unwrap</span>();
+            <span class="kw">let</span> <span class="ident">got</span> <span class="op">=</span> <span class="ident">to_rust_tensor</span>(<span class="kw-2">&amp;</span><span class="ident">exports</span>, <span class="kw-2">&amp;</span><span class="ident">input</span>);
             <span class="macro">assert_eq!</span>(<span class="ident">got</span>, <span class="ident">should_be</span>);
         }
     }
@@ -1088,6 +1223,8 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="kw">mod</span> <span class="ident">type_tests</span> {
+    <span class="kw">use</span> <span class="ident">std::borrow::Cow</span>;
+
     <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
 
     <span class="macro">macro_rules!</span> <span class="ident">parse_tensor_type</span> {
@@ -1099,7 +1236,7 @@
             <span class="kw">fn</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>() {
                 <span class="kw">let</span> <span class="ident">tokens</span> <span class="op">=</span> <span class="macro">quote!</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ty</span>)<span class="kw-2">*</span>);
 
-                <span class="kw">let</span> <span class="ident">got</span>: <span class="ident">TensorDescriptor</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">syn::parse2</span>(<span class="ident">tokens</span>.<span class="ident">clone</span>()) {
+                <span class="kw">let</span> <span class="ident">got</span>: <span class="ident">TensorDescriptor</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">parse_tensor_descriptor</span>.<span class="ident">parse2</span>(<span class="ident">tokens</span>.<span class="ident">clone</span>()) {
                     <span class="prelude-val">Ok</span>(<span class="ident">d</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">d</span>,
                     <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(<span class="string">&quot;Unable to parse \&quot;{}\&quot;: {}&quot;</span>, <span class="ident">tokens</span>.<span class="ident">to_string</span>(), <span class="ident">e</span>),
                 };
@@ -1128,6 +1265,73 @@
        <span class="ident">element_type</span>: <span class="ident">Type::String</span>,
        <span class="ident">dimensions</span>: <span class="macro">vec!</span>[<span class="ident">Dimension::Value</span>(<span class="number">1</span>)].<span class="ident">into</span>(),
     });
+
+    <span class="macro">macro_rules!</span> <span class="ident">parse_transform_attribute</span> {
+        (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span>, <span class="attribute">#[<span class="ident">transform</span>( $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">attr</span>:<span class="ident">tt</span>)<span class="op">*</span> )]</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">should_be</span>:<span class="ident">expr</span> $(,)<span class="question-mark">?</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="attribute">#[<span class="ident">test</span>]</span>
+            <span class="kw">fn</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>() {
+                <span class="kw">let</span> <span class="ident">tokens</span> <span class="op">=</span> <span class="macro">quote!</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">attr</span>)<span class="kw-2">*</span>);
+
+                <span class="kw">let</span> <span class="ident">got</span>: <span class="ident">TransformDescriptor</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">parse_transform_descriptor</span>.<span class="ident">parse2</span>(<span class="ident">tokens</span>.<span class="ident">clone</span>()) {
+                    <span class="prelude-val">Ok</span>(<span class="ident">d</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">d</span>,
+                    <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(<span class="string">&quot;Unable to parse \&quot;{}\&quot;: {}&quot;</span>, <span class="ident">tokens</span>.<span class="ident">to_string</span>(), <span class="ident">e</span>),
+                };
+
+                <span class="macro">assert_eq!</span>(<span class="ident">got</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">should_be</span>);
+            }
+        };
+    }
+
+    <span class="macro">parse_transform_attribute!</span>(<span class="ident">transform_single_to_single</span>,
+        <span class="attribute">#[<span class="ident">transform</span>(<span class="ident">inputs</span> <span class="op">=</span> [<span class="ident">f32</span>; <span class="number">1</span>]</span>, <span class="ident">outputs</span> <span class="op">=</span> [<span class="ident">f32</span>; <span class="number">1</span>])] <span class="op">=</span><span class="op">&gt;</span>
+        <span class="ident">TransformDescriptor</span> {
+            <span class="ident">inputs</span>: <span class="ident">TensorDescriptors</span>(<span class="ident">Cow::Borrowed</span>(<span class="kw-2">&amp;</span>[
+                <span class="ident">TensorDescriptor</span> {
+                    <span class="ident">element_type</span>: <span class="ident">Type::f32</span>,
+                    <span class="ident">dimensions</span>: <span class="ident">Dimensions::Finite</span>(<span class="ident">Cow::Borrowed</span>(<span class="kw-2">&amp;</span>[
+                        <span class="ident">Dimension::Any</span>,
+                    ])),
+                },
+            ])),
+            <span class="ident">outputs</span>: <span class="ident">TensorDescriptors</span>(<span class="ident">Cow::Borrowed</span>(<span class="kw-2">&amp;</span>[
+                <span class="ident">TensorDescriptor</span> {
+                    <span class="ident">element_type</span>: <span class="ident">Type::f32</span>,
+                    <span class="ident">dimensions</span>: <span class="ident">Dimensions::Finite</span>(<span class="ident">Cow::Borrowed</span>(<span class="kw-2">&amp;</span>[
+                        <span class="ident">Dimension::Any</span>,
+                    ])),
+                },
+            ])),
+        },
+    );
+
+    <span class="macro">parse_transform_attribute!</span>(<span class="ident">transform_attribute_with_multiple_inputs</span>,
+        <span class="attribute">#[<span class="ident">transform</span>(<span class="ident">inputs</span> <span class="op">=</span> ([<span class="ident">f32</span>; <span class="number">1</span>]</span>, [<span class="ident">u8</span>; <span class="number">2</span>]), <span class="ident">outputs</span> <span class="op">=</span> [<span class="ident">f32</span>; <span class="number">1</span>])] <span class="op">=</span><span class="op">&gt;</span>
+        <span class="ident">TransformDescriptor</span> {
+            <span class="ident">inputs</span>: <span class="ident">TensorDescriptors</span>(<span class="ident">Cow::Borrowed</span>(<span class="kw-2">&amp;</span>[
+                <span class="ident">TensorDescriptor</span> {
+                    <span class="ident">element_type</span>: <span class="ident">Type::f32</span>,
+                    <span class="ident">dimensions</span>: <span class="ident">Dimensions::Finite</span>(<span class="ident">Cow::Borrowed</span>(<span class="kw-2">&amp;</span>[
+                        <span class="ident">Dimension::Any</span>,
+                    ])),
+                },
+                <span class="ident">TensorDescriptor</span> {
+                    <span class="ident">element_type</span>: <span class="ident">Type::u8</span>,
+                    <span class="ident">dimensions</span>: <span class="ident">Dimensions::Finite</span>(<span class="ident">Cow::Borrowed</span>(<span class="kw-2">&amp;</span>[
+                        <span class="ident">Dimension::Any</span>,
+                        <span class="ident">Dimension::Any</span>,
+                    ])),
+                },
+            ])),
+            <span class="ident">outputs</span>: <span class="ident">TensorDescriptors</span>(<span class="ident">Cow::Borrowed</span>(<span class="kw-2">&amp;</span>[
+                <span class="ident">TensorDescriptor</span> {
+                    <span class="ident">element_type</span>: <span class="ident">Type::f32</span>,
+                    <span class="ident">dimensions</span>: <span class="ident">Dimensions::Finite</span>(<span class="ident">Cow::Borrowed</span>(<span class="kw-2">&amp;</span>[
+                        <span class="ident">Dimension::Any</span>,
+                    ])),
+                },
+            ])),
+        },
+    );
 }
 </pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="hotg_rune_proc_block_macros" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>

@@ -15,7 +15,7 @@ valid for a particular proc block. A plain primitive will be treated as a
 <span class="kw">use</span> <span class="ident">hotg_rune_core::Tensor</span>;
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Default</span>, <span class="ident">hotg_rune_proc_block_macros::ProcBlock</span>)]</span>
-<span class="attribute">#[<span class="ident">transform</span>(<span class="ident">input</span> <span class="op">=</span> <span class="ident">f32</span>, <span class="ident">output</span> <span class="op">=</span> <span class="ident">f32</span>)]</span>
+<span class="attribute">#[<span class="ident">transform</span>(<span class="ident">inputs</span> <span class="op">=</span> <span class="ident">f32</span>, <span class="ident">outputs</span> <span class="op">=</span> <span class="ident">f32</span>)]</span>
 <span class="kw">struct</span> <span class="ident">Foo</span> { }
 
 <span class="kw">impl</span> <span class="ident">Transform</span><span class="op">&lt;</span><span class="ident">Tensor</span><span class="op">&lt;</span><span class="ident">f32</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Foo</span> {
@@ -30,7 +30,7 @@ compile.</p>
 <span class="kw">use</span> <span class="ident">hotg_rune_core::Tensor</span>;
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Default</span>, <span class="ident">hotg_rune_proc_block_macros::ProcBlock</span>)]</span>  <span class="comment">// Error: the trait bound `Foo: hotg_rune_proc_blocks::Transform&lt;Tensor&lt;f32&gt;&gt;` is not satisfied</span>
-<span class="attribute">#[<span class="ident">transform</span>(<span class="ident">input</span> <span class="op">=</span> <span class="ident">f32</span>, <span class="ident">output</span> <span class="op">=</span> <span class="ident">f32</span>)]</span>
+<span class="attribute">#[<span class="ident">transform</span>(<span class="ident">inputs</span> <span class="op">=</span> <span class="ident">f32</span>, <span class="ident">outputs</span> <span class="op">=</span> <span class="ident">f32</span>)]</span>
 <span class="kw">struct</span> <span class="ident">Foo</span> { }
 
 <span class="comment">// impl Transform&lt;Tensor&lt;f32&gt;&gt; for Foo {</span>
@@ -45,8 +45,8 @@ compile.</p>
 <span class="kw">use</span> <span class="ident">hotg_rune_core::Tensor</span>;
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Default</span>, <span class="ident">hotg_rune_proc_block_macros::ProcBlock</span>)]</span>
-<span class="attribute">#[<span class="ident">transform</span>(<span class="ident">input</span> <span class="op">=</span> [<span class="ident">f32</span>; <span class="kw">_</span>]</span>, <span class="ident">output</span> <span class="op">=</span> [<span class="ident">u8</span>; <span class="number">1920</span>])]
-<span class="attribute">#[<span class="ident">transform</span>(<span class="ident">input</span> <span class="op">=</span> <span class="ident">str</span>, <span class="ident">output</span> <span class="op">=</span> [<span class="ident">i16</span>; <span class="number">2</span>]</span>)]
+<span class="attribute">#[<span class="ident">transform</span>(<span class="ident">inputs</span> <span class="op">=</span> [<span class="ident">f32</span>; <span class="kw">_</span>]</span>, <span class="ident">outputs</span> <span class="op">=</span> [<span class="ident">u8</span>; <span class="number">1920</span>])]
+<span class="attribute">#[<span class="ident">transform</span>(<span class="ident">inputs</span> <span class="op">=</span> <span class="ident">str</span>, <span class="ident">outputs</span> <span class="op">=</span> [<span class="ident">i16</span>; <span class="number">2</span>]</span>)]
 <span class="kw">struct</span> <span class="ident">Foo</span> { }
 
 <span class="kw">impl</span> <span class="ident">Transform</span><span class="op">&lt;</span><span class="ident">Tensor</span><span class="op">&lt;</span><span class="ident">f32</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Foo</span> {

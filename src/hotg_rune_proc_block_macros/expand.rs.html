@@ -589,42 +589,10 @@
 <span id="589">589</span>
 <span id="590">590</span>
 <span id="591">591</span>
-<span id="592">592</span>
-<span id="593">593</span>
-<span id="594">594</span>
-<span id="595">595</span>
-<span id="596">596</span>
-<span id="597">597</span>
-<span id="598">598</span>
-<span id="599">599</span>
-<span id="600">600</span>
-<span id="601">601</span>
-<span id="602">602</span>
-<span id="603">603</span>
-<span id="604">604</span>
-<span id="605">605</span>
-<span id="606">606</span>
-<span id="607">607</span>
-<span id="608">608</span>
-<span id="609">609</span>
-<span id="610">610</span>
-<span id="611">611</span>
-<span id="612">612</span>
-<span id="613">613</span>
-<span id="614">614</span>
-<span id="615">615</span>
-<span id="616">616</span>
-<span id="617">617</span>
-<span id="618">618</span>
-<span id="619">619</span>
-<span id="620">620</span>
-<span id="621">621</span>
-<span id="622">622</span>
-<span id="623">623</span>
 </pre><pre class="rust">
 <span class="kw">use</span> <span class="ident">proc_macro2</span>::{<span class="ident">Ident</span>, <span class="ident">Span</span>, <span class="ident">TokenStream</span>};
 <span class="kw">use</span> <span class="ident">quote</span>::{<span class="ident">quote</span>, <span class="ident">ToTokens</span>};
-<span class="kw">use</span> <span class="ident">syn</span>::{<span class="ident">LitByteStr</span>, <span class="ident">Path</span>};
+<span class="kw">use</span> <span class="ident">syn</span>::{<span class="ident">LitByteStr</span>, <span class="ident">Path</span>, <span class="ident">Type</span>};
 <span class="kw">use</span> <span class="ident">hotg_rune_core::reflect::Type</span> <span class="kw">as</span> <span class="ident">ReflectType</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::{
     <span class="ident">descriptor</span>::{
@@ -782,11 +750,11 @@
         }
 
         <span class="kw">let</span> <span class="ident">assertions</span> <span class="op">=</span> <span class="ident">assertions</span>.<span class="ident">iter</span>()
-            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">TransformAssertion</span> { <span class="ident">input</span>, <span class="ident">output</span> }<span class="op">|</span> {
-                <span class="kw">let</span> <span class="ident">input</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">to_token_stream</span>();
-                <span class="kw">let</span> <span class="ident">output</span> <span class="op">=</span> <span class="ident">output</span>.<span class="ident">to_token_stream</span>();
+            .<span class="ident">map</span>(<span class="op">|</span><span class="ident">TransformAssertion</span> { <span class="ident">inputs</span>, <span class="ident">outputs</span> }<span class="op">|</span> {
+                <span class="kw">let</span> <span class="ident">inputs</span> <span class="op">=</span> <span class="ident">transform_assertion_type</span>(<span class="ident">inputs</span>);
+                <span class="kw">let</span> <span class="ident">outputs</span> <span class="op">=</span> <span class="ident">transform_assertion_type</span>(<span class="ident">outputs</span>);
                 <span class="macro">quote!</span> {
-                    <span class="ident">assert_implements_transform</span>::<span class="op">&lt;</span>#<span class="ident">proc_block_type</span>, #<span class="ident">input</span>, #<span class="ident">output</span><span class="op">&gt;</span>();
+                    <span class="ident">assert_implements_transform</span>::<span class="op">&lt;</span>#<span class="ident">proc_block_type</span>, #<span class="ident">inputs</span>, #<span class="ident">outputs</span><span class="op">&gt;</span>();
                 }
             });
 
@@ -803,6 +771,13 @@
             };
         };
         <span class="ident">tokens</span>.<span class="ident">extend</span>(<span class="ident">t</span>);
+    }
+}
+
+<span class="kw">fn</span> <span class="ident">transform_assertion_type</span>(<span class="ident">types</span>: <span class="kw-2">&amp;</span>[<span class="ident">Type</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span> {
+    <span class="kw">match</span> <span class="ident">types</span> {
+        [<span class="ident">ty</span>] <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ty</span>.<span class="ident">to_token_stream</span>(),
+        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote!</span>((#(#<span class="ident">types</span>),<span class="kw-2">*</span>)),
     }
 }
 
@@ -825,9 +800,9 @@
     }
 }
 
-<span class="kw">fn</span> <span class="ident">descriptor_to_tokens</span>(
-    <span class="ident">exports</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>,
-    <span class="ident">d</span>: <span class="kw-2">&amp;</span><span class="ident">ProcBlockDescriptor</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>,
+<span class="kw">fn</span> <span class="ident">descriptor_to_tokens</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span>: <span class="lifetime">&#39;a</span><span class="op">&gt;</span>(
+    <span class="ident">exports</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Path</span>,
+    <span class="ident">d</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">ProcBlockDescriptor</span><span class="op">&lt;</span><span class="lifetime">&#39;b</span><span class="op">&gt;</span>,
 ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span> {
     <span class="kw">let</span> <span class="ident">ProcBlockDescriptor</span> {
         <span class="ident">type_name</span>,
@@ -837,7 +812,7 @@
 
     <span class="kw">let</span> <span class="ident">available_transforms</span> <span class="op">=</span> <span class="ident">available_transforms</span>
         .<span class="ident">iter</span>()
-        .<span class="ident">map</span>(<span class="op">|</span><span class="ident">transform</span><span class="op">|</span> <span class="ident">TransformProxy</span> { <span class="ident">exports</span>, <span class="ident">transform</span> });
+        .<span class="ident">map</span>(<span class="op">|</span><span class="ident">transform</span><span class="op">|</span> <span class="ident">transform_to_tokens</span>(<span class="ident">exports</span>, <span class="ident">transform</span>));
 
     <span class="macro">quote!</span> {
         #<span class="ident">exports::ProcBlockDescriptor</span> {
@@ -850,132 +825,87 @@
     }
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">struct</span> <span class="ident">TransformProxy</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="ident">exports</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Path</span>,
-    <span class="ident">transform</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">TransformDescriptor</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-}
+<span class="kw">fn</span> <span class="ident">transform_to_tokens</span>(
+    <span class="ident">exports</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>,
+    <span class="ident">transform</span>: <span class="kw-2">&amp;</span><span class="ident">TransformDescriptor</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>,
+) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span> {
+    <span class="kw">let</span> <span class="ident">TransformDescriptor</span> { <span class="ident">inputs</span>, <span class="ident">outputs</span> } <span class="op">=</span> <span class="ident">transform</span>;
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">ToTokens</span> <span class="kw">for</span> <span class="ident">TransformProxy</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">to_tokens</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">tokens</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">TokenStream</span>) {
-        <span class="kw">let</span> <span class="ident">TransformProxy</span> {
-            <span class="ident">exports</span>,
-            <span class="ident">transform</span>: <span class="ident">TransformDescriptor</span> { <span class="ident">input</span>, <span class="ident">output</span> },
-        } <span class="op">=</span> <span class="kw-2">*</span><span class="self">self</span>;
+    <span class="kw">let</span> <span class="ident">inputs</span> <span class="op">=</span> <span class="ident">tensor_descriptors_to_tokens</span>(<span class="ident">exports</span>, <span class="ident">inputs</span>);
+    <span class="kw">let</span> <span class="ident">outputs</span> <span class="op">=</span> <span class="ident">tensor_descriptors_to_tokens</span>(<span class="ident">exports</span>, <span class="ident">outputs</span>);
 
-        <span class="kw">let</span> <span class="ident">input</span> <span class="op">=</span> <span class="ident">TensorProxy</span> {
-            <span class="ident">exports</span>,
-            <span class="ident">tensor</span>: <span class="ident">input</span>,
-        };
-        <span class="kw">let</span> <span class="ident">output</span> <span class="op">=</span> <span class="ident">TensorProxy</span> {
-            <span class="ident">exports</span>,
-            <span class="ident">tensor</span>: <span class="ident">output</span>,
-        };
-
-        <span class="kw">let</span> <span class="ident">t</span> <span class="op">=</span> <span class="macro">quote!</span> {
-            #<span class="ident">exports::TransformDescriptor</span> {
-                <span class="ident">input</span>: #<span class="ident">input</span>,
-                <span class="ident">output</span>: #<span class="ident">output</span>,
-            }
-        };
-        <span class="ident">tokens</span>.<span class="ident">extend</span>(<span class="ident">t</span>);
+    <span class="macro">quote!</span> {
+        #<span class="ident">exports::TransformDescriptor</span> {
+            <span class="ident">inputs</span>: #<span class="ident">exports::TensorDescriptors</span>(#<span class="ident">exports::Cow::Borrowed</span>(#<span class="ident">inputs</span>)),
+            <span class="ident">outputs</span>: #<span class="ident">exports::TensorDescriptors</span>(#<span class="ident">exports::Cow::Borrowed</span>(#<span class="ident">outputs</span>)),
+        }
     }
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">struct</span> <span class="ident">TensorProxy</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="ident">exports</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Path</span>,
-    <span class="ident">tensor</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">TensorDescriptor</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-}
+<span class="kw">fn</span> <span class="ident">tensor_descriptors_to_tokens</span>(
+    <span class="ident">exports</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>,
+    <span class="ident">tensors</span>: <span class="kw-2">&amp;</span>[<span class="ident">TensorDescriptor</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>],
+) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span> {
+    <span class="kw">let</span> <span class="ident">descriptors</span> <span class="op">=</span> <span class="ident">tensors</span>.<span class="ident">iter</span>().<span class="ident">map</span>(
+        <span class="op">|</span><span class="ident">TensorDescriptor</span> {
+             <span class="ident">element_type</span>,
+             <span class="ident">dimensions</span>,
+         }<span class="op">|</span> {
+            <span class="kw">let</span> <span class="ident">element_type</span> <span class="op">=</span> <span class="ident">reflect_type_to_tokens</span>(<span class="ident">exports</span>, <span class="ident">element_type</span>);
+            <span class="kw">let</span> <span class="ident">dimensions</span> <span class="op">=</span> <span class="ident">dimensions_to_tokens</span>(<span class="ident">exports</span>, <span class="ident">dimensions</span>);
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">ToTokens</span> <span class="kw">for</span> <span class="ident">TensorProxy</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">to_tokens</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">tokens</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">TokenStream</span>) {
-        <span class="kw">let</span> <span class="ident">TensorProxy</span> {
-            <span class="ident">exports</span>,
-            <span class="ident">tensor</span>:
-                <span class="ident">TensorDescriptor</span> {
-                    <span class="ident">element_type</span>,
-                    <span class="ident">dimensions</span>,
-                },
-        } <span class="op">=</span> <span class="kw-2">*</span><span class="self">self</span>;
-
-        <span class="kw">let</span> <span class="ident">element_type</span> <span class="op">=</span> <span class="ident">TypeProxy</span> {
-            <span class="ident">exports</span>,
-            <span class="ident">ty</span>: <span class="ident">element_type</span>,
-        };
-        <span class="kw">let</span> <span class="ident">dimensions</span> <span class="op">=</span> <span class="ident">DimensionsProxy</span> {
-            <span class="ident">exports</span>,
-            <span class="ident">dimensions</span>,
-        };
-
-        <span class="kw">let</span> <span class="ident">t</span> <span class="op">=</span> <span class="macro">quote!</span> {
-            #<span class="ident">exports::TensorDescriptor</span> {
-                <span class="ident">element_type</span>: #<span class="ident">element_type</span>,
-                <span class="ident">dimensions</span>: #<span class="ident">dimensions</span>,
+            <span class="macro">quote!</span> {
+                #<span class="ident">exports::TensorDescriptor</span> {
+                    <span class="ident">element_type</span>: #<span class="ident">element_type</span>,
+                    <span class="ident">dimensions</span>: #<span class="ident">dimensions</span>,
+                }
             }
-        };
-        <span class="ident">tokens</span>.<span class="ident">extend</span>(<span class="ident">t</span>);
+        },
+    );
+
+    <span class="macro">quote!</span> {
+        <span class="kw-2">&amp;</span>[
+            #( #<span class="ident">descriptors</span> ),<span class="op">*</span>
+        ]
     }
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">struct</span> <span class="ident">TypeProxy</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="ident">exports</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Path</span>,
-    <span class="ident">ty</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">ReflectType</span>,
-}
-
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">ToTokens</span> <span class="kw">for</span> <span class="ident">TypeProxy</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">to_tokens</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">tokens</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">TokenStream</span>) {
-        <span class="kw">let</span> <span class="ident">TypeProxy</span> { <span class="ident">exports</span>, <span class="ident">ty</span> } <span class="op">=</span> <span class="kw-2">*</span><span class="self">self</span>;
-
-        <span class="kw">let</span> <span class="ident">t</span> <span class="op">=</span> <span class="kw">match</span> <span class="kw-2">*</span><span class="ident">ty</span> {
-            <span class="ident">ReflectType::Integer</span> { <span class="ident">signed</span>, <span class="ident">bit_width</span> } <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">quote!</span>(#<span class="ident">exports::Type::Integer</span> {
-                    <span class="ident">signed</span>: #<span class="ident">signed</span>,
-                    <span class="ident">bit_width</span>: #<span class="ident">bit_width</span>,
-                })
-            },
-            <span class="ident">ReflectType::Float</span> { <span class="ident">bit_width</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote!</span>(#<span class="ident">exports::Type::Float</span> {
+<span class="kw">fn</span> <span class="ident">reflect_type_to_tokens</span>(<span class="ident">exports</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>, <span class="ident">ty</span>: <span class="kw-2">&amp;</span><span class="ident">ReflectType</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span> {
+    <span class="kw">match</span> <span class="kw-2">*</span><span class="ident">ty</span> {
+        <span class="ident">ReflectType::Integer</span> { <span class="ident">signed</span>, <span class="ident">bit_width</span> } <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="macro">quote!</span>(#<span class="ident">exports::Type::Integer</span> {
+                <span class="ident">signed</span>: #<span class="ident">signed</span>,
                 <span class="ident">bit_width</span>: #<span class="ident">bit_width</span>,
-            }),
-            <span class="ident">ReflectType::String</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote!</span>(#<span class="ident">exports::Type::String</span>),
-            <span class="ident">ReflectType::Opaque</span> { <span class="kw-2">ref</span> <span class="ident">type_name</span> } <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="macro">quote!</span>(#<span class="ident">exports::Type::Opaque</span> {
-                    <span class="ident">type_name</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">exports::Cow::Borrowed</span>(#<span class="ident">type_name</span>),
-                })
-            },
-        };
-        <span class="ident">tokens</span>.<span class="ident">extend</span>(<span class="ident">t</span>);
+            })
+        },
+        <span class="ident">ReflectType::Float</span> { <span class="ident">bit_width</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote!</span>(#<span class="ident">exports::Type::Float</span> {
+            <span class="ident">bit_width</span>: #<span class="ident">bit_width</span>,
+        }),
+        <span class="ident">ReflectType::String</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote!</span>(#<span class="ident">exports::Type::String</span>),
+        <span class="ident">ReflectType::Opaque</span> { <span class="kw-2">ref</span> <span class="ident">type_name</span> } <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="macro">quote!</span>(#<span class="ident">exports::Type::Opaque</span> {
+                <span class="ident">type_name</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">exports::Cow::Borrowed</span>(#<span class="ident">type_name</span>),
+            })
+        },
     }
 }
 
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
-<span class="kw">struct</span> <span class="ident">DimensionsProxy</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="ident">exports</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Path</span>,
-    <span class="ident">dimensions</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Dimensions</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
-}
+<span class="kw">fn</span> <span class="ident">dimensions_to_tokens</span>(
+    <span class="ident">exports</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>,
+    <span class="ident">dimensions</span>: <span class="kw-2">&amp;</span><span class="ident">Dimensions</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>,
+) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span> {
+    <span class="kw">match</span> <span class="ident">dimensions</span> {
+        <span class="ident">Dimensions::Arbitrary</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote!</span>(#<span class="ident">exports::Dimensions::Arbitrary</span>),
+        <span class="ident">Dimensions::Finite</span>(<span class="ident">fixed</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="kw">let</span> <span class="ident">dimensions</span> <span class="op">=</span> <span class="ident">fixed</span>
+                .<span class="ident">iter</span>()
+                .<span class="ident">copied</span>()
+                .<span class="ident">map</span>(<span class="op">|</span><span class="ident">dimension</span><span class="op">|</span> <span class="ident">DimensionProxy</span> { <span class="ident">exports</span>, <span class="ident">dimension</span> });
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">ToTokens</span> <span class="kw">for</span> <span class="ident">DimensionsProxy</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">to_tokens</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">tokens</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">TokenStream</span>) {
-        <span class="kw">let</span> <span class="ident">DimensionsProxy</span> {
-            <span class="ident">exports</span>,
-            <span class="ident">dimensions</span>,
-        } <span class="op">=</span> <span class="self">self</span>;
-
-        <span class="kw">let</span> <span class="ident">t</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">dimensions</span> {
-            <span class="ident">Dimensions::Arbitrary</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote!</span>(#<span class="ident">exports::Dimensions::Arbitrary</span>),
-            <span class="ident">Dimensions::Finite</span>(<span class="ident">fixed</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                <span class="kw">let</span> <span class="ident">dimensions</span> <span class="op">=</span> <span class="ident">fixed</span>
-                    .<span class="ident">iter</span>()
-                    .<span class="ident">copied</span>()
-                    .<span class="ident">map</span>(<span class="op">|</span><span class="ident">dimension</span><span class="op">|</span> <span class="ident">DimensionProxy</span> { <span class="ident">exports</span>, <span class="ident">dimension</span> });
-
-                <span class="macro">quote!</span>(#<span class="ident">exports::Dimensions::Finite</span>(#<span class="ident">exports::Cow::Borrowed</span>(<span class="kw-2">&amp;</span>[
-                    #(#<span class="ident">dimensions</span>),<span class="op">*</span>
-                ])))
-            },
-        };
-        <span class="ident">tokens</span>.<span class="ident">extend</span>(<span class="ident">t</span>);
+            <span class="macro">quote!</span>(#<span class="ident">exports::Dimensions::Finite</span>(#<span class="ident">exports::Cow::Borrowed</span>(<span class="kw-2">&amp;</span>[
+                #(#<span class="ident">dimensions</span>),<span class="op">*</span>
+            ])))
+        },
     }
 }
 
@@ -1128,9 +1058,12 @@
             <span class="ident">proc_block_type</span>: <span class="ident">syn::parse_str</span>(<span class="string">&quot;Proc&quot;</span>).<span class="ident">unwrap</span>(),
             <span class="ident">exports</span>: <span class="ident">syn::parse_str</span>(<span class="string">&quot;exports&quot;</span>).<span class="ident">unwrap</span>(),
             <span class="ident">assertions</span>: <span class="macro">vec!</span>[<span class="ident">TransformAssertion</span> {
-                <span class="ident">input</span>: <span class="ident">syn::parse_str</span>(<span class="string">&quot;exports::Tensor&lt;&amp;&#39;static str&gt;&quot;</span>).<span class="ident">unwrap</span>(),
-                <span class="ident">output</span>: <span class="ident">syn::parse_str</span>(<span class="string">&quot;exports::Tensor&lt;&amp;&#39;static str&gt;&quot;</span>)
-                    .<span class="ident">unwrap</span>(),
+                <span class="ident">inputs</span>: <span class="macro">vec!</span>[
+                    <span class="ident">syn::parse_str</span>(<span class="string">&quot;exports::Tensor&lt;&amp;&#39;static str&gt;&quot;</span>).<span class="ident">unwrap</span>()
+                ],
+                <span class="ident">outputs</span>: <span class="macro">vec!</span>[
+                    <span class="ident">syn::parse_str</span>(<span class="string">&quot;exports::Tensor&lt;&amp;&#39;static str&gt;&quot;</span>).<span class="ident">unwrap</span>()
+                ],
             }],
         };
         <span class="kw">let</span> <span class="ident">should_be</span> <span class="op">=</span> <span class="macro">quote!</span> {
@@ -1157,8 +1090,8 @@
             <span class="ident">proc_block_type</span>: <span class="ident">syn::parse_str</span>(<span class="string">&quot;Proc&quot;</span>).<span class="ident">unwrap</span>(),
             <span class="ident">exports</span>: <span class="ident">syn::parse_str</span>(<span class="string">&quot;exports&quot;</span>).<span class="ident">unwrap</span>(),
             <span class="ident">assertions</span>: <span class="macro">vec!</span>[<span class="ident">TransformAssertion</span> {
-                <span class="ident">input</span>: <span class="ident">syn::parse_str</span>(<span class="string">&quot;exports::Tensor&lt;f32&gt;&quot;</span>).<span class="ident">unwrap</span>(),
-                <span class="ident">output</span>: <span class="ident">syn::parse_str</span>(<span class="string">&quot;exports::Tensor&lt;u8&gt;&quot;</span>).<span class="ident">unwrap</span>(),
+                <span class="ident">inputs</span>: <span class="macro">vec!</span>[<span class="ident">syn::parse_str</span>(<span class="string">&quot;exports::Tensor&lt;f32&gt;&quot;</span>).<span class="ident">unwrap</span>()],
+                <span class="ident">outputs</span>: <span class="macro">vec!</span>[<span class="ident">syn::parse_str</span>(<span class="string">&quot;exports::Tensor&lt;u8&gt;&quot;</span>).<span class="ident">unwrap</span>()],
             }],
         };
         <span class="kw">let</span> <span class="ident">should_be</span> <span class="op">=</span> <span class="macro">quote!</span> {
@@ -1208,39 +1141,42 @@
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">transform</span>() {
         <span class="kw">let</span> <span class="ident">exports</span> <span class="op">=</span> <span class="ident">syn::parse_str</span>(<span class="string">&quot;exports&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">transform</span> <span class="op">=</span> <span class="ident">TransformProxy</span> {
-            <span class="ident">exports</span>: <span class="kw-2">&amp;</span><span class="ident">exports</span>,
-            <span class="ident">transform</span>: <span class="kw-2">&amp;</span><span class="ident">TransformDescriptor</span> {
-                <span class="ident">input</span>: <span class="ident">TensorDescriptor</span> {
-                    <span class="ident">element_type</span>: <span class="ident">ReflectType::f32</span>,
-                    <span class="ident">dimensions</span>: <span class="ident">Dimensions::Arbitrary</span>,
-                },
-                <span class="ident">output</span>: <span class="ident">TensorDescriptor</span> {
-                    <span class="ident">element_type</span>: <span class="ident">ReflectType::u8</span>,
-                    <span class="ident">dimensions</span>: <span class="ident">Dimensions::Finite</span>(
-                        <span class="macro">vec!</span>[<span class="ident">Dimension::Value</span>(<span class="number">1980</span>)].<span class="ident">into</span>(),
-                    ),
-                },
-            },
+        <span class="kw">let</span> <span class="ident">transform</span> <span class="op">=</span> <span class="ident">TransformDescriptor</span> {
+            <span class="ident">inputs</span>: <span class="ident">TensorDescriptor</span> {
+                <span class="ident">element_type</span>: <span class="ident">ReflectType::f32</span>,
+                <span class="ident">dimensions</span>: <span class="ident">Dimensions::Arbitrary</span>,
+            }
+            .<span class="ident">into</span>(),
+            <span class="ident">outputs</span>: <span class="ident">TensorDescriptor</span> {
+                <span class="ident">element_type</span>: <span class="ident">ReflectType::u8</span>,
+                <span class="ident">dimensions</span>: <span class="ident">Dimensions::Finite</span>(
+                    <span class="macro">vec!</span>[<span class="ident">Dimension::Value</span>(<span class="number">1980</span>)].<span class="ident">into</span>(),
+                ),
+            }
+            .<span class="ident">into</span>(),
         };
         <span class="kw">let</span> <span class="ident">should_be</span> <span class="op">=</span> <span class="macro">quote!</span> {
             <span class="ident">exports::TransformDescriptor</span> {
-                <span class="ident">input</span>: <span class="ident">exports::TensorDescriptor</span> {
-                    <span class="ident">element_type</span>: <span class="ident">exports::Type::Float</span> { <span class="ident">bit_width</span>: <span class="number">32usize</span> },
-                    <span class="ident">dimensions</span>: <span class="ident">exports::Dimensions::Arbitrary</span>,
-                },
-                <span class="ident">output</span>: <span class="ident">exports::TensorDescriptor</span> {
-                    <span class="ident">element_type</span>: <span class="ident">exports::Type::Integer</span> { <span class="ident">signed</span>: <span class="bool-val">false</span>, <span class="ident">bit_width</span>: <span class="number">8usize</span> },
-                    <span class="ident">dimensions</span>: <span class="ident">exports::Dimensions::Finite</span>(
-                        <span class="ident">exports::Cow::Borrowed</span>(<span class="kw-2">&amp;</span>[
-                            <span class="ident">exports::Dimension::Value</span>(<span class="number">1980usize</span>),
-                        ]),
-                    ),
-                },
+                <span class="ident">inputs</span>: <span class="ident">exports::TensorDescriptors</span>(<span class="ident">exports::Cow::Borrowed</span>(<span class="kw-2">&amp;</span>[
+                    <span class="ident">exports::TensorDescriptor</span> {
+                        <span class="ident">element_type</span>: <span class="ident">exports::Type::Float</span> { <span class="ident">bit_width</span>: <span class="number">32usize</span> },
+                        <span class="ident">dimensions</span>: <span class="ident">exports::Dimensions::Arbitrary</span>,
+                    },
+                ])),
+                <span class="ident">outputs</span>: <span class="ident">exports::TensorDescriptors</span>(<span class="ident">exports::Cow::Borrowed</span>(<span class="kw-2">&amp;</span>[
+                    <span class="ident">exports::TensorDescriptor</span> {
+                        <span class="ident">element_type</span>: <span class="ident">exports::Type::Integer</span> { <span class="ident">signed</span>: <span class="bool-val">false</span>, <span class="ident">bit_width</span>: <span class="number">8usize</span> },
+                        <span class="ident">dimensions</span>: <span class="ident">exports::Dimensions::Finite</span>(
+                            <span class="ident">exports::Cow::Borrowed</span>(<span class="kw-2">&amp;</span>[
+                                <span class="ident">exports::Dimension::Value</span>(<span class="number">1980usize</span>),
+                            ]),
+                        ),
+                    },
+                ])),
             }
         };
 
-        <span class="kw">let</span> <span class="ident">got</span> <span class="op">=</span> <span class="ident">transform</span>.<span class="ident">to_token_stream</span>();
+        <span class="kw">let</span> <span class="ident">got</span> <span class="op">=</span> <span class="ident">transform_to_tokens</span>(<span class="kw-2">&amp;</span><span class="ident">exports</span>, <span class="kw-2">&amp;</span><span class="ident">transform</span>);
 
         <span class="macro">assert_eq_tok!</span>(<span class="ident">got</span>, <span class="ident">should_be</span>);
     }

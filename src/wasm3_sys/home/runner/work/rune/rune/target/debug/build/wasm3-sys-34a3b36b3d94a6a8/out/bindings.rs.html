@@ -1251,6 +1251,18 @@
         <span class="ident">i_lineNum</span>: <span class="ident">u32_</span>,
     );
 }
+<span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">m3_LinkTracer</span>(<span class="ident">io_module</span>: <span class="ident">IM3Module</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">M3Result</span>;
+}
+<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">IM3Operation</span> <span class="op">=</span> <span class="ident">::core::option::Option</span><span class="op">&lt;</span>
+    <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(
+        <span class="ident">_pc</span>: <span class="ident">pc_t</span>,
+        <span class="ident">_sp</span>: <span class="ident">m3stack_t</span>,
+        <span class="ident">_mem</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">M3MemoryHeader</span>,
+        <span class="ident">_r0</span>: <span class="ident">m3reg_t</span>,
+        <span class="ident">_fp0</span>: <span class="ident">f64_</span>,
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">m3ret_t</span>,
+<span class="op">&gt;</span>;
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">M3CodePage</span> {
@@ -1294,15 +1306,6 @@
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">CountCodePages</span>(<span class="ident">i_list</span>: <span class="ident">IM3CodePage</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32_</span>;
 }
-<span class="kw">pub</span> <span class="kw">type</span> <span class="ident">IM3Operation</span> <span class="op">=</span> <span class="ident">::core::option::Option</span><span class="op">&lt;</span>
-    <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(
-        <span class="ident">_pc</span>: <span class="ident">pc_t</span>,
-        <span class="ident">_sp</span>: <span class="ident">m3stack_t</span>,
-        <span class="ident">_mem</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">M3MemoryHeader</span>,
-        <span class="ident">_r0</span>: <span class="ident">m3reg_t</span>,
-        <span class="ident">_fp0</span>: <span class="ident">f64_</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">m3ret_t</span>,
-<span class="op">&gt;</span>;
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">M3BranchPatch</span> {
@@ -1397,37 +1400,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">GetMaxUsedSlotPlusOne</span>(<span class="ident">o</span>: <span class="ident">IM3Compilation</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u16_</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">BridgeToNewPageIfNecessary</span>(<span class="ident">o</span>: <span class="ident">IM3Compilation</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">M3Result</span>;
-}
-<span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">EnsureCodePageNumLines</span>(<span class="ident">o</span>: <span class="ident">IM3Compilation</span>, <span class="ident">i_numLines</span>: <span class="ident">u32_</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">M3Result</span>;
-}
-<span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">EmitOp</span>(<span class="ident">o</span>: <span class="ident">IM3Compilation</span>, <span class="ident">i_operation</span>: <span class="ident">IM3Operation</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">M3Result</span>;
-}
-<span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">EmitConstant32</span>(<span class="ident">o</span>: <span class="ident">IM3Compilation</span>, <span class="ident">i_immediate</span>: <span class="ident">u32_</span>);
-}
-<span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">EmitSlotOffset</span>(<span class="ident">o</span>: <span class="ident">IM3Compilation</span>, <span class="ident">i_offset</span>: <span class="ident">i32_</span>);
-}
-<span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">EmitPointer</span>(<span class="ident">o</span>: <span class="ident">IM3Compilation</span>, <span class="ident">i_pointer</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">cty::c_void</span>);
-}
-<span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ReservePointer</span>(<span class="ident">o</span>: <span class="ident">IM3Compilation</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">cty::c_void</span>;
-}
-<span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">GetPC</span>(<span class="ident">o</span>: <span class="ident">IM3Compilation</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">pc_t</span>;
-}
-<span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">m3_LinkLibC</span>(<span class="ident">io_module</span>: <span class="ident">IM3Module</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">M3Result</span>;
-}
-<span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">m3_LinkSpecTest</span>(<span class="ident">io_module</span>: <span class="ident">IM3Module</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">M3Result</span>;
-}
-<span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">m3_LinkTracer</span>(<span class="ident">io_module</span>: <span class="ident">IM3Module</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">M3Result</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">m3_LinkWASI</span>(<span class="ident">io_module</span>: <span class="ident">IM3Module</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">M3Result</span>;
 }
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
@@ -1645,13 +1618,40 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ReleaseCodePage</span>(<span class="ident">io_runtime</span>: <span class="ident">IM3Runtime</span>, <span class="ident">i_codePage</span>: <span class="ident">IM3CodePage</span>);
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">BridgeToNewPageIfNecessary</span>(<span class="ident">o</span>: <span class="ident">IM3Compilation</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">M3Result</span>;
+}
+<span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">EnsureCodePageNumLines</span>(<span class="ident">o</span>: <span class="ident">IM3Compilation</span>, <span class="ident">i_numLines</span>: <span class="ident">u32_</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">M3Result</span>;
+}
+<span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">EmitOp</span>(<span class="ident">o</span>: <span class="ident">IM3Compilation</span>, <span class="ident">i_operation</span>: <span class="ident">IM3Operation</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">M3Result</span>;
+}
+<span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">EmitConstant32</span>(<span class="ident">o</span>: <span class="ident">IM3Compilation</span>, <span class="ident">i_immediate</span>: <span class="ident">u32_</span>);
+}
+<span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">EmitSlotOffset</span>(<span class="ident">o</span>: <span class="ident">IM3Compilation</span>, <span class="ident">i_offset</span>: <span class="ident">i32_</span>);
+}
+<span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">EmitPointer</span>(<span class="ident">o</span>: <span class="ident">IM3Compilation</span>, <span class="ident">i_pointer</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">cty::c_void</span>);
+}
+<span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ReservePointer</span>(<span class="ident">o</span>: <span class="ident">IM3Compilation</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">cty::c_void</span>;
+}
+<span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">GetPC</span>(<span class="ident">o</span>: <span class="ident">IM3Compilation</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">pc_t</span>;
+}
+<span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">m3_LinkLibC</span>(<span class="ident">io_module</span>: <span class="ident">IM3Module</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">M3Result</span>;
+}
+<span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">m3_LinkSpecTest</span>(<span class="ident">io_module</span>: <span class="ident">IM3Module</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">M3Result</span>;
+}
+<span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ConvertTypeCharToTypeId</span>(<span class="ident">i_code</span>: <span class="ident">cty::c_char</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u8_</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">SignatureToFuncType</span>(<span class="ident">o_functionType</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">IM3FuncType</span>, <span class="ident">i_signature</span>: <span class="ident">ccstr_t</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">M3Result</span>;
-}
-<span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">m3_LinkWASI</span>(<span class="ident">io_module</span>: <span class="ident">IM3Module</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">M3Result</span>;
 }
 </pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../../../../../../../../../../" data-current-crate="wasm3_sys" data-search-index-js="../../../../../../../../../../../../search-index.js" data-search-js="../../../../../../../../../../../../search.js"></div>

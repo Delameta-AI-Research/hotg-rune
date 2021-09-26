@@ -260,18 +260,6 @@
 <span id="260">260</span>
 <span id="261">261</span>
 <span id="262">262</span>
-<span id="263">263</span>
-<span id="264">264</span>
-<span id="265">265</span>
-<span id="266">266</span>
-<span id="267">267</span>
-<span id="268">268</span>
-<span id="269">269</span>
-<span id="270">270</span>
-<span id="271">271</span>
-<span id="272">272</span>
-<span id="273">273</span>
-<span id="274">274</span>
 </pre><pre class="rust">
 <span class="kw">use</span> <span class="ident">anyhow</span>::{<span class="ident">Context</span>, <span class="ident">Error</span>};
 <span class="kw">use</span> <span class="ident">codespan_reporting</span>::{
@@ -279,7 +267,7 @@
     <span class="ident">term</span>::{<span class="ident">termcolor::StandardStream</span>, <span class="ident">Config</span>, <span class="ident">termcolor::ColorChoice</span>},
 };
 <span class="kw">use</span> <span class="ident">hotg_rune_compiler</span>::{
-    <span class="ident">BuildContext</span>, <span class="ident">Diagnostics</span>, <span class="ident">FeatureFlags</span>, <span class="ident">Verbosity</span>,
+    <span class="ident">BuildContext</span>, <span class="ident">Diagnostics</span>, <span class="ident">Verbosity</span>,
     <span class="ident">codegen::RuneVersion</span>,
     <span class="ident">compile</span>::{<span class="ident">CompilationResult</span>, <span class="ident">CompiledBinary</span>},
     <span class="ident">hooks</span>::{
@@ -289,6 +277,8 @@
 };
 <span class="kw">use</span> <span class="ident">std::path</span>::{<span class="ident">Path</span>, <span class="ident">PathBuf</span>};
 <span class="kw">use</span> <span class="ident">once_cell::sync::Lazy</span>;
+
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::Unstable</span>;
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">structopt::StructOpt</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Build</span> {
@@ -317,20 +307,16 @@
     <span class="doccomment">/// Compile the Rune without optimisations.</span>
     <span class="attribute">#[<span class="ident">structopt</span>(<span class="ident">long</span>)]</span>
     <span class="ident">debug</span>: <span class="ident">bool</span>,
-
-    <span class="doccomment">/// Unlock unstable features.</span>
-    <span class="attribute">#[<span class="ident">structopt</span>(<span class="ident">long</span>)]</span>
-    <span class="ident">unstable</span>: <span class="ident">bool</span>,
-    <span class="doccomment">/// (unstable) A path to the Rune repository. Primarily used to patch</span>
-    <span class="doccomment">/// dependencies when hacking on Rune locally.</span>
-    <span class="attribute">#[<span class="ident">structopt</span>(<span class="ident">long</span>, <span class="ident">requires</span> <span class="op">=</span> <span class="string">&quot;unstable&quot;</span>, <span class="ident">parse</span>(<span class="ident">from_os_str</span>))]</span>
-    <span class="ident">rune_repo_dir</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PathBuf</span><span class="op">&gt;</span>,
 }
 
 <span class="kw">impl</span> <span class="ident">Build</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">execute</span>(<span class="self">self</span>, <span class="ident">color</span>: <span class="ident">ColorChoice</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">execute</span>(
+        <span class="self">self</span>,
+        <span class="ident">color</span>: <span class="ident">ColorChoice</span>,
+        <span class="ident">unstable</span>: <span class="ident">Unstable</span>,
+    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">ctx</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">build_context</span>()<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">features</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">feature_flags</span>();
+        <span class="kw">let</span> <span class="ident">features</span> <span class="op">=</span> <span class="ident">unstable</span>.<span class="ident">feature_flags</span>();
 
         <span class="macro">log::debug!</span>(
             <span class="string">&quot;Compiling {} in \&quot;{}\&quot;&quot;</span>,
@@ -379,16 +365,6 @@
             <span class="ident">optimized</span>: <span class="op">!</span><span class="self">self</span>.<span class="ident">debug</span>,
             <span class="ident">rune_version</span>: <span class="prelude-val">Some</span>(<span class="ident">RuneVersion::new</span>(<span class="macro">env!</span>(<span class="string">&quot;CARGO_PKG_VERSION&quot;</span>))),
         })
-    }
-
-    <span class="kw">fn</span> <span class="ident">feature_flags</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">FeatureFlags</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">features</span> <span class="op">=</span> <span class="ident">FeatureFlags::default</span>();
-
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">unstable</span> {
-            <span class="ident">features</span>.<span class="ident">set_rune_repo_dir</span>(<span class="self">self</span>.<span class="ident">rune_repo_dir</span>.<span class="ident">clone</span>());
-        }
-
-        <span class="ident">features</span>
     }
 
     <span class="kw">fn</span> <span class="ident">current_directory</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">PathBuf</span>, <span class="ident">Error</span><span class="op">&gt;</span> {

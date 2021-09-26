@@ -83,12 +83,11 @@
 <span id="83">83</span>
 </pre><pre class="rust">
 <span class="kw">use</span> <span class="ident">anyhow::Error</span>;
+<span class="kw">use</span> <span class="ident">log::LevelFilter</span>;
 <span class="kw">use</span> <span class="ident">structopt</span>::{<span class="ident">clap::AppSettings</span>, <span class="ident">StructOpt</span>};
-<span class="kw">use</span> <span class="ident">env_logger::Env</span>;
 <span class="kw">use</span> <span class="ident">strum::VariantNames</span>;
 <span class="kw">use</span> <span class="ident">hotg_rune_cli</span>::{
-    <span class="ident">Build</span>, <span class="ident">ColorChoice</span>, <span class="ident">DEFAULT_RUST_LOG</span>, <span class="ident">Format</span>, <span class="ident">Graph</span>, <span class="ident">Inspect</span>, <span class="ident">ModelInfo</span>,
-    <span class="ident">Run</span>, <span class="ident">Version</span>,
+    <span class="ident">Build</span>, <span class="ident">ColorChoice</span>, <span class="ident">Format</span>, <span class="ident">Graph</span>, <span class="ident">Inspect</span>, <span class="ident">ModelInfo</span>, <span class="ident">Run</span>, <span class="ident">Version</span>,
 };
 
 <span class="kw">fn</span> <span class="ident">main</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
@@ -100,12 +99,13 @@
         <span class="ident">version</span>,
     } <span class="op">=</span> <span class="ident">Args::from_args</span>();
 
-    <span class="kw">let</span> <span class="ident">env</span> <span class="op">=</span> <span class="ident">Env::new</span>().<span class="ident">default_filter_or</span>(<span class="ident">DEFAULT_RUST_LOG</span>);
     <span class="ident">env_logger::builder</span>()
-        .<span class="ident">parse_env</span>(<span class="ident">env</span>)
         .<span class="ident">format_timestamp_millis</span>()
         .<span class="ident">format_indent</span>(<span class="prelude-val">Some</span>(<span class="number">2</span>))
         .<span class="ident">write_style</span>(<span class="ident">colour</span>.<span class="ident">into</span>())
+        <span class="comment">// Some modules are known to generate loads of logs that aren&#39;t relevant</span>
+        .<span class="ident">filter_module</span>(<span class="string">&quot;cranelift_codegen&quot;</span>, <span class="ident">LevelFilter::Warn</span>)
+        .<span class="ident">filter_module</span>(<span class="string">&quot;regalloc&quot;</span>, <span class="ident">LevelFilter::Warn</span>)
         .<span class="ident">init</span>();
 
     <span class="kw">match</span> <span class="ident">cmd</span> {

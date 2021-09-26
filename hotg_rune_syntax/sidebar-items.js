@@ -1,1 +1,0 @@
-initSidebarItems({"fn":[["analyse",""]],"mod":[["hir","The High-level Internal Representation."],["yaml",""]],"struct":[["Diagnostics",""]]});

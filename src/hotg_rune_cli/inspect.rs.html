@@ -263,18 +263,21 @@
 <span id="263">263</span>
 <span id="264">264</span>
 <span id="265">265</span>
+<span id="266">266</span>
+<span id="267">267</span>
+<span id="268">268</span>
 </pre><pre class="rust">
-<span class="kw">use</span> <span class="ident">std</span>::{
-    <span class="ident">collections</span>::{<span class="ident">BTreeMap</span>, <span class="ident">HashMap</span>},
-    <span class="ident">path::PathBuf</span>,
-};
+<span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">collections::HashMap</span>, <span class="ident">path::PathBuf</span>};
 <span class="kw">use</span> <span class="ident">anyhow</span>::{<span class="ident">Context</span>, <span class="ident">Error</span>};
-<span class="kw">use</span> <span class="ident">build_info::BuildInfo</span>;
-<span class="kw">use</span> <span class="ident">hotg_rune_syntax</span>::{
-    <span class="ident">hir</span>::{<span class="ident">HirId</span>, <span class="ident">Rune</span>, <span class="ident">SourceKind</span>},
-    <span class="ident">yaml</span>::{<span class="ident">Type</span>, <span class="ident">Value</span>},
+<span class="kw">use</span> <span class="ident">hotg_rune_compiler</span>::{
+    <span class="ident">codegen</span>::{
+        <span class="ident">CapabilitySummary</span>, <span class="ident">ModelSummary</span>, <span class="ident">OutputSummary</span>, <span class="ident">ProcBlockSummary</span>,
+        <span class="ident">RuneGraph</span>, <span class="ident">RuneVersion</span>, <span class="ident">TensorId</span>,
+    },
+    <span class="ident">lowering</span>::{<span class="ident">Name</span>, <span class="ident">Resource</span>},
+    <span class="ident">parse</span>::{<span class="ident">ResourceType</span>, <span class="ident">Value</span>},
 };
-<span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Serialize</span>, <span class="ident">Serializer</span>};
+<span class="kw">use</span> <span class="ident">hotg_rune_core::Shape</span>;
 <span class="kw">use</span> <span class="ident">strum::VariantNames</span>;
 <span class="kw">use</span> <span class="ident">wasmparser</span>::{<span class="ident">BinaryReaderError</span>, <span class="ident">Parser</span>, <span class="ident">Payload</span>};
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::Format</span>;
@@ -316,53 +319,144 @@
 }
 
 <span class="kw">fn</span> <span class="ident">print_meta</span>(<span class="ident">meta</span>: <span class="kw-2">&amp;</span><span class="ident">Metadata</span>) {
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">build_info</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">meta</span>.<span class="ident">rune_cli_build_info</span> {
-        <span class="kw">let</span> <span class="ident">git</span> <span class="op">=</span> <span class="ident">build_info</span>.<span class="ident">version_control</span>.<span class="ident">as_ref</span>().<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">v</span><span class="op">|</span> <span class="ident">v</span>.<span class="ident">git</span>());
-
-        <span class="macro">print!</span>(
-            <span class="string">&quot;Compiled by: {} v{}&quot;</span>,
-            <span class="ident">build_info</span>.<span class="ident">crate_info</span>.<span class="ident">name</span>, <span class="ident">build_info</span>.<span class="ident">crate_info</span>.<span class="ident">version</span>,
-        );
-
-        <span class="kw">match</span> <span class="ident">git</span> {
-            <span class="prelude-val">Some</span>(<span class="ident">git</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">println!</span>(
-                <span class="string">&quot; ({} {})&quot;</span>,
-                <span class="ident">git</span>.<span class="ident">commit_short_id</span>,
-                <span class="ident">git</span>.<span class="ident">commit_timestamp</span>.<span class="ident">date</span>().<span class="ident">naive_utc</span>(),
-            ),
-            <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">println!</span>(),
-        }
+    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">rune</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">meta</span>.<span class="ident">rune</span> {
+        <span class="ident">print_rune</span>(<span class="ident">rune</span>);
     }
 
-    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">SimplifiedRune</span> { <span class="ident">capabilities</span> }) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">meta</span>.<span class="ident">simplified_rune</span> {
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">capabilities</span>.<span class="ident">is_empty</span>() {
-            <span class="ident">print_capabilities</span>(<span class="kw-2">&amp;</span><span class="ident">capabilities</span>);
+    <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">version</span>) <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">meta</span>.<span class="ident">version</span> {
+        <span class="macro">println!</span>(<span class="string">&quot;Compiled by: Rune {}&quot;</span>, <span class="ident">version</span>);
+    }
+}
+
+<span class="kw">fn</span> <span class="ident">print_rune</span>(<span class="ident">rune</span>: <span class="kw-2">&amp;</span><span class="ident">RuneGraph</span>) {
+    <span class="kw">let</span> <span class="ident">RuneGraph</span> {
+        <span class="ident">rune</span>,
+        <span class="ident">capabilities</span>,
+        <span class="ident">models</span>,
+        <span class="ident">proc_blocks</span>,
+        <span class="ident">outputs</span>,
+        <span class="ident">resources</span>,
+        <span class="ident">tensors</span>,
+    } <span class="op">=</span> <span class="ident">rune</span>;
+
+    <span class="macro">println!</span>(<span class="string">&quot;Name: {}&quot;</span>, <span class="ident">rune</span>.<span class="ident">name</span>);
+
+    <span class="ident">print_capabilities</span>(<span class="ident">capabilities</span>, <span class="ident">tensors</span>);
+    <span class="ident">print_models</span>(<span class="ident">models</span>, <span class="ident">tensors</span>);
+    <span class="ident">print_proc_blocks</span>(<span class="ident">proc_blocks</span>, <span class="ident">tensors</span>);
+    <span class="ident">print_outputs</span>(<span class="ident">outputs</span>, <span class="ident">tensors</span>);
+    <span class="ident">print_resources</span>(<span class="ident">resources</span>);
+}
+
+<span class="kw">fn</span> <span class="ident">print_outputs</span>(
+    <span class="ident">outputs</span>: <span class="kw-2">&amp;</span><span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">Name</span>, <span class="ident">OutputSummary</span><span class="op">&gt;</span>,
+    <span class="ident">tensors</span>: <span class="kw-2">&amp;</span><span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">TensorId</span>, <span class="ident">Shape</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+) {
+    <span class="kw">if</span> <span class="ident">outputs</span>.<span class="ident">is_empty</span>() {
+        <span class="kw">return</span>;
+    }
+
+    <span class="macro">println!</span>(<span class="string">&quot;Outputs:&quot;</span>);
+
+    <span class="kw">for</span> (<span class="ident">name</span>, <span class="ident">output</span>) <span class="kw">in</span> <span class="ident">outputs</span> {
+        <span class="macro">println!</span>(<span class="string">&quot;- {}: {}&quot;</span>, <span class="ident">name</span>, <span class="ident">output</span>.<span class="ident">kind</span>);
+        <span class="ident">print_tensors</span>(<span class="string">&quot;Inputs&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">output</span>.<span class="ident">inputs</span>, <span class="ident">tensors</span>);
+    }
+}
+
+<span class="kw">fn</span> <span class="ident">print_resources</span>(<span class="ident">resources</span>: <span class="kw-2">&amp;</span><span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">Name</span>, <span class="ident">Resource</span><span class="op">&gt;</span>) {
+    <span class="kw">if</span> <span class="ident">resources</span>.<span class="ident">is_empty</span>() {
+        <span class="kw">return</span>;
+    }
+
+    <span class="macro">println!</span>(<span class="string">&quot;Resources:&quot;</span>);
+
+    <span class="kw">for</span> (<span class="ident">name</span>, <span class="ident">resource</span>) <span class="kw">in</span> <span class="ident">resources</span> {
+        <span class="kw">match</span> <span class="ident">resource</span>.<span class="ident">ty</span> {
+            <span class="ident">ResourceType::String</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">println!</span>(<span class="string">&quot;\t{} (string)&quot;</span>, <span class="ident">name</span>),
+            <span class="ident">ResourceType::Binary</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">println!</span>(<span class="string">&quot;\t{} (binary)&quot;</span>, <span class="ident">name</span>),
         }
     }
 }
 
-<span class="kw">fn</span> <span class="ident">print_capabilities</span>(<span class="ident">capabilities</span>: <span class="kw-2">&amp;</span><span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">SimplifiedCapability</span><span class="op">&gt;</span>) {
+<span class="kw">fn</span> <span class="ident">print_models</span>(
+    <span class="ident">models</span>: <span class="kw-2">&amp;</span><span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">Name</span>, <span class="ident">ModelSummary</span><span class="op">&gt;</span>,
+    <span class="ident">tensors</span>: <span class="kw-2">&amp;</span><span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">TensorId</span>, <span class="ident">Shape</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+) {
+    <span class="kw">if</span> <span class="ident">models</span>.<span class="ident">is_empty</span>() {
+        <span class="kw">return</span>;
+    }
+
+    <span class="macro">println!</span>(<span class="string">&quot;Models:&quot;</span>);
+
+    <span class="kw">for</span> (<span class="ident">name</span>, <span class="ident">model</span>) <span class="kw">in</span> <span class="ident">models</span> {
+        <span class="macro">println!</span>(<span class="string">&quot;- {}: {}&quot;</span>, <span class="ident">name</span>, <span class="ident">model</span>.<span class="ident">file</span>);
+        <span class="ident">print_tensors</span>(<span class="string">&quot;Inputs&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">model</span>.<span class="ident">inputs</span>, <span class="ident">tensors</span>);
+        <span class="ident">print_tensors</span>(<span class="string">&quot;Outputs&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">model</span>.<span class="ident">outputs</span>, <span class="ident">tensors</span>);
+    }
+}
+
+<span class="kw">fn</span> <span class="ident">print_proc_blocks</span>(
+    <span class="ident">proc_blocks</span>: <span class="kw-2">&amp;</span><span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">Name</span>, <span class="ident">ProcBlockSummary</span><span class="op">&gt;</span>,
+    <span class="ident">tensors</span>: <span class="kw-2">&amp;</span><span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">TensorId</span>, <span class="ident">Shape</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+) {
+    <span class="kw">if</span> <span class="ident">proc_blocks</span>.<span class="ident">is_empty</span>() {
+        <span class="kw">return</span>;
+    }
+
+    <span class="macro">println!</span>(<span class="string">&quot;Proc Blocks:&quot;</span>);
+
+    <span class="kw">for</span> (<span class="ident">name</span>, <span class="ident">proc_block</span>) <span class="kw">in</span> <span class="ident">proc_blocks</span> {
+        <span class="macro">println!</span>(<span class="string">&quot;- {}: {}&quot;</span>, <span class="ident">name</span>, <span class="ident">proc_block</span>.<span class="ident">path</span>);
+        <span class="ident">print_tensors</span>(<span class="string">&quot;Inputs&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">proc_block</span>.<span class="ident">inputs</span>, <span class="ident">tensors</span>);
+        <span class="ident">print_tensors</span>(<span class="string">&quot;Outputs&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">proc_block</span>.<span class="ident">outputs</span>, <span class="ident">tensors</span>);
+        <span class="ident">print_args</span>(<span class="kw-2">&amp;</span><span class="ident">proc_block</span>.<span class="ident">args</span>);
+    }
+}
+
+<span class="kw">fn</span> <span class="ident">print_capabilities</span>(
+    <span class="ident">capabilities</span>: <span class="kw-2">&amp;</span><span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">Name</span>, <span class="ident">CapabilitySummary</span><span class="op">&gt;</span>,
+    <span class="ident">tensors</span>: <span class="kw-2">&amp;</span><span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">TensorId</span>, <span class="ident">Shape</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+) {
+    <span class="kw">if</span> <span class="op">!</span><span class="ident">capabilities</span>.<span class="ident">is_empty</span>() {
+        <span class="kw">return</span>;
+    }
+
     <span class="macro">println!</span>(<span class="string">&quot;Capabilities:&quot;</span>);
 
-    <span class="kw">for</span> (<span class="ident">name</span>, <span class="ident">value</span>) <span class="kw">in</span> <span class="ident">capabilities</span> {
-        <span class="kw">let</span> <span class="ident">SimplifiedCapability</span> {
-            <span class="ident">capability_type</span>,
-            <span class="ident">outputs</span>,
-            <span class="ident">parameters</span>,
-        } <span class="op">=</span> <span class="ident">value</span>;
-        <span class="macro">println!</span>(<span class="string">&quot;  {} ({})&quot;</span>, <span class="ident">name</span>, <span class="ident">capability_type</span>);
+    <span class="kw">for</span> (<span class="ident">name</span>, <span class="ident">cap</span>) <span class="kw">in</span> <span class="ident">capabilities</span> {
+        <span class="macro">println!</span>(<span class="string">&quot;- {}: {}&quot;</span>, <span class="ident">name</span>, <span class="ident">cap</span>.<span class="ident">kind</span>);
+        <span class="ident">print_tensors</span>(<span class="string">&quot;Outputs&quot;</span>, <span class="kw-2">&amp;</span><span class="ident">cap</span>.<span class="ident">outputs</span>, <span class="ident">tensors</span>);
+        <span class="ident">print_args</span>(<span class="kw-2">&amp;</span><span class="ident">cap</span>.<span class="ident">args</span>);
+    }
+}
 
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">outputs</span>.<span class="ident">is_empty</span>() {
-            <span class="macro">println!</span>(<span class="string">&quot;    Outputs:&quot;</span>);
-            <span class="kw">for</span> <span class="ident">output</span> <span class="kw">in</span> <span class="ident">outputs</span> {
-                <span class="macro">println!</span>(<span class="string">&quot;    - {}{:?}&quot;</span>, <span class="ident">output</span>.<span class="ident">name</span>, <span class="ident">output</span>.<span class="ident">dimensions</span>);
-            }
-        }
+<span class="kw">fn</span> <span class="ident">print_tensors</span>(
+    <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>,
+    <span class="ident">tensors</span>: <span class="kw-2">&amp;</span>[<span class="ident">TensorId</span>],
+    <span class="ident">tensor_shapes</span>: <span class="kw-2">&amp;</span><span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">TensorId</span>, <span class="ident">Shape</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;</span><span class="op">&gt;</span>,
+) {
+    <span class="macro">println!</span>(<span class="string">&quot;  {}:&quot;</span>, <span class="ident">name</span>);
 
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">parameters</span>.<span class="ident">is_empty</span>() {
-            <span class="macro">println!</span>(<span class="string">&quot;    Parameters:&quot;</span>);
-            <span class="kw">for</span> (<span class="ident">key</span>, <span class="ident">value</span>) <span class="kw">in</span> <span class="ident">parameters</span> {
-                <span class="macro">println!</span>(<span class="string">&quot;    - {}: {:?}&quot;</span>, <span class="ident">key</span>, <span class="ident">value</span>);
+    <span class="kw">for</span> <span class="ident">tensor</span> <span class="kw">in</span> <span class="ident">tensors</span> {
+        <span class="macro">println!</span>(<span class="string">&quot;  - {}&quot;</span>, <span class="ident">tensor_shapes</span>[<span class="ident">tensor</span>]);
+    }
+}
+
+<span class="kw">fn</span> <span class="ident">print_args</span>(<span class="ident">args</span>: <span class="kw-2">&amp;</span><span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">Value</span><span class="op">&gt;</span>) {
+    <span class="kw">if</span> <span class="op">!</span><span class="ident">args</span>.<span class="ident">is_empty</span>() {
+        <span class="macro">println!</span>(<span class="string">&quot;  Arguments:&quot;</span>);
+
+        <span class="kw">for</span> (<span class="ident">arg</span>, <span class="ident">value</span>) <span class="kw">in</span> <span class="ident">args</span> {
+            <span class="macro">print!</span>(<span class="string">&quot;    {}: &quot;</span>, <span class="ident">arg</span>);
+
+            <span class="kw">match</span> <span class="ident">value</span> {
+                <span class="ident">Value::Int</span>(<span class="ident">i</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">i</span>),
+                <span class="ident">Value::Float</span>(<span class="ident">f</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">f</span>),
+                <span class="ident">Value::String</span>(<span class="ident">s</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">s</span>),
+                <span class="ident">Value::List</span>(<span class="ident">list</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="macro">println!</span>(<span class="string">&quot;{}&quot;</span>, <span class="ident">serde_json::to_string</span>(<span class="ident">list</span>).<span class="ident">unwrap</span>())
+                },
             }
         }
     }
@@ -370,10 +464,8 @@
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Default</span>, <span class="ident">Clone</span>, <span class="ident">serde::Serialize</span>)]</span>
 <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct</span> <span class="ident">Metadata</span> {
-    <span class="ident">rune_cli_build_info</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">BuildInfo</span><span class="op">&gt;</span>,
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">skip</span>)]</span>
-    <span class="ident">rune</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Rune</span><span class="op">&gt;</span>,
-    <span class="ident">simplified_rune</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">SimplifiedRune</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">version</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">RuneVersion</span><span class="op">&gt;</span>,
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="ident">rune</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">RuneGraph</span><span class="op">&gt;</span>,
 }
 
 <span class="kw">impl</span> <span class="ident">Metadata</span> {
@@ -390,11 +482,9 @@
 
         <span class="kw">for</span> <span class="ident">section</span> <span class="kw">in</span> <span class="ident">sections</span> {
             <span class="kw">match</span> <span class="ident">section</span>.<span class="ident">name</span> {
-                <span class="ident">hotg_rune_codegen::GRAPH_CUSTOM_SECTION</span> <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="ident">hotg_rune_compiler::codegen::GRAPH_CUSTOM_SECTION</span> <span class="op">=</span><span class="op">&gt;</span> {
                     <span class="kw">match</span> <span class="ident">serde_json::from_slice</span>(<span class="ident">section</span>.<span class="ident">data</span>) {
                         <span class="prelude-val">Ok</span>(<span class="ident">rune</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                            <span class="ident">meta</span>.<span class="ident">simplified_rune</span> <span class="op">=</span>
-                                <span class="prelude-val">Some</span>(<span class="ident">SimplifiedRune::from_rune</span>(<span class="kw-2">&amp;</span><span class="ident">rune</span>));
                             <span class="ident">meta</span>.<span class="ident">rune</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">rune</span>);
                         },
                         <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=</span><span class="op">&gt;</span> {
@@ -405,10 +495,10 @@
                         },
                     }
                 },
-                <span class="ident">hotg_rune_codegen::VERSION_CUSTOM_SECTION</span> <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="ident">hotg_rune_compiler::codegen::VERSION_CUSTOM_SECTION</span> <span class="op">=</span><span class="op">&gt;</span> {
                     <span class="kw">match</span> <span class="ident">serde_json::from_slice</span>(<span class="ident">section</span>.<span class="ident">data</span>) {
                         <span class="prelude-val">Ok</span>(<span class="ident">v</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                            <span class="ident">meta</span>.<span class="ident">rune_cli_build_info</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">v</span>);
+                            <span class="ident">meta</span>.<span class="ident">version</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">v</span>);
                         },
                         <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=</span><span class="op">&gt;</span> {
                             <span class="macro">log::warn!</span>(
@@ -424,90 +514,6 @@
 
         <span class="ident">meta</span>
     }
-
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">take_rune</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Rune</span><span class="op">&gt;</span> { <span class="self">self</span>.<span class="ident">rune</span>.<span class="ident">take</span>() }
-}
-
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">serde::Serialize</span>)]</span>
-<span class="kw">struct</span> <span class="ident">SimplifiedRune</span> {
-    <span class="ident">capabilities</span>: <span class="ident">BTreeMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">SimplifiedCapability</span><span class="op">&gt;</span>,
-}
-
-<span class="kw">impl</span> <span class="ident">SimplifiedRune</span> {
-    <span class="kw">fn</span> <span class="ident">from_rune</span>(<span class="ident">rune</span>: <span class="kw-2">&amp;</span><span class="ident">Rune</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">capabilities</span> <span class="op">=</span> <span class="ident">BTreeMap::new</span>();
-
-        <span class="kw">for</span> (<span class="kw-2">&amp;</span><span class="ident">id</span>, <span class="ident">node</span>) <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">rune</span>.<span class="ident">stages</span> {
-            <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">rune</span>.<span class="ident">names</span>[<span class="ident">id</span>].<span class="ident">to_string</span>();
-            <span class="kw">let</span> <span class="ident">outputs</span> <span class="op">=</span> <span class="ident">node</span>
-                .<span class="ident">output_slots</span>
-                .<span class="ident">iter</span>()
-                .<span class="ident">map</span>(<span class="op">|</span><span class="ident">slot</span><span class="op">|</span> <span class="ident">rune</span>.<span class="ident">slots</span>[<span class="ident">slot</span>].<span class="ident">element_type</span>)
-                .<span class="ident">map</span>(<span class="op">|</span><span class="ident">type_id</span><span class="op">|</span> <span class="ident">resolve_type</span>(<span class="kw-2">&amp;</span><span class="ident">rune</span>, <span class="ident">type_id</span>))
-                .<span class="ident">collect</span>();
-
-            <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">node</span>.<span class="ident">stage</span> {
-                <span class="ident">hotg_rune_syntax::hir::Stage::Source</span>(
-                    <span class="ident">hotg_rune_syntax::hir::Source</span> { <span class="ident">kind</span>, <span class="ident">parameters</span> },
-                ) <span class="op">=</span><span class="op">&gt;</span> {
-                    <span class="kw">let</span> <span class="ident">kind</span> <span class="op">=</span> <span class="ident">kind</span>.<span class="ident">clone</span>();
-                    <span class="kw">let</span> <span class="ident">parameters</span> <span class="op">=</span> <span class="ident">parameters</span>.<span class="ident">clone</span>();
-                    <span class="ident">capabilities</span>.<span class="ident">insert</span>(
-                        <span class="ident">name</span>,
-                        <span class="ident">SimplifiedCapability</span> {
-                            <span class="ident">capability_type</span>: <span class="ident">kind</span>,
-                            <span class="ident">parameters</span>,
-                            <span class="ident">outputs</span>,
-                        },
-                    );
-                },
-                <span class="ident">hotg_rune_syntax::hir::Stage::Sink</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> {},
-                <span class="ident">hotg_rune_syntax::hir::Stage::Model</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> {},
-                <span class="ident">hotg_rune_syntax::hir::Stage::ProcBlock</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> {},
-            }
-        }
-
-        <span class="ident">SimplifiedRune</span> { <span class="ident">capabilities</span> }
-    }
-}
-
-<span class="kw">fn</span> <span class="ident">resolve_type</span>(<span class="ident">rune</span>: <span class="kw-2">&amp;</span><span class="ident">Rune</span>, <span class="ident">type_id</span>: <span class="ident">HirId</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Type</span> {
-    <span class="kw">let</span> (<span class="ident">primitive</span>, <span class="ident">dims</span>) <span class="op">=</span> <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">rune</span>.<span class="ident">types</span>[<span class="kw-2">&amp;</span><span class="ident">type_id</span>] {
-        <span class="ident">hotg_rune_syntax::hir::Type::Primitive</span>(<span class="ident">p</span>) <span class="op">=</span><span class="op">&gt;</span> (<span class="ident">p</span>, <span class="macro">vec!</span>[<span class="number">1</span>]),
-        <span class="ident">hotg_rune_syntax::hir::Type::Buffer</span> {
-            <span class="ident">underlying_type</span>,
-            <span class="ident">dimensions</span>,
-        } <span class="op">=</span><span class="op">&gt;</span> <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">rune</span>.<span class="ident">types</span>[<span class="ident">underlying_type</span>] {
-            <span class="ident">hotg_rune_syntax::hir::Type::Primitive</span>(<span class="ident">p</span>) <span class="op">=</span><span class="op">&gt;</span> {
-                (<span class="ident">p</span>, <span class="ident">dimensions</span>.<span class="ident">clone</span>())
-            },
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable!</span>(),
-        },
-        <span class="ident">hotg_rune_syntax::hir::Type::Unknown</span>
-        <span class="op">|</span> <span class="ident">hotg_rune_syntax::hir::Type::Any</span> <span class="op">=</span><span class="op">&gt;</span> {
-            <span class="macro">unreachable!</span>(<span class="string">&quot;All types should have been resolved&quot;</span>)
-        },
-    };
-
-    <span class="ident">Type</span> {
-        <span class="ident">name</span>: <span class="ident">primitive</span>.<span class="ident">rust_name</span>().<span class="ident">to_string</span>(),
-        <span class="ident">dimensions</span>: <span class="ident">dims</span>,
-    }
-}
-
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">serde::Serialize</span>)]</span>
-<span class="kw">struct</span> <span class="ident">SimplifiedCapability</span> {
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">serialize_with</span> <span class="op">=</span> <span class="string">&quot;serialize_source_kind&quot;</span>)]</span>
-    <span class="ident">capability_type</span>: <span class="ident">SourceKind</span>,
-    <span class="ident">outputs</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Type</span><span class="op">&gt;</span>,
-    <span class="ident">parameters</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">Value</span><span class="op">&gt;</span>,
-}
-
-<span class="kw">fn</span> <span class="ident">serialize_source_kind</span><span class="op">&lt;</span><span class="ident">S</span>: <span class="ident">Serializer</span><span class="op">&gt;</span>(
-    <span class="ident">kind</span>: <span class="kw-2">&amp;</span><span class="ident">SourceKind</span>,
-    <span class="ident">ser</span>: <span class="ident">S</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">S::Ok</span>, <span class="ident">S::Error</span><span class="op">&gt;</span> {
-    <span class="ident">kind</span>.<span class="ident">to_string</span>().<span class="ident">serialize</span>(<span class="ident">ser</span>)
 }
 
 <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">wasm_custom_sections</span>(

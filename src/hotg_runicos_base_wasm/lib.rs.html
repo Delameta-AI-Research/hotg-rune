@@ -99,12 +99,12 @@
 <span class="kw">mod</span> <span class="ident">stats_allocator</span>;
 
 <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::{
-    <span class="ident">capability</span>::{<span class="ident">GenericCapability</span>, <span class="ident">Accelerometer</span>, <span class="ident">Random</span>, <span class="ident">Sound</span>, <span class="ident">Raw</span>, <span class="ident">Image</span>},
+    <span class="ident">capability::Capability</span>,
     <span class="ident">guards</span>::{<span class="ident">SetupGuard</span>, <span class="ident">PipelineGuard</span>},
     <span class="ident">logging::Logger</span>,
     <span class="ident">model::Model</span>,
     <span class="ident">serial::Serial</span>,
-    <span class="ident">resources::Resource</span>,
+    <span class="ident">resources</span>::{<span class="ident">Resource</span>, <span class="ident">ResourceError</span>},
 };
 
 <span class="kw">use</span> <span class="ident">core</span>::{<span class="ident">alloc::Layout</span>, <span class="ident">fmt::Write</span>, <span class="ident">panic::PanicInfo</span>};

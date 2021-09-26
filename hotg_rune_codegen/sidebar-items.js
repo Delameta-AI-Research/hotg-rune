@@ -1,1 +1,0 @@
-initSidebarItems({"constant":[["GRAPH_CUSTOM_SECTION",""],["RESOURCE_CUSTOM_SECTION",""],["VERSION_CUSTOM_SECTION",""]],"enum":[["GitSpecifier",""],["RuneProject",""],["Verbosity",""]],"fn":[["generate",""],["generate_with_env",""]],"struct":[["Compilation",""],["DefaultEnvironment",""],["Project",""]],"trait":[["Environment",""]]});

@@ -924,8 +924,6 @@
 <span id="924">924</span>
 <span id="925">925</span>
 <span id="926">926</span>
-<span id="927">927</span>
-<span id="928">928</span>
 </pre><pre class="rust">
 <span class="kw">use</span> <span class="ident">std</span>::{
     <span class="ident">cell::Cell</span>,
@@ -1732,9 +1730,7 @@
     <span class="kw">let</span> <span class="ident">factory</span> <span class="op">=</span> <span class="ident">env</span>
         .<span class="ident">factories</span>
         .<span class="ident">get</span>(<span class="ident">name</span>)
-        .<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> {
-            <span class="macro">format!</span>(<span class="string">&quot;Unable to find the \&quot;{}\&quot; resource&quot;</span>, <span class="ident">name</span>)
-        })
+        .<span class="ident">with_context</span>(<span class="op">|</span><span class="op">|</span> <span class="macro">format!</span>(<span class="string">&quot;Unable to find the \&quot;{}\&quot; resource&quot;</span>, <span class="ident">name</span>))
         .<span class="ident">map_err</span>(<span class="ident">runtime_error</span>)<span class="question-mark">?</span>;
 
     <span class="kw">let</span> <span class="ident">instance</span> <span class="op">=</span> <span class="ident">factory</span>

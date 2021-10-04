@@ -67,12 +67,22 @@
 <span id="67">67</span>
 <span id="68">68</span>
 <span id="69">69</span>
+<span id="70">70</span>
+<span id="71">71</span>
+<span id="72">72</span>
+<span id="73">73</span>
+<span id="74">74</span>
+<span id="75">75</span>
+<span id="76">76</span>
 </pre><pre class="rust">
 <span class="attribute">#![<span class="ident">no_std</span>]</span>
 
+<span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
+<span class="attribute">#[<span class="ident">macro_use</span>]</span>
+<span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">alloc</span>;
+
 <span class="kw">use</span> <span class="ident">num_traits</span>::{<span class="ident">Bounded</span>, <span class="ident">ToPrimitive</span>};
-<span class="kw">use</span> <span class="ident">hotg_rune_core</span>::{<span class="ident">HasOutputs</span>, <span class="ident">Tensor</span>};
-<span class="kw">use</span> <span class="ident">hotg_rune_proc_blocks</span>::{<span class="ident">ProcBlock</span>, <span class="ident">Transform</span>};
+<span class="kw">use</span> <span class="ident">hotg_rune_proc_blocks</span>::{<span class="ident">ProcBlock</span>, <span class="ident">Transform</span>, <span class="ident">Tensor</span>};
 
 <span class="doccomment">/// A normalization routine which takes some tensor of integers and fits their</span>
 <span class="doccomment">/// values to the range `[0, 1]` as `f32`&#39;s.</span>
@@ -86,6 +96,19 @@
 <span class="attribute">#[<span class="ident">transform</span>(<span class="ident">inputs</span> <span class="op">=</span> [<span class="ident">i32</span>; <span class="kw">_</span>]</span>, <span class="ident">outputs</span> <span class="op">=</span> [<span class="ident">f32</span>; <span class="kw">_</span>])]
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ImageNormalization</span> {}
 
+<span class="kw">impl</span> <span class="ident">ImageNormalization</span> {
+    <span class="kw">fn</span> <span class="ident">check_input_dimensions</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">dimensions</span>: <span class="kw-2">&amp;</span>[<span class="ident">usize</span>]) {
+        <span class="kw">match</span> <span class="kw-2">*</span><span class="ident">dimensions</span> {
+            [<span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="number">3</span>] <span class="op">=</span><span class="op">&gt;</span> {},
+            [<span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="ident">channels</span>] <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(
+                <span class="string">&quot;The number of channels should be either 1 or 3, found {}&quot;</span>,
+                <span class="ident">channels</span>
+            ),
+            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(<span class="string">&quot;The image normalization proc block only supports outputs of the form [frames, rows, columns, channels], found {:?}&quot;</span>, <span class="ident">dimensions</span>),
+        }
+    }
+}
+
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Transform</span><span class="op">&lt;</span><span class="ident">Tensor</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ImageNormalization</span>
 <span class="kw">where</span>
     <span class="ident">T</span>: <span class="ident">Bounded</span> <span class="op">+</span> <span class="ident">ToPrimitive</span> <span class="op">+</span> <span class="ident">Copy</span>,
@@ -93,6 +116,7 @@
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">Tensor</span><span class="op">&lt;</span><span class="ident">f32</span><span class="op">&gt;</span>;
 
     <span class="kw">fn</span> <span class="ident">transform</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">input</span>: <span class="ident">Tensor</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::Output</span> {
+        <span class="self">self</span>.<span class="ident">check_input_dimensions</span>(<span class="ident">input</span>.<span class="ident">dimensions</span>());
         <span class="ident">input</span>.<span class="ident">map</span>(<span class="op">|</span><span class="kw">_</span>, <span class="kw-2">&amp;</span><span class="ident">value</span><span class="op">|</span> <span class="ident">normalize</span>(<span class="ident">value</span>).<span class="ident">expect</span>(<span class="string">&quot;Cast should never fail&quot;</span>))
     }
 }
@@ -109,28 +133,18 @@
     <span class="prelude-val">Some</span>((<span class="ident">value</span> <span class="op">-</span> <span class="ident">min</span>) <span class="op">/</span> (<span class="ident">max</span> <span class="op">-</span> <span class="ident">min</span>))
 }
 
-<span class="kw">impl</span> <span class="ident">HasOutputs</span> <span class="kw">for</span> <span class="ident">ImageNormalization</span> {
-    <span class="kw">fn</span> <span class="ident">set_output_dimensions</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">dimensions</span>: <span class="kw-2">&amp;</span>[<span class="ident">usize</span>]) {
-        <span class="kw">match</span> <span class="kw-2">*</span><span class="ident">dimensions</span> {
-            [<span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="number">3</span>] <span class="op">=</span><span class="op">&gt;</span> {},
-            [<span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="ident">channels</span>] <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(
-                <span class="string">&quot;The number of channels should be either 1 or 3, found {}&quot;</span>,
-                <span class="ident">channels</span>
-            ),
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(<span class="string">&quot;The image normalization proc block only supports outputs of the form [frames, rows, columns, channels], found {:?}&quot;</span>, <span class="ident">dimensions</span>),
-        }
-    }
-}
-
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="kw">mod</span> <span class="ident">tests</span> {
     <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">normalizing_with_default_distribution_is_noop</span>() {
-        <span class="kw">let</span> <span class="ident">input</span>: <span class="ident">Tensor</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Tensor::from</span>([<span class="number">0</span>, <span class="number">127</span>, <span class="number">255</span>]);
+        <span class="kw">let</span> <span class="ident">dims</span> <span class="op">=</span> <span class="macro">vec!</span>[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">3</span>];
+        <span class="kw">let</span> <span class="ident">input</span>: <span class="ident">Tensor</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span> <span class="op">=</span>
+            <span class="ident">Tensor::new_row_major</span>(<span class="macro">vec!</span>[<span class="number">0</span>, <span class="number">127</span>, <span class="number">255</span>].<span class="ident">into</span>(), <span class="ident">dims</span>.<span class="ident">clone</span>());
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">norm</span> <span class="op">=</span> <span class="ident">ImageNormalization::default</span>();
-        <span class="kw">let</span> <span class="ident">should_be</span>: <span class="ident">Tensor</span><span class="op">&lt;</span><span class="ident">f32</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Tensor::from</span>([<span class="number">0.0</span>, <span class="number">127.0</span> <span class="op">/</span> <span class="number">255.0</span>, <span class="number">1.0</span>]);
+        <span class="kw">let</span> <span class="ident">should_be</span>: <span class="ident">Tensor</span><span class="op">&lt;</span><span class="ident">f32</span><span class="op">&gt;</span> <span class="op">=</span>
+            <span class="ident">Tensor::new_row_major</span>(<span class="macro">vec!</span>[<span class="number">0.0</span>, <span class="number">127.0</span> <span class="op">/</span> <span class="number">255.0</span>, <span class="number">1.0</span>].<span class="ident">into</span>(), <span class="ident">dims</span>);
 
         <span class="kw">let</span> <span class="ident">got</span> <span class="op">=</span> <span class="ident">norm</span>.<span class="ident">transform</span>(<span class="ident">input</span>);
 

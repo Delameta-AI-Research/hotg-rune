@@ -163,6 +163,11 @@
 <span id="163">163</span>
 <span id="164">164</span>
 <span id="165">165</span>
+<span id="166">166</span>
+<span id="167">167</span>
+<span id="168">168</span>
+<span id="169">169</span>
+<span id="170">170</span>
 </pre><pre class="rust">
 <span class="kw">use</span> <span class="ident">legion</span>::{
     <span class="ident">Entity</span>, <span class="ident">Query</span>,
@@ -170,12 +175,17 @@
     <span class="ident">systems::CommandBuffer</span>,
     <span class="ident">world::SubWorld</span>,
 };
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">BuildContext</span>, <span class="ident">codegen</span>::{
+<span class="kw">use</span> <span class="kw">crate</span>::{
+    <span class="ident">BuildContext</span>,
+    <span class="ident">codegen</span>::{
         <span class="ident">ModelSummary</span>, <span class="ident">OutputSummary</span>, <span class="ident">ProcBlockSummary</span>, <span class="ident">RuneGraph</span>, <span class="ident">TensorId</span>,
-    }, <span class="ident">lowering</span>::{
+    },
+    <span class="ident">lowering</span>::{
         <span class="ident">Inputs</span>, <span class="ident">Model</span>, <span class="ident">ModelFile</span>, <span class="ident">Name</span>, <span class="ident">Outputs</span>, <span class="ident">ProcBlock</span>, <span class="ident">Resource</span>, <span class="ident">Sink</span>,
         <span class="ident">Source</span>, <span class="ident">Tensor</span>,
-    }, <span class="ident">parse</span>::{<span class="ident">ResourceName</span>, <span class="ident">ResourceOrString</span>}};
+    },
+    <span class="ident">parse</span>::{<span class="ident">ResourceName</span>, <span class="ident">ResourceOrString</span>},
+};
 
 <span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">CapabilitySummary</span>, <span class="ident">RuneSummary</span>};
 

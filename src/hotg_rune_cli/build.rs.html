@@ -283,7 +283,7 @@
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">structopt::StructOpt</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Build</span> {
     <span class="doccomment">/// The Runefile to compile.</span>
-    <span class="attribute">#[<span class="ident">structopt</span>(<span class="ident">parse</span>(<span class="ident">from_os_str</span>), <span class="ident">default_value</span> <span class="op">=</span> <span class="string">&quot;Runefile&quot;</span>)]</span>
+    <span class="attribute">#[<span class="ident">structopt</span>(<span class="ident">parse</span>(<span class="ident">from_os_str</span>), <span class="ident">default_value</span> <span class="op">=</span> <span class="string">&quot;Runefile.yml&quot;</span>)]</span>
     <span class="ident">runefile</span>: <span class="ident">PathBuf</span>,
     <span class="doccomment">/// Where to write the generated Rune.</span>
     <span class="attribute">#[<span class="ident">structopt</span>(<span class="ident">short</span>, <span class="ident">long</span>, <span class="ident">parse</span>(<span class="ident">from_os_str</span>))]</span>

@@ -193,20 +193,20 @@
     <span class="ident">num::ParseIntError</span>,
     <span class="ident">str::FromStr</span>,
 };
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::reflect::Type</span>;
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::element_type::ElementType</span>;
 
 <span class="doccomment">/// A tensor&#39;s shape.</span>
 <span class="attribute">#[<span class="ident">derive</span>(
     <span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">Hash</span>, <span class="ident">serde::Serialize</span>, <span class="ident">serde::Deserialize</span>,
 )]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Shape</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="ident">element_type</span>: <span class="ident">Type</span>,
+    <span class="ident">element_type</span>: <span class="ident">ElementType</span>,
     <span class="ident">dimensions</span>: <span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, [<span class="ident">usize</span>]<span class="op">&gt;</span>,
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Shape</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(
-        <span class="ident">element_type</span>: <span class="ident">Type</span>,
+        <span class="ident">element_type</span>: <span class="ident">ElementType</span>,
         <span class="ident">dimensions</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, [<span class="ident">usize</span>]<span class="op">&gt;</span><span class="op">&gt;</span>,
     ) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
         <span class="ident">Shape</span> {
@@ -215,14 +215,15 @@
         }
     }
 
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">element_type</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">Type</span> { <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">element_type</span> }
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">element_type</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ElementType</span> { <span class="self">self</span>.<span class="ident">element_type</span> }
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">dimensions</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span>[<span class="ident">usize</span>] { <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">dimensions</span> }
 
-    <span class="doccomment">/// The number of bytes this tensor would take up.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">size</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
-        <span class="self">self</span>.<span class="ident">dimensions</span>.<span class="ident">iter</span>().<span class="ident">product</span>::<span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>()
-            <span class="op">*</span> <span class="self">self</span>.<span class="ident">element_type</span>.<span class="ident">size_of</span>().<span class="ident">unwrap</span>()
+    <span class="doccomment">/// The number of bytes this tensor would take up, if it has a fized size.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">size</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
+        <span class="kw">let</span> <span class="ident">element_size</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">element_type</span>.<span class="ident">size_of</span>()<span class="question-mark">?</span>;
+
+        <span class="prelude-val">Some</span>(<span class="self">self</span>.<span class="ident">dimensions</span>.<span class="ident">iter</span>().<span class="ident">product</span>::<span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>() <span class="op">*</span> <span class="ident">element_size</span>)
     }
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_owned</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Shape</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;</span> {
@@ -241,8 +242,7 @@
             <span class="ident">element_type</span>,
             <span class="ident">dimensions</span>,
         } <span class="op">=</span> <span class="self">self</span>;
-        <span class="kw">let</span> <span class="ident">element_type_name</span> <span class="op">=</span> <span class="ident">element_type</span>.<span class="ident">rust_name</span>().<span class="ident">ok_or</span>(<span class="ident">fmt::Error</span>)<span class="question-mark">?</span>;
-        <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{}[&quot;</span>, <span class="ident">element_type_name</span>)<span class="question-mark">?</span>;
+        <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{}[&quot;</span>, <span class="ident">element_type</span>)<span class="question-mark">?</span>;
 
         <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">dim</span>) <span class="kw">in</span> <span class="ident">dimensions</span>.<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
             <span class="kw">if</span> <span class="ident">i</span> <span class="op">&gt;</span> <span class="number">0</span> {
@@ -263,7 +263,7 @@
     <span class="kw">fn</span> <span class="ident">from_str</span>(<span class="ident">s</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident"><span class="self">Self</span>::Err</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">opening_bracket</span> <span class="op">=</span> <span class="ident">s</span>.<span class="ident">find</span>(<span class="string">&#39;[&#39;</span>).<span class="ident">ok_or</span>(<span class="ident">FormatError::Malformed</span>)<span class="question-mark">?</span>;
         <span class="kw">let</span> <span class="ident">element_type</span> <span class="op">=</span> <span class="ident">s</span>[..<span class="ident">opening_bracket</span>].<span class="ident">trim</span>();
-        <span class="kw">let</span> <span class="ident">ty</span> <span class="op">=</span> <span class="ident">Type::from_rust_name</span>(<span class="ident">element_type</span>).<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> {
+        <span class="kw">let</span> <span class="ident">ty</span> <span class="op">=</span> <span class="ident">element_type</span>.<span class="ident">parse</span>().<span class="ident">map_err</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> {
             <span class="ident">FormatError::UnknownElementType</span> {
                 <span class="ident">found</span>: <span class="ident">element_type</span>.<span class="ident">to_string</span>(),
             }
@@ -337,14 +337,14 @@
     <span class="kw">const</span> <span class="ident">SHAPES</span>: <span class="kw-2">&amp;</span>[(<span class="ident">Shape</span>, <span class="kw-2">&amp;</span><span class="ident">str</span>)] <span class="op">=</span> <span class="kw-2">&amp;</span>[
         (
             <span class="ident">Shape</span> {
-                <span class="ident">element_type</span>: <span class="ident">Type::f32</span>,
+                <span class="ident">element_type</span>: <span class="ident">ElementType::F32</span>,
                 <span class="ident">dimensions</span>: <span class="ident">Cow::Borrowed</span>(<span class="kw-2">&amp;</span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]),
             },
             <span class="string">&quot;f32[1, 2, 3]&quot;</span>,
         ),
         (
             <span class="ident">Shape</span> {
-                <span class="ident">element_type</span>: <span class="ident">Type::u8</span>,
+                <span class="ident">element_type</span>: <span class="ident">ElementType::U8</span>,
                 <span class="ident">dimensions</span>: <span class="ident">Cow::Borrowed</span>(<span class="kw-2">&amp;</span>[<span class="number">42</span>]),
             },
             <span class="string">&quot;u8[42]&quot;</span>,

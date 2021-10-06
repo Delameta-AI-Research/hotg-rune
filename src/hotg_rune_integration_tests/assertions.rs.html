@@ -229,7 +229,7 @@
             .<span class="ident">context</span>(<span class="string">&quot;Unable to parse output as UTF-8&quot;</span>)<span class="question-mark">?</span>;
 
         <span class="kw">if</span> <span class="op">!</span><span class="ident">output</span>.<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">expected</span>) {
-            <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::from</span>(<span class="ident">MismatchedStderr</span> {
+            <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::from</span>(<span class="ident">MismatchedStdio</span> {
                 <span class="ident">expected</span>: <span class="self">self</span>.<span class="ident">expected</span>.<span class="ident">clone</span>(),
                 <span class="ident">actual</span>: <span class="ident">output</span>.<span class="ident">to_string</span>(),
             }));
@@ -240,12 +240,12 @@
 }
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>)]</span>
-<span class="kw">struct</span> <span class="ident">MismatchedStderr</span> {
+<span class="kw">struct</span> <span class="ident">MismatchedStdio</span> {
     <span class="ident">expected</span>: <span class="ident">String</span>,
     <span class="ident">actual</span>: <span class="ident">String</span>,
 }
 
-<span class="kw">impl</span> <span class="ident">Display</span> <span class="kw">for</span> <span class="ident">MismatchedStderr</span> {
+<span class="kw">impl</span> <span class="ident">Display</span> <span class="kw">for</span> <span class="ident">MismatchedStdio</span> {
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
         <span class="macro">writeln!</span>(<span class="ident">f</span>, <span class="string">&quot;Unable to find the expected output in stderr.&quot;</span>)<span class="question-mark">?</span>;
         <span class="macro">writeln!</span>(<span class="ident">f</span>, <span class="string">&quot;Expected:&quot;</span>)<span class="question-mark">?</span>;
@@ -265,7 +265,7 @@
     }
 }
 
-<span class="kw">impl</span> <span class="ident">std::error::Error</span> <span class="kw">for</span> <span class="ident">MismatchedStderr</span> {}
+<span class="kw">impl</span> <span class="ident">std::error::Error</span> <span class="kw">for</span> <span class="ident">MismatchedStdio</span> {}
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">ExitSuccessfully</span>;

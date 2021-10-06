@@ -85,6 +85,7 @@
 <span id="85">85</span>
 <span id="86">86</span>
 <span id="87">87</span>
+<span id="88">88</span>
 </pre><pre class="rust">
 <span class="kw">use</span> <span class="ident">anyhow::Error</span>;
 <span class="kw">use</span> <span class="ident">log::LevelFilter</span>;
@@ -146,7 +147,8 @@
         <span class="ident">default_value</span> <span class="op">=</span> <span class="string">&quot;auto&quot;</span>,
         <span class="ident">aliases</span> <span class="op">=</span> <span class="kw-2">&amp;</span>[<span class="string">&quot;color&quot;</span>]</span>,
         <span class="ident">parse</span>(<span class="ident">try_from_str</span>),
-        <span class="ident">possible_values</span> <span class="op">=</span> <span class="ident">ColorChoice::VARIANTS</span>)
+        <span class="ident">possible_values</span> <span class="op">=</span> <span class="ident">ColorChoice::VARIANTS</span>,
+        <span class="ident">global</span> <span class="op">=</span> <span class="bool-val">true</span>)
     ]
     <span class="ident">colour</span>: <span class="ident">ColorChoice</span>,
     <span class="doccomment">/// Prints out version information.</span>

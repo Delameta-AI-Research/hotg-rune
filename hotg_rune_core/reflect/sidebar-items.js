@@ -1,1 +1,0 @@
-initSidebarItems({"enum":[["Type",""]],"trait":[["ReflectionType","A type known to the reflection system."]]});

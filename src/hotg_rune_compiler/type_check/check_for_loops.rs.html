@@ -110,11 +110,14 @@
 <span id="110">110</span>
 <span id="111">111</span>
 <span id="112">112</span>
+<span id="113">113</span>
+<span id="114">114</span>
 </pre><pre class="rust">
-<span class="kw">use</span> <span class="ident">std::collections</span>::{<span class="ident">HashMap</span>, <span class="ident">HashSet</span>, <span class="ident">VecDeque</span>};
+<span class="kw">use</span> <span class="ident">std::collections</span>::{<span class="ident">HashSet</span>, <span class="ident">VecDeque</span>};
 
 <span class="kw">use</span> <span class="ident">codespan::Span</span>;
 <span class="kw">use</span> <span class="ident">codespan_reporting::diagnostic</span>::{<span class="ident">Diagnostic</span>, <span class="ident">Label</span>};
+<span class="kw">use</span> <span class="ident">indexmap::IndexMap</span>;
 <span class="kw">use</span> <span class="ident">legion</span>::{<span class="ident">Entity</span>, <span class="ident">Query</span>, <span class="ident">world::SubWorld</span>};
 
 <span class="kw">use</span> <span class="kw">crate</span>::{
@@ -130,7 +133,8 @@
     <span class="ident">query</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Query</span><span class="op">&lt;</span>(<span class="ident">Entity</span>, <span class="kw-2">&amp;</span><span class="ident">Outputs</span>)<span class="op">&gt;</span>,
 ) {
     <span class="comment">// construct an adjacency graph where edges go from a node to its output.</span>
-    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">outputs</span> <span class="op">=</span> <span class="ident">HashMap::new</span>();
+    <span class="comment">// Note: use an IndexMap so ordering is deterministic</span>
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">outputs</span> <span class="op">=</span> <span class="ident">IndexMap::new</span>();
     <span class="ident">query</span>.<span class="ident">for_each</span>(<span class="ident">world</span>, <span class="op">|</span>(<span class="kw-2">&amp;</span><span class="ident">ent</span>, <span class="ident">out</span>)<span class="op">|</span> {
         <span class="ident">outputs</span>.<span class="ident">insert</span>(<span class="ident">ent</span>, <span class="ident">out</span>.<span class="ident">tensors</span>.<span class="ident">as_slice</span>());
     });
@@ -175,7 +179,7 @@
     <span class="ident">diag</span>.<span class="ident">with_notes</span>(<span class="ident">notes</span>)
 }
 
-<span class="kw">fn</span> <span class="ident">next_cycle</span>(<span class="ident">outputs</span>: <span class="kw-2">&amp;</span><span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">Entity</span>, <span class="kw-2">&amp;</span>[<span class="ident">Entity</span>]<span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Entity</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">next_cycle</span>(<span class="ident">outputs</span>: <span class="kw-2">&amp;</span><span class="ident">IndexMap</span><span class="op">&lt;</span><span class="ident">Entity</span>, <span class="kw-2">&amp;</span>[<span class="ident">Entity</span>]<span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Entity</span><span class="op">&gt;</span><span class="op">&gt;</span> {
     <span class="comment">// https://www.geeksforgeeks.org/detect-cycle-in-a-graph/</span>
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">stack</span> <span class="op">=</span> <span class="ident">VecDeque::new</span>();
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">visited</span> <span class="op">=</span> <span class="ident">HashSet::new</span>();
@@ -191,7 +195,7 @@
 
 <span class="kw">fn</span> <span class="ident">detect_cycles</span>(
     <span class="ident">ent</span>: <span class="ident">Entity</span>,
-    <span class="ident">outputs</span>: <span class="kw-2">&amp;</span><span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">Entity</span>, <span class="kw-2">&amp;</span>[<span class="ident">Entity</span>]<span class="op">&gt;</span>,
+    <span class="ident">outputs</span>: <span class="kw-2">&amp;</span><span class="ident">IndexMap</span><span class="op">&lt;</span><span class="ident">Entity</span>, <span class="kw-2">&amp;</span>[<span class="ident">Entity</span>]<span class="op">&gt;</span>,
     <span class="ident">visited</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">HashSet</span><span class="op">&lt;</span><span class="ident">Entity</span><span class="op">&gt;</span>,
     <span class="ident">stack</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">VecDeque</span><span class="op">&lt;</span><span class="ident">Entity</span><span class="op">&gt;</span>,
 ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {

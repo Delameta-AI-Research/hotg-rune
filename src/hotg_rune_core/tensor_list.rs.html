@@ -238,7 +238,7 @@
 <span class="doccomment">//!</span>
 <span class="doccomment">//! I apologise in advance for all the generic gymnastics.</span>
 
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Shape</span>, <span class="ident">Tensor</span>, <span class="ident">reflect::ReflectionType</span>};
+<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Shape</span>, <span class="ident">Tensor</span>, <span class="ident">element_type::AsElementType</span>};
 
 <span class="doccomment">/// A helper trait which lets us get the shape from a tuple of different</span>
 <span class="doccomment">/// tensors.</span>
@@ -286,7 +286,7 @@
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span> <span class="ident">TensorList</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Tensor</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
 <span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">ReflectionType</span>,
+    <span class="ident">T</span>: <span class="ident">AsElementType</span>,
 {
     <span class="kw">type</span> <span class="ident">ConstElementPtrBuffer</span> <span class="op">=</span> [<span class="kw-2">*</span><span class="kw">const</span> <span class="ident">u8</span>; <span class="number">1</span>];
     <span class="kw">type</span> <span class="ident">ShapeBuffer</span> <span class="op">=</span> [<span class="ident">Shape</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>; <span class="number">1</span>];
@@ -300,7 +300,7 @@
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span> <span class="ident">TensorListMut</span> <span class="kw">for</span> <span class="ident">Tensor</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>
 <span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">ReflectionType</span> <span class="op">+</span> <span class="ident">Default</span> <span class="op">+</span> <span class="ident">Clone</span>,
+    <span class="ident">T</span>: <span class="ident">AsElementType</span> <span class="op">+</span> <span class="ident">Default</span> <span class="op">+</span> <span class="ident">Clone</span>,
 {
     <span class="kw">type</span> <span class="ident">MutElementPtrBuffer</span> <span class="op">=</span> [<span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>; <span class="number">1</span>];
 
@@ -309,7 +309,7 @@
             [<span class="ident">s</span>] <span class="op">=</span><span class="op">&gt;</span> {
                 <span class="macro">assert_eq!</span>(
                     <span class="ident">s</span>.<span class="ident">element_type</span>(),
-                    <span class="kw-2">&amp;</span><span class="ident">T::TYPE</span>,
+                    <span class="ident">T::TYPE</span>,
                     <span class="string">&quot;Incorrect element type&quot;</span>
                 );
                 <span class="ident">Tensor::zeroed</span>(<span class="ident">s</span>.<span class="ident">dimensions</span>().<span class="ident">to_vec</span>())
@@ -336,8 +336,8 @@
         <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_snake_case</span>)]</span>
         <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">first</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span>),<span class="kw-2">*</span><span class="op">&gt;</span> <span class="ident">TensorList</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> (<span class="ident">Tensor</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">first</span><span class="op">&gt;</span>, $(<span class="ident">Tensor</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span><span class="op">&gt;</span>),<span class="kw-2">*</span>)
         <span class="kw">where</span>
-            <span class="macro-nonterminal">$</span><span class="macro-nonterminal">first</span>: <span class="ident">ReflectionType</span>,
-            $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span>: <span class="ident">ReflectionType</span>),<span class="op">*</span>
+            <span class="macro-nonterminal">$</span><span class="macro-nonterminal">first</span>: <span class="ident">AsElementType</span>,
+            $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span>: <span class="ident">AsElementType</span>),<span class="op">*</span>
         {
             <span class="kw">type</span> <span class="ident">ShapeBuffer</span> <span class="op">=</span> [<span class="ident">Shape</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>; <span class="macro">count!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">first</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span>),<span class="kw-2">*</span>)];
             <span class="kw">type</span> <span class="ident">ConstElementPtrBuffer</span>  <span class="op">=</span> [<span class="kw-2">*</span><span class="kw">const</span> <span class="ident">u8</span>; <span class="macro">count!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">first</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span>),<span class="kw-2">*</span>)];
@@ -365,18 +365,18 @@
         <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_snake_case</span>)]</span>
         <span class="kw">impl</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">first</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span>),<span class="kw-2">*</span><span class="op">&gt;</span> <span class="ident">TensorListMut</span> <span class="kw">for</span> (<span class="ident">Tensor</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">first</span><span class="op">&gt;</span>, $(<span class="ident">Tensor</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span><span class="op">&gt;</span>),<span class="kw-2">*</span>)
         <span class="kw">where</span>
-            <span class="macro-nonterminal">$</span><span class="macro-nonterminal">first</span>: <span class="ident">ReflectionType</span> <span class="op">+</span> <span class="ident">Default</span> <span class="op">+</span> <span class="ident">Clone</span>,
-            $( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span>: <span class="ident">ReflectionType</span> <span class="op">+</span> <span class="ident">Default</span> <span class="op">+</span> <span class="ident">Clone</span> ),<span class="op">*</span>
+            <span class="macro-nonterminal">$</span><span class="macro-nonterminal">first</span>: <span class="ident">AsElementType</span> <span class="op">+</span> <span class="ident">Default</span> <span class="op">+</span> <span class="ident">Clone</span>,
+            $( <span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span>: <span class="ident">AsElementType</span> <span class="op">+</span> <span class="ident">Default</span> <span class="op">+</span> <span class="ident">Clone</span> ),<span class="op">*</span>
         {
             <span class="kw">type</span> <span class="ident">MutElementPtrBuffer</span>  <span class="op">=</span> [<span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>; <span class="macro">count!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">first</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span>),<span class="kw-2">*</span>)];
 
             <span class="kw">fn</span> <span class="ident">new_tensors</span>(<span class="ident">shape</span>: <span class="kw-2">&amp;</span>[<span class="ident">Shape</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
                 <span class="kw">match</span> <span class="ident">shape</span> {
                     [<span class="macro-nonterminal">$</span><span class="macro-nonterminal">first</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span>),<span class="kw-2">*</span>] <span class="op">=</span><span class="op">&gt;</span> {
-                        <span class="macro">assert_eq!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">first</span>.<span class="ident">element_type</span>(), <span class="kw-2">&amp;</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">first</span><span class="op">&gt;</span><span class="ident">::TYPE</span>, <span class="string">&quot;Incorrect element type&quot;</span>);
+                        <span class="macro">assert_eq!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">first</span>.<span class="ident">element_type</span>(), <span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">first</span><span class="op">&gt;</span><span class="ident">::TYPE</span>, <span class="string">&quot;Incorrect element type&quot;</span>);
                         <span class="kw">let</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">first</span> <span class="op">=</span> <span class="ident">Tensor::zeroed</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">first</span>.<span class="ident">dimensions</span>().<span class="ident">to_vec</span>());
                         $(
-                            <span class="macro">assert_eq!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span>.<span class="ident">element_type</span>(), <span class="kw-2">&amp;</span><span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span><span class="op">&gt;</span><span class="ident">::TYPE</span>, <span class="string">&quot;Incorrect element type&quot;</span>);
+                            <span class="macro">assert_eq!</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span>.<span class="ident">element_type</span>(), <span class="op">&lt;</span><span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span><span class="op">&gt;</span><span class="ident">::TYPE</span>, <span class="string">&quot;Incorrect element type&quot;</span>);
                             <span class="kw">let</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span> <span class="op">=</span> <span class="ident">Tensor::zeroed</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span>.<span class="ident">dimensions</span>().<span class="ident">to_vec</span>());
                         )<span class="op">*</span>
 
@@ -409,7 +409,7 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="kw">mod</span> <span class="ident">tests</span> {
-    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::reflect::Type</span>;
+    <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::element_type::ElementType</span>;
 
     <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
     <span class="kw">use</span> <span class="ident">std::prelude::v1</span>::<span class="kw-2">*</span>;
@@ -431,9 +431,9 @@
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">create_empty_tensors_from_shapes_list</span>() {
         <span class="kw">let</span> <span class="ident">shapes</span> <span class="op">=</span> [
-            <span class="ident">Shape::new</span>(<span class="ident">Type::f32</span>, [<span class="number">1_usize</span>].<span class="ident">as_ref</span>()),
-            <span class="ident">Shape::new</span>(<span class="ident">Type::u8</span>, [<span class="number">3_usize</span>, <span class="number">256</span>, <span class="number">256</span>].<span class="ident">as_ref</span>()),
-            <span class="ident">Shape::new</span>(<span class="ident">Type::i16</span>, [<span class="number">1920_usize</span>].<span class="ident">as_ref</span>()),
+            <span class="ident">Shape::new</span>(<span class="ident">ElementType::F32</span>, [<span class="number">1_usize</span>].<span class="ident">as_ref</span>()),
+            <span class="ident">Shape::new</span>(<span class="ident">ElementType::U8</span>, [<span class="number">3_usize</span>, <span class="number">256</span>, <span class="number">256</span>].<span class="ident">as_ref</span>()),
+            <span class="ident">Shape::new</span>(<span class="ident">ElementType::I16</span>, [<span class="number">1920_usize</span>].<span class="ident">as_ref</span>()),
         ];
 
         <span class="kw">let</span> (<span class="ident">a</span>, <span class="ident">b</span>, <span class="ident">c</span>) <span class="op">=</span>
@@ -444,9 +444,9 @@
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
-    <span class="attribute">#[<span class="ident">should_panic</span> <span class="op">=</span> <span class="string">&quot;Expected a shape with 3 elements, found [Shape { element_type: Float { bit_width: 32 }, dimensions: [1] }]&quot;</span>]</span>
+    <span class="attribute">#[<span class="ident">should_panic</span> <span class="op">=</span> <span class="string">&quot;Expected a shape with 3 elements, found [Shape { element_type: F32, dimensions: [1] }]&quot;</span>]</span>
     <span class="kw">fn</span> <span class="ident">incorrect_shape_list_length</span>() {
-        <span class="kw">let</span> <span class="ident">shapes</span> <span class="op">=</span> [<span class="ident">Shape::new</span>(<span class="ident">Type::f32</span>, [<span class="number">1_usize</span>].<span class="ident">as_ref</span>())];
+        <span class="kw">let</span> <span class="ident">shapes</span> <span class="op">=</span> [<span class="ident">Shape::new</span>(<span class="ident">ElementType::F32</span>, [<span class="number">1_usize</span>].<span class="ident">as_ref</span>())];
 
         <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="op">&lt;</span>(<span class="ident">Tensor</span><span class="op">&lt;</span><span class="ident">f32</span><span class="op">&gt;</span>, <span class="ident">Tensor</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>, <span class="ident">Tensor</span><span class="op">&lt;</span><span class="ident">i16</span><span class="op">&gt;</span>)<span class="op">&gt;</span><span class="ident">::new_tensors</span>(<span class="kw-2">&amp;</span><span class="ident">shapes</span>);
     }
@@ -454,7 +454,7 @@
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="attribute">#[<span class="ident">should_panic</span> <span class="op">=</span> <span class="string">&quot;Incorrect element type&quot;</span>]</span>
     <span class="kw">fn</span> <span class="ident">incorrect_type_in_shape_list</span>() {
-        <span class="kw">let</span> <span class="ident">shapes</span> <span class="op">=</span> [<span class="ident">Shape::new</span>(<span class="ident">Type::f32</span>, [<span class="number">1_usize</span>].<span class="ident">as_ref</span>())];
+        <span class="kw">let</span> <span class="ident">shapes</span> <span class="op">=</span> [<span class="ident">Shape::new</span>(<span class="ident">ElementType::F32</span>, [<span class="number">1_usize</span>].<span class="ident">as_ref</span>())];
 
         <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">Tensor</span><span class="op">&lt;</span><span class="ident">i16</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="ident">::new_tensors</span>(<span class="kw-2">&amp;</span><span class="ident">shapes</span>);
     }

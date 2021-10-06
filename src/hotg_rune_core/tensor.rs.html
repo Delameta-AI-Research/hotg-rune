@@ -679,7 +679,7 @@
 <span class="kw">use</span> <span class="ident">alloc</span>::{<span class="ident">sync::Arc</span>, <span class="ident">vec::Vec</span>};
 <span class="kw">use</span> <span class="ident">serde</span>::{<span class="ident">Deserialize</span>, <span class="ident">Deserializer</span>, <span class="ident">Serialize</span>, <span class="ident">Serializer</span>};
 
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Shape</span>, <span class="ident">reflect::ReflectionType</span>};
+<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Shape</span>, <span class="ident">element_type::AsElementType</span>};
 
 <span class="doccomment">/// A multidimensional array with copy-on-write semantics.</span>
 <span class="doccomment">///</span>
@@ -740,7 +740,7 @@
 
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">shape</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Shape</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>
     <span class="kw">where</span>
-        <span class="ident">T</span>: <span class="ident">ReflectionType</span>,
+        <span class="ident">T</span>: <span class="ident">AsElementType</span>,
     {
         <span class="ident">Shape::new</span>(<span class="ident">T::TYPE</span>, <span class="self">self</span>.<span class="ident">dimensions</span>())
     }

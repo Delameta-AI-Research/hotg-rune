@@ -127,6 +127,7 @@
 <span id="127">127</span>
 <span id="128">128</span>
 <span id="129">129</span>
+<span id="130">130</span>
 </pre><pre class="rust">
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">proc_macro</span>;
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">alloc</span>;
@@ -191,19 +192,20 @@
 <span class="doccomment">/// ```rust</span>
 <span class="doccomment">/// use hotg_rune_proc_blocks::{ProcBlock, Transform};</span>
 <span class="doccomment">/// use hotg_rune_core::Tensor;</span>
+<span class="doccomment">/// use std::borrow::Cow;</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// #[derive(Default, hotg_rune_proc_block_macros::ProcBlock)]</span>
 <span class="doccomment">/// #[transform(inputs = [f32; _], outputs = [u8; 1920])]</span>
-<span class="doccomment">/// #[transform(inputs = str, outputs = [i16; 2])]</span>
+<span class="doccomment">/// #[transform(inputs = utf8, outputs = [i16; 2])]</span>
 <span class="doccomment">/// struct Foo { }</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// impl Transform&lt;Tensor&lt;f32&gt;&gt; for Foo {</span>
 <span class="doccomment">///     type Output = Tensor&lt;u8&gt;;</span>
 <span class="doccomment">///     fn transform(&amp;mut self, _input: Tensor&lt;f32&gt;) -&gt; Self::Output { todo!() }</span>
 <span class="doccomment">/// }</span>
-<span class="doccomment">/// impl Transform&lt;Tensor&lt;&amp;&#39;static str&gt;&gt; for Foo {</span>
+<span class="doccomment">/// impl Transform&lt;Tensor&lt;Cow&lt;&#39;static, str&gt;&gt;&gt; for Foo {</span>
 <span class="doccomment">///     type Output = Tensor&lt;i16&gt;;</span>
-<span class="doccomment">///     fn transform(&amp;mut self, _input: Tensor&lt;&amp;&#39;static str&gt;) -&gt; Self::Output { todo!() }</span>
+<span class="doccomment">///     fn transform(&amp;mut self, _input: Tensor&lt;Cow&lt;&#39;static, str&gt;&gt;) -&gt; Self::Output { todo!() }</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">///</span>

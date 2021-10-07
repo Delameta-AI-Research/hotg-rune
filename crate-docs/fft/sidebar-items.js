@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["ShortTimeFourierTransform",""]],"type":[["Fft","A type alias for [`ShortTimeFourierTransform`] which uses the camel case version of this crate."]]});

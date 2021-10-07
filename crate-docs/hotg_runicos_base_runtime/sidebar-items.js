@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["BaseImage",""],["Random","A [`Capability`] that defers to a random number generator."]],"trait":[["CapabilityFactory",""],["Model",""],["ModelFactory",""],["OutputFactory",""],["ResourceFactory",""]]});

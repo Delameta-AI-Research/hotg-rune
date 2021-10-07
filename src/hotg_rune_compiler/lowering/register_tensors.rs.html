@@ -314,6 +314,8 @@
 <span id="314">314</span>
 <span id="315">315</span>
 <span id="316">316</span>
+<span id="317">317</span>
+<span id="318">318</span>
 </pre><pre class="rust">
 <span class="kw">use</span> <span class="ident">std::collections::HashMap</span>;
 <span class="kw">use</span> <span class="ident">codespan_reporting::diagnostic::Diagnostic</span>;
@@ -539,22 +541,24 @@
     <span class="kw">use</span> <span class="kw">crate</span>::{
         <span class="ident">BuildContext</span>,
         <span class="ident">lowering</span>::{<span class="self">self</span>, <span class="ident">PipelineNode</span>},
+        <span class="ident">parse</span>::{<span class="ident">CapabilityStage</span>, <span class="ident">OutStage</span>, <span class="ident">ProcBlockStage</span>},
         <span class="ident">phases::Phase</span>,
     };
     <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
 
     <span class="kw">fn</span> <span class="ident">doc</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">DocumentV1</span> {
         <span class="ident">DocumentV1</span> {
+            <span class="ident">version</span>: <span class="number">1</span>,
             <span class="ident">image</span>: <span class="string">&quot;image&quot;</span>.<span class="ident">parse</span>().<span class="ident">unwrap</span>(),
             <span class="ident">pipeline</span>: <span class="macro">map!</span> {
-                <span class="ident">rand</span>: <span class="ident">parse::Stage::Capability</span> {
+                <span class="ident">rand</span>: <span class="ident">parse::Stage::Capability</span>(<span class="ident">CapabilityStage</span> {
                     <span class="ident">capability</span>: <span class="string">&quot;RAND&quot;</span>.<span class="ident">to_string</span>(),
                     <span class="ident">outputs</span>: <span class="macro">vec!</span>[
                         <span class="macro">ty!</span>(<span class="ident">f32</span>[<span class="number">128</span>]),
                     ],
                     <span class="ident">args</span>: <span class="macro">map!</span> {},
-                },
-                <span class="ident">transform</span>: <span class="ident">parse::Stage::ProcBlock</span> {
+                }),
+                <span class="ident">transform</span>: <span class="ident">parse::Stage::ProcBlock</span>(<span class="ident">ProcBlockStage</span> {
                     <span class="ident">proc_block</span>: <span class="string">&quot;proc-block&quot;</span>.<span class="ident">parse</span>().<span class="ident">unwrap</span>(),
                     <span class="ident">inputs</span>: <span class="macro">vec!</span>[
                         <span class="string">&quot;rand&quot;</span>.<span class="ident">parse</span>().<span class="ident">unwrap</span>(),
@@ -564,15 +568,15 @@
                         <span class="macro">ty!</span>(<span class="ident">u8</span>[<span class="number">2</span>]),
                     ],
                     <span class="ident">args</span>: <span class="macro">map!</span> {},
-                },
-                <span class="ident">output</span>: <span class="ident">parse::Stage::Out</span> {
+                }),
+                <span class="ident">output</span>: <span class="ident">parse::Stage::Out</span>(<span class="ident">OutStage</span> {
                     <span class="ident">out</span>: <span class="string">&quot;SERIAL&quot;</span>.<span class="ident">to_string</span>(),
                     <span class="ident">inputs</span>: <span class="macro">vec!</span>[
                         <span class="string">&quot;transform.1&quot;</span>.<span class="ident">parse</span>().<span class="ident">unwrap</span>(),
                         <span class="string">&quot;transform.0&quot;</span>.<span class="ident">parse</span>().<span class="ident">unwrap</span>(),
                     ],
                     <span class="ident">args</span>: <span class="macro">map!</span> {},
-                }
+                })
             },
             <span class="ident">resources</span>: <span class="macro">map!</span> {},
         }

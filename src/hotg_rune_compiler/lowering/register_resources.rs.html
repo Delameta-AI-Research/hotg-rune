@@ -157,6 +157,7 @@
 <span id="157">157</span>
 <span id="158">158</span>
 <span id="159">159</span>
+<span id="160">160</span>
 </pre><pre class="rust">
 <span class="kw">use</span> <span class="ident">codespan::Span</span>;
 <span class="kw">use</span> <span class="ident">codespan_reporting::diagnostic</span>::{<span class="ident">Diagnostic</span>, <span class="ident">Label</span>};
@@ -235,6 +236,7 @@
 
     <span class="kw">fn</span> <span class="ident">doc</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">DocumentV1</span> {
         <span class="ident">DocumentV1</span> {
+            <span class="ident">version</span>: <span class="number">1</span>,
             <span class="ident">image</span>: <span class="string">&quot;img&quot;</span>.<span class="ident">parse</span>().<span class="ident">unwrap</span>(),
             <span class="ident">pipeline</span>: <span class="ident">Default::default</span>(),
             <span class="ident">resources</span>: <span class="macro">map!</span> {

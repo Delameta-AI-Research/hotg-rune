@@ -1,1 +1,0 @@
-initSidebarItems({"enum":[["ElementType",""]],"struct":[["UnknownElementType",""]],"trait":[["AsElementType","A type that is associated with an [`ElementType`]."]]});

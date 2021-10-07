@@ -1,1 +1,0 @@
-initSidebarItems({"derive":[["ProcBlock","Derive the `ProcBlock` trait for a particular type."]]});

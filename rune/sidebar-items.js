@@ -1,1 +1,0 @@
-initSidebarItems({"enum":[["Cmd",""]],"fn":[["main",""]],"struct":[["Args",""]]});

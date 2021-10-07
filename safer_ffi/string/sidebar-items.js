@@ -1,1 +1,0 @@
-initSidebarItems({"struct":[["String","Same as [`String`][`rust::String`], but with guaranteed `#[repr(C)]` layout"],["str_boxed","Same as [`Box`][`rust::Box`]`<str>`, but with a guaranteed `#[repr(C)]` layout."],["str_ref","`&'lt str`, but with a guaranteed `#[repr(C)]` layout."]]});

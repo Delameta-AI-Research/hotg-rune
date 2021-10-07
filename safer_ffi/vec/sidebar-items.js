@@ -1,1 +1,0 @@
-initSidebarItems({"struct":[["Vec","Same as [`Vec<T>`][`rust::Vec`], but with guaranteed `#[repr(C)]` layout"],["Vec_Layout",""]]});

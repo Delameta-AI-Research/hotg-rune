@@ -113,7 +113,7 @@
             <span class="comment">// &quot;.rune_resource&quot; sections into one blob.</span>
             <span class="ident">core::iter::from_fn</span>(<span class="kw">move</span> <span class="op">|</span><span class="op">|</span> {
                 <span class="kw">let</span> (<span class="ident">name</span>, <span class="ident">value</span>, <span class="ident">rest</span>) <span class="op">=</span>
-                    <span class="ident">hotg_rune_core::inline_resource_from_bytes</span>(<span class="ident">data</span>)<span class="question-mark">?</span>;
+                    <span class="ident">hotg_rune_core::decode_inline_resource</span>(<span class="ident">data</span>)<span class="question-mark">?</span>;
                 <span class="ident">data</span> <span class="op">=</span> <span class="ident">rest</span>;
                 <span class="prelude-val">Some</span>((<span class="ident">name</span>, <span class="ident">value</span>))
             })

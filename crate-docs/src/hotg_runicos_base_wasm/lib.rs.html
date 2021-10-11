@@ -80,6 +80,7 @@
 <span id="80">80</span>
 <span id="81">81</span>
 <span id="82">82</span>
+<span id="83">83</span>
 </pre><pre class="rust">
 <span class="attribute">#![<span class="ident">cfg</span>(<span class="ident">target_arch</span> <span class="op">=</span> <span class="string">&quot;wasm32&quot;</span>)]</span>
 <span class="attribute">#![<span class="ident">no_std</span>]</span>
@@ -89,6 +90,7 @@
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">alloc</span>;
 
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">allocator</span>;
+<span class="kw">mod</span> <span class="ident">buf_writer</span>;
 <span class="kw">mod</span> <span class="ident">capability</span>;
 <span class="kw">mod</span> <span class="ident">guards</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">intrinsics</span>;
@@ -105,10 +107,10 @@
     <span class="ident">model::Model</span>,
     <span class="ident">serial::Serial</span>,
     <span class="ident">resources</span>::{<span class="ident">Resource</span>, <span class="ident">ResourceError</span>},
+    <span class="ident">buf_writer::BufWriter</span>,
 };
 
 <span class="kw">use</span> <span class="ident">core</span>::{<span class="ident">alloc::Layout</span>, <span class="ident">fmt::Write</span>, <span class="ident">panic::PanicInfo</span>};
-<span class="kw">use</span> <span class="ident">hotg_rune_core::BufWriter</span>;
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::allocator::Allocator</span>;
 <span class="kw">use</span> <span class="ident">dlmalloc::GlobalDlmalloc</span>;
 

@@ -41,21 +41,24 @@
 <span id="41">41</span>
 <span id="42">42</span>
 <span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
 </pre><pre class="rust">
+<span class="doccomment">//! The various unstable/internal flags you can use with Rune.</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! # Note to Implementors</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! To make sure people explicitly opt into unstable features and have a</span>
+<span class="doccomment">//! consistent experience, there are a couple requirements:</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! - Set `global = true` so unstable flags can be placed anywhere on the</span>
+<span class="doccomment">//!   command-line</span>
+<span class="doccomment">//! - Set `requires = &quot;enable_unstable&quot;` so you can only use unstable features</span>
+<span class="doccomment">//!   after explicitly opting in.</span>
+
 <span class="kw">use</span> <span class="ident">std::path::PathBuf</span>;
 <span class="kw">use</span> <span class="ident">hotg_rune_compiler::FeatureFlags</span>;
 
-<span class="doccomment">/// The various unstable/internal flags you can use with Rune.</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// # Note to Implementors</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// To make sure people explicitly opt into unstable features and have a</span>
-<span class="doccomment">/// consistent experience, there are a couple requirements:</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// - Set `global = true` so unstable flags can be placed anywhere on the</span>
-<span class="doccomment">///   command-line</span>
-<span class="doccomment">/// - Set `requires = &quot;enable_unstable&quot;` so you can only use unstable features</span>
-<span class="doccomment">///   after explicitly opting in.</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">structopt::StructOpt</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Unstable</span> {
     <span class="doccomment">/// Enable unstable features.</span>
@@ -65,6 +68,7 @@
     <span class="doccomment">/// dependencies when hacking on Rune locally.</span>
     <span class="attribute">#[<span class="ident">structopt</span>(
         <span class="ident">long</span>,
+        <span class="ident">env</span>,
         <span class="ident">requires</span> <span class="op">=</span> <span class="string">&quot;unstable&quot;</span>,
         <span class="ident">parse</span>(<span class="ident">from_os_str</span>),
         <span class="ident">global</span> <span class="op">=</span> <span class="bool-val">true</span>

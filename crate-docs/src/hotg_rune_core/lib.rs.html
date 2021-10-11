@@ -92,6 +92,8 @@
 <span id="92">92</span>
 <span id="93">93</span>
 <span id="94">94</span>
+<span id="95">95</span>
+<span id="96">96</span>
 </pre><pre class="rust">
 <span class="attribute">#![<span class="ident">cfg_attr</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>), <span class="ident">no_std</span>)]</span>
 
@@ -101,8 +103,7 @@
 
 <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">alloc</span>;
 
-<span class="kw">mod</span> <span class="ident">buf_writer</span>;
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">element_type</span>;
+<span class="kw">mod</span> <span class="ident">element_type</span>;
 <span class="kw">mod</span> <span class="ident">logging</span>;
 <span class="kw">mod</span> <span class="ident">pixel_format</span>;
 <span class="kw">mod</span> <span class="ident">resources</span>;
@@ -112,18 +113,21 @@
 <span class="kw">mod</span> <span class="ident">value</span>;
 
 <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::{
-    <span class="ident">buf_writer::BufWriter</span>,
     <span class="ident">tensor</span>::{<span class="ident">Tensor</span>, <span class="ident">TensorView</span>, <span class="ident">TensorViewMut</span>},
     <span class="ident">value</span>::{<span class="ident">Value</span>, <span class="ident">Type</span>, <span class="ident">AsType</span>, <span class="ident">InvalidConversionError</span>},
     <span class="ident">pixel_format</span>::{<span class="ident">PixelFormat</span>, <span class="ident">PixelFormatConversionError</span>},
     <span class="ident">logging::SerializableRecord</span>,
     <span class="ident">shape::Shape</span>,
     <span class="ident">tensor_list</span>::{<span class="ident">TensorList</span>, <span class="ident">TensorListMut</span>},
-    <span class="ident">resources</span>::{<span class="ident">InlineResource</span>, <span class="ident">inline_resource_from_bytes</span>},
+    <span class="ident">resources</span>::{<span class="ident">InlineResource</span>, <span class="ident">decode_inline_resource</span>},
+    <span class="ident">element_type</span>::{<span class="ident">AsElementType</span>, <span class="ident">ElementType</span>, <span class="ident">UnknownElementType</span>},
 };
 
 <span class="doccomment">/// The mimetype used for a TensorFlow Lite model.</span>
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TFLITE_MIMETYPE</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;application/tflite-model&quot;</span>;
+
+<span class="doccomment">/// The version number for this crate.</span>
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">VERSION</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span> <span class="op">=</span> <span class="macro">env!</span>(<span class="string">&quot;CARGO_PKG_VERSION&quot;</span>);
 
 <span class="macro">macro_rules!</span> <span class="ident">constants</span> {
     (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span> { $(

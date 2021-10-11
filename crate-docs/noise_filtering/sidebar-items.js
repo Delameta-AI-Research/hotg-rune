@@ -1,1 +1,0 @@
-initSidebarItems({"struct":[["GainControl",""],["NoiseFiltering",""],["NoiseReduction",""]]});

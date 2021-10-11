@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;libloading-0.7.0&#x2F;src&#x2F;lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../libloading/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;libloading-0.7.1&#x2F;src&#x2F;lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../libloading/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -362,33 +362,31 @@
 <span id="362">362</span>
 <span id="363">363</span>
 <span id="364">364</span>
-<span id="365">365</span>
-<span id="366">366</span>
-<span id="367">367</span>
-<span id="368">368</span>
 </pre><pre class="rust">
-<span class="doccomment">//! A memory-safer wrapper around system dynamic library loading primitives.</span>
+<span class="doccomment">//! Bindings around the platform&#39;s dynamic library loading primitives with greatly improved memory safety.</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! Using this library allows loading [dynamic libraries](struct.Library.html) (also known as</span>
-<span class="doccomment">//! shared libraries) and use functions &amp; global variables contained within the libraries.</span>
+<span class="doccomment">//! Using this library allows the loading of [dynamic libraries](struct.Library.html), also known as</span>
+<span class="doccomment">//! shared libraries, and the use of the functions and static variables they contain.</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! `libloading` crate exposes a cross-platform interface to load a library and utilize its</span>
-<span class="doccomment">//! contents, but little is done to paper over the differences in behaviour between different</span>
-<span class="doccomment">//! platforms. The API documentation strives to document such differences on the best-effort basis.</span>
+<span class="doccomment">//! The `libloading` crate exposes a cross-platform interface to load a library and make use of its</span>
+<span class="doccomment">//! contents, but little is done to hide the differences in behaviour between platforms.</span>
+<span class="doccomment">//! The API documentation strives to document such differences as much as possible.</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! Platform specific APIs are also available in the [`os`](crate::os) module. These APIs are more</span>
-<span class="doccomment">//! flexible but less safe.</span>
+<span class="doccomment">//! Platform-specific APIs are also available in the [`os`](crate::os) module. These APIs are more</span>
+<span class="doccomment">//! flexible, but less safe.</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! # Usage</span>
+<span class="doccomment">//! # Installation</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! Add a dependency on this library to your `Cargo.toml`:</span>
+<span class="doccomment">//! Add the `libloading` library to your dependencies in `Cargo.toml`:</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ```toml</span>
 <span class="doccomment">//! [dependencies]</span>
 <span class="doccomment">//! libloading = &quot;0.7&quot;</span>
 <span class="doccomment">//! ```</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! Then inside your code:</span>
+<span class="doccomment">//! # Usage</span>
+<span class="doccomment">//!</span>
+<span class="doccomment">//! In your code, run the following:</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! ```no_run</span>
 <span class="doccomment">//! fn call_dynamic() -&gt; Result&lt;u32, Box&lt;dyn std::error::Error&gt;&gt; {</span>
@@ -400,33 +398,28 @@
 <span class="doccomment">//! }</span>
 <span class="doccomment">//! ```</span>
 <span class="doccomment">//!</span>
-<span class="doccomment">//! The compiler will ensure that the loaded `function` will not outlive the `Library` it comes</span>
-<span class="doccomment">//! from, preventing a common class of issues.</span>
-<span class="attribute">#![<span class="ident">deny</span>(
-    <span class="ident">missing_docs</span>,
-    <span class="ident">clippy::all</span>,
-    <span class="ident">unreachable_pub</span>,
-    <span class="ident">unused</span>,
-)]</span>
+<span class="doccomment">//! The compiler will ensure that the loaded function`will not outlive the `Library` from which it comes,</span>
+<span class="doccomment">//! preventing the most common memory-safety issues.</span>
+<span class="attribute">#![<span class="ident">deny</span>(<span class="ident">missing_docs</span>, <span class="ident">clippy::all</span>, <span class="ident">unreachable_pub</span>, <span class="ident">unused</span>)]</span>
 <span class="attribute">#![<span class="ident">cfg_attr</span>(<span class="ident">docsrs</span>, <span class="ident">deny</span>(<span class="ident">broken_intra_doc_links</span>))]</span>
 <span class="attribute">#![<span class="ident">cfg_attr</span>(<span class="ident">docsrs</span>, <span class="ident">feature</span>(<span class="ident">doc_cfg</span>))]</span>
 
 <span class="kw">use</span> <span class="ident">std::env::consts</span>::{<span class="ident">DLL_PREFIX</span>, <span class="ident">DLL_SUFFIX</span>};
 <span class="kw">use</span> <span class="ident">std::ffi</span>::{<span class="ident">OsStr</span>, <span class="ident">OsString</span>};
 <span class="kw">use</span> <span class="ident">std::fmt</span>;
-<span class="kw">use</span> <span class="ident">std::ops</span>;
 <span class="kw">use</span> <span class="ident">std::marker</span>;
+<span class="kw">use</span> <span class="ident">std::ops</span>;
 
+<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::error::Error</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">unix</span>)]</span>
 <span class="kw">use</span> <span class="ident"><span class="self">self</span>::os::unix</span> <span class="kw">as</span> <span class="ident">imp</span>;
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">windows</span>)]</span>
 <span class="kw">use</span> <span class="ident"><span class="self">self</span>::os::windows</span> <span class="kw">as</span> <span class="ident">imp</span>;
-<span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::error::Error</span>;
 
-<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">os</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">changelog</span>;
-<span class="kw">mod</span> <span class="ident">util</span>;
 <span class="kw">mod</span> <span class="ident">error</span>;
+<span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">os</span>;
+<span class="kw">mod</span> <span class="ident">util</span>;
 
 <span class="doccomment">/// A loaded dynamic library.</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Library</span>(<span class="ident">imp::Library</span>);
@@ -434,16 +427,16 @@
 <span class="kw">impl</span> <span class="ident">Library</span> {
     <span class="doccomment">/// Find and load a dynamic library.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// The `filename` argument may be any of:</span>
+    <span class="doccomment">/// The `filename` argument may be either:</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// * A library filename;</span>
-    <span class="doccomment">/// * Absolute path to the library;</span>
-    <span class="doccomment">/// * Relative (to the current working directory) path to the library.</span>
+    <span class="doccomment">/// * The absolute path to the library;</span>
+    <span class="doccomment">/// * A relative (to the current working directory) path to the library.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Safety</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// When a library is loaded initialization routines contained within the library are executed.</span>
-    <span class="doccomment">/// For the purposes of safety, execution of these routines is conceptually the same calling an</span>
+    <span class="doccomment">/// When a library is loaded, initialisation routines contained within it are executed.</span>
+    <span class="doccomment">/// For the purposes of safety, the execution of these routines is conceptually the same calling an</span>
     <span class="doccomment">/// unknown foreign function and may impose arbitrary requirements on the caller for the call</span>
     <span class="doccomment">/// to be sound.</span>
     <span class="doccomment">///</span>
@@ -464,18 +457,18 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Platform-specific behaviour</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// When a plain library filename is supplied, locations where library is searched for is</span>
-    <span class="doccomment">/// platform specific and cannot be adjusted in a portable manner. See documentation for</span>
+    <span class="doccomment">/// When a plain library filename is supplied, the locations in which the library is searched are</span>
+    <span class="doccomment">/// platform specific and cannot be adjusted in a portable manner. See the documentation for</span>
     <span class="doccomment">/// the platform specific [`os::unix::Library::new`] and [`os::windows::Library::new`] methods</span>
     <span class="doccomment">/// for further information on library lookup behaviour.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// If the `filename` specifies a library filename without path and with extension omitted,</span>
-    <span class="doccomment">/// `.dll` extension is implicitly added on Windows.</span>
+    <span class="doccomment">/// If the `filename` specifies a library filename without a path and with the extension omitted,</span>
+    <span class="doccomment">/// the `.dll` extension is implicitly added on Windows.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Tips</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Distributing your dynamic libraries under a filename common to all platforms (e.g.</span>
-    <span class="doccomment">/// `awesome.module`) allows to avoid code which has to account for platform’s conventional</span>
+    <span class="doccomment">/// `awesome.module`) allows you to avoid code which has to account for platform’s conventional</span>
     <span class="doccomment">/// library filenames.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Strive to specify an absolute or at least a relative path to your library, unless</span>
@@ -498,22 +491,21 @@
         <span class="ident">imp::Library::new</span>(<span class="ident">filename</span>).<span class="ident">map</span>(<span class="ident">From::from</span>)
     }
 
-    <span class="doccomment">/// Get a pointer to function or static variable by symbol name.</span>
+    <span class="doccomment">/// Get a pointer to a function or static variable by symbol name.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// The `symbol` may not contain any null bytes, with an exception of last byte. Providing a</span>
-    <span class="doccomment">/// null terminated `symbol` may help to avoid an allocation.</span>
+    <span class="doccomment">/// The `symbol` may not contain any null bytes, with the exception of the last byte. Providing a</span>
+    <span class="doccomment">/// null-terminated `symbol` may help to avoid an allocation.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// Symbol is interpreted as-is; no mangling is done. This means that symbols like `x::y` are</span>
+    <span class="doccomment">/// The symbol is interpreted as-is; no mangling is done. This means that symbols like `x::y` are</span>
     <span class="doccomment">/// most likely invalid.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Safety</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// Users of this API must specify the correct type of the function or variable loaded. Using a</span>
-    <span class="doccomment">/// `Symbol` with a wrong type is undefined.</span>
+    <span class="doccomment">/// Users of this API must specify the correct type of the function or variable loaded.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Platform-specific behaviour</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// Implementation of thread local variables is extremely platform specific and uses of such</span>
+    <span class="doccomment">/// The implementation of thread-local variables is extremely platform specific and uses of such</span>
     <span class="doccomment">/// variables that work on e.g. Linux may have unintended behaviour on other targets.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// On POSIX implementations where the `dlerror` function is not confirmed to be MT-safe (such</span>
@@ -600,15 +592,15 @@
 <span class="doccomment">/// Symbol from a library.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// This type is a safeguard against using dynamically loaded symbols after a `Library` is</span>
-<span class="doccomment">/// unloaded. Primary method to create an instance of a `Symbol` is via [`Library::get`].</span>
+<span class="doccomment">/// unloaded. The primary method to create an instance of a `Symbol` is via [`Library::get`].</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// The `Deref` trait implementation allows use of `Symbol` as if it was a function or variable</span>
-<span class="doccomment">/// itself, without taking care to “extract” function or variable manually most of the time.</span>
+<span class="doccomment">/// The `Deref` trait implementation allows the use of `Symbol` as if it was a function or variable</span>
+<span class="doccomment">/// itself, without taking care to “extract” the function or variable manually most of the time.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// [`Library::get`]: Library::get</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Symbol</span><span class="op">&lt;</span><span class="lifetime">&#39;lib</span>, <span class="ident">T</span>: <span class="lifetime">&#39;lib</span><span class="op">&gt;</span> {
     <span class="ident">inner</span>: <span class="ident">imp::Symbol</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>,
-    <span class="ident">pd</span>: <span class="ident">marker::PhantomData</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;lib</span> <span class="ident">T</span><span class="op">&gt;</span>
+    <span class="ident">pd</span>: <span class="ident">marker::PhantomData</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;lib</span> <span class="ident">T</span><span class="op">&gt;</span>,
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;lib</span>, <span class="ident">T</span><span class="op">&gt;</span> <span class="ident">Symbol</span><span class="op">&lt;</span><span class="lifetime">&#39;lib</span>, <span class="ident">T</span><span class="op">&gt;</span> {
@@ -616,7 +608,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Safety</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// Using this function relinquishes all the lifetime guarantees. It is up to programmer to</span>
+    <span class="doccomment">/// Using this function relinquishes all the lifetime guarantees. It is up to the developer to</span>
     <span class="doccomment">/// ensure the resulting `Symbol` is not used past the lifetime of the `Library` this symbol</span>
     <span class="doccomment">/// was loaded from.</span>
     <span class="doccomment">///</span>
@@ -658,7 +650,7 @@
         <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">library</span>; <span class="comment">// ignore here for documentation purposes.</span>
         <span class="ident">Symbol</span> {
             <span class="ident">inner</span>: <span class="ident">sym</span>,
-            <span class="ident">pd</span>: <span class="ident">marker::PhantomData</span>
+            <span class="ident">pd</span>: <span class="ident">marker::PhantomData</span>,
         }
     }
 }
@@ -688,7 +680,7 @@
     <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Symbol</span><span class="op">&lt;</span><span class="lifetime">&#39;lib</span>, <span class="ident">T</span><span class="op">&gt;</span> {
         <span class="ident">Symbol</span> {
             <span class="ident">inner</span>: <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">clone</span>(),
-            <span class="ident">pd</span>: <span class="ident">marker::PhantomData</span>
+            <span class="ident">pd</span>: <span class="ident">marker::PhantomData</span>,
         }
     }
 }
@@ -712,7 +704,7 @@
 
 <span class="doccomment">/// Converts a library name to a filename generally appropriate for use on the system.</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// The function will prepend prefixes (such as `lib`) and suffixes (such as `.so`) to the library</span>
+<span class="doccomment">/// This function will prepend prefixes (such as `lib`) and suffixes (such as `.so`) to the library</span>
 <span class="doccomment">/// `name` to construct the filename.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// # Examples</span>

@@ -1148,7 +1148,7 @@
 <span id="1148">1148</span>
 </pre><pre class="rust">
 <span class="kw">use</span> <span class="ident">std::collections</span>::{<span class="ident">HashMap</span>, <span class="ident">HashSet</span>};
-<span class="kw">use</span> <span class="ident">hotg_rune_core</span>::{<span class="ident">Shape</span>, <span class="ident">element_type::ElementType</span>};
+<span class="kw">use</span> <span class="ident">hotg_rune_core</span>::{<span class="ident">Shape</span>, <span class="ident">ElementType</span>};
 <span class="kw">use</span> <span class="ident">legion</span>::{<span class="ident">Entity</span>, <span class="ident">Query</span>, <span class="ident">systems::CommandBuffer</span>, <span class="ident">world::SubWorld</span>};
 <span class="kw">use</span> <span class="ident">proc_macro2</span>::{<span class="ident">Ident</span>, <span class="ident">Literal</span>, <span class="ident">Span</span>, <span class="ident">TokenStream</span>};
 <span class="kw">use</span> <span class="ident">quote</span>::{<span class="ident">ToTokens</span>, <span class="ident">quote</span>};
@@ -1714,7 +1714,7 @@
         <span class="ident">ElementType::String</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;String&quot;</span>,
     };
     <span class="kw">let</span> <span class="ident">ident</span> <span class="op">=</span> <span class="ident">Ident::new</span>(<span class="ident">name</span>, <span class="ident">Span::call_site</span>());
-    <span class="macro">quote!</span>(<span class="ident">hotg_rune_core::element_type::ElementType</span>::#<span class="ident">ident</span>)
+    <span class="macro">quote!</span>(<span class="ident">hotg_rune_core::ElementType</span>::#<span class="ident">ident</span>)
 }
 
 <span class="kw">fn</span> <span class="ident">shape_to_tokens</span>(<span class="ident">shape</span>: <span class="kw-2">&amp;</span><span class="ident">Shape</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span> {
@@ -1857,7 +1857,7 @@
         <span class="kw">extern</span> <span class="kw">crate</span> <span class="ident">lazy_static</span>;
 
         <span class="kw">use</span> <span class="ident">alloc::boxed::Box</span>;
-        <span class="kw">use</span> <span class="ident">hotg_rune_core</span>::<span class="kw-2">*</span>;
+        <span class="kw">use</span> <span class="ident">hotg_rune_core::PixelFormat</span>;
         <span class="kw">use</span> <span class="ident">hotg_rune_proc_blocks</span>::<span class="kw-2">*</span>;
 
         <span class="kw">static</span> <span class="kw-2">mut</span> <span class="ident">PIPELINE</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">FnMut</span>()<span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">=</span> <span class="prelude-val">None</span>;

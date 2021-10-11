@@ -180,6 +180,8 @@
 <span id="180">180</span>
 <span id="181">181</span>
 <span id="182">182</span>
+<span id="183">183</span>
+<span id="184">184</span>
 </pre><pre class="rust">
 <span class="kw">use</span> <span class="ident">std</span>::{
     <span class="ident">collections::HashMap</span>,
@@ -256,6 +258,8 @@
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">serde::Serialize</span>, <span class="ident">serde::Deserialize</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">RuneVersion</span> {
+    <span class="doccomment">/// The version of the tool generating a Rune, typically what you&#39;d see</span>
+    <span class="doccomment">/// when running `rune --version`.</span>
     <span class="kw">pub</span> <span class="ident">version</span>: <span class="ident">String</span>,
 }
 

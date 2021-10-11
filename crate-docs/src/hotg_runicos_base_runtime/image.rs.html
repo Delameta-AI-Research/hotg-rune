@@ -636,7 +636,7 @@
 <span class="kw">mod</span> <span class="ident">runecoral</span> {
     <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
     <span class="kw">use</span> <span class="ident">anyhow</span>::{<span class="ident">Context</span>, <span class="ident">Error</span>};
-    <span class="kw">use</span> <span class="ident">hotg_rune_core::element_type::ElementType</span> <span class="kw">as</span> <span class="ident">RuneElementType</span>;
+    <span class="kw">use</span> <span class="ident">hotg_rune_core::ElementType</span> <span class="kw">as</span> <span class="ident">RuneElementType</span>;
     <span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">borrow::Cow</span>, <span class="ident">cell::Cell</span>, <span class="ident">convert::TryInto</span>, <span class="ident">ffi::CStr</span>, <span class="ident">sync::Mutex</span>};
     <span class="kw">use</span> <span class="ident">hotg_runecoral</span>::{
         <span class="ident">ElementType</span>, <span class="ident">InferenceContext</span>, <span class="ident">Tensor</span>, <span class="ident">TensorDescriptor</span>, <span class="ident">TensorMut</span>,

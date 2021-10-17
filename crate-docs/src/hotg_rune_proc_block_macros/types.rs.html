@@ -64,8 +64,10 @@
 <span id="64">64</span>
 <span id="65">65</span>
 <span id="66">66</span>
+<span id="67">67</span>
+<span id="68">68</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">proc_macro2::Ident</span>;
-<span class="kw">use</span> <span class="ident">syn</span>::{<span class="ident">Path</span>, <span class="ident">Type</span>};
+<span class="kw">use</span> <span class="ident">syn</span>::{<span class="ident">Generics</span>, <span class="ident">Path</span>, <span class="ident">Type</span>};
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::descriptor::ProcBlockDescriptor</span>;
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
@@ -80,6 +82,7 @@
 <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct</span> <span class="ident">ProcBlockImpl</span> {
     <span class="kw">pub</span> <span class="ident">type_name</span>: <span class="ident">Ident</span>,
     <span class="kw">pub</span> <span class="ident">exports</span>: <span class="ident">Path</span>,
+    <span class="kw">pub</span> <span class="ident">generics</span>: <span class="ident">Generics</span>,
     <span class="kw">pub</span> <span class="ident">descriptor</span>: <span class="ident">ProcBlockDescriptor</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;</span>,
 }
 
@@ -92,6 +95,7 @@
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">PartialEq</span>)]</span>
 <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">struct</span> <span class="ident">Setters</span> {
     <span class="kw">pub</span> <span class="ident">type_name</span>: <span class="ident">Ident</span>,
+    <span class="kw">pub</span> <span class="ident">generics</span>: <span class="ident">Generics</span>,
     <span class="kw">pub</span> <span class="ident">setters</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Setter</span><span class="op">&gt;</span>,
 }
 

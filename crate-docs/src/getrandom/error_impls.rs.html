@@ -22,8 +22,7 @@
 <span id="22">22</span>
 <span id="23">23</span>
 <span id="24">24</span>
-</pre><pre class="rust">
-<span class="comment">// Copyright 2018 Developers of the Rand project.</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2018 Developers of the Rand project.</span>
 <span class="comment">//</span>
 <span class="comment">// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or</span>
 <span class="comment">// https://www.apache.org/licenses/LICENSE-2.0&gt; or the MIT license</span>
@@ -38,16 +37,16 @@
 <span class="kw">use</span> <span class="ident">std::io</span>;
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Error</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">io::Error</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">err</span>: <span class="ident">Error</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">err</span>: <span class="ident">Error</span>) -&gt; <span class="self">Self</span> {
         <span class="kw">match</span> <span class="ident">err</span>.<span class="ident">raw_os_error</span>() {
-            <span class="prelude-val">Some</span>(<span class="ident">errno</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">io::Error::from_raw_os_error</span>(<span class="ident">errno</span>),
-            <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">io::Error::new</span>(<span class="ident">io::ErrorKind::Other</span>, <span class="ident">err</span>),
+            <span class="prelude-val">Some</span>(<span class="ident">errno</span>) =&gt; <span class="ident">io::Error::from_raw_os_error</span>(<span class="ident">errno</span>),
+            <span class="prelude-val">None</span> =&gt; <span class="ident">io::Error::new</span>(<span class="ident">io::ErrorKind::Other</span>, <span class="ident">err</span>),
         }
     }
 }
 
 <span class="kw">impl</span> <span class="ident">std::error::Error</span> <span class="kw">for</span> <span class="ident">Error</span> {}
-</pre></div>
+</code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="getrandom" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
     <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script>
 </body></html>

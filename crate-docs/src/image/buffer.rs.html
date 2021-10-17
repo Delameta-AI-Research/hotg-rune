@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;image-0.23.14&#x2F;.&#x2F;src&#x2F;buffer.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>buffer.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../image/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">   1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;image-0.23.14&#x2F;.&#x2F;src&#x2F;buffer.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>buffer.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../image/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">   1</span>
 <span id="2">   2</span>
 <span id="3">   3</span>
 <span id="4">   4</span>
@@ -1562,8 +1562,7 @@
 <span id="1562">1562</span>
 <span id="1563">1563</span>
 <span id="1564">1564</span>
-</pre><pre class="rust">
-<span class="doccomment">//! Contains the generic `ImageBuffer` struct.</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Contains the generic `ImageBuffer` struct.</span>
 <span class="kw">use</span> <span class="ident">num_traits::Zero</span>;
 <span class="kw">use</span> <span class="ident">std::fmt</span>;
 <span class="kw">use</span> <span class="ident">std::marker::PhantomData</span>;
@@ -1595,7 +1594,7 @@
     <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">P</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">P</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">P</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">chunks</span>.<span class="ident">next</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">v</span><span class="op">|</span> <span class="op">&lt;</span><span class="ident">P</span> <span class="kw">as</span> <span class="ident">Pixel</span><span class="op">&gt;</span><span class="ident">::from_slice</span>(<span class="ident">v</span>))
     }
 }
@@ -1604,7 +1603,7 @@
 <span class="kw">where</span>
     <span class="ident">P::Subpixel</span>: <span class="lifetime">&#39;a</span>,
 {
-    <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
+    <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
         <span class="self">self</span>.<span class="ident">chunks</span>.<span class="ident">len</span>()
     }
 }
@@ -1614,13 +1613,13 @@
     <span class="ident">P::Subpixel</span>: <span class="lifetime">&#39;a</span>,
 {
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">next_back</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">P</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">next_back</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">P</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">chunks</span>.<span class="ident">next_back</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">v</span><span class="op">|</span> <span class="op">&lt;</span><span class="ident">P</span> <span class="kw">as</span> <span class="ident">Pixel</span><span class="op">&gt;</span><span class="ident">::from_slice</span>(<span class="ident">v</span>))
     }
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">P</span>: <span class="ident">Pixel</span><span class="op">&gt;</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">Pixels</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, <span class="ident">P</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
         <span class="ident">Pixels</span> { <span class="ident">chunks</span>: <span class="self">self</span>.<span class="ident">chunks</span>.<span class="ident">clone</span>() }
     }
 }
@@ -1629,7 +1628,7 @@
 <span class="kw">where</span>
     <span class="ident">P::Subpixel</span>: <span class="ident">fmt::Debug</span>,
 {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
         <span class="ident">f</span>
             .<span class="ident">debug_struct</span>(<span class="string">&quot;Pixels&quot;</span>)
             .<span class="ident">field</span>(<span class="string">&quot;chunks&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">chunks</span>)
@@ -1652,7 +1651,7 @@
     <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">P</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">P</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">P</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">chunks</span>.<span class="ident">next</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">v</span><span class="op">|</span> <span class="op">&lt;</span><span class="ident">P</span> <span class="kw">as</span> <span class="ident">Pixel</span><span class="op">&gt;</span><span class="ident">::from_slice_mut</span>(<span class="ident">v</span>))
     }
 }
@@ -1661,7 +1660,7 @@
 <span class="kw">where</span>
     <span class="ident">P::Subpixel</span>: <span class="lifetime">&#39;a</span>,
 {
-    <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
+    <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
         <span class="self">self</span>.<span class="ident">chunks</span>.<span class="ident">len</span>()
     }
 }
@@ -1671,7 +1670,7 @@
     <span class="ident">P::Subpixel</span>: <span class="lifetime">&#39;a</span>,
 {
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">next_back</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">P</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">next_back</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">P</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">chunks</span>
             .<span class="ident">next_back</span>()
             .<span class="ident">map</span>(<span class="op">|</span><span class="ident">v</span><span class="op">|</span> <span class="op">&lt;</span><span class="ident">P</span> <span class="kw">as</span> <span class="ident">Pixel</span><span class="op">&gt;</span><span class="ident">::from_slice_mut</span>(<span class="ident">v</span>))
@@ -1682,7 +1681,7 @@
 <span class="kw">where</span>
     <span class="ident">P::Subpixel</span>: <span class="ident">fmt::Debug</span>,
 {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
         <span class="ident">f</span>
             .<span class="ident">debug_struct</span>(<span class="string">&quot;PixelsMut&quot;</span>)
             .<span class="ident">field</span>(<span class="string">&quot;chunks&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">chunks</span>)
@@ -1705,9 +1704,9 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">P</span>: <span class="ident">Pixel</span> <span class="op">+</span> <span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">Rows</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">P</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Construct the iterator from image pixels. This is not public since it has a (hidden) panic</span>
     <span class="doccomment">/// condition. The `pixels` slice must be large enough so that all pixels are addressable.</span>
-    <span class="kw">fn</span> <span class="ident">with_image</span>(<span class="ident">pixels</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">P::Subpixel</span>], <span class="ident">width</span>: <span class="ident">u32</span>, <span class="ident">height</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">with_image</span>(<span class="ident">pixels</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">P::Subpixel</span>], <span class="ident">width</span>: <span class="ident">u32</span>, <span class="ident">height</span>: <span class="ident">u32</span>) -&gt; <span class="self">Self</span> {
         <span class="kw">let</span> <span class="ident">row_len</span> <span class="op">=</span> (<span class="ident">width</span> <span class="kw">as</span> <span class="ident">usize</span>) <span class="op">*</span> <span class="ident">usize::from</span>(<span class="op">&lt;</span><span class="ident">P</span> <span class="kw">as</span> <span class="ident">Pixel</span><span class="op">&gt;</span><span class="ident">::CHANNEL_COUNT</span>);
-        <span class="kw">if</span> <span class="ident">row_len</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
+        <span class="kw">if</span> <span class="ident">row_len</span> <span class="op">==</span> <span class="number">0</span> {
             <span class="ident">Rows</span> {
                 <span class="ident">pixels</span>: [].<span class="ident">chunks_exact</span>(<span class="number">1</span>),
             }
@@ -1730,7 +1729,7 @@
     <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="ident">Pixels</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">P</span><span class="op">&gt;</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pixels</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">P</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pixels</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">P</span><span class="op">&gt;</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">row</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">pixels</span>.<span class="ident">next</span>()<span class="question-mark">?</span>;
         <span class="prelude-val">Some</span>(<span class="ident">Pixels</span> {
             <span class="comment">// Note: this is not reached when CHANNEL_COUNT is 0.</span>
@@ -1743,7 +1742,7 @@
 <span class="kw">where</span>
     <span class="ident">P::Subpixel</span>: <span class="lifetime">&#39;a</span>,
 {
-    <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
+    <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
         <span class="self">self</span>.<span class="ident">pixels</span>.<span class="ident">len</span>()
     }
 }
@@ -1753,7 +1752,7 @@
     <span class="ident">P::Subpixel</span>: <span class="lifetime">&#39;a</span>,
 {
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">next_back</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pixels</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">P</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">next_back</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Pixels</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">P</span><span class="op">&gt;</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">row</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">pixels</span>.<span class="ident">next_back</span>()<span class="question-mark">?</span>;
         <span class="prelude-val">Some</span>(<span class="ident">Pixels</span> {
             <span class="comment">// Note: this is not reached when CHANNEL_COUNT is 0.</span>
@@ -1763,7 +1762,7 @@
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">P</span>: <span class="ident">Pixel</span><span class="op">&gt;</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">Rows</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, <span class="ident">P</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
         <span class="ident">Rows</span> { <span class="ident">pixels</span>: <span class="self">self</span>.<span class="ident">pixels</span>.<span class="ident">clone</span>() }
     }
 }
@@ -1772,7 +1771,7 @@
 <span class="kw">where</span>
     <span class="ident">P::Subpixel</span>: <span class="ident">fmt::Debug</span>,
 {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
         <span class="ident">f</span>
             .<span class="ident">debug_struct</span>(<span class="string">&quot;Rows&quot;</span>)
             .<span class="ident">field</span>(<span class="string">&quot;pixels&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">pixels</span>)
@@ -1795,9 +1794,9 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">P</span>: <span class="ident">Pixel</span> <span class="op">+</span> <span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">RowsMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">P</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Construct the iterator from image pixels. This is not public since it has a (hidden) panic</span>
     <span class="doccomment">/// condition. The `pixels` slice must be large enough so that all pixels are addressable.</span>
-    <span class="kw">fn</span> <span class="ident">with_image</span>(<span class="ident">pixels</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> [<span class="ident">P::Subpixel</span>], <span class="ident">width</span>: <span class="ident">u32</span>, <span class="ident">height</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">with_image</span>(<span class="ident">pixels</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> [<span class="ident">P::Subpixel</span>], <span class="ident">width</span>: <span class="ident">u32</span>, <span class="ident">height</span>: <span class="ident">u32</span>) -&gt; <span class="self">Self</span> {
         <span class="kw">let</span> <span class="ident">row_len</span> <span class="op">=</span> (<span class="ident">width</span> <span class="kw">as</span> <span class="ident">usize</span>) <span class="op">*</span> <span class="ident">usize::from</span>(<span class="op">&lt;</span><span class="ident">P</span> <span class="kw">as</span> <span class="ident">Pixel</span><span class="op">&gt;</span><span class="ident">::CHANNEL_COUNT</span>);
-        <span class="kw">if</span> <span class="ident">row_len</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
+        <span class="kw">if</span> <span class="ident">row_len</span> <span class="op">==</span> <span class="number">0</span> {
             <span class="ident">RowsMut</span> {
                 <span class="ident">pixels</span>: [].<span class="ident">chunks_exact_mut</span>(<span class="number">1</span>),
             }
@@ -1820,7 +1819,7 @@
     <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="ident">PixelsMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">P</span><span class="op">&gt;</span>;
 
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PixelsMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">P</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PixelsMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">P</span><span class="op">&gt;</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">row</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">pixels</span>.<span class="ident">next</span>()<span class="question-mark">?</span>;
         <span class="prelude-val">Some</span>(<span class="ident">PixelsMut</span> {
             <span class="comment">// Note: this is not reached when CHANNEL_COUNT is 0.</span>
@@ -1833,7 +1832,7 @@
 <span class="kw">where</span>
     <span class="ident">P::Subpixel</span>: <span class="lifetime">&#39;a</span>,
 {
-    <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
+    <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
         <span class="self">self</span>.<span class="ident">pixels</span>.<span class="ident">len</span>()
     }
 }
@@ -1843,7 +1842,7 @@
     <span class="ident">P::Subpixel</span>: <span class="lifetime">&#39;a</span>,
 {
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">next_back</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PixelsMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">P</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">next_back</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">PixelsMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">P</span><span class="op">&gt;</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">row</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">pixels</span>.<span class="ident">next_back</span>()<span class="question-mark">?</span>;
         <span class="prelude-val">Some</span>(<span class="ident">PixelsMut</span> {
             <span class="comment">// Note: this is not reached when CHANNEL_COUNT is 0.</span>
@@ -1856,7 +1855,7 @@
 <span class="kw">where</span>
     <span class="ident">P::Subpixel</span>: <span class="ident">fmt::Debug</span>,
 {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
         <span class="ident">f</span>
             .<span class="ident">debug_struct</span>(<span class="string">&quot;RowsMut&quot;</span>)
             .<span class="ident">field</span>(<span class="string">&quot;pixels&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">pixels</span>)
@@ -1882,7 +1881,7 @@
     <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> (<span class="ident">u32</span>, <span class="ident">u32</span>, <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">P</span>);
 
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">u32</span>, <span class="ident">u32</span>, <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">P</span>)<span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">u32</span>, <span class="ident">u32</span>, <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">P</span>)<span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">x</span> <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">width</span> {
             <span class="self">self</span>.<span class="ident">x</span> <span class="op">=</span> <span class="number">0</span>;
             <span class="self">self</span>.<span class="ident">y</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
@@ -1897,13 +1896,13 @@
 <span class="kw">where</span>
     <span class="ident">P::Subpixel</span>: <span class="lifetime">&#39;a</span>,
 {
-    <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
+    <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
         <span class="self">self</span>.<span class="ident">pixels</span>.<span class="ident">len</span>()
     }
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">P</span>: <span class="ident">Pixel</span><span class="op">&gt;</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">EnumeratePixels</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, <span class="ident">P</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
         <span class="ident">EnumeratePixels</span> {
             <span class="ident">pixels</span>: <span class="self">self</span>.<span class="ident">pixels</span>.<span class="ident">clone</span>(),
             ..<span class="kw-2">*</span><span class="self">self</span>
@@ -1915,7 +1914,7 @@
 <span class="kw">where</span>
     <span class="ident">P::Subpixel</span>: <span class="ident">fmt::Debug</span>,
 {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
         <span class="ident">f</span>
           .<span class="ident">debug_struct</span>(<span class="string">&quot;EnumeratePixels&quot;</span>)
           .<span class="ident">field</span>(<span class="string">&quot;pixels&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">pixels</span>)
@@ -1943,7 +1942,7 @@
     <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> (<span class="ident">u32</span>, <span class="ident">EnumeratePixels</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">P</span><span class="op">&gt;</span>);
 
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">u32</span>, <span class="ident">EnumeratePixels</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">P</span><span class="op">&gt;</span>)<span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">u32</span>, <span class="ident">EnumeratePixels</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">P</span><span class="op">&gt;</span>)<span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">y</span>;
         <span class="self">self</span>.<span class="ident">y</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
         <span class="self">self</span>.<span class="ident">rows</span>.<span class="ident">next</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">r</span><span class="op">|</span> {
@@ -1964,13 +1963,13 @@
 <span class="kw">where</span>
     <span class="ident">P::Subpixel</span>: <span class="lifetime">&#39;a</span>,
 {
-    <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
+    <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
         <span class="self">self</span>.<span class="ident">rows</span>.<span class="ident">len</span>()
     }
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">P</span>: <span class="ident">Pixel</span><span class="op">&gt;</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">EnumerateRows</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, <span class="ident">P</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
         <span class="ident">EnumerateRows</span> {
             <span class="ident">rows</span>: <span class="self">self</span>.<span class="ident">rows</span>.<span class="ident">clone</span>(),
             ..<span class="kw-2">*</span><span class="self">self</span>
@@ -1982,7 +1981,7 @@
 <span class="kw">where</span>
     <span class="ident">P::Subpixel</span>: <span class="ident">fmt::Debug</span>,
 {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
         <span class="ident">f</span>
           .<span class="ident">debug_struct</span>(<span class="string">&quot;EnumerateRows&quot;</span>)
           .<span class="ident">field</span>(<span class="string">&quot;rows&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">rows</span>)
@@ -2010,7 +2009,7 @@
     <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> (<span class="ident">u32</span>, <span class="ident">u32</span>, <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">P</span>);
 
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">u32</span>, <span class="ident">u32</span>, <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">P</span>)<span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">u32</span>, <span class="ident">u32</span>, <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">P</span>)<span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">x</span> <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">width</span> {
             <span class="self">self</span>.<span class="ident">x</span> <span class="op">=</span> <span class="number">0</span>;
             <span class="self">self</span>.<span class="ident">y</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
@@ -2025,7 +2024,7 @@
 <span class="kw">where</span>
     <span class="ident">P::Subpixel</span>: <span class="lifetime">&#39;a</span>,
 {
-    <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
+    <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
         <span class="self">self</span>.<span class="ident">pixels</span>.<span class="ident">len</span>()
     }
 }
@@ -2034,7 +2033,7 @@
 <span class="kw">where</span>
     <span class="ident">P::Subpixel</span>: <span class="ident">fmt::Debug</span>,
 {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
         <span class="ident">f</span>
           .<span class="ident">debug_struct</span>(<span class="string">&quot;EnumeratePixelsMut&quot;</span>)
           .<span class="ident">field</span>(<span class="string">&quot;pixels&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">pixels</span>)
@@ -2062,7 +2061,7 @@
     <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> (<span class="ident">u32</span>, <span class="ident">EnumeratePixelsMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">P</span><span class="op">&gt;</span>);
 
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">u32</span>, <span class="ident">EnumeratePixelsMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">P</span><span class="op">&gt;</span>)<span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">u32</span>, <span class="ident">EnumeratePixelsMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">P</span><span class="op">&gt;</span>)<span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">y</span>;
         <span class="self">self</span>.<span class="ident">y</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
         <span class="self">self</span>.<span class="ident">rows</span>.<span class="ident">next</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">r</span><span class="op">|</span> {
@@ -2083,7 +2082,7 @@
 <span class="kw">where</span>
     <span class="ident">P::Subpixel</span>: <span class="lifetime">&#39;a</span>,
 {
-    <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
+    <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
         <span class="self">self</span>.<span class="ident">rows</span>.<span class="ident">len</span>()
     }
 }
@@ -2092,7 +2091,7 @@
 <span class="kw">where</span>
     <span class="ident">P::Subpixel</span>: <span class="ident">fmt::Debug</span>,
 {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
         <span class="ident">f</span>
           .<span class="ident">debug_struct</span>(<span class="string">&quot;EnumerateRowsMut&quot;</span>)
           .<span class="ident">field</span>(<span class="string">&quot;rows&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">rows</span>)
@@ -2193,7 +2192,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// Returns `None` if the container is not big enough (including when the image dimensions</span>
     <span class="doccomment">/// necessitate an allocation of more bytes than supported by the container).</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_raw</span>(<span class="ident">width</span>: <span class="ident">u32</span>, <span class="ident">height</span>: <span class="ident">u32</span>, <span class="ident">buf</span>: <span class="ident">Container</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ImageBuffer</span><span class="op">&lt;</span><span class="ident">P</span>, <span class="ident">Container</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_raw</span>(<span class="ident">width</span>: <span class="ident">u32</span>, <span class="ident">height</span>: <span class="ident">u32</span>, <span class="ident">buf</span>: <span class="ident">Container</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ImageBuffer</span><span class="op">&lt;</span><span class="ident">P</span>, <span class="ident">Container</span><span class="op">&gt;</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="ident"><span class="self">Self</span>::check_image_fits</span>(<span class="ident">width</span>, <span class="ident">height</span>, <span class="ident">buf</span>.<span class="ident">len</span>()) {
             <span class="prelude-val">Some</span>(<span class="ident">ImageBuffer</span> {
                 <span class="ident">data</span>: <span class="ident">buf</span>,
@@ -2207,39 +2206,39 @@
     }
 
     <span class="doccomment">/// Returns the underlying raw buffer</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_raw</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Container</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_raw</span>(<span class="self">self</span>) -&gt; <span class="ident">Container</span> {
         <span class="self">self</span>.<span class="ident">data</span>
     }
 
     <span class="doccomment">/// Returns the underlying raw buffer</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_raw</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">Container</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_raw</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">Container</span> {
         <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">data</span>
     }
 
     <span class="doccomment">/// The width and height of this image.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">dimensions</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">u32</span>, <span class="ident">u32</span>) {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">dimensions</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (<span class="ident">u32</span>, <span class="ident">u32</span>) {
         (<span class="self">self</span>.<span class="ident">width</span>, <span class="self">self</span>.<span class="ident">height</span>)
     }
 
     <span class="doccomment">/// The width of this image.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">width</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">width</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u32</span> {
         <span class="self">self</span>.<span class="ident">width</span>
     }
 
     <span class="doccomment">/// The height of this image.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">height</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">height</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u32</span> {
         <span class="self">self</span>.<span class="ident">height</span>
     }
 
     <span class="comment">// TODO: choose name under which to expose.</span>
-    <span class="kw">fn</span> <span class="ident">inner_pixels</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span>[<span class="ident">P::Subpixel</span>] {
+    <span class="kw">fn</span> <span class="ident">inner_pixels</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">P::Subpixel</span>] {
         <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::image_buffer_len</span>(<span class="self">self</span>.<span class="ident">width</span>, <span class="self">self</span>.<span class="ident">height</span>).<span class="ident">unwrap</span>();
         <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">data</span>[..<span class="ident">len</span>]
     }
 
     <span class="doccomment">/// Returns an iterator over the pixels of this image.</span>
     <span class="doccomment">/// The iteration order is x = 0 to width then y = 0 to height</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">pixels</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Pixels</span><span class="op">&lt;</span><span class="ident">P</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">pixels</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Pixels</span><span class="op">&lt;</span><span class="ident">P</span><span class="op">&gt;</span> {
         <span class="ident">Pixels</span> {
             <span class="ident">chunks</span>: <span class="self">self</span>.<span class="ident">inner_pixels</span>().<span class="ident">chunks_exact</span>(<span class="op">&lt;</span><span class="ident">P</span> <span class="kw">as</span> <span class="ident">Pixel</span><span class="op">&gt;</span><span class="ident">::CHANNEL_COUNT</span> <span class="kw">as</span> <span class="ident">usize</span>),
         }
@@ -2250,7 +2249,7 @@
     <span class="doccomment">/// Only non-empty rows can be iterated in this manner. In particular the iterator will not</span>
     <span class="doccomment">/// yield any item when the width of the image is `0` or a pixel type without any channels is</span>
     <span class="doccomment">/// used. This ensures that its length can always be represented by `usize`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rows</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Rows</span><span class="op">&lt;</span><span class="ident">P</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rows</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Rows</span><span class="op">&lt;</span><span class="ident">P</span><span class="op">&gt;</span> {
         <span class="ident">Rows::with_image</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">data</span>, <span class="self">self</span>.<span class="ident">width</span>, <span class="self">self</span>.<span class="ident">height</span>)
     }
 
@@ -2259,7 +2258,7 @@
     <span class="doccomment">/// along with a reference to them.</span>
     <span class="doccomment">/// The iteration order is x = 0 to width then y = 0 to height</span>
     <span class="doccomment">/// Starting from the top left.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">enumerate_pixels</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">EnumeratePixels</span><span class="op">&lt;</span><span class="ident">P</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">enumerate_pixels</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">EnumeratePixels</span><span class="op">&lt;</span><span class="ident">P</span><span class="op">&gt;</span> {
         <span class="ident">EnumeratePixels</span> {
             <span class="ident">pixels</span>: <span class="self">self</span>.<span class="ident">pixels</span>(),
             <span class="ident">x</span>: <span class="number">0</span>,
@@ -2271,7 +2270,7 @@
     <span class="doccomment">/// Enumerates over the rows of the image.</span>
     <span class="doccomment">/// The iterator yields the y-coordinate of each row</span>
     <span class="doccomment">/// along with a reference to them.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">enumerate_rows</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">EnumerateRows</span><span class="op">&lt;</span><span class="ident">P</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">enumerate_rows</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">EnumerateRows</span><span class="op">&lt;</span><span class="ident">P</span><span class="op">&gt;</span> {
         <span class="ident">EnumerateRows</span> {
             <span class="ident">rows</span>: <span class="self">self</span>.<span class="ident">rows</span>(),
             <span class="ident">y</span>: <span class="number">0</span>,
@@ -2284,10 +2283,10 @@
     <span class="doccomment">/// # Panics</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Panics if `(x, y)` is out of the bounds `(width, height)`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_pixel</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">P</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_pixel</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">P</span> {
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">pixel_indices</span>(<span class="ident">x</span>, <span class="ident">y</span>) {
-            <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(<span class="string">&quot;Image index {:?} out of bounds {:?}&quot;</span>, (<span class="ident">x</span>, <span class="ident">y</span>), (<span class="self">self</span>.<span class="ident">width</span>, <span class="self">self</span>.<span class="ident">height</span>)),
-            <span class="prelude-val">Some</span>(<span class="ident">pixel_indices</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="op">&lt;</span><span class="ident">P</span> <span class="kw">as</span> <span class="ident">Pixel</span><span class="op">&gt;</span><span class="ident">::from_slice</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">data</span>[<span class="ident">pixel_indices</span>]),
+            <span class="prelude-val">None</span> =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Image index {:?} out of bounds {:?}&quot;</span>, (<span class="ident">x</span>, <span class="ident">y</span>), (<span class="self">self</span>.<span class="ident">width</span>, <span class="self">self</span>.<span class="ident">height</span>)),
+            <span class="prelude-val">Some</span>(<span class="ident">pixel_indices</span>) =&gt; <span class="op">&lt;</span><span class="ident">P</span> <span class="kw">as</span> <span class="ident">Pixel</span><span class="op">&gt;</span><span class="ident">::from_slice</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">data</span>[<span class="ident">pixel_indices</span>]),
         }
     }
 
@@ -2296,19 +2295,19 @@
     <span class="doccomment">/// Verifies that the maximum image of pixels inside the bounds is smaller than the provided</span>
     <span class="doccomment">/// length. Note that as a corrolary we also have that the index calculation of pixels inside</span>
     <span class="doccomment">/// the bounds will not overflow.</span>
-    <span class="kw">fn</span> <span class="ident">check_image_fits</span>(<span class="ident">width</span>: <span class="ident">u32</span>, <span class="ident">height</span>: <span class="ident">u32</span>, <span class="ident">len</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">fn</span> <span class="ident">check_image_fits</span>(<span class="ident">width</span>: <span class="ident">u32</span>, <span class="ident">height</span>: <span class="ident">u32</span>, <span class="ident">len</span>: <span class="ident">usize</span>) -&gt; <span class="ident">bool</span> {
         <span class="kw">let</span> <span class="ident">checked_len</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::image_buffer_len</span>(<span class="ident">width</span>, <span class="ident">height</span>);
         <span class="ident">checked_len</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">min_len</span><span class="op">|</span> <span class="ident">min_len</span> <span class="op">&lt;</span><span class="op">=</span> <span class="ident">len</span>).<span class="ident">unwrap_or</span>(<span class="bool-val">false</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">image_buffer_len</span>(<span class="ident">width</span>: <span class="ident">u32</span>, <span class="ident">height</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">image_buffer_len</span>(<span class="ident">width</span>: <span class="ident">u32</span>, <span class="ident">height</span>: <span class="ident">u32</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
         <span class="prelude-val">Some</span>(<span class="op">&lt;</span><span class="ident">P</span> <span class="kw">as</span> <span class="ident">Pixel</span><span class="op">&gt;</span><span class="ident">::CHANNEL_COUNT</span> <span class="kw">as</span> <span class="ident">usize</span>)
             .<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">size</span><span class="op">|</span> <span class="ident">size</span>.<span class="ident">checked_mul</span>(<span class="ident">width</span> <span class="kw">as</span> <span class="ident">usize</span>))
             .<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">size</span><span class="op">|</span> <span class="ident">size</span>.<span class="ident">checked_mul</span>(<span class="ident">height</span> <span class="kw">as</span> <span class="ident">usize</span>))
     }
 
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">pixel_indices</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Range</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">pixel_indices</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Range</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="ident">x</span> <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">width</span> <span class="op">|</span><span class="op">|</span> <span class="ident">y</span> <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">height</span> {
             <span class="kw">return</span> <span class="prelude-val">None</span>
         }
@@ -2317,7 +2316,7 @@
     }
 
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">pixel_indices_unchecked</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Range</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">pixel_indices_unchecked</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>) -&gt; <span class="ident">Range</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">no_channels</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">P</span> <span class="kw">as</span> <span class="ident">Pixel</span><span class="op">&gt;</span><span class="ident">::CHANNEL_COUNT</span> <span class="kw">as</span> <span class="ident">usize</span>;
         <span class="comment">// If in bounds, this can&#39;t overflow as we have tested that at construction!</span>
         <span class="kw">let</span> <span class="ident">min_index</span> <span class="op">=</span> (<span class="ident">y</span> <span class="kw">as</span> <span class="ident">usize</span><span class="kw-2">*</span><span class="self">self</span>.<span class="ident">width</span> <span class="kw">as</span> <span class="ident">usize</span> <span class="op">+</span> <span class="ident">x</span> <span class="kw">as</span> <span class="ident">usize</span>)<span class="kw-2">*</span><span class="ident">no_channels</span>;
@@ -2325,7 +2324,7 @@
     }
 
     <span class="doccomment">/// Get the format of the buffer when viewed as a matrix of samples.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">sample_layout</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">SampleLayout</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">sample_layout</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">SampleLayout</span> {
         <span class="comment">// None of these can overflow, as all our memory is addressable.</span>
         <span class="ident">SampleLayout::row_major_packed</span>(<span class="op">&lt;</span><span class="ident">P</span> <span class="kw">as</span> <span class="ident">Pixel</span><span class="op">&gt;</span><span class="ident">::CHANNEL_COUNT</span>, <span class="self">self</span>.<span class="ident">width</span>, <span class="self">self</span>.<span class="ident">height</span>)
     }
@@ -2336,7 +2335,7 @@
     <span class="doccomment">/// colors, width then height, meaning `channel_stride &lt;= width_stride &lt;= height_stride`. All</span>
     <span class="doccomment">/// strides are in numbers of elements but those are mostly `u8` in which case the strides are</span>
     <span class="doccomment">/// also byte strides.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_flat_samples</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">FlatSamples</span><span class="op">&lt;</span><span class="ident">Container</span><span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_flat_samples</span>(<span class="self">self</span>) -&gt; <span class="ident">FlatSamples</span><span class="op">&lt;</span><span class="ident">Container</span><span class="op">&gt;</span>
         <span class="kw">where</span> <span class="ident">Container</span>: <span class="ident">AsRef</span><span class="op">&lt;</span>[<span class="ident">P::Subpixel</span>]<span class="op">&gt;</span>
     {
         <span class="comment">// None of these can overflow, as all our memory is addressable.</span>
@@ -2351,7 +2350,7 @@
     <span class="doccomment">/// Return a view on the raw sample buffer.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// See [`into_flat_samples`](#method.into_flat_samples) for more details.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_flat_samples</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">FlatSamples</span><span class="op">&lt;</span><span class="kw-2">&amp;</span>[<span class="ident">P::Subpixel</span>]<span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_flat_samples</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">FlatSamples</span><span class="op">&lt;</span><span class="kw-2">&amp;</span>[<span class="ident">P::Subpixel</span>]<span class="op">&gt;</span>
         <span class="kw">where</span> <span class="ident">Container</span>: <span class="ident">AsRef</span><span class="op">&lt;</span>[<span class="ident">P::Subpixel</span>]<span class="op">&gt;</span>
     {
         <span class="kw">let</span> <span class="ident">layout</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">sample_layout</span>();
@@ -2365,7 +2364,7 @@
     <span class="doccomment">/// Return a mutable view on the raw sample buffer.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// See [`into_flat_samples`](#method.into_flat_samples) for more details.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_flat_samples_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">FlatSamples</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">P::Subpixel</span>]<span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_flat_samples_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="ident">FlatSamples</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">P::Subpixel</span>]<span class="op">&gt;</span>
         <span class="kw">where</span> <span class="ident">Container</span>: <span class="ident">AsMut</span><span class="op">&lt;</span>[<span class="ident">P::Subpixel</span>]<span class="op">&gt;</span>
     {
         <span class="kw">let</span> <span class="ident">layout</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">sample_layout</span>();
@@ -2384,13 +2383,13 @@
     <span class="ident">Container</span>: <span class="ident">Deref</span><span class="op">&lt;</span><span class="ident">Target</span> <span class="op">=</span> [<span class="ident">P::Subpixel</span>]<span class="op">&gt;</span> <span class="op">+</span> <span class="ident">DerefMut</span>,
 {
     <span class="comment">// TODO: choose name under which to expose.</span>
-    <span class="kw">fn</span> <span class="ident">inner_pixels_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">P::Subpixel</span>] {
+    <span class="kw">fn</span> <span class="ident">inner_pixels_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">P::Subpixel</span>] {
         <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::image_buffer_len</span>(<span class="self">self</span>.<span class="ident">width</span>, <span class="self">self</span>.<span class="ident">height</span>).<span class="ident">unwrap</span>();
         <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">data</span>[..<span class="ident">len</span>]
     }
 
     <span class="doccomment">/// Returns an iterator over the mutable pixels of this image.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">pixels_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PixelsMut</span><span class="op">&lt;</span><span class="ident">P</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">pixels_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="ident">PixelsMut</span><span class="op">&lt;</span><span class="ident">P</span><span class="op">&gt;</span> {
         <span class="ident">PixelsMut</span> {
             <span class="ident">chunks</span>: <span class="self">self</span>.<span class="ident">inner_pixels_mut</span>().<span class="ident">chunks_exact_mut</span>(<span class="op">&lt;</span><span class="ident">P</span> <span class="kw">as</span> <span class="ident">Pixel</span><span class="op">&gt;</span><span class="ident">::CHANNEL_COUNT</span> <span class="kw">as</span> <span class="ident">usize</span>),
         }
@@ -2401,14 +2400,14 @@
     <span class="doccomment">/// Only non-empty rows can be iterated in this manner. In particular the iterator will not</span>
     <span class="doccomment">/// yield any item when the width of the image is `0` or a pixel type without any channels is</span>
     <span class="doccomment">/// used. This ensures that its length can always be represented by `usize`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rows_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">RowsMut</span><span class="op">&lt;</span><span class="ident">P</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">rows_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="ident">RowsMut</span><span class="op">&lt;</span><span class="ident">P</span><span class="op">&gt;</span> {
         <span class="ident">RowsMut::with_image</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">data</span>, <span class="self">self</span>.<span class="ident">width</span>, <span class="self">self</span>.<span class="ident">height</span>)
     }
 
     <span class="doccomment">/// Enumerates over the pixels of the image.</span>
     <span class="doccomment">/// The iterator yields the coordinates of each pixel</span>
     <span class="doccomment">/// along with a mutable reference to them.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">enumerate_pixels_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">EnumeratePixelsMut</span><span class="op">&lt;</span><span class="ident">P</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">enumerate_pixels_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="ident">EnumeratePixelsMut</span><span class="op">&lt;</span><span class="ident">P</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">width</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">width</span>;
         <span class="ident">EnumeratePixelsMut</span> {
             <span class="ident">pixels</span>: <span class="self">self</span>.<span class="ident">pixels_mut</span>(),
@@ -2421,7 +2420,7 @@
     <span class="doccomment">/// Enumerates over the rows of the image.</span>
     <span class="doccomment">/// The iterator yields the y-coordinate of each row</span>
     <span class="doccomment">/// along with a mutable reference to them.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">enumerate_rows_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">EnumerateRowsMut</span><span class="op">&lt;</span><span class="ident">P</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">enumerate_rows_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="ident">EnumerateRowsMut</span><span class="op">&lt;</span><span class="ident">P</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">width</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">width</span>;
         <span class="ident">EnumerateRowsMut</span> {
             <span class="ident">rows</span>: <span class="self">self</span>.<span class="ident">rows_mut</span>(),
@@ -2435,10 +2434,10 @@
     <span class="doccomment">/// # Panics</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Panics if `(x, y)` is out of the bounds `(width, height)`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_pixel_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">P</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_pixel_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">P</span> {
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">pixel_indices</span>(<span class="ident">x</span>, <span class="ident">y</span>) {
-            <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(<span class="string">&quot;Image index {:?} out of bounds {:?}&quot;</span>, (<span class="ident">x</span>, <span class="ident">y</span>), (<span class="self">self</span>.<span class="ident">width</span>, <span class="self">self</span>.<span class="ident">height</span>)),
-            <span class="prelude-val">Some</span>(<span class="ident">pixel_indices</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="op">&lt;</span><span class="ident">P</span> <span class="kw">as</span> <span class="ident">Pixel</span><span class="op">&gt;</span><span class="ident">::from_slice_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">data</span>[<span class="ident">pixel_indices</span>]),
+            <span class="prelude-val">None</span> =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Image index {:?} out of bounds {:?}&quot;</span>, (<span class="ident">x</span>, <span class="ident">y</span>), (<span class="self">self</span>.<span class="ident">width</span>, <span class="self">self</span>.<span class="ident">height</span>)),
+            <span class="prelude-val">Some</span>(<span class="ident">pixel_indices</span>) =&gt; <span class="op">&lt;</span><span class="ident">P</span> <span class="kw">as</span> <span class="ident">Pixel</span><span class="op">&gt;</span><span class="ident">::from_slice_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">data</span>[<span class="ident">pixel_indices</span>]),
         }
     }
 
@@ -2462,7 +2461,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// The image format is derived from the file extension.</span>
     <span class="doccomment">/// Currently only jpeg and png files are supported.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">save</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">path</span>: <span class="ident">Q</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ImageResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">save</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">path</span>: <span class="ident">Q</span>) -&gt; <span class="ident">ImageResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">Q</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span>,
     {
@@ -2488,7 +2487,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// See [`save_buffer_with_format`](fn.save_buffer_with_format.html) for</span>
     <span class="doccomment">/// supported types.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">save_with_format</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">path</span>: <span class="ident">Q</span>, <span class="ident">format</span>: <span class="ident">ImageFormat</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ImageResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">save_with_format</span><span class="op">&lt;</span><span class="ident">Q</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">path</span>: <span class="ident">Q</span>, <span class="ident">format</span>: <span class="ident">ImageFormat</span>) -&gt; <span class="ident">ImageResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">Q</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span>,
     {
@@ -2509,7 +2508,7 @@
     <span class="ident">P</span>: <span class="ident">Pixel</span>,
     <span class="ident">Container</span>: <span class="ident">Default</span>,
 {
-    <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
         <span class="self">Self</span> {
             <span class="ident">width</span>: <span class="number">0</span>,
             <span class="ident">height</span>: <span class="number">0</span>,
@@ -2527,7 +2526,7 @@
 {
     <span class="kw">type</span> <span class="ident">Target</span> <span class="op">=</span> [<span class="ident">P::Subpixel</span>];
 
-    <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="op">&lt;</span><span class="self">Self</span> <span class="kw">as</span> <span class="ident">Deref</span><span class="op">&gt;</span><span class="ident">::Target</span> {
+    <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="op">&lt;</span><span class="self">Self</span> <span class="kw">as</span> <span class="ident">Deref</span><span class="op">&gt;</span><span class="ident">::Target</span> {
         <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="self">self</span>.<span class="ident">data</span>
     }
 }
@@ -2538,7 +2537,7 @@
     <span class="ident">P::Subpixel</span>: <span class="lifetime">&#39;static</span>,
     <span class="ident">Container</span>: <span class="ident">Deref</span><span class="op">&lt;</span><span class="ident">Target</span> <span class="op">=</span> [<span class="ident">P::Subpixel</span>]<span class="op">&gt;</span> <span class="op">+</span> <span class="ident">DerefMut</span>,
 {
-    <span class="kw">fn</span> <span class="ident">deref_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="op">&lt;</span><span class="self">Self</span> <span class="kw">as</span> <span class="ident">Deref</span><span class="op">&gt;</span><span class="ident">::Target</span> {
+    <span class="kw">fn</span> <span class="ident">deref_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="op">&lt;</span><span class="self">Self</span> <span class="kw">as</span> <span class="ident">Deref</span><span class="op">&gt;</span><span class="ident">::Target</span> {
         <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="self">self</span>.<span class="ident">data</span>
     }
 }
@@ -2551,7 +2550,7 @@
 {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">P</span>;
 
-    <span class="kw">fn</span> <span class="ident">index</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, (<span class="ident">x</span>, <span class="ident">y</span>): (<span class="ident">u32</span>, <span class="ident">u32</span>)) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">P</span> {
+    <span class="kw">fn</span> <span class="ident">index</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, (<span class="ident">x</span>, <span class="ident">y</span>): (<span class="ident">u32</span>, <span class="ident">u32</span>)) -&gt; <span class="kw-2">&amp;</span><span class="ident">P</span> {
         <span class="self">self</span>.<span class="ident">get_pixel</span>(<span class="ident">x</span>, <span class="ident">y</span>)
     }
 }
@@ -2562,7 +2561,7 @@
     <span class="ident">P::Subpixel</span>: <span class="lifetime">&#39;static</span>,
     <span class="ident">Container</span>: <span class="ident">Deref</span><span class="op">&lt;</span><span class="ident">Target</span> <span class="op">=</span> [<span class="ident">P::Subpixel</span>]<span class="op">&gt;</span> <span class="op">+</span> <span class="ident">DerefMut</span>,
 {
-    <span class="kw">fn</span> <span class="ident">index_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, (<span class="ident">x</span>, <span class="ident">y</span>): (<span class="ident">u32</span>, <span class="ident">u32</span>)) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">P</span> {
+    <span class="kw">fn</span> <span class="ident">index_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, (<span class="ident">x</span>, <span class="ident">y</span>): (<span class="ident">u32</span>, <span class="ident">u32</span>)) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">P</span> {
         <span class="self">self</span>.<span class="ident">get_pixel_mut</span>(<span class="ident">x</span>, <span class="ident">y</span>)
     }
 }
@@ -2572,7 +2571,7 @@
     <span class="ident">P</span>: <span class="ident">Pixel</span>,
     <span class="ident">Container</span>: <span class="ident">Deref</span><span class="op">&lt;</span><span class="ident">Target</span> <span class="op">=</span> [<span class="ident">P::Subpixel</span>]<span class="op">&gt;</span> <span class="op">+</span> <span class="ident">Clone</span>,
 {
-    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ImageBuffer</span><span class="op">&lt;</span><span class="ident">P</span>, <span class="ident">Container</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">ImageBuffer</span><span class="op">&lt;</span><span class="ident">P</span>, <span class="ident">Container</span><span class="op">&gt;</span> {
         <span class="ident">ImageBuffer</span> {
             <span class="ident">data</span>: <span class="self">self</span>.<span class="ident">data</span>.<span class="ident">clone</span>(),
             <span class="ident">width</span>: <span class="self">self</span>.<span class="ident">width</span>,
@@ -2591,26 +2590,26 @@
     <span class="kw">type</span> <span class="ident">Pixel</span> <span class="op">=</span> <span class="ident">P</span>;
     <span class="kw">type</span> <span class="ident">InnerImageView</span> <span class="op">=</span> <span class="self">Self</span>;
 
-    <span class="kw">fn</span> <span class="ident">dimensions</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">u32</span>, <span class="ident">u32</span>) {
+    <span class="kw">fn</span> <span class="ident">dimensions</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (<span class="ident">u32</span>, <span class="ident">u32</span>) {
         <span class="self">self</span>.<span class="ident">dimensions</span>()
     }
 
-    <span class="kw">fn</span> <span class="ident">bounds</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">u32</span>, <span class="ident">u32</span>, <span class="ident">u32</span>, <span class="ident">u32</span>) {
+    <span class="kw">fn</span> <span class="ident">bounds</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (<span class="ident">u32</span>, <span class="ident">u32</span>, <span class="ident">u32</span>, <span class="ident">u32</span>) {
         (<span class="number">0</span>, <span class="number">0</span>, <span class="self">self</span>.<span class="ident">width</span>, <span class="self">self</span>.<span class="ident">height</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">get_pixel</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">P</span> {
+    <span class="kw">fn</span> <span class="ident">get_pixel</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>) -&gt; <span class="ident">P</span> {
         <span class="kw-2">*</span><span class="self">self</span>.<span class="ident">get_pixel</span>(<span class="ident">x</span>, <span class="ident">y</span>)
     }
 
     <span class="doccomment">/// Returns the pixel located at (x, y), ignoring bounds checking.</span>
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">unsafe_get_pixel</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">P</span> {
+    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">unsafe_get_pixel</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>) -&gt; <span class="ident">P</span> {
         <span class="kw">let</span> <span class="ident">indices</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">pixel_indices_unchecked</span>(<span class="ident">x</span>, <span class="ident">y</span>);
         <span class="kw-2">*</span><span class="op">&lt;</span><span class="ident">P</span> <span class="kw">as</span> <span class="ident">Pixel</span><span class="op">&gt;</span><span class="ident">::from_slice</span>(<span class="self">self</span>.<span class="ident">data</span>.<span class="ident">get_unchecked</span>(<span class="ident">indices</span>))
     }
 
-    <span class="kw">fn</span> <span class="ident">inner</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::InnerImageView</span> {
+    <span class="kw">fn</span> <span class="ident">inner</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::InnerImageView</span> {
         <span class="self">self</span>
     }
 }
@@ -2623,7 +2622,7 @@
 {
     <span class="kw">type</span> <span class="ident">InnerImage</span> <span class="op">=</span> <span class="self">Self</span>;
 
-    <span class="kw">fn</span> <span class="ident">get_pixel_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">P</span> {
+    <span class="kw">fn</span> <span class="ident">get_pixel_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">P</span> {
         <span class="self">self</span>.<span class="ident">get_pixel_mut</span>(<span class="ident">x</span>, <span class="ident">y</span>)
     }
 
@@ -2646,7 +2645,7 @@
         <span class="self">self</span>.<span class="ident">get_pixel_mut</span>(<span class="ident">x</span>, <span class="ident">y</span>).<span class="ident">blend</span>(<span class="kw-2">&amp;</span><span class="ident">p</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">copy_within</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">source</span>: <span class="ident">Rect</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">fn</span> <span class="ident">copy_within</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">source</span>: <span class="ident">Rect</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>) -&gt; <span class="ident">bool</span> {
         <span class="kw">let</span> <span class="ident">Rect</span> { <span class="ident">x</span>: <span class="ident">sx</span>, <span class="ident">y</span>: <span class="ident">sy</span>, <span class="ident">width</span>, <span class="ident">height</span> } <span class="op">=</span> <span class="ident">source</span>;
         <span class="kw">let</span> <span class="ident">dx</span> <span class="op">=</span> <span class="ident">x</span>;
         <span class="kw">let</span> <span class="ident">dy</span> <span class="op">=</span> <span class="ident">y</span>;
@@ -2678,7 +2677,7 @@
         <span class="bool-val">true</span>
     }
 
-    <span class="kw">fn</span> <span class="ident">inner_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident"><span class="self">Self</span>::InnerImage</span> {
+    <span class="kw">fn</span> <span class="ident">inner_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident"><span class="self">Self</span>::InnerImage</span> {
         <span class="self">self</span>
     }
 }
@@ -2716,7 +2715,7 @@
     <span class="doccomment">/// # Panics</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Panics when the resulting image is larger the the maximum size of a vector.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">width</span>: <span class="ident">u32</span>, <span class="ident">height</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ImageBuffer</span><span class="op">&lt;</span><span class="ident">P</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">P::Subpixel</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">width</span>: <span class="ident">u32</span>, <span class="ident">height</span>: <span class="ident">u32</span>) -&gt; <span class="ident">ImageBuffer</span><span class="op">&lt;</span><span class="ident">P</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">P::Subpixel</span><span class="op">&gt;</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::image_buffer_len</span>(<span class="ident">width</span>, <span class="ident">height</span>)
             .<span class="ident">expect</span>(<span class="string">&quot;Buffer length in `ImageBuffer::new` overflows usize&quot;</span>);
         <span class="ident">ImageBuffer</span> {
@@ -2732,7 +2731,7 @@
     <span class="doccomment">/// # Panics</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Panics when the resulting image is larger the the maximum size of a vector.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_pixel</span>(<span class="ident">width</span>: <span class="ident">u32</span>, <span class="ident">height</span>: <span class="ident">u32</span>, <span class="ident">pixel</span>: <span class="ident">P</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ImageBuffer</span><span class="op">&lt;</span><span class="ident">P</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">P::Subpixel</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_pixel</span>(<span class="ident">width</span>: <span class="ident">u32</span>, <span class="ident">height</span>: <span class="ident">u32</span>, <span class="ident">pixel</span>: <span class="ident">P</span>) -&gt; <span class="ident">ImageBuffer</span><span class="op">&lt;</span><span class="ident">P</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">P::Subpixel</span><span class="op">&gt;</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span> <span class="op">=</span> <span class="ident">ImageBuffer::new</span>(<span class="ident">width</span>, <span class="ident">height</span>);
         <span class="kw">for</span> <span class="ident">p</span> <span class="kw">in</span> <span class="ident">buf</span>.<span class="ident">pixels_mut</span>() {
             <span class="kw-2">*</span><span class="ident">p</span> <span class="op">=</span> <span class="ident">pixel</span>
@@ -2747,9 +2746,9 @@
     <span class="doccomment">/// # Panics</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Panics when the resulting image is larger the the maximum size of a vector.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_fn</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="ident">width</span>: <span class="ident">u32</span>, <span class="ident">height</span>: <span class="ident">u32</span>, <span class="kw-2">mut</span> <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ImageBuffer</span><span class="op">&lt;</span><span class="ident">P</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">P::Subpixel</span><span class="op">&gt;</span><span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_fn</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="ident">width</span>: <span class="ident">u32</span>, <span class="ident">height</span>: <span class="ident">u32</span>, <span class="kw-2">mut</span> <span class="ident">f</span>: <span class="ident">F</span>) -&gt; <span class="ident">ImageBuffer</span><span class="op">&lt;</span><span class="ident">P</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">P::Subpixel</span><span class="op">&gt;</span><span class="op">&gt;</span>
     <span class="kw">where</span>
-        <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="ident">u32</span>, <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">P</span>,
+        <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="ident">u32</span>, <span class="ident">u32</span>) -&gt; <span class="ident">P</span>,
     {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buf</span> <span class="op">=</span> <span class="ident">ImageBuffer::new</span>(<span class="ident">width</span>, <span class="ident">height</span>);
         <span class="kw">for</span> (<span class="ident">x</span>, <span class="ident">y</span>, <span class="ident">p</span>) <span class="kw">in</span> <span class="ident">buf</span>.<span class="ident">enumerate_pixels_mut</span>() {
@@ -2764,13 +2763,13 @@
         <span class="ident">width</span>: <span class="ident">u32</span>,
         <span class="ident">height</span>: <span class="ident">u32</span>,
         <span class="ident">buf</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">P::Subpixel</span><span class="op">&gt;</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ImageBuffer</span><span class="op">&lt;</span><span class="ident">P</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">P::Subpixel</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ImageBuffer</span><span class="op">&lt;</span><span class="ident">P</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">P::Subpixel</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span> {
         <span class="ident">ImageBuffer::from_raw</span>(<span class="ident">width</span>, <span class="ident">height</span>, <span class="ident">buf</span>)
     }
 
     <span class="doccomment">/// Consumes the image buffer and returns the underlying data</span>
     <span class="doccomment">/// as an owned buffer</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_vec</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">P::Subpixel</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_vec</span>(<span class="self">self</span>) -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">P::Subpixel</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">into_raw</span>()
     }
 }
@@ -2781,7 +2780,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// A generic implementation is provided to convert any image buffer to a image buffer</span>
     <span class="doccomment">/// based on a `Vec&lt;T&gt;`.</span>
-    <span class="kw">fn</span> <span class="ident">convert</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">T</span>;
+    <span class="kw">fn</span> <span class="ident">convert</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">T</span>;
 }
 
 <span class="comment">// concrete implementation Luma -&gt; Rgba</span>
@@ -2793,7 +2792,7 @@
         <span class="self">self</span>,
         <span class="ident">palette</span>: <span class="kw-2">&amp;</span>[(<span class="ident">u8</span>, <span class="ident">u8</span>, <span class="ident">u8</span>)],
         <span class="ident">transparent_idx</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">RgbaImage</span> {
+    ) -&gt; <span class="ident">RgbaImage</span> {
         <span class="kw">let</span> (<span class="ident">width</span>, <span class="ident">height</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">dimensions</span>();
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">data</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">into_raw</span>();
         <span class="kw">let</span> <span class="ident">entries</span> <span class="op">=</span> <span class="ident">data</span>.<span class="ident">len</span>();
@@ -2802,7 +2801,7 @@
         <span class="ident">expand_packed</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">buffer</span>, <span class="number">4</span>, <span class="number">8</span>, <span class="op">|</span><span class="ident">idx</span>, <span class="ident">pixel</span><span class="op">|</span> {
             <span class="kw">let</span> (<span class="ident">r</span>, <span class="ident">g</span>, <span class="ident">b</span>) <span class="op">=</span> <span class="ident">palette</span>[<span class="ident">idx</span> <span class="kw">as</span> <span class="ident">usize</span>];
             <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">t_idx</span>) <span class="op">=</span> <span class="ident">transparent_idx</span> {
-                <span class="kw">if</span> <span class="ident">t_idx</span> <span class="op">=</span><span class="op">=</span> <span class="ident">idx</span> {
+                <span class="kw">if</span> <span class="ident">t_idx</span> <span class="op">==</span> <span class="ident">idx</span> {
                     <span class="number">0</span>
                 } <span class="kw">else</span> {
                     <span class="number">255</span>
@@ -2843,7 +2842,7 @@
     <span class="doccomment">/// </span>
     <span class="doccomment">/// let gray_image: GrayImage = image.convert();</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">fn</span> <span class="ident">convert</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ImageBuffer</span><span class="op">&lt;</span><span class="ident">ToType</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ToType::Subpixel</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">convert</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">ImageBuffer</span><span class="op">&lt;</span><span class="ident">ToType</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ToType::Subpixel</span><span class="op">&gt;</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">buffer</span>: <span class="ident">ImageBuffer</span><span class="op">&lt;</span><span class="ident">ToType</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">ToType::Subpixel</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="op">=</span>
             <span class="ident">ImageBuffer::new</span>(<span class="self">self</span>.<span class="ident">width</span>, <span class="self">self</span>.<span class="ident">height</span>);
         <span class="kw">for</span> (<span class="ident">to</span>, <span class="ident">from</span>) <span class="kw">in</span> <span class="ident">buffer</span>.<span class="ident">pixels_mut</span>().<span class="ident">zip</span>(<span class="self">self</span>.<span class="ident">pixels</span>()) {
@@ -3127,7 +3126,7 @@
         <span class="macro">assert_eq!</span>(<span class="kw-2">&amp;</span><span class="ident">image</span>.<span class="ident">into_raw</span>(), <span class="kw-2">&amp;</span><span class="ident">expected</span>);
     }
 }
-</pre></div>
+</code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="image" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
     <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script>
 </body></html>

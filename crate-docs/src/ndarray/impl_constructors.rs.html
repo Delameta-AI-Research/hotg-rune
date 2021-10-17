@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;ndarray-0.15.3&#x2F;src&#x2F;impl_constructors.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>impl_constructors.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../ndarray/index.html'><div class='logo-container rust-logo'><img src='https:&#x2F;&#x2F;rust-ndarray.github.io&#x2F;images&#x2F;rust-ndarray_logo.svg' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;ndarray-0.15.3&#x2F;src&#x2F;impl_constructors.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>impl_constructors.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../ndarray/index.html'><div class='logo-container rust-logo'><img src='https:&#x2F;&#x2F;rust-ndarray.github.io&#x2F;images&#x2F;rust-ndarray_logo.svg' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -670,8 +670,7 @@
 <span id="670">670</span>
 <span id="671">671</span>
 <span id="672">672</span>
-</pre><pre class="rust">
-<span class="comment">// Copyright 2014-2016 bluss and ndarray developers.</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2014-2016 bluss and ndarray developers.</span>
 <span class="comment">//</span>
 <span class="comment">// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or</span>
 <span class="comment">// http://www.apache.org/licenses/LICENSE-2.0&gt; or the MIT license</span>
@@ -728,8 +727,8 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// let array = Array::from_vec(vec![1., 2., 3., 4.]);</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_vec</span>(<span class="ident">v</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
-        <span class="kw">if</span> <span class="ident">mem::size_of</span>::<span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>() <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_vec</span>(<span class="ident">v</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
+        <span class="kw">if</span> <span class="ident">mem::size_of</span>::<span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>() <span class="op">==</span> <span class="number">0</span> {
             <span class="macro">assert!</span>(
                 <span class="ident">v</span>.<span class="ident">len</span>() <span class="op">&lt;</span><span class="op">=</span> <span class="ident">isize::MAX</span> <span class="kw">as</span> <span class="ident">usize</span>,
                 <span class="string">&quot;Length must fit in `isize`.&quot;</span>,
@@ -748,7 +747,7 @@
     <span class="doccomment">/// let array = Array::from_iter(0..10);</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::should_implement_trait</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_iter</span><span class="op">&lt;</span><span class="ident">I</span>: <span class="ident">IntoIterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">A</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">iterable</span>: <span class="ident">I</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_iter</span><span class="op">&lt;</span><span class="ident">I</span>: <span class="ident">IntoIterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">A</span><span class="op">&gt;</span><span class="op">&gt;</span>(<span class="ident">iterable</span>: <span class="ident">I</span>) -&gt; <span class="self">Self</span> {
         <span class="ident"><span class="self">Self</span>::from_vec</span>(<span class="ident">iterable</span>.<span class="ident">into_iter</span>().<span class="ident">collect</span>())
     }
 
@@ -770,7 +769,7 @@
     <span class="doccomment">/// assert!(array == arr1(&amp;[0.0, 0.25, 0.5, 0.75, 1.0]))</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">linspace</span>(<span class="ident">start</span>: <span class="ident">A</span>, <span class="ident">end</span>: <span class="ident">A</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">linspace</span>(<span class="ident">start</span>: <span class="ident">A</span>, <span class="ident">end</span>: <span class="ident">A</span>, <span class="ident">n</span>: <span class="ident">usize</span>) -&gt; <span class="self">Self</span>
     <span class="kw">where</span>
         <span class="ident">A</span>: <span class="ident">Float</span>,
     {
@@ -789,7 +788,7 @@
     <span class="doccomment">/// assert!(array == arr1(&amp;[0., 1., 2., 3., 4.]))</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">range</span>(<span class="ident">start</span>: <span class="ident">A</span>, <span class="ident">end</span>: <span class="ident">A</span>, <span class="ident">step</span>: <span class="ident">A</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">range</span>(<span class="ident">start</span>: <span class="ident">A</span>, <span class="ident">end</span>: <span class="ident">A</span>, <span class="ident">step</span>: <span class="ident">A</span>) -&gt; <span class="self">Self</span>
     <span class="kw">where</span>
         <span class="ident">A</span>: <span class="ident">Float</span>,
     {
@@ -818,7 +817,7 @@
     <span class="doccomment">/// # }</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">logspace</span>(<span class="ident">base</span>: <span class="ident">A</span>, <span class="ident">start</span>: <span class="ident">A</span>, <span class="ident">end</span>: <span class="ident">A</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">logspace</span>(<span class="ident">base</span>: <span class="ident">A</span>, <span class="ident">start</span>: <span class="ident">A</span>, <span class="ident">end</span>: <span class="ident">A</span>, <span class="ident">n</span>: <span class="ident">usize</span>) -&gt; <span class="self">Self</span>
     <span class="kw">where</span>
         <span class="ident">A</span>: <span class="ident">Float</span>,
     {
@@ -853,7 +852,7 @@
     <span class="doccomment">/// # example().unwrap();</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">geomspace</span>(<span class="ident">start</span>: <span class="ident">A</span>, <span class="ident">end</span>: <span class="ident">A</span>, <span class="ident">n</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">geomspace</span>(<span class="ident">start</span>: <span class="ident">A</span>, <span class="ident">end</span>: <span class="ident">A</span>, <span class="ident">n</span>: <span class="ident">usize</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">A</span>: <span class="ident">Float</span>,
     {
@@ -869,7 +868,7 @@
     <span class="doccomment">/// Create an identity matrix of size `n` (square 2D array).</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// **Panics** if `n * n` would overflow `isize`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">eye</span>(<span class="ident">n</span>: <span class="ident">Ix</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">eye</span>(<span class="ident">n</span>: <span class="ident">Ix</span>) -&gt; <span class="self">Self</span>
     <span class="kw">where</span>
         <span class="ident">S</span>: <span class="ident">DataMut</span>,
         <span class="ident">A</span>: <span class="ident">Clone</span> <span class="op">+</span> <span class="ident">Zero</span> <span class="op">+</span> <span class="ident">One</span>,
@@ -892,7 +891,7 @@
     <span class="doccomment">/// let array = Array2::from_diag(&amp;diag);</span>
     <span class="doccomment">/// assert_eq!(array, arr2(&amp;[[1, 0], [0, 2]]));</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_diag</span><span class="op">&lt;</span><span class="ident">S2</span><span class="op">&gt;</span>(<span class="ident">diag</span>: <span class="kw-2">&amp;</span><span class="ident">ArrayBase</span><span class="op">&lt;</span><span class="ident">S2</span>, <span class="ident">Ix1</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_diag</span><span class="op">&lt;</span><span class="ident">S2</span><span class="op">&gt;</span>(<span class="ident">diag</span>: <span class="kw-2">&amp;</span><span class="ident">ArrayBase</span><span class="op">&lt;</span><span class="ident">S2</span>, <span class="ident">Ix1</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span>
     <span class="kw">where</span>
         <span class="ident">A</span>: <span class="ident">Clone</span> <span class="op">+</span> <span class="ident">Zero</span>,
         <span class="ident">S</span>: <span class="ident">DataMut</span>,
@@ -908,10 +907,10 @@
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">debug_assertions</span>))]</span>
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">clippy::match_wild_err_arm</span>)]</span>
 <span class="macro">macro_rules!</span> <span class="ident">size_of_shape_checked_unwrap</span> {
-    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span>:<span class="ident">expr</span>) <span class="op">=</span><span class="op">&gt;</span> {
+    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span>:<span class="ident">expr</span>) =&gt; {
         <span class="kw">match</span> <span class="ident">dimension::size_of_shape_checked</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span>) {
-            <span class="prelude-val">Ok</span>(<span class="ident">sz</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">sz</span>,
-            <span class="prelude-val">Err</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="prelude-val">Ok</span>(<span class="ident">sz</span>) =&gt; <span class="ident">sz</span>,
+            <span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; {
                 <span class="macro">panic!</span>(<span class="string">&quot;ndarray: Shape too large, product of non-zero axis lengths overflows isize&quot;</span>)
             }
         }
@@ -920,10 +919,10 @@
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">debug_assertions</span>)]</span>
 <span class="macro">macro_rules!</span> <span class="ident">size_of_shape_checked_unwrap</span> {
-    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span>:<span class="ident">expr</span>) <span class="op">=</span><span class="op">&gt;</span> {
+    (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span>:<span class="ident">expr</span>) =&gt; {
         <span class="kw">match</span> <span class="ident">dimension::size_of_shape_checked</span>(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span>) {
-            <span class="prelude-val">Ok</span>(<span class="ident">sz</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">sz</span>,
-            <span class="prelude-val">Err</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(
+            <span class="prelude-val">Ok</span>(<span class="ident">sz</span>) =&gt; <span class="ident">sz</span>,
+            <span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; <span class="macro">panic!</span>(
                 <span class="string">&quot;ndarray: Shape too large, product of non-zero axis lengths \
                  overflows isize in shape {:?}&quot;</span>,
                 <span class="macro-nonterminal">$</span><span class="macro-nonterminal">dim</span>
@@ -973,7 +972,7 @@
     <span class="doccomment">/// let b = Array::from_elem((2, 2, 2).f(), 1.);</span>
     <span class="doccomment">/// assert!(b.strides() == &amp;[1, 2, 4]);</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_elem</span><span class="op">&lt;</span><span class="ident">Sh</span><span class="op">&gt;</span>(<span class="ident">shape</span>: <span class="ident">Sh</span>, <span class="ident">elem</span>: <span class="ident">A</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_elem</span><span class="op">&lt;</span><span class="ident">Sh</span><span class="op">&gt;</span>(<span class="ident">shape</span>: <span class="ident">Sh</span>, <span class="ident">elem</span>: <span class="ident">A</span>) -&gt; <span class="self">Self</span>
     <span class="kw">where</span>
         <span class="ident">A</span>: <span class="ident">Clone</span>,
         <span class="ident">Sh</span>: <span class="ident">ShapeBuilder</span><span class="op">&lt;</span><span class="ident">Dim</span> <span class="op">=</span> <span class="ident">D</span><span class="op">&gt;</span>,
@@ -987,7 +986,7 @@
     <span class="doccomment">/// Create an array with zeros, shape `shape`.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// **Panics** if the product of non-zero axis lengths overflows `isize`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">zeros</span><span class="op">&lt;</span><span class="ident">Sh</span><span class="op">&gt;</span>(<span class="ident">shape</span>: <span class="ident">Sh</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">zeros</span><span class="op">&lt;</span><span class="ident">Sh</span><span class="op">&gt;</span>(<span class="ident">shape</span>: <span class="ident">Sh</span>) -&gt; <span class="self">Self</span>
     <span class="kw">where</span>
         <span class="ident">A</span>: <span class="ident">Clone</span> <span class="op">+</span> <span class="ident">Zero</span>,
         <span class="ident">Sh</span>: <span class="ident">ShapeBuilder</span><span class="op">&lt;</span><span class="ident">Dim</span> <span class="op">=</span> <span class="ident">D</span><span class="op">&gt;</span>,
@@ -998,7 +997,7 @@
     <span class="doccomment">/// Create an array with ones, shape `shape`.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// **Panics** if the product of non-zero axis lengths overflows `isize`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ones</span><span class="op">&lt;</span><span class="ident">Sh</span><span class="op">&gt;</span>(<span class="ident">shape</span>: <span class="ident">Sh</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ones</span><span class="op">&lt;</span><span class="ident">Sh</span><span class="op">&gt;</span>(<span class="ident">shape</span>: <span class="ident">Sh</span>) -&gt; <span class="self">Self</span>
     <span class="kw">where</span>
         <span class="ident">A</span>: <span class="ident">Clone</span> <span class="op">+</span> <span class="ident">One</span>,
         <span class="ident">Sh</span>: <span class="ident">ShapeBuilder</span><span class="op">&lt;</span><span class="ident">Dim</span> <span class="op">=</span> <span class="ident">D</span><span class="op">&gt;</span>,
@@ -1009,7 +1008,7 @@
     <span class="doccomment">/// Create an array with default values, shape `shape`</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// **Panics** if the product of non-zero axis lengths overflows `isize`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">default</span><span class="op">&lt;</span><span class="ident">Sh</span><span class="op">&gt;</span>(<span class="ident">shape</span>: <span class="ident">Sh</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">default</span><span class="op">&lt;</span><span class="ident">Sh</span><span class="op">&gt;</span>(<span class="ident">shape</span>: <span class="ident">Sh</span>) -&gt; <span class="self">Self</span>
     <span class="kw">where</span>
         <span class="ident">A</span>: <span class="ident">Default</span>,
         <span class="ident">Sh</span>: <span class="ident">ShapeBuilder</span><span class="op">&lt;</span><span class="ident">Dim</span> <span class="op">=</span> <span class="ident">D</span><span class="op">&gt;</span>,
@@ -1027,10 +1026,10 @@
     <span class="doccomment">/// for example if they are identical or random.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// **Panics** if the product of non-zero axis lengths overflows `isize`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_shape_simple_fn</span><span class="op">&lt;</span><span class="ident">Sh</span>, <span class="ident">F</span><span class="op">&gt;</span>(<span class="ident">shape</span>: <span class="ident">Sh</span>, <span class="kw-2">mut</span> <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_shape_simple_fn</span><span class="op">&lt;</span><span class="ident">Sh</span>, <span class="ident">F</span><span class="op">&gt;</span>(<span class="ident">shape</span>: <span class="ident">Sh</span>, <span class="kw-2">mut</span> <span class="ident">f</span>: <span class="ident">F</span>) -&gt; <span class="self">Self</span>
     <span class="kw">where</span>
         <span class="ident">Sh</span>: <span class="ident">ShapeBuilder</span><span class="op">&lt;</span><span class="ident">Dim</span> <span class="op">=</span> <span class="ident">D</span><span class="op">&gt;</span>,
-        <span class="ident">F</span>: <span class="ident">FnMut</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">A</span>,
+        <span class="ident">F</span>: <span class="ident">FnMut</span>() -&gt; <span class="ident">A</span>,
     {
         <span class="kw">let</span> <span class="ident">shape</span> <span class="op">=</span> <span class="ident">shape</span>.<span class="ident">into_shape</span>();
         <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="macro">size_of_shape_checked_unwrap!</span>(<span class="kw-2">&amp;</span><span class="ident">shape</span>.<span class="ident">dim</span>);
@@ -1058,10 +1057,10 @@
     <span class="doccomment">///            [3, 6, 9]])</span>
     <span class="doccomment">/// );</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_shape_fn</span><span class="op">&lt;</span><span class="ident">Sh</span>, <span class="ident">F</span><span class="op">&gt;</span>(<span class="ident">shape</span>: <span class="ident">Sh</span>, <span class="ident">f</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_shape_fn</span><span class="op">&lt;</span><span class="ident">Sh</span>, <span class="ident">F</span><span class="op">&gt;</span>(<span class="ident">shape</span>: <span class="ident">Sh</span>, <span class="ident">f</span>: <span class="ident">F</span>) -&gt; <span class="self">Self</span>
     <span class="kw">where</span>
         <span class="ident">Sh</span>: <span class="ident">ShapeBuilder</span><span class="op">&lt;</span><span class="ident">Dim</span> <span class="op">=</span> <span class="ident">D</span><span class="op">&gt;</span>,
-        <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="ident">D::Pattern</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">A</span>,
+        <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="ident">D::Pattern</span>) -&gt; <span class="ident">A</span>,
     {
         <span class="kw">let</span> <span class="ident">shape</span> <span class="op">=</span> <span class="ident">shape</span>.<span class="ident">into_shape</span>();
         <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="macro">size_of_shape_checked_unwrap!</span>(<span class="kw-2">&amp;</span><span class="ident">shape</span>.<span class="ident">dim</span>);
@@ -1108,7 +1107,7 @@
     <span class="doccomment">///                 [2., 4.]])</span>
     <span class="doccomment">/// );</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_shape_vec</span><span class="op">&lt;</span><span class="ident">Sh</span><span class="op">&gt;</span>(<span class="ident">shape</span>: <span class="ident">Sh</span>, <span class="ident">v</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">ShapeError</span><span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_shape_vec</span><span class="op">&lt;</span><span class="ident">Sh</span><span class="op">&gt;</span>(<span class="ident">shape</span>: <span class="ident">Sh</span>, <span class="ident">v</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">ShapeError</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">Sh</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">StrideShape</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span><span class="op">&gt;</span>,
     {
@@ -1116,7 +1115,7 @@
         <span class="ident"><span class="self">Self</span>::from_shape_vec_impl</span>(<span class="ident">shape</span>.<span class="ident">into</span>(), <span class="ident">v</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">from_shape_vec_impl</span>(<span class="ident">shape</span>: <span class="ident">StrideShape</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span>, <span class="ident">v</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">ShapeError</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">from_shape_vec_impl</span>(<span class="ident">shape</span>: <span class="ident">StrideShape</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span>, <span class="ident">v</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">ShapeError</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">dim</span> <span class="op">=</span> <span class="ident">shape</span>.<span class="ident">dim</span>;
         <span class="kw">let</span> <span class="ident">is_custom</span> <span class="op">=</span> <span class="ident">shape</span>.<span class="ident">strides</span>.<span class="ident">is_custom</span>();
         <span class="ident">dimension::can_index_slice_with_strides</span>(<span class="kw-2">&amp;</span><span class="ident">v</span>, <span class="kw-2">&amp;</span><span class="ident">dim</span>, <span class="kw-2">&amp;</span><span class="ident">shape</span>.<span class="ident">strides</span>)<span class="question-mark">?</span>;
@@ -1151,7 +1150,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// 5. The strides must not allow any element to be referenced by two different</span>
     <span class="doccomment">///    indices.</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_shape_vec_unchecked</span><span class="op">&lt;</span><span class="ident">Sh</span><span class="op">&gt;</span>(<span class="ident">shape</span>: <span class="ident">Sh</span>, <span class="ident">v</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_shape_vec_unchecked</span><span class="op">&lt;</span><span class="ident">Sh</span><span class="op">&gt;</span>(<span class="ident">shape</span>: <span class="ident">Sh</span>, <span class="ident">v</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span>
     <span class="kw">where</span>
         <span class="ident">Sh</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">StrideShape</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span><span class="op">&gt;</span>,
     {
@@ -1161,7 +1160,7 @@
         <span class="ident"><span class="self">Self</span>::from_vec_dim_stride_unchecked</span>(<span class="ident">dim</span>, <span class="ident">strides</span>, <span class="ident">v</span>)
     }
 
-    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_vec_dim_stride_unchecked</span>(<span class="ident">dim</span>: <span class="ident">D</span>, <span class="ident">strides</span>: <span class="ident">D</span>, <span class="kw-2">mut</span> <span class="ident">v</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_vec_dim_stride_unchecked</span>(<span class="ident">dim</span>: <span class="ident">D</span>, <span class="ident">strides</span>: <span class="ident">D</span>, <span class="kw-2">mut</span> <span class="ident">v</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
         <span class="comment">// debug check for issues that indicates wrong use of this constructor</span>
         <span class="macro">debug_assert!</span>(<span class="ident">dimension::can_index_slice</span>(<span class="kw-2">&amp;</span><span class="ident">v</span>, <span class="kw-2">&amp;</span><span class="ident">dim</span>, <span class="kw-2">&amp;</span><span class="ident">strides</span>).<span class="ident">is_ok</span>());
 
@@ -1176,11 +1175,11 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// See from_shape_vec_unchecked</span>
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">from_shape_trusted_iter_unchecked</span><span class="op">&lt;</span><span class="ident">Sh</span>, <span class="ident">I</span>, <span class="ident">F</span><span class="op">&gt;</span>(<span class="ident">shape</span>: <span class="ident">Sh</span>, <span class="ident">iter</span>: <span class="ident">I</span>, <span class="ident">map</span>: <span class="ident">F</span>)
-        <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>
+        -&gt; <span class="self">Self</span>
     <span class="kw">where</span>
         <span class="ident">Sh</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">StrideShape</span><span class="op">&lt;</span><span class="ident">D</span><span class="op">&gt;</span><span class="op">&gt;</span>,
         <span class="ident">I</span>: <span class="ident">TrustedIterator</span> <span class="op">+</span> <span class="ident">ExactSizeIterator</span>,
-        <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="ident">I::Item</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">A</span>,
+        <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="ident">I::Item</span>) -&gt; <span class="ident">A</span>,
     {
         <span class="kw">let</span> <span class="ident">shape</span> <span class="op">=</span> <span class="ident">shape</span>.<span class="ident">into</span>();
         <span class="kw">let</span> <span class="ident">dim</span> <span class="op">=</span> <span class="ident">shape</span>.<span class="ident">dim</span>;
@@ -1235,7 +1234,7 @@
     <span class="doccomment">/// </span>
     <span class="doccomment">/// # let _ = shift_by_two;</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">uninit</span><span class="op">&lt;</span><span class="ident">Sh</span><span class="op">&gt;</span>(<span class="ident">shape</span>: <span class="ident">Sh</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ArrayBase</span><span class="op">&lt;</span><span class="ident">S::MaybeUninit</span>, <span class="ident">D</span><span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">uninit</span><span class="op">&lt;</span><span class="ident">Sh</span><span class="op">&gt;</span>(<span class="ident">shape</span>: <span class="ident">Sh</span>) -&gt; <span class="ident">ArrayBase</span><span class="op">&lt;</span><span class="ident">S::MaybeUninit</span>, <span class="ident">D</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">Sh</span>: <span class="ident">ShapeBuilder</span><span class="op">&lt;</span><span class="ident">Dim</span> <span class="op">=</span> <span class="ident">D</span><span class="op">&gt;</span>,
     {
@@ -1269,7 +1268,7 @@
     <span class="doccomment">/// using [`.assume_init()`] or otherwise traversed/read with the element type `A`.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// [`.assume_init()`]: ArrayBase::assume_init</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">build_uninit</span><span class="op">&lt;</span><span class="ident">Sh</span>, <span class="ident">F</span><span class="op">&gt;</span>(<span class="ident">shape</span>: <span class="ident">Sh</span>, <span class="ident">builder</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ArrayBase</span><span class="op">&lt;</span><span class="ident">S::MaybeUninit</span>, <span class="ident">D</span><span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">build_uninit</span><span class="op">&lt;</span><span class="ident">Sh</span>, <span class="ident">F</span><span class="op">&gt;</span>(<span class="ident">shape</span>: <span class="ident">Sh</span>, <span class="ident">builder</span>: <span class="ident">F</span>) -&gt; <span class="ident">ArrayBase</span><span class="op">&lt;</span><span class="ident">S::MaybeUninit</span>, <span class="ident">D</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">Sh</span>: <span class="ident">ShapeBuilder</span><span class="op">&lt;</span><span class="ident">Dim</span> <span class="op">=</span> <span class="ident">D</span><span class="op">&gt;</span>,
         <span class="ident">F</span>: <span class="ident">FnOnce</span>(<span class="ident">ArrayViewMut</span><span class="op">&lt;</span><span class="ident">MaybeUninit</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>, <span class="ident">D</span><span class="op">&gt;</span>),
@@ -1307,7 +1306,7 @@
     <span class="doccomment">/// (Also note that the constructors `from_shape_vec` and</span>
     <span class="doccomment">/// `from_shape_vec_unchecked` allow the user yet more control, in the sense</span>
     <span class="doccomment">/// that Arrays can be created from arbitrary vectors.)</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">uninitialized</span><span class="op">&lt;</span><span class="ident">Sh</span><span class="op">&gt;</span>(<span class="ident">shape</span>: <span class="ident">Sh</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">uninitialized</span><span class="op">&lt;</span><span class="ident">Sh</span><span class="op">&gt;</span>(<span class="ident">shape</span>: <span class="ident">Sh</span>) -&gt; <span class="self">Self</span>
     <span class="kw">where</span>
         <span class="ident">A</span>: <span class="ident">Copy</span>,
         <span class="ident">Sh</span>: <span class="ident">ShapeBuilder</span><span class="op">&lt;</span><span class="ident">Dim</span> <span class="op">=</span> <span class="ident">D</span><span class="op">&gt;</span>,
@@ -1330,7 +1329,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// This method has been renamed to `uninit`</span>
     <span class="attribute">#[<span class="ident">deprecated</span>(<span class="ident">note</span> <span class="op">=</span> <span class="string">&quot;Renamed to `uninit`&quot;</span>, <span class="ident">since</span> <span class="op">=</span> <span class="string">&quot;0.15.0&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">maybe_uninit</span><span class="op">&lt;</span><span class="ident">Sh</span><span class="op">&gt;</span>(<span class="ident">shape</span>: <span class="ident">Sh</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">maybe_uninit</span><span class="op">&lt;</span><span class="ident">Sh</span><span class="op">&gt;</span>(<span class="ident">shape</span>: <span class="ident">Sh</span>) -&gt; <span class="self">Self</span>
     <span class="kw">where</span>
         <span class="ident">Sh</span>: <span class="ident">ShapeBuilder</span><span class="op">&lt;</span><span class="ident">Dim</span> <span class="op">=</span> <span class="ident">D</span><span class="op">&gt;</span>,
     {
@@ -1343,7 +1342,7 @@
         }
     }
 }
-</pre></div>
+</code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="ndarray" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
     <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script>
 </body></html>

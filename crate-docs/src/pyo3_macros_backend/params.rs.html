@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;pyo3-macros-backend-0.14.5&#x2F;src&#x2F;params.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>params.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../pyo3_macros_backend/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;pyo3-macros-backend-0.14.5&#x2F;src&#x2F;params.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>params.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../pyo3_macros_backend/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -310,8 +310,7 @@
 <span id="310">310</span>
 <span id="311">311</span>
 <span id="312">312</span>
-</pre><pre class="rust">
-<span class="comment">// Copyright (c) 2017-present PyO3 Project and Contributors</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright (c) 2017-present PyO3 Project and Contributors</span>
 
 <span class="kw">use</span> <span class="kw">crate</span>::{
     <span class="ident">attributes::FromPyWithAttribute</span>,
@@ -326,14 +325,14 @@
 <span class="kw">use</span> <span class="ident">syn::Result</span>;
 
 <span class="doccomment">/// Determine if the function gets passed a *args tuple or **kwargs dict.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">accept_args_kwargs</span>(<span class="ident">attrs</span>: <span class="kw-2">&amp;</span>[<span class="ident">Argument</span>]) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">bool</span>, <span class="ident">bool</span>) {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">accept_args_kwargs</span>(<span class="ident">attrs</span>: <span class="kw-2">&amp;</span>[<span class="ident">Argument</span>]) -&gt; (<span class="ident">bool</span>, <span class="ident">bool</span>) {
     <span class="kw">let</span> (<span class="kw-2">mut</span> <span class="ident">accept_args</span>, <span class="kw-2">mut</span> <span class="ident">accept_kwargs</span>) <span class="op">=</span> (<span class="bool-val">false</span>, <span class="bool-val">false</span>);
 
     <span class="kw">for</span> <span class="ident">s</span> <span class="kw">in</span> <span class="ident">attrs</span> {
         <span class="kw">match</span> <span class="ident">s</span> {
-            <span class="ident">Argument::VarArgs</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">accept_args</span> <span class="op">=</span> <span class="bool-val">true</span>,
-            <span class="ident">Argument::KeywordArgs</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">accept_kwargs</span> <span class="op">=</span> <span class="bool-val">true</span>,
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">continue</span>,
+            <span class="ident">Argument::VarArgs</span>(<span class="kw">_</span>) =&gt; <span class="ident">accept_args</span> <span class="op">=</span> <span class="bool-val">true</span>,
+            <span class="ident">Argument::KeywordArgs</span>(<span class="kw">_</span>) =&gt; <span class="ident">accept_kwargs</span> <span class="op">=</span> <span class="bool-val">true</span>,
+            <span class="kw">_</span> =&gt; <span class="kw">continue</span>,
         }
     }
 
@@ -341,11 +340,11 @@
 }
 
 <span class="doccomment">/// Return true if the argument list is simply (*args, **kwds).</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_forwarded_args</span>(<span class="ident">args</span>: <span class="kw-2">&amp;</span>[<span class="ident">FnArg</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>], <span class="ident">attrs</span>: <span class="kw-2">&amp;</span>[<span class="ident">Argument</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-    <span class="ident">args</span>.<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="number">2</span> <span class="op">&amp;&amp;</span> <span class="ident">is_args</span>(<span class="ident">attrs</span>, <span class="ident">args</span>[<span class="number">0</span>].<span class="ident">name</span>) <span class="op">&amp;&amp;</span> <span class="ident">is_kwargs</span>(<span class="ident">attrs</span>, <span class="ident">args</span>[<span class="number">1</span>].<span class="ident">name</span>)
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_forwarded_args</span>(<span class="ident">args</span>: <span class="kw-2">&amp;</span>[<span class="ident">FnArg</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>], <span class="ident">attrs</span>: <span class="kw-2">&amp;</span>[<span class="ident">Argument</span>]) -&gt; <span class="ident">bool</span> {
+    <span class="ident">args</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="number">2</span> <span class="op">&amp;&amp;</span> <span class="ident">is_args</span>(<span class="ident">attrs</span>, <span class="ident">args</span>[<span class="number">0</span>].<span class="ident">name</span>) <span class="op">&amp;&amp;</span> <span class="ident">is_kwargs</span>(<span class="ident">attrs</span>, <span class="ident">args</span>[<span class="number">1</span>].<span class="ident">name</span>)
 }
 
-<span class="kw">fn</span> <span class="ident">is_args</span>(<span class="ident">attrs</span>: <span class="kw-2">&amp;</span>[<span class="ident">Argument</span>], <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">syn::Ident</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+<span class="kw">fn</span> <span class="ident">is_args</span>(<span class="ident">attrs</span>: <span class="kw-2">&amp;</span>[<span class="ident">Argument</span>], <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">syn::Ident</span>) -&gt; <span class="ident">bool</span> {
     <span class="kw">for</span> <span class="ident">s</span> <span class="kw">in</span> <span class="ident">attrs</span>.<span class="ident">iter</span>() {
         <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Argument::VarArgs</span>(<span class="ident">path</span>) <span class="op">=</span> <span class="ident">s</span> {
             <span class="kw">return</span> <span class="ident">path</span>.<span class="ident">is_ident</span>(<span class="ident">name</span>);
@@ -354,7 +353,7 @@
     <span class="bool-val">false</span>
 }
 
-<span class="kw">fn</span> <span class="ident">is_kwargs</span>(<span class="ident">attrs</span>: <span class="kw-2">&amp;</span>[<span class="ident">Argument</span>], <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">syn::Ident</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+<span class="kw">fn</span> <span class="ident">is_kwargs</span>(<span class="ident">attrs</span>: <span class="kw-2">&amp;</span>[<span class="ident">Argument</span>], <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">syn::Ident</span>) -&gt; <span class="ident">bool</span> {
     <span class="kw">for</span> <span class="ident">s</span> <span class="kw">in</span> <span class="ident">attrs</span>.<span class="ident">iter</span>() {
         <span class="kw">if</span> <span class="kw">let</span> <span class="ident">Argument::KeywordArgs</span>(<span class="ident">path</span>) <span class="op">=</span> <span class="ident">s</span> {
             <span class="kw">return</span> <span class="ident">path</span>.<span class="ident">is_ident</span>(<span class="ident">name</span>);
@@ -369,7 +368,7 @@
     <span class="ident">body</span>: <span class="ident">TokenStream</span>,
     <span class="ident">py</span>: <span class="kw-2">&amp;</span><span class="ident">syn::Ident</span>,
     <span class="ident">fastcall</span>: <span class="ident">bool</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">TokenStream</span><span class="op">&gt;</span> {
+) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">TokenStream</span><span class="op">&gt;</span> {
     <span class="kw">if</span> <span class="ident">spec</span>.<span class="ident">args</span>.<span class="ident">is_empty</span>() {
         <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">body</span>);
     }
@@ -498,11 +497,11 @@
     <span class="ident">option_pos</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">usize</span>,
     <span class="ident">py</span>: <span class="kw-2">&amp;</span><span class="ident">syn::Ident</span>,
     <span class="ident">args_array</span>: <span class="kw-2">&amp;</span><span class="ident">syn::Ident</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">TokenStream</span><span class="op">&gt;</span> {
+) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">TokenStream</span><span class="op">&gt;</span> {
     <span class="comment">// Use this macro inside this function, to ensure that all code generated here is associated</span>
     <span class="comment">// with the function argument</span>
     <span class="macro">macro_rules!</span> <span class="ident">quote_arg_span</span> {
-        ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tokens</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) <span class="op">=</span><span class="op">&gt;</span> { <span class="macro">quote_spanned!</span>(<span class="ident">arg</span>.<span class="ident">ty</span>.<span class="ident">span</span>() <span class="op">=</span><span class="op">&gt;</span> $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tokens</span>)<span class="kw-2">*</span>) }
+        ($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tokens</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) =&gt; { <span class="macro">quote_spanned!</span>(<span class="ident">arg</span>.<span class="ident">ty</span>.<span class="ident">span</span>() =&gt; $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">tokens</span>)<span class="kw-2">*</span>) }
     }
 
     <span class="kw">let</span> <span class="ident">arg_name</span> <span class="op">=</span> <span class="ident">syn::Ident::new</span>(<span class="kw-2">&amp;</span><span class="macro">format!</span>(<span class="string">&quot;arg{}&quot;</span>, <span class="ident">idx</span>), <span class="ident">Span::call_site</span>());
@@ -520,7 +519,7 @@
     <span class="kw">if</span> <span class="ident">is_args</span>(<span class="kw-2">&amp;</span><span class="ident">spec</span>.<span class="ident">attrs</span>, <span class="ident">name</span>) {
         <span class="macro">ensure_spanned!</span>(
             <span class="ident">arg</span>.<span class="ident">optional</span>.<span class="ident">is_none</span>(),
-            <span class="ident">arg</span>.<span class="ident">name</span>.<span class="ident">span</span>() <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;args cannot be optional&quot;</span>
+            <span class="ident">arg</span>.<span class="ident">name</span>.<span class="ident">span</span>() =&gt; <span class="string">&quot;args cannot be optional&quot;</span>
         );
         <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="macro">quote_arg_span!</span> {
             <span class="kw">let</span> #<span class="ident">arg_name</span> <span class="op">=</span> <span class="ident">_args</span>.<span class="ident">unwrap</span>().<span class="ident">extract</span>().<span class="ident">map_err</span>(#<span class="ident">transform_error</span>)<span class="question-mark">?</span>;
@@ -528,7 +527,7 @@
     } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">is_kwargs</span>(<span class="kw-2">&amp;</span><span class="ident">spec</span>.<span class="ident">attrs</span>, <span class="ident">name</span>) {
         <span class="macro">ensure_spanned!</span>(
             <span class="ident">arg</span>.<span class="ident">optional</span>.<span class="ident">is_some</span>(),
-            <span class="ident">arg</span>.<span class="ident">name</span>.<span class="ident">span</span>() <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;kwargs must be Option&lt;_&gt;&quot;</span>
+            <span class="ident">arg</span>.<span class="ident">name</span>.<span class="ident">span</span>() =&gt; <span class="string">&quot;kwargs must be Option&lt;_&gt;&quot;</span>
         );
         <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="macro">quote_arg_span!</span> {
             <span class="kw">let</span> #<span class="ident">arg_name</span> <span class="op">=</span> <span class="ident">_kwargs</span>.<span class="ident">map</span>(<span class="op">|</span><span class="ident">kwargs</span><span class="op">|</span> <span class="ident">kwargs</span>.<span class="ident">extract</span>())
@@ -547,14 +546,14 @@
     };
 
     <span class="kw">let</span> <span class="ident">arg_value_or_default</span> <span class="op">=</span> <span class="kw">match</span> (<span class="ident">spec</span>.<span class="ident">default_value</span>(<span class="ident">name</span>), <span class="ident">arg</span>.<span class="ident">optional</span>.<span class="ident">is_some</span>()) {
-        (<span class="prelude-val">Some</span>(<span class="ident">default</span>), <span class="bool-val">true</span>) <span class="kw">if</span> <span class="ident">default</span>.<span class="ident">to_string</span>() <span class="op">!</span><span class="op">=</span> <span class="string">&quot;None&quot;</span> <span class="op">=</span><span class="op">&gt;</span> {
+        (<span class="prelude-val">Some</span>(<span class="ident">default</span>), <span class="bool-val">true</span>) <span class="kw">if</span> <span class="ident">default</span>.<span class="ident">to_string</span>() <span class="op">!</span><span class="op">=</span> <span class="string">&quot;None&quot;</span> =&gt; {
             <span class="macro">quote_arg_span!</span> { #<span class="ident">arg_value</span>.<span class="ident">map_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(#<span class="ident">default</span>)), <span class="op">|</span><span class="ident">_obj</span><span class="op">|</span> #<span class="ident">extract</span>)<span class="question-mark">?</span> }
         }
-        (<span class="prelude-val">Some</span>(<span class="ident">default</span>), <span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        (<span class="prelude-val">Some</span>(<span class="ident">default</span>), <span class="kw">_</span>) =&gt; {
             <span class="macro">quote_arg_span!</span> { #<span class="ident">arg_value</span>.<span class="ident">map_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="prelude-val">Ok</span>(#<span class="ident">default</span>), <span class="op">|</span><span class="ident">_obj</span><span class="op">|</span> #<span class="ident">extract</span>)<span class="question-mark">?</span> }
         }
-        (<span class="prelude-val">None</span>, <span class="bool-val">true</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote_arg_span!</span> { #<span class="ident">arg_value</span>.<span class="ident">map_or</span>(<span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>), <span class="op">|</span><span class="ident">_obj</span><span class="op">|</span> #<span class="ident">extract</span>)<span class="question-mark">?</span> },
-        (<span class="prelude-val">None</span>, <span class="bool-val">false</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        (<span class="prelude-val">None</span>, <span class="bool-val">true</span>) =&gt; <span class="macro">quote_arg_span!</span> { #<span class="ident">arg_value</span>.<span class="ident">map_or</span>(<span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>), <span class="op">|</span><span class="ident">_obj</span><span class="op">|</span> #<span class="ident">extract</span>)<span class="question-mark">?</span> },
+        (<span class="prelude-val">None</span>, <span class="bool-val">false</span>) =&gt; {
             <span class="macro">quote_arg_span!</span> {
                 {
                     <span class="kw">let</span> <span class="ident">_obj</span> <span class="op">=</span> #<span class="ident">arg_value</span>.<span class="ident">expect</span>(<span class="string">&quot;Failed to extract required method argument&quot;</span>);
@@ -598,7 +597,7 @@
     <span class="kw">fn</span> <span class="ident">preprocess_tref</span>(
         <span class="ident">tref</span>: <span class="kw-2">&amp;</span><span class="ident">syn::TypeReference</span>,
         <span class="ident">self_</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">syn::Type</span><span class="op">&gt;</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">syn::TypeReference</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">syn::token::Mut</span><span class="op">&gt;</span>) {
+    ) -&gt; (<span class="ident">syn::TypeReference</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">syn::token::Mut</span><span class="op">&gt;</span>) {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">tref</span> <span class="op">=</span> <span class="ident">tref</span>.<span class="ident">to_owned</span>();
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">syn::Type::Path</span>(<span class="ident">tpath</span>)) <span class="op">=</span> <span class="ident">self_</span> {
             <span class="ident">replace_self</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">tref</span>, <span class="kw-2">&amp;</span><span class="ident">tpath</span>.<span class="ident">path</span>);
@@ -611,19 +610,19 @@
     <span class="doccomment">/// Replace `Self` with the exact type name since it is used out of the impl block</span>
     <span class="kw">fn</span> <span class="ident">replace_self</span>(<span class="ident">tref</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">syn::TypeReference</span>, <span class="ident">self_path</span>: <span class="kw-2">&amp;</span><span class="ident">syn::Path</span>) {
         <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="ident">tref</span>.<span class="ident">elem</span> {
-            <span class="ident">syn::Type::Reference</span>(<span class="ident">tref_inner</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">replace_self</span>(<span class="ident">tref_inner</span>, <span class="ident">self_path</span>),
-            <span class="ident">syn::Type::Path</span>(<span class="ident">tpath</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">syn::Type::Reference</span>(<span class="ident">tref_inner</span>) =&gt; <span class="ident">replace_self</span>(<span class="ident">tref_inner</span>, <span class="ident">self_path</span>),
+            <span class="ident">syn::Type::Path</span>(<span class="ident">tpath</span>) =&gt; {
                 <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">ident</span>) <span class="op">=</span> <span class="ident">tpath</span>.<span class="ident">path</span>.<span class="ident">get_ident</span>() {
-                    <span class="kw">if</span> <span class="ident">ident</span> <span class="op">=</span><span class="op">=</span> <span class="string">&quot;Self&quot;</span> {
+                    <span class="kw">if</span> <span class="ident">ident</span> <span class="op">==</span> <span class="string">&quot;Self&quot;</span> {
                         <span class="ident">tpath</span>.<span class="ident">path</span> <span class="op">=</span> <span class="ident">self_path</span>.<span class="ident">to_owned</span>();
                     }
                 }
             }
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {}
+            <span class="kw">_</span> =&gt; {}
         }
     }
 }
-</pre></div>
+</code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="pyo3_macros_backend" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
     <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script>
 </body></html>

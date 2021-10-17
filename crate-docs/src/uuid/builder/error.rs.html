@@ -50,8 +50,7 @@
 <span id="50">50</span>
 <span id="51">51</span>
 <span id="52">52</span>
-</pre><pre class="rust">
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::std::fmt</span>;
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::std::fmt</span>;
 
 <span class="doccomment">/// The error that can occur when creating a [`Uuid`].</span>
 <span class="doccomment">///</span>
@@ -65,13 +64,13 @@
 <span class="kw">impl</span> <span class="ident">Error</span> {
     <span class="doccomment">/// The expected number of bytes.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">expected</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
+    <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">expected</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
         <span class="self">self</span>.<span class="ident">expected</span>
     }
 
     <span class="doccomment">/// The number of bytes found.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">found</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
+    <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">found</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
         <span class="self">self</span>.<span class="ident">found</span>
     }
 
@@ -79,13 +78,13 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// [`UuidError`]: struct.UuidError.html</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">expected</span>: <span class="ident">usize</span>, <span class="ident">found</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">const</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">expected</span>: <span class="ident">usize</span>, <span class="ident">found</span>: <span class="ident">usize</span>) -&gt; <span class="self">Self</span> {
         <span class="ident">Error</span> { <span class="ident">expected</span>, <span class="ident">found</span> }
     }
 }
 
 <span class="kw">impl</span> <span class="ident">fmt::Display</span> <span class="kw">for</span> <span class="ident">Error</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="ident">fmt::Result</span> {
         <span class="macro">write!</span>(
             <span class="ident">f</span>,
             <span class="string">&quot;invalid bytes length: expected {}, found {}&quot;</span>,
@@ -103,7 +102,7 @@
 
     <span class="kw">impl</span> <span class="ident">error::Error</span> <span class="kw">for</span> <span class="ident">Error</span> {}
 }
-</pre></div>
+</code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="uuid" data-search-index-js="../../../search-index.js" data-search-js="../../../search.js"></div>
     <script src="../../../main.js"></script><script src="../../../source-script.js"></script><script src="../../../source-files.js"></script>
 </body></html>

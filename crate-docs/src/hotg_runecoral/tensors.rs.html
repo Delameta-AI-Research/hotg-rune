@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;hotg-runecoral-0.3.5&#x2F;rust&#x2F;tensors.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>tensors.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../hotg_runecoral/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;hotg-runecoral-0.3.6&#x2F;rust&#x2F;tensors.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>tensors.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../hotg_runecoral/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -242,8 +242,7 @@
 <span id="242">242</span>
 <span id="243">243</span>
 <span id="244">244</span>
-</pre><pre class="rust">
-<span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">borrow::Cow</span>, <span class="ident">fmt</span>, <span class="ident">os::raw::c_int</span>};
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std</span>::{<span class="ident">borrow::Cow</span>, <span class="ident">fmt</span>, <span class="ident">os::raw::c_int</span>};
 <span class="kw">use</span> <span class="ident">itertools::Itertools</span>;
 <span class="kw">use</span> <span class="ident">std::ffi::CStr</span>;
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::ffi</span>;
@@ -288,26 +287,26 @@
     <span class="kw">const</span> <span class="ident">ELEMENT_TYPE</span>: <span class="ident">ElementType</span>;
 
     <span class="doccomment">/// Reinterpret a slice of this [`TensorElement`] as an immutable byte array.</span>
-    <span class="kw">fn</span> <span class="ident">byte_buffer</span>(<span class="ident">slice</span>: <span class="kw-2">&amp;</span>[<span class="self">Self</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span>[<span class="ident">u8</span>];
+    <span class="kw">fn</span> <span class="ident">byte_buffer</span>(<span class="ident">slice</span>: <span class="kw-2">&amp;</span>[<span class="self">Self</span>]) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">u8</span>];
 
     <span class="doccomment">/// Reinterpret a slice of this [`TensorElement`] as a mutable byte array.</span>
-    <span class="kw">fn</span> <span class="ident">byte_buffer_mut</span>(<span class="ident">slice</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="self">Self</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>];
+    <span class="kw">fn</span> <span class="ident">byte_buffer_mut</span>(<span class="ident">slice</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="self">Self</span>]) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>];
 }
 
 <span class="macro">macro_rules!</span> <span class="ident">impl_tensor_element</span> {
-    ($(<span class="macro-nonterminal">$</span><span class="kw">type</span>:<span class="macro-nonterminal">ty</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">variant</span>:<span class="ident">expr</span>,)<span class="op">*</span> $(,)<span class="question-mark">?</span>) <span class="op">=</span><span class="op">&gt;</span> {
+    ($(<span class="macro-nonterminal">$</span><span class="kw">type</span>:<span class="macro-nonterminal">ty</span> =&gt; <span class="macro-nonterminal">$</span><span class="macro-nonterminal">variant</span>:<span class="ident">expr</span>,)<span class="op">*</span> $(,)<span class="question-mark">?</span>) =&gt; {
         $(
             <span class="kw">impl</span> <span class="ident">TensorElement</span>  <span class="kw">for</span> <span class="macro-nonterminal">$</span><span class="kw">type</span> {
                 <span class="kw">const</span> <span class="macro-nonterminal">ELEMENT_TYPE</span>: <span class="ident">ElementType</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">variant</span>;
 
-                <span class="kw">fn</span> <span class="ident">byte_buffer</span>(<span class="ident">slice</span>: <span class="kw-2">&amp;</span>[<span class="self">Self</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] {
+                <span class="kw">fn</span> <span class="ident">byte_buffer</span>(<span class="ident">slice</span>: <span class="kw-2">&amp;</span>[<span class="self">Self</span>]) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">u8</span>] {
                     <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">std::mem::size_of_val</span>(<span class="ident">slice</span>);
                     <span class="kw">unsafe</span> {
                         <span class="ident">std::slice::from_raw_parts</span>(<span class="ident">slice</span>.<span class="ident">as_ptr</span>().<span class="ident">cast</span>(), <span class="ident">len</span>)
                     }
                 }
 
-                <span class="kw">fn</span> <span class="ident">byte_buffer_mut</span>(<span class="ident">slice</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="self">Self</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>] {
+                <span class="kw">fn</span> <span class="ident">byte_buffer_mut</span>(<span class="ident">slice</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="self">Self</span>]) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>] {
                     <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">std::mem::size_of_val</span>(<span class="ident">slice</span>);
                     <span class="kw">unsafe</span> {
                         <span class="ident">std::slice::from_raw_parts_mut</span>(<span class="ident">slice</span>.<span class="ident">as_mut_ptr</span>().<span class="ident">cast</span>(), <span class="ident">len</span>)
@@ -319,43 +318,43 @@
 }
 
 <span class="macro">impl_tensor_element!</span> {
-    <span class="ident">u8</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ElementType::UInt8</span>,
-    <span class="ident">i16</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ElementType::Int16</span>,
-    <span class="ident">i32</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ElementType::Int32</span>,
-    <span class="ident">i64</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ElementType::Int64</span>,
-    <span class="ident">f32</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ElementType::Float32</span>,
-    <span class="ident">f64</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ElementType::Float64</span>,
+    <span class="ident">u8</span> =&gt; <span class="ident">ElementType::UInt8</span>,
+    <span class="ident">i16</span> =&gt; <span class="ident">ElementType::Int16</span>,
+    <span class="ident">i32</span> =&gt; <span class="ident">ElementType::Int32</span>,
+    <span class="ident">i64</span> =&gt; <span class="ident">ElementType::Int64</span>,
+    <span class="ident">f32</span> =&gt; <span class="ident">ElementType::Float32</span>,
+    <span class="ident">f64</span> =&gt; <span class="ident">ElementType::Float64</span>,
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">ElementType</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ffi::RuneCoralElementType</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">e</span>: <span class="ident">ElementType</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ffi::RuneCoralElementType</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">e</span>: <span class="ident">ElementType</span>) -&gt; <span class="ident">ffi::RuneCoralElementType</span> {
         <span class="ident">e</span> <span class="kw">as</span> <span class="ident">ffi::RuneCoralElementType</span>
     }
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">ffi::RuneCoralElementType</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ElementType</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">e</span>: <span class="ident">ffi::RuneCoralElementType</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ElementType</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">e</span>: <span class="ident">ffi::RuneCoralElementType</span>) -&gt; <span class="ident">ElementType</span> {
         <span class="kw">match</span> <span class="ident">e</span> {
-            <span class="ident">ffi::RuneCoralElementType__NoType</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ElementType::NoType</span>,
-            <span class="ident">ffi::RuneCoralElementType__Float32</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ElementType::Float32</span>,
-            <span class="ident">ffi::RuneCoralElementType__Int32</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ElementType::Int32</span>,
-            <span class="ident">ffi::RuneCoralElementType__UInt8</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ElementType::UInt8</span>,
-            <span class="ident">ffi::RuneCoralElementType__Int64</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ElementType::Int64</span>,
-            <span class="ident">ffi::RuneCoralElementType__String</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ElementType::String</span>,
-            <span class="ident">ffi::RuneCoralElementType__Bool</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ElementType::Bool</span>,
-            <span class="ident">ffi::RuneCoralElementType__Int16</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ElementType::Int16</span>,
-            <span class="ident">ffi::RuneCoralElementType__Complex64</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ElementType::Complex64</span>,
-            <span class="ident">ffi::RuneCoralElementType__Int8</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ElementType::Int8</span>,
-            <span class="ident">ffi::RuneCoralElementType__Float16</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ElementType::Float16</span>,
-            <span class="ident">ffi::RuneCoralElementType__Float64</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ElementType::Float64</span>,
-            <span class="ident">ffi::RuneCoralElementType__Complex128</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ElementType::Complex128</span>,
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ElementType::NoType</span>,
+            <span class="ident">ffi::RuneCoralElementType__NoType</span> =&gt; <span class="ident">ElementType::NoType</span>,
+            <span class="ident">ffi::RuneCoralElementType__Float32</span> =&gt; <span class="ident">ElementType::Float32</span>,
+            <span class="ident">ffi::RuneCoralElementType__Int32</span> =&gt; <span class="ident">ElementType::Int32</span>,
+            <span class="ident">ffi::RuneCoralElementType__UInt8</span> =&gt; <span class="ident">ElementType::UInt8</span>,
+            <span class="ident">ffi::RuneCoralElementType__Int64</span> =&gt; <span class="ident">ElementType::Int64</span>,
+            <span class="ident">ffi::RuneCoralElementType__String</span> =&gt; <span class="ident">ElementType::String</span>,
+            <span class="ident">ffi::RuneCoralElementType__Bool</span> =&gt; <span class="ident">ElementType::Bool</span>,
+            <span class="ident">ffi::RuneCoralElementType__Int16</span> =&gt; <span class="ident">ElementType::Int16</span>,
+            <span class="ident">ffi::RuneCoralElementType__Complex64</span> =&gt; <span class="ident">ElementType::Complex64</span>,
+            <span class="ident">ffi::RuneCoralElementType__Int8</span> =&gt; <span class="ident">ElementType::Int8</span>,
+            <span class="ident">ffi::RuneCoralElementType__Float16</span> =&gt; <span class="ident">ElementType::Float16</span>,
+            <span class="ident">ffi::RuneCoralElementType__Float64</span> =&gt; <span class="ident">ElementType::Float64</span>,
+            <span class="ident">ffi::RuneCoralElementType__Complex128</span> =&gt; <span class="ident">ElementType::Complex128</span>,
+            <span class="kw">_</span> =&gt; <span class="ident">ElementType::NoType</span>,
         }
     }
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">TensorDescriptor</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_rune_coral_tensor</span>(<span class="ident">tensor</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">ffi::RuneCoralTensor</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TensorDescriptor</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_rune_coral_tensor</span>(<span class="ident">tensor</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">ffi::RuneCoralTensor</span>) -&gt; <span class="ident">TensorDescriptor</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
         <span class="comment">// Safety: Lifetimes ensure our TensorDescriptor&#39;s shape field won&#39;t</span>
         <span class="comment">// accidentally outlive the original tensor.</span>
         <span class="kw">unsafe</span> {
@@ -372,21 +371,21 @@
 }
 
 <span class="kw">impl</span> <span class="ident">fmt::Display</span> <span class="kw">for</span> <span class="ident">ElementType</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="ident">fmt::Result</span> {
         <span class="kw">let</span> <span class="ident">element_kind</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">ElementType::Bool</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;b&quot;</span>,
-            <span class="ident">ElementType::UInt8</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;u8&quot;</span>,
-            <span class="ident">ElementType::Int8</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;i8&quot;</span>,
-            <span class="ident">ElementType::Int16</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;i16&quot;</span>,
-            <span class="ident">ElementType::Int32</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;i32&quot;</span>,
-            <span class="ident">ElementType::Int64</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;i64&quot;</span>,
-            <span class="ident">ElementType::Float16</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;f16&quot;</span>,
-            <span class="ident">ElementType::Float32</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;f32&quot;</span>,
-            <span class="ident">ElementType::Float64</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;f64&quot;</span>,
-            <span class="ident">ElementType::Complex64</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;c64&quot;</span>,
-            <span class="ident">ElementType::Complex128</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;c128&quot;</span>,
-            <span class="ident">ElementType::String</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;string&quot;</span>,
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;?&quot;</span>
+            <span class="ident">ElementType::Bool</span> =&gt; <span class="string">&quot;b&quot;</span>,
+            <span class="ident">ElementType::UInt8</span> =&gt; <span class="string">&quot;u8&quot;</span>,
+            <span class="ident">ElementType::Int8</span> =&gt; <span class="string">&quot;i8&quot;</span>,
+            <span class="ident">ElementType::Int16</span> =&gt; <span class="string">&quot;i16&quot;</span>,
+            <span class="ident">ElementType::Int32</span> =&gt; <span class="string">&quot;i32&quot;</span>,
+            <span class="ident">ElementType::Int64</span> =&gt; <span class="string">&quot;i64&quot;</span>,
+            <span class="ident">ElementType::Float16</span> =&gt; <span class="string">&quot;f16&quot;</span>,
+            <span class="ident">ElementType::Float32</span> =&gt; <span class="string">&quot;f32&quot;</span>,
+            <span class="ident">ElementType::Float64</span> =&gt; <span class="string">&quot;f64&quot;</span>,
+            <span class="ident">ElementType::Complex64</span> =&gt; <span class="string">&quot;c64&quot;</span>,
+            <span class="ident">ElementType::Complex128</span> =&gt; <span class="string">&quot;c128&quot;</span>,
+            <span class="ident">ElementType::String</span> =&gt; <span class="string">&quot;string&quot;</span>,
+            <span class="kw">_</span> =&gt; <span class="string">&quot;?&quot;</span>
         };
 
         <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="ident">element_kind</span>)
@@ -394,7 +393,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">fmt::Display</span> <span class="kw">for</span> <span class="ident">TensorDescriptor</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="ident">fmt::Result</span> {
         <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{}: {}[{}]&quot;</span>,
                 <span class="self">self</span>.<span class="ident">name</span>.<span class="ident">to_str</span>().<span class="ident">unwrap</span>(),
                 <span class="self">self</span>.<span class="ident">element_type</span>,
@@ -416,7 +415,7 @@
     <span class="doccomment">/// # Safety</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// The [`ffi::RuneCoralTensor`] can&#39;t outlive `self`.</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">as_coral_tensor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ffi::RuneCoralTensor</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">as_coral_tensor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">ffi::RuneCoralTensor</span> {
         <span class="ident">ffi::RuneCoralTensor</span> {
             <span class="ident">name</span>: <span class="ident">std::ptr::null</span>(),
             <span class="ident">type_</span>: <span class="self">self</span>.<span class="ident">element_type</span>.<span class="ident">into</span>(),
@@ -427,7 +426,7 @@
     }
 
     <span class="doccomment">/// Create a new [`Tensor`] backed by a slice.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_slice</span><span class="op">&lt;</span><span class="ident">E</span>: <span class="ident">TensorElement</span><span class="op">&gt;</span>(<span class="ident">slice</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">E</span>], <span class="ident">dimensions</span>: <span class="kw-2">&amp;</span>[<span class="ident">usize</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_slice</span><span class="op">&lt;</span><span class="ident">E</span>: <span class="ident">TensorElement</span><span class="op">&gt;</span>(<span class="ident">slice</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">E</span>], <span class="ident">dimensions</span>: <span class="kw-2">&amp;</span>[<span class="ident">usize</span>]) -&gt; <span class="self">Self</span> {
         <span class="ident">Tensor</span> {
             <span class="ident">element_type</span>: <span class="ident">E::ELEMENT_TYPE</span>,
             <span class="ident">buffer</span>: <span class="ident">E::byte_buffer</span>(<span class="ident">slice</span>),
@@ -436,7 +435,7 @@
     }
 
     <span class="doccomment">/// Get a [`TensorDescriptor`] that describes this tensor.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">descriptor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TensorDescriptor</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">descriptor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">TensorDescriptor</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
         <span class="ident">TensorDescriptor</span> {
             <span class="ident">name</span>: <span class="ident">CStr::from_bytes_with_nul</span>(<span class="string">b&quot;\0&quot;</span>).<span class="ident">unwrap</span>(),
             <span class="ident">element_type</span>: <span class="self">self</span>.<span class="ident">element_type</span>,
@@ -459,7 +458,7 @@
     <span class="doccomment">/// # Safety</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// The [`ffi::RuneCoralTensor`] can&#39;t outlive `self`.</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">as_coral_tensor</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ffi::RuneCoralTensor</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">as_coral_tensor</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="ident">ffi::RuneCoralTensor</span> {
         <span class="ident">ffi::RuneCoralTensor</span> {
             <span class="ident">name</span>: <span class="ident">std::ptr::null</span>(),
             <span class="ident">type_</span>: <span class="self">self</span>.<span class="ident">element_type</span>.<span class="ident">into</span>(),
@@ -470,7 +469,7 @@
     }
 
     <span class="doccomment">/// Create a new [`TensorMut`] backed by a slice.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_slice</span><span class="op">&lt;</span><span class="ident">E</span>: <span class="ident">TensorElement</span><span class="op">&gt;</span>(<span class="ident">slice</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> [<span class="ident">E</span>], <span class="ident">dimensions</span>: <span class="kw-2">&amp;</span>[<span class="ident">usize</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_slice</span><span class="op">&lt;</span><span class="ident">E</span>: <span class="ident">TensorElement</span><span class="op">&gt;</span>(<span class="ident">slice</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> [<span class="ident">E</span>], <span class="ident">dimensions</span>: <span class="kw-2">&amp;</span>[<span class="ident">usize</span>]) -&gt; <span class="self">Self</span> {
         <span class="ident">TensorMut</span> {
             <span class="ident">element_type</span>: <span class="ident">E::ELEMENT_TYPE</span>,
             <span class="ident">buffer</span>: <span class="ident">E::byte_buffer_mut</span>(<span class="ident">slice</span>),
@@ -479,7 +478,7 @@
     }
 
     <span class="doccomment">/// Get a [`TensorDescriptor`] that describes this tensor.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">descriptor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TensorDescriptor</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">descriptor</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">TensorDescriptor</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
         <span class="ident">TensorDescriptor</span> {
             <span class="ident">name</span>: <span class="ident">CStr::from_bytes_with_nul</span>(<span class="string">b&quot;\0&quot;</span>).<span class="ident">unwrap</span>(),
             <span class="ident">element_type</span>: <span class="self">self</span>.<span class="ident">element_type</span>,
@@ -487,7 +486,7 @@
         }
     }
 }
-</pre></div>
+</code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="hotg_runecoral" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
     <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script>
 </body></html>

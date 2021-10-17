@@ -159,7 +159,6 @@ sourcesIndex["remove_dir_all"] = {"name":"","files":["lib.rs"]};
 sourcesIndex["require_unsafe_in_body"] = {"name":"","dirs":[{"name":"utils","files":["macros.rs","mod.rs"]}],"files":["lib.rs"]};
 sourcesIndex["rkyv"] = {"name":"","dirs":[{"name":"core_impl","files":["mod.rs","range.rs","time.rs"]},{"name":"de","files":["adapters.rs","deserializers.rs","mod.rs"]},{"name":"ser","dirs":[{"name":"serializers","files":["mod.rs","std.rs"]}],"files":["adapters.rs","mod.rs"]},{"name":"std_impl","dirs":[{"name":"chd","files":["mod.rs"]},{"name":"shared","files":["mod.rs"]}],"files":["mod.rs","net.rs"]},{"name":"util","files":["mod.rs","std.rs"]}],"files":["lib.rs","macros.rs"]};
 sourcesIndex["rkyv_derive"] = {"name":"","files":["archive.rs","attributes.rs","deserialize.rs","lib.rs","serialize.rs"]};
-sourcesIndex["rune"] = {"name":"","files":["rune.rs"]};
 sourcesIndex["rune_py"] = {"name":"","files":["lib.rs"]};
 sourcesIndex["rustc_demangle"] = {"name":"","files":["legacy.rs","lib.rs","v0.rs"]};
 sourcesIndex["rustc_hash"] = {"name":"","files":["lib.rs"]};

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `crates&#x2F;compiler&#x2F;src&#x2F;codegen&#x2F;generate_lib_rs.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>generate_lib_rs.rs - source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../hotg_rune_compiler/index.html'><div class='logo-container rust-logo'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">   1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `crates&#x2F;compiler&#x2F;src&#x2F;codegen&#x2F;generate_lib_rs.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>generate_lib_rs.rs - source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../hotg_rune_compiler/index.html'><div class='logo-container rust-logo'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">   1</span>
 <span id="2">   2</span>
 <span id="3">   3</span>
 <span id="4">   4</span>
@@ -1129,25 +1129,7 @@
 <span id="1129">1129</span>
 <span id="1130">1130</span>
 <span id="1131">1131</span>
-<span id="1132">1132</span>
-<span id="1133">1133</span>
-<span id="1134">1134</span>
-<span id="1135">1135</span>
-<span id="1136">1136</span>
-<span id="1137">1137</span>
-<span id="1138">1138</span>
-<span id="1139">1139</span>
-<span id="1140">1140</span>
-<span id="1141">1141</span>
-<span id="1142">1142</span>
-<span id="1143">1143</span>
-<span id="1144">1144</span>
-<span id="1145">1145</span>
-<span id="1146">1146</span>
-<span id="1147">1147</span>
-<span id="1148">1148</span>
-</pre><pre class="rust">
-<span class="kw">use</span> <span class="ident">std::collections</span>::{<span class="ident">HashMap</span>, <span class="ident">HashSet</span>};
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::collections</span>::{<span class="ident">HashMap</span>, <span class="ident">HashSet</span>};
 <span class="kw">use</span> <span class="ident">hotg_rune_core</span>::{<span class="ident">Shape</span>, <span class="ident">ElementType</span>};
 <span class="kw">use</span> <span class="ident">legion</span>::{<span class="ident">Entity</span>, <span class="ident">Query</span>, <span class="ident">systems::CommandBuffer</span>, <span class="ident">world::SubWorld</span>};
 <span class="kw">use</span> <span class="ident">proc_macro2</span>::{<span class="ident">Ident</span>, <span class="ident">Literal</span>, <span class="ident">Span</span>, <span class="ident">TokenStream</span>};
@@ -1227,17 +1209,11 @@
     <span class="ident">capabilities</span>: <span class="kw-2">&amp;</span>[(<span class="kw-2">&amp;</span><span class="ident">Name</span>, <span class="kw-2">&amp;</span><span class="ident">Source</span>, <span class="kw-2">&amp;</span><span class="ident">Outputs</span>)],
     <span class="ident">proc_blocks</span>: <span class="kw-2">&amp;</span>[(<span class="kw-2">&amp;</span><span class="ident">Name</span>, <span class="kw-2">&amp;</span><span class="ident">ProcBlock</span>)],
     <span class="ident">outputs</span>: <span class="kw-2">&amp;</span>[(<span class="kw-2">&amp;</span><span class="ident">Name</span>, <span class="kw-2">&amp;</span><span class="ident">Sink</span>)],
-    <span class="ident">pipeline_nodes</span>: <span class="kw-2">&amp;</span>[(
-        <span class="kw-2">&amp;</span><span class="ident">Entity</span>,
-        <span class="kw-2">&amp;</span><span class="ident">Name</span>,
-        <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">Inputs</span><span class="op">&gt;</span>,
-        <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">Outputs</span><span class="op">&gt;</span>,
-        <span class="kw-2">&amp;</span><span class="ident">PipelineNode</span>,
-    )],
+    <span class="ident">pipeline_nodes</span>: <span class="kw-2">&amp;</span>[<span class="ident">Node</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>],
     <span class="ident">tensors</span>: <span class="kw-2">&amp;</span>[(<span class="kw-2">&amp;</span><span class="ident">Entity</span>, <span class="kw-2">&amp;</span><span class="ident">Tensor</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">Inputs</span><span class="op">&gt;</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">Outputs</span><span class="op">&gt;</span>)],
-    <span class="kw-2">mut</span> <span class="ident">get_name</span>: <span class="kw">impl</span> <span class="ident">FnMut</span>(<span class="ident">Entity</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">Name</span><span class="op">&gt;</span>,
-    <span class="kw-2">mut</span> <span class="ident">get_tensor</span>: <span class="kw">impl</span> <span class="ident">FnMut</span>(<span class="ident">Entity</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">Tensor</span><span class="op">&gt;</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span> {
+    <span class="kw-2">mut</span> <span class="ident">get_name</span>: <span class="kw">impl</span> <span class="ident">FnMut</span>(<span class="ident">Entity</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">Name</span><span class="op">&gt;</span>,
+    <span class="kw-2">mut</span> <span class="ident">get_tensor</span>: <span class="kw">impl</span> <span class="ident">FnMut</span>(<span class="ident">Entity</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">Tensor</span><span class="op">&gt;</span>,
+) -&gt; <span class="ident">TokenStream</span> {
     <span class="kw">let</span> <span class="ident">prelude</span> <span class="op">=</span> <span class="ident">generate_prelude</span>();
     <span class="kw">let</span> <span class="ident">custom_sections</span> <span class="op">=</span> <span class="ident">generate_custom_sections</span>(<span class="ident">sections</span>);
     <span class="kw">let</span> <span class="ident">resources_module</span> <span class="op">=</span> <span class="ident">generate_resources_module</span>(<span class="ident">resources</span>);
@@ -1275,20 +1251,14 @@
     <span class="ident">capabilities</span>: <span class="kw-2">&amp;</span>[(<span class="kw-2">&amp;</span><span class="ident">Name</span>, <span class="kw-2">&amp;</span><span class="ident">Source</span>, <span class="kw-2">&amp;</span><span class="ident">Outputs</span>)],
     <span class="ident">proc_blocks</span>: <span class="kw-2">&amp;</span>[(<span class="kw-2">&amp;</span><span class="ident">Name</span>, <span class="kw-2">&amp;</span><span class="ident">ProcBlock</span>)],
     <span class="ident">outputs</span>: <span class="kw-2">&amp;</span>[(<span class="kw-2">&amp;</span><span class="ident">Name</span>, <span class="kw-2">&amp;</span><span class="ident">Sink</span>)],
-    <span class="ident">pipeline_nodes</span>: <span class="kw-2">&amp;</span>[(
-        <span class="kw-2">&amp;</span><span class="ident">Entity</span>,
-        <span class="kw-2">&amp;</span><span class="ident">Name</span>,
-        <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">Inputs</span><span class="op">&gt;</span>,
-        <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">Outputs</span><span class="op">&gt;</span>,
-        <span class="kw-2">&amp;</span><span class="ident">PipelineNode</span>,
-    )],
+    <span class="ident">pipeline_nodes</span>: <span class="kw-2">&amp;</span>[<span class="ident">Node</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>],
     <span class="ident">tensors</span>: <span class="kw-2">&amp;</span>[(<span class="kw-2">&amp;</span><span class="ident">Entity</span>, <span class="kw-2">&amp;</span><span class="ident">Tensor</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">Inputs</span><span class="op">&gt;</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">Outputs</span><span class="op">&gt;</span>)],
     <span class="ident">get_name</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">F</span>,
     <span class="ident">get_tensor</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span>
+) -&gt; <span class="ident">TokenStream</span>
 <span class="kw">where</span>
-    <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="ident">Entity</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">Name</span><span class="op">&gt;</span>,
-    <span class="ident">T</span>: <span class="ident">FnMut</span>(<span class="ident">Entity</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">Tensor</span><span class="op">&gt;</span>,
+    <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="ident">Entity</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">Name</span><span class="op">&gt;</span>,
+    <span class="ident">T</span>: <span class="ident">FnMut</span>(<span class="ident">Entity</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">Tensor</span><span class="op">&gt;</span>,
 {
     <span class="kw">let</span> <span class="ident">capabilities</span> <span class="op">=</span> <span class="ident">initialize_capabilities</span>(<span class="ident">capabilities</span>, <span class="ident">get_tensor</span>);
     <span class="kw">let</span> <span class="ident">proc_blocks</span> <span class="op">=</span> <span class="ident">initialize_proc_blocks</span>(<span class="ident">proc_blocks</span>);
@@ -1301,7 +1271,7 @@
 
     <span class="macro">quote!</span> {
         <span class="attribute">#[<span class="ident">no_mangle</span>]</span>
-        <span class="kw">pub</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">_manifest</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">i32</span> {
+        <span class="kw">pub</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">_manifest</span>() -&gt; <span class="ident">i32</span> {
             #<span class="ident">capabilities</span>
             #<span class="ident">proc_blocks</span>
             #<span class="ident">models</span>
@@ -1330,7 +1300,7 @@
         <span class="kw-2">&amp;</span><span class="ident">PipelineNode</span>,
     )],
     <span class="ident">tensors</span>: <span class="kw-2">&amp;</span>[(<span class="kw-2">&amp;</span><span class="ident">Entity</span>, <span class="kw-2">&amp;</span><span class="ident">Tensor</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">Inputs</span><span class="op">&gt;</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">Outputs</span><span class="op">&gt;</span>)],
-) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span> {
+) -&gt; <span class="ident">TokenStream</span> {
     <span class="kw">let</span> <span class="ident">ExecutionOrder</span> {
         <span class="ident">order</span>,
         <span class="ident">tensor_names</span>,
@@ -1359,25 +1329,25 @@
     <span class="op">&gt;</span>,
     <span class="ident">tensor_names</span>: <span class="kw-2">&amp;</span><span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">Entity</span>, <span class="ident">Ident</span><span class="op">&gt;</span>,
     <span class="ident">tensors</span>: <span class="kw-2">&amp;</span>[(<span class="kw-2">&amp;</span><span class="ident">Entity</span>, <span class="kw-2">&amp;</span><span class="ident">Tensor</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">Inputs</span><span class="op">&gt;</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">Outputs</span><span class="op">&gt;</span>)],
-) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span> {
+) -&gt; <span class="ident">TokenStream</span> {
     <span class="kw">let</span> (<span class="ident">name</span>, <span class="ident">inputs</span>, <span class="ident">outputs</span>) <span class="op">=</span> <span class="ident">pipeline_nodes</span>
         .<span class="ident">get</span>(<span class="ident">node</span>)
         .<span class="ident">copied</span>()
         .<span class="ident">expect</span>(<span class="string">&quot;This pipeline node always be present&quot;</span>);
 
     <span class="kw">match</span> (<span class="ident">inputs</span>, <span class="ident">outputs</span>) {
-        (<span class="prelude-val">Some</span>(<span class="ident">inputs</span>), <span class="prelude-val">Some</span>(<span class="ident">outputs</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">execute_model_or_proc_block</span>(
+        (<span class="prelude-val">Some</span>(<span class="ident">inputs</span>), <span class="prelude-val">Some</span>(<span class="ident">outputs</span>)) =&gt; <span class="ident">execute_model_or_proc_block</span>(
             <span class="ident">name</span>,
             <span class="ident">inputs</span>,
             <span class="ident">outputs</span>,
             <span class="ident">tensor_names</span>,
             <span class="ident">tensors</span>,
         ),
-        (<span class="prelude-val">None</span>, <span class="prelude-val">Some</span>(<span class="ident">outputs</span>)) <span class="op">=</span><span class="op">&gt;</span> {
+        (<span class="prelude-val">None</span>, <span class="prelude-val">Some</span>(<span class="ident">outputs</span>)) =&gt; {
             <span class="ident">execute_capability</span>(<span class="ident">name</span>, <span class="ident">outputs</span>, <span class="ident">tensor_names</span>, <span class="ident">tensors</span>)
         },
-        (<span class="prelude-val">Some</span>(<span class="ident">inputs</span>), <span class="prelude-val">None</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">execute_output</span>(<span class="ident">name</span>, <span class="ident">inputs</span>, <span class="ident">tensor_names</span>),
-        (<span class="prelude-val">None</span>, <span class="prelude-val">None</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        (<span class="prelude-val">Some</span>(<span class="ident">inputs</span>), <span class="prelude-val">None</span>) =&gt; <span class="ident">execute_output</span>(<span class="ident">name</span>, <span class="ident">inputs</span>, <span class="ident">tensor_names</span>),
+        (<span class="prelude-val">None</span>, <span class="prelude-val">None</span>) =&gt; {
             <span class="macro">unreachable!</span>(
                 <span class="string">&quot;The \&quot;{}\&quot; pipeline node should have inputs and/or outputs&quot;</span>,
                 <span class="ident">name</span>
@@ -1390,7 +1360,7 @@
     <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">Name</span>,
     <span class="ident">inputs</span>: <span class="kw-2">&amp;</span><span class="ident">Inputs</span>,
     <span class="ident">tensor_names</span>: <span class="kw-2">&amp;</span><span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">Entity</span>, <span class="ident">Ident</span><span class="op">&gt;</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span> {
+) -&gt; <span class="ident">TokenStream</span> {
     <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">Ident::new</span>(<span class="ident">name</span>, <span class="ident">Span::call_site</span>());
     <span class="kw">let</span> <span class="ident">inputs</span> <span class="op">=</span> <span class="ident">input_bindings</span>(<span class="kw-2">&amp;</span><span class="ident">inputs</span>.<span class="ident">tensors</span>, <span class="ident">tensor_names</span>);
 
@@ -1405,7 +1375,7 @@
     <span class="ident">outputs</span>: <span class="kw-2">&amp;</span><span class="ident">Outputs</span>,
     <span class="ident">tensor_names</span>: <span class="kw-2">&amp;</span><span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">Entity</span>, <span class="ident">Ident</span><span class="op">&gt;</span>,
     <span class="ident">tensors</span>: <span class="kw-2">&amp;</span>[(<span class="kw-2">&amp;</span><span class="ident">Entity</span>, <span class="kw-2">&amp;</span><span class="ident">Tensor</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">Inputs</span><span class="op">&gt;</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">Outputs</span><span class="op">&gt;</span>)],
-) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span> {
+) -&gt; <span class="ident">TokenStream</span> {
     <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">Ident::new</span>(<span class="ident">name</span>, <span class="ident">Span::call_site</span>());
     <span class="kw">let</span> <span class="ident">inputs</span> <span class="op">=</span> <span class="ident">input_bindings</span>(<span class="kw-2">&amp;</span><span class="ident">inputs</span>.<span class="ident">tensors</span>, <span class="ident">tensor_names</span>);
     <span class="kw">let</span> <span class="ident">output_types</span> <span class="op">=</span> <span class="ident">tensor_types</span>(<span class="kw-2">&amp;</span><span class="ident">outputs</span>.<span class="ident">tensors</span>, <span class="ident">tensors</span>);
@@ -1419,51 +1389,51 @@
 <span class="kw">fn</span> <span class="ident">input_bindings</span>(
     <span class="ident">tensors</span>: <span class="kw-2">&amp;</span>[<span class="ident">Entity</span>],
     <span class="ident">tensor_names</span>: <span class="kw-2">&amp;</span><span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">Entity</span>, <span class="ident">Ident</span><span class="op">&gt;</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span> {
+) -&gt; <span class="ident">TokenStream</span> {
     <span class="kw">let</span> <span class="ident">names</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">tensors</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">t</span><span class="op">|</span> <span class="kw-2">&amp;</span><span class="ident">tensor_names</span>[<span class="ident">t</span>]).<span class="ident">collect</span>();
 
     <span class="kw">match</span> <span class="ident">names</span>.<span class="ident">as_slice</span>() {
-        [] <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable!</span>(<span class="string">&quot;Expected 1 or more tensors&quot;</span>),
-        [<span class="ident">tensor</span>] <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote!</span>(#<span class="ident">tensor</span>.<span class="ident">clone</span>()),
-        <span class="ident">names</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote!</span>((#( #<span class="ident">names</span>.<span class="ident">clone</span>() ),<span class="kw-2">*</span>)),
+        [] =&gt; <span class="macro">unreachable!</span>(<span class="string">&quot;Expected 1 or more tensors&quot;</span>),
+        [<span class="ident">tensor</span>] =&gt; <span class="macro">quote!</span>(#<span class="ident">tensor</span>.<span class="ident">clone</span>()),
+        <span class="ident">names</span> =&gt; <span class="macro">quote!</span>((#( #<span class="ident">names</span>.<span class="ident">clone</span>() ),<span class="kw-2">*</span>)),
     }
 }
 
-<span class="kw">fn</span> <span class="ident">tensor_types</span><span class="op">&lt;</span><span class="lifetime">&#39;world</span><span class="op">&gt;</span>(
+<span class="kw">fn</span> <span class="ident">tensor_types</span>(
     <span class="ident">tensors</span>: <span class="kw-2">&amp;</span>[<span class="ident">Entity</span>],
     <span class="ident">all_tensors</span>: <span class="kw-2">&amp;</span>[(<span class="kw-2">&amp;</span><span class="ident">Entity</span>, <span class="kw-2">&amp;</span><span class="ident">Tensor</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">Inputs</span><span class="op">&gt;</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">Outputs</span><span class="op">&gt;</span>)],
-) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span> {
+) -&gt; <span class="ident">TokenStream</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">types</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
 
     <span class="kw">for</span> <span class="ident">ent</span> <span class="kw">in</span> <span class="ident">tensors</span> {
         <span class="kw">let</span> (<span class="kw">_</span>, <span class="ident">Tensor</span>(<span class="ident">shape</span>), <span class="kw">_</span>, <span class="kw">_</span>) <span class="op">=</span> <span class="ident">all_tensors</span>
             .<span class="ident">iter</span>()
             .<span class="ident">copied</span>()
-            .<span class="ident">find</span>(<span class="op">|</span>(<span class="ident">e</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>)<span class="op">|</span> <span class="ident">ent</span> <span class="op">=</span><span class="op">=</span> <span class="kw-2">*</span><span class="ident">e</span>)
+            .<span class="ident">find</span>(<span class="op">|</span>(<span class="ident">e</span>, <span class="kw">_</span>, <span class="kw">_</span>, <span class="kw">_</span>)<span class="op">|</span> <span class="ident">ent</span> <span class="op">==</span> <span class="kw-2">*</span><span class="ident">e</span>)
             .<span class="ident">unwrap</span>();
 
         <span class="ident">types</span>.<span class="ident">push</span>(<span class="ident">shape_to_tensor_type</span>(<span class="ident">shape</span>));
     }
 
     <span class="kw">match</span> <span class="ident">types</span>.<span class="ident">as_slice</span>() {
-        [<span class="ident">single</span>] <span class="op">=</span><span class="op">&gt;</span> <span class="ident">single</span>.<span class="ident">clone</span>(),
-        <span class="ident">many</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote!</span>((#(#<span class="ident">many</span>),<span class="kw-2">*</span>)),
+        [<span class="ident">single</span>] =&gt; <span class="ident">single</span>.<span class="ident">clone</span>(),
+        <span class="ident">many</span> =&gt; <span class="macro">quote!</span>((#(#<span class="ident">many</span>),<span class="kw-2">*</span>)),
     }
 }
 
-<span class="kw">fn</span> <span class="ident">shape_to_tensor_type</span>(<span class="ident">shape</span>: <span class="kw-2">&amp;</span><span class="ident">Shape</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span> {
+<span class="kw">fn</span> <span class="ident">shape_to_tensor_type</span>(<span class="ident">shape</span>: <span class="kw-2">&amp;</span><span class="ident">Shape</span>) -&gt; <span class="ident">TokenStream</span> {
     <span class="kw">let</span> <span class="ident">element_type</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">shape</span>.<span class="ident">element_type</span>() {
-        <span class="ident">ElementType::U8</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote!</span>(<span class="ident">u8</span>),
-        <span class="ident">ElementType::I8</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote!</span>(<span class="ident">i8</span>),
-        <span class="ident">ElementType::U16</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote!</span>(<span class="ident">u16</span>),
-        <span class="ident">ElementType::I16</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote!</span>(<span class="ident">i16</span>),
-        <span class="ident">ElementType::U32</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote!</span>(<span class="ident">u32</span>),
-        <span class="ident">ElementType::I32</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote!</span>(<span class="ident">i32</span>),
-        <span class="ident">ElementType::F32</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote!</span>(<span class="ident">f32</span>),
-        <span class="ident">ElementType::U64</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote!</span>(<span class="ident">u64</span>),
-        <span class="ident">ElementType::I64</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote!</span>(<span class="ident">i64</span>),
-        <span class="ident">ElementType::F64</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote!</span>(<span class="ident">f64</span>),
-        <span class="ident">ElementType::String</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote!</span>(<span class="ident">alloc::borrow::Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span>, <span class="ident">str</span><span class="op">&gt;</span>),
+        <span class="ident">ElementType::U8</span> =&gt; <span class="macro">quote!</span>(<span class="ident">u8</span>),
+        <span class="ident">ElementType::I8</span> =&gt; <span class="macro">quote!</span>(<span class="ident">i8</span>),
+        <span class="ident">ElementType::U16</span> =&gt; <span class="macro">quote!</span>(<span class="ident">u16</span>),
+        <span class="ident">ElementType::I16</span> =&gt; <span class="macro">quote!</span>(<span class="ident">i16</span>),
+        <span class="ident">ElementType::U32</span> =&gt; <span class="macro">quote!</span>(<span class="ident">u32</span>),
+        <span class="ident">ElementType::I32</span> =&gt; <span class="macro">quote!</span>(<span class="ident">i32</span>),
+        <span class="ident">ElementType::F32</span> =&gt; <span class="macro">quote!</span>(<span class="ident">f32</span>),
+        <span class="ident">ElementType::U64</span> =&gt; <span class="macro">quote!</span>(<span class="ident">u64</span>),
+        <span class="ident">ElementType::I64</span> =&gt; <span class="macro">quote!</span>(<span class="ident">i64</span>),
+        <span class="ident">ElementType::F64</span> =&gt; <span class="macro">quote!</span>(<span class="ident">f64</span>),
+        <span class="ident">ElementType::String</span> =&gt; <span class="macro">quote!</span>(<span class="ident">alloc::borrow::Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span>, <span class="ident">str</span><span class="op">&gt;</span>),
     };
     <span class="macro">quote!</span>(<span class="ident">Tensor</span><span class="op">&lt;</span>#<span class="ident">element_type</span><span class="op">&gt;</span>)
 }
@@ -1471,13 +1441,13 @@
 <span class="kw">fn</span> <span class="ident">tensor_name_or_tuple</span>(
     <span class="ident">tensors</span>: <span class="kw-2">&amp;</span>[<span class="ident">Entity</span>],
     <span class="ident">tensor_names</span>: <span class="kw-2">&amp;</span><span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">Entity</span>, <span class="ident">Ident</span><span class="op">&gt;</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span> {
+) -&gt; <span class="ident">TokenStream</span> {
     <span class="kw">let</span> <span class="ident">names</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">tensors</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">t</span><span class="op">|</span> <span class="kw-2">&amp;</span><span class="ident">tensor_names</span>[<span class="ident">t</span>]).<span class="ident">collect</span>();
 
     <span class="kw">match</span> <span class="ident">names</span>.<span class="ident">as_slice</span>() {
-        [] <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable!</span>(<span class="string">&quot;Expected 1 or more tensors&quot;</span>),
-        [<span class="ident">tensor</span>] <span class="op">=</span><span class="op">&gt;</span> <span class="ident">tensor</span>.<span class="ident">into_token_stream</span>(),
-        <span class="ident">names</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote!</span>((#(#<span class="ident">names</span>),<span class="kw-2">*</span>)),
+        [] =&gt; <span class="macro">unreachable!</span>(<span class="string">&quot;Expected 1 or more tensors&quot;</span>),
+        [<span class="ident">tensor</span>] =&gt; <span class="ident">tensor</span>.<span class="ident">into_token_stream</span>(),
+        <span class="ident">names</span> =&gt; <span class="macro">quote!</span>((#(#<span class="ident">names</span>),<span class="kw-2">*</span>)),
     }
 }
 
@@ -1486,7 +1456,7 @@
     <span class="ident">outputs</span>: <span class="kw-2">&amp;</span><span class="ident">Outputs</span>,
     <span class="ident">tensor_names</span>: <span class="kw-2">&amp;</span><span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">Entity</span>, <span class="ident">Ident</span><span class="op">&gt;</span>,
     <span class="ident">tensors</span>: <span class="kw-2">&amp;</span>[(<span class="kw-2">&amp;</span><span class="ident">Entity</span>, <span class="kw-2">&amp;</span><span class="ident">Tensor</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">Inputs</span><span class="op">&gt;</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">Outputs</span><span class="op">&gt;</span>)],
-) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span> {
+) -&gt; <span class="ident">TokenStream</span> {
     <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">Ident::new</span>(<span class="ident">name</span>, <span class="ident">Span::call_site</span>());
     <span class="kw">let</span> <span class="ident">output_types</span> <span class="op">=</span> <span class="ident">tensor_types</span>(<span class="kw-2">&amp;</span><span class="ident">outputs</span>.<span class="ident">tensors</span>, <span class="ident">tensors</span>);
     <span class="kw">let</span> <span class="ident">outputs</span> <span class="op">=</span> <span class="ident">tensor_name_or_tuple</span>(<span class="kw-2">&amp;</span><span class="ident">outputs</span>.<span class="ident">tensors</span>, <span class="ident">tensor_names</span>);
@@ -1508,14 +1478,16 @@
             <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">Outputs</span><span class="op">&gt;</span>,
         ),
     <span class="op">&gt;</span>,
-    <span class="ident">tensors</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> [(
-        <span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">Entity</span>,
-        <span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">Tensor</span>,
-        <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">Inputs</span><span class="op">&gt;</span>,
-        <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">Outputs</span><span class="op">&gt;</span>,
-    )],
     <span class="ident">tensor_inputs</span>: <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">Entity</span>, <span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> [<span class="ident">Entity</span>]<span class="op">&gt;</span>,
 }
+
+<span class="kw">type</span> <span class="ident">Node</span><span class="op">&lt;</span><span class="lifetime">&#39;world</span><span class="op">&gt;</span> <span class="op">=</span> (
+    <span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">Entity</span>,
+    <span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">Name</span>,
+    <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">Inputs</span><span class="op">&gt;</span>,
+    <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">Outputs</span><span class="op">&gt;</span>,
+    <span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">PipelineNode</span>,
+);
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;world</span><span class="op">&gt;</span> <span class="ident">ExecutionOrder</span><span class="op">&lt;</span><span class="lifetime">&#39;world</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Given a set of pipeline nodes, determine the order they should be</span>
@@ -1531,20 +1503,14 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// [topo]: https://www.geeksforgeeks.org/topological-sorting/</span>
     <span class="kw">fn</span> <span class="ident">calculate</span>(
-        <span class="ident">pipeline_nodes</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> [(
-            <span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">Entity</span>,
-            <span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">Name</span>,
-            <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">Inputs</span><span class="op">&gt;</span>,
-            <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">Outputs</span><span class="op">&gt;</span>,
-            <span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">PipelineNode</span>,
-        )],
+        <span class="ident">pipeline_nodes</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> [<span class="ident">Node</span><span class="op">&lt;</span><span class="lifetime">&#39;world</span><span class="op">&gt;</span>],
         <span class="ident">tensors</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> [(
             <span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">Entity</span>,
             <span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">Tensor</span>,
             <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">Inputs</span><span class="op">&gt;</span>,
             <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">Outputs</span><span class="op">&gt;</span>,
         )],
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    ) -&gt; <span class="self">Self</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">order</span> <span class="op">=</span> <span class="ident">ExecutionOrder</span> {
             <span class="ident">order</span>: <span class="ident">Vec::new</span>(),
             <span class="ident">tensor_names</span>: <span class="ident">HashMap::new</span>(),
@@ -1556,7 +1522,6 @@
                     (<span class="kw-2">*</span><span class="ident">ent</span>, (<span class="ident">name</span>, <span class="ident">inputs</span>, <span class="ident">outputs</span>))
                 })
                 .<span class="ident">collect</span>(),
-            <span class="ident">tensors</span>,
             <span class="ident">tensor_inputs</span>: <span class="ident">tensors</span>
                 .<span class="ident">iter</span>()
                 .<span class="ident">copied</span>()
@@ -1617,14 +1582,14 @@
     }
 }
 
-<span class="kw">fn</span> <span class="ident">initialize_outputs</span>(<span class="ident">outputs</span>: <span class="kw-2">&amp;</span>[(<span class="kw-2">&amp;</span><span class="ident">Name</span>, <span class="kw-2">&amp;</span><span class="ident">Sink</span>)]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span> {
+<span class="kw">fn</span> <span class="ident">initialize_outputs</span>(<span class="ident">outputs</span>: <span class="kw-2">&amp;</span>[(<span class="kw-2">&amp;</span><span class="ident">Name</span>, <span class="kw-2">&amp;</span><span class="ident">Sink</span>)]) -&gt; <span class="ident">TokenStream</span> {
     <span class="ident">outputs</span>
         .<span class="ident">iter</span>()
         .<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">name</span>, <span class="ident">sink</span>)<span class="op">|</span> <span class="ident">initialize_output</span>(<span class="ident">name</span>, <span class="ident">sink</span>))
         .<span class="ident">collect</span>()
 }
 
-<span class="kw">fn</span> <span class="ident">initialize_output</span>(<span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">Name</span>, <span class="ident">sink</span>: <span class="kw-2">&amp;</span><span class="ident">Sink</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span> {
+<span class="kw">fn</span> <span class="ident">initialize_output</span>(<span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">Name</span>, <span class="ident">sink</span>: <span class="kw-2">&amp;</span><span class="ident">Sink</span>) -&gt; <span class="ident">TokenStream</span> {
     <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">Ident::new</span>(<span class="ident">name</span>, <span class="ident">Span::call_site</span>());
     <span class="kw">let</span> <span class="ident">type_name</span>: <span class="ident">TokenStream</span> <span class="op">=</span> <span class="ident">sink_type_name</span>(<span class="kw-2">&amp;</span><span class="ident">sink</span>.<span class="ident">kind</span>);
 
@@ -1633,10 +1598,10 @@
     }
 }
 
-<span class="kw">fn</span> <span class="ident">sink_type_name</span>(<span class="ident">kind</span>: <span class="kw-2">&amp;</span><span class="ident">SinkKind</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span> {
+<span class="kw">fn</span> <span class="ident">sink_type_name</span>(<span class="ident">kind</span>: <span class="kw-2">&amp;</span><span class="ident">SinkKind</span>) -&gt; <span class="ident">TokenStream</span> {
     <span class="kw">match</span> <span class="ident">kind</span> {
-        <span class="ident">SinkKind::Serial</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote!</span>(<span class="ident">hotg_runicos_base_wasm::Serial</span>),
-        <span class="ident">SinkKind::Other</span>(<span class="ident">other</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">SinkKind::Serial</span> =&gt; <span class="macro">quote!</span>(<span class="ident">hotg_runicos_base_wasm::Serial</span>),
+        <span class="ident">SinkKind::Other</span>(<span class="ident">other</span>) =&gt; {
             <span class="macro">unimplemented!</span>(<span class="string">&quot;Unable to handle \&quot;{}\&quot; outputs&quot;</span>, <span class="ident">other</span>)
         },
     }
@@ -1649,16 +1614,16 @@
     <span class="ident">outputs</span>: <span class="kw-2">&amp;</span><span class="ident">Outputs</span>,
     <span class="ident">get_name</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">N</span>,
     <span class="ident">get_tensor</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span>
+) -&gt; <span class="ident">TokenStream</span>
 <span class="kw">where</span>
-    <span class="ident">N</span>: <span class="ident">FnMut</span>(<span class="ident">Entity</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">Name</span><span class="op">&gt;</span>,
-    <span class="ident">T</span>: <span class="ident">FnMut</span>(<span class="ident">Entity</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">Tensor</span><span class="op">&gt;</span>,
+    <span class="ident">N</span>: <span class="ident">FnMut</span>(<span class="ident">Entity</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">Name</span><span class="op">&gt;</span>,
+    <span class="ident">T</span>: <span class="ident">FnMut</span>(<span class="ident">Entity</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">Tensor</span><span class="op">&gt;</span>,
 {
     <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">Ident::new</span>(<span class="ident">name</span>, <span class="ident">Span::call_site</span>());
 
     <span class="kw">let</span> <span class="ident">path_to_model_bytes</span> <span class="op">=</span> <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">model</span>.<span class="ident">model_file</span> {
-        <span class="ident">ModelFile::FromDisk</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote!</span>(<span class="ident"><span class="kw">crate</span>::models</span>::#<span class="ident">name</span>),
-        <span class="ident">ModelFile::Resource</span>(<span class="ident">resource</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">ModelFile::FromDisk</span>(<span class="kw">_</span>) =&gt; <span class="macro">quote!</span>(<span class="ident"><span class="kw">crate</span>::models</span>::#<span class="ident">name</span>),
+        <span class="ident">ModelFile::Resource</span>(<span class="ident">resource</span>) =&gt; {
             <span class="kw">let</span> <span class="ident">resource_name</span> <span class="op">=</span> <span class="ident">get_name</span>(<span class="kw-2">*</span><span class="ident">resource</span>)
                 .<span class="ident">expect</span>(<span class="string">&quot;We should always be able to get a resource&#39;s name&quot;</span>);
             <span class="kw">let</span> <span class="ident">resource_name</span> <span class="op">=</span> <span class="ident">Ident::new</span>(<span class="ident">resource_name</span>, <span class="ident">Span::call_site</span>());
@@ -1686,9 +1651,9 @@
 <span class="kw">fn</span> <span class="ident">tensor_descriptors</span><span class="op">&lt;</span><span class="lifetime">&#39;world</span>, <span class="ident">T</span><span class="op">&gt;</span>(
     <span class="ident">tensors</span>: <span class="kw-2">&amp;</span>[<span class="ident">Entity</span>],
     <span class="ident">get_tensor</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span>
+) -&gt; <span class="ident">TokenStream</span>
 <span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">FnMut</span>(<span class="ident">Entity</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">Tensor</span><span class="op">&gt;</span>,
+    <span class="ident">T</span>: <span class="ident">FnMut</span>(<span class="ident">Entity</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">Tensor</span><span class="op">&gt;</span>,
 {
     <span class="kw">let</span> <span class="ident">inputs</span> <span class="op">=</span> <span class="ident">tensors</span>
         .<span class="ident">iter</span>()
@@ -1699,25 +1664,25 @@
     <span class="macro">quote!</span> { <span class="kw-2">&amp;</span>[#(#<span class="ident">inputs</span>),<span class="kw-2">*</span>] }
 }
 
-<span class="kw">fn</span> <span class="ident">element_type_to_tokens</span>(<span class="ident">element_type</span>: <span class="ident">ElementType</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span> {
+<span class="kw">fn</span> <span class="ident">element_type_to_tokens</span>(<span class="ident">element_type</span>: <span class="ident">ElementType</span>) -&gt; <span class="ident">TokenStream</span> {
     <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">element_type</span> {
-        <span class="ident">ElementType::U8</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;U8&quot;</span>,
-        <span class="ident">ElementType::I8</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;I8&quot;</span>,
-        <span class="ident">ElementType::U16</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;U16&quot;</span>,
-        <span class="ident">ElementType::I16</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;I16&quot;</span>,
-        <span class="ident">ElementType::U32</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;U32&quot;</span>,
-        <span class="ident">ElementType::F32</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;F32&quot;</span>,
-        <span class="ident">ElementType::I32</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;I32&quot;</span>,
-        <span class="ident">ElementType::U64</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;U64&quot;</span>,
-        <span class="ident">ElementType::F64</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;F64&quot;</span>,
-        <span class="ident">ElementType::I64</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;I64&quot;</span>,
-        <span class="ident">ElementType::String</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;String&quot;</span>,
+        <span class="ident">ElementType::U8</span> =&gt; <span class="string">&quot;U8&quot;</span>,
+        <span class="ident">ElementType::I8</span> =&gt; <span class="string">&quot;I8&quot;</span>,
+        <span class="ident">ElementType::U16</span> =&gt; <span class="string">&quot;U16&quot;</span>,
+        <span class="ident">ElementType::I16</span> =&gt; <span class="string">&quot;I16&quot;</span>,
+        <span class="ident">ElementType::U32</span> =&gt; <span class="string">&quot;U32&quot;</span>,
+        <span class="ident">ElementType::F32</span> =&gt; <span class="string">&quot;F32&quot;</span>,
+        <span class="ident">ElementType::I32</span> =&gt; <span class="string">&quot;I32&quot;</span>,
+        <span class="ident">ElementType::U64</span> =&gt; <span class="string">&quot;U64&quot;</span>,
+        <span class="ident">ElementType::F64</span> =&gt; <span class="string">&quot;F64&quot;</span>,
+        <span class="ident">ElementType::I64</span> =&gt; <span class="string">&quot;I64&quot;</span>,
+        <span class="ident">ElementType::String</span> =&gt; <span class="string">&quot;String&quot;</span>,
     };
     <span class="kw">let</span> <span class="ident">ident</span> <span class="op">=</span> <span class="ident">Ident::new</span>(<span class="ident">name</span>, <span class="ident">Span::call_site</span>());
     <span class="macro">quote!</span>(<span class="ident">hotg_rune_core::ElementType</span>::#<span class="ident">ident</span>)
 }
 
-<span class="kw">fn</span> <span class="ident">shape_to_tokens</span>(<span class="ident">shape</span>: <span class="kw-2">&amp;</span><span class="ident">Shape</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span> {
+<span class="kw">fn</span> <span class="ident">shape_to_tokens</span>(<span class="ident">shape</span>: <span class="kw-2">&amp;</span><span class="ident">Shape</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="ident">TokenStream</span> {
     <span class="kw">let</span> <span class="ident">element_type</span> <span class="op">=</span> <span class="ident">element_type_to_tokens</span>(<span class="ident">shape</span>.<span class="ident">element_type</span>());
     <span class="kw">let</span> <span class="ident">dimensions</span> <span class="op">=</span> <span class="ident">shape</span>.<span class="ident">dimensions</span>();
 
@@ -1729,7 +1694,7 @@
     }
 }
 
-<span class="kw">fn</span> <span class="ident">initialize_proc_blocks</span>(<span class="ident">proc_blocks</span>: <span class="kw-2">&amp;</span>[(<span class="kw-2">&amp;</span><span class="ident">Name</span>, <span class="kw-2">&amp;</span><span class="ident">ProcBlock</span>)]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span> {
+<span class="kw">fn</span> <span class="ident">initialize_proc_blocks</span>(<span class="ident">proc_blocks</span>: <span class="kw-2">&amp;</span>[(<span class="kw-2">&amp;</span><span class="ident">Name</span>, <span class="kw-2">&amp;</span><span class="ident">ProcBlock</span>)]) -&gt; <span class="ident">TokenStream</span> {
     <span class="ident">proc_blocks</span>
         .<span class="ident">iter</span>()
         .<span class="ident">copied</span>()
@@ -1737,7 +1702,7 @@
         .<span class="ident">collect</span>()
 }
 
-<span class="kw">fn</span> <span class="ident">initialize_proc_block</span>(<span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">Name</span>, <span class="ident">proc_block</span>: <span class="kw-2">&amp;</span><span class="ident">ProcBlock</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span> {
+<span class="kw">fn</span> <span class="ident">initialize_proc_block</span>(<span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">Name</span>, <span class="ident">proc_block</span>: <span class="kw-2">&amp;</span><span class="ident">ProcBlock</span>) -&gt; <span class="ident">TokenStream</span> {
     <span class="kw">let</span> <span class="ident">ty</span> <span class="op">=</span> <span class="ident">proc_block_type</span>(<span class="ident">proc_block</span>);
 
     <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">Ident::new</span>(<span class="ident">name</span>, <span class="ident">Span::call_site</span>());
@@ -1756,7 +1721,7 @@
     }
 }
 
-<span class="kw">fn</span> <span class="ident">proc_block_type</span>(<span class="ident">proc_block</span>: <span class="kw-2">&amp;</span><span class="ident">ProcBlock</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span> {
+<span class="kw">fn</span> <span class="ident">proc_block_type</span>(<span class="ident">proc_block</span>: <span class="kw-2">&amp;</span><span class="ident">ProcBlock</span>) -&gt; <span class="ident">TokenStream</span> {
     <span class="kw">let</span> <span class="ident">module_name</span> <span class="op">=</span> <span class="ident">proc_block</span>.<span class="ident">name</span>().<span class="ident">to_snake_case</span>();
     <span class="kw">let</span> <span class="ident">type_name</span> <span class="op">=</span> <span class="ident">module_name</span>.<span class="ident">to_camel_case</span>();
 
@@ -1769,9 +1734,9 @@
 <span class="kw">fn</span> <span class="ident">initialize_capabilities</span><span class="op">&lt;</span><span class="lifetime">&#39;world</span>, <span class="ident">T</span><span class="op">&gt;</span>(
     <span class="ident">capabilities</span>: <span class="kw-2">&amp;</span>[(<span class="kw-2">&amp;</span><span class="ident">Name</span>, <span class="kw-2">&amp;</span><span class="ident">Source</span>, <span class="kw-2">&amp;</span><span class="ident">Outputs</span>)],
     <span class="ident">get_tensor</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span>
+) -&gt; <span class="ident">TokenStream</span>
 <span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">FnMut</span>(<span class="ident">Entity</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">Tensor</span><span class="op">&gt;</span>,
+    <span class="ident">T</span>: <span class="ident">FnMut</span>(<span class="ident">Entity</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">Tensor</span><span class="op">&gt;</span>,
 {
     <span class="ident">capabilities</span>
         .<span class="ident">iter</span>()
@@ -1787,24 +1752,24 @@
     <span class="ident">source</span>: <span class="kw-2">&amp;</span><span class="ident">Source</span>,
     <span class="ident">outputs</span>: <span class="kw-2">&amp;</span><span class="ident">Outputs</span>,
     <span class="ident">get_tensor</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span>
+) -&gt; <span class="ident">TokenStream</span>
 <span class="kw">where</span>
-    <span class="ident">T</span>: <span class="ident">FnMut</span>(<span class="ident">Entity</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">Tensor</span><span class="op">&gt;</span>,
+    <span class="ident">T</span>: <span class="ident">FnMut</span>(<span class="ident">Entity</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">Tensor</span><span class="op">&gt;</span>,
 {
     <span class="kw">let</span> <span class="ident">capability_type</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">source</span>.<span class="ident">kind</span>.<span class="ident">as_capability_name</span>() {
-        <span class="prelude-val">Some</span>(<span class="ident">name</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="prelude-val">Some</span>(<span class="ident">name</span>) =&gt; {
             <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">Ident::new</span>(<span class="ident">name</span>, <span class="ident">Span::call_site</span>());
             <span class="macro">quote!</span>(<span class="ident">hotg_rune_core::capabilities</span>::#<span class="ident">name</span>)
         },
-        <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unimplemented!</span>(
+        <span class="prelude-val">None</span> =&gt; <span class="macro">unimplemented!</span>(
             <span class="string">&quot;Unable to generate code for the \&quot;{}\&quot; capability type&quot;</span>,
             <span class="ident">source</span>.<span class="ident">kind</span>
         ),
     };
 
     <span class="kw">let</span> <span class="ident">output_tensor</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">outputs</span>.<span class="ident">tensors</span>.<span class="ident">as_slice</span>() {
-        [<span class="ident">tensor</span>] <span class="op">=</span><span class="op">&gt;</span> <span class="ident">get_tensor</span>(<span class="kw-2">*</span><span class="ident">tensor</span>).<span class="ident">unwrap</span>(),
-        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable!</span>(<span class="string">&quot;Capabilities should only have one output&quot;</span>),
+        [<span class="ident">tensor</span>] =&gt; <span class="ident">get_tensor</span>(<span class="kw-2">*</span><span class="ident">tensor</span>).<span class="ident">unwrap</span>(),
+        <span class="kw">_</span> =&gt; <span class="macro">unreachable!</span>(<span class="string">&quot;Capabilities should only have one output&quot;</span>),
     };
     <span class="kw">let</span> <span class="ident">shape</span> <span class="op">=</span> <span class="ident">shape_to_tokens</span>(<span class="kw-2">&amp;</span><span class="ident">output_tensor</span>.<span class="number">0</span>);
 
@@ -1823,19 +1788,19 @@
     }
 }
 
-<span class="kw">fn</span> <span class="ident">value_to_tokens</span>(<span class="ident">value</span>: <span class="kw-2">&amp;</span><span class="ident">Value</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span> {
+<span class="kw">fn</span> <span class="ident">value_to_tokens</span>(<span class="ident">value</span>: <span class="kw-2">&amp;</span><span class="ident">Value</span>) -&gt; <span class="ident">TokenStream</span> {
     <span class="kw">match</span> <span class="ident">value</span> {
-        <span class="ident">Value::Int</span>(<span class="ident">i</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">i</span>.<span class="ident">into_token_stream</span>(),
-        <span class="ident">Value::Float</span>(<span class="ident">f</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">f</span>.<span class="ident">into_token_stream</span>(),
-        <span class="ident">Value::String</span>(<span class="ident">ResourceOrString::String</span>(<span class="ident">s</span>)) <span class="kw">if</span> <span class="ident">s</span>.<span class="ident">starts_with</span>(<span class="string">&quot;@&quot;</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">Value::Int</span>(<span class="ident">i</span>) =&gt; <span class="ident">i</span>.<span class="ident">into_token_stream</span>(),
+        <span class="ident">Value::Float</span>(<span class="ident">f</span>) =&gt; <span class="ident">f</span>.<span class="ident">into_token_stream</span>(),
+        <span class="ident">Value::String</span>(<span class="ident">ResourceOrString::String</span>(<span class="ident">s</span>)) <span class="kw">if</span> <span class="ident">s</span>.<span class="ident">starts_with</span>(<span class="string">&#39;@&#39;</span>) =&gt; {
             <span class="ident">s</span>[<span class="number">1</span>..].<span class="ident">parse</span>().<span class="ident">unwrap</span>()
         },
-        <span class="ident">Value::String</span>(<span class="ident">ResourceOrString::String</span>(<span class="ident">s</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">s</span>.<span class="ident">into_token_stream</span>(),
-        <span class="ident">Value::String</span>(<span class="ident">ResourceOrString::Resource</span>(<span class="ident">r</span>)) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">Value::String</span>(<span class="ident">ResourceOrString::String</span>(<span class="ident">s</span>)) =&gt; <span class="ident">s</span>.<span class="ident">into_token_stream</span>(),
+        <span class="ident">Value::String</span>(<span class="ident">ResourceOrString::Resource</span>(<span class="ident">r</span>)) =&gt; {
             <span class="kw">let</span> <span class="ident">resource_name</span> <span class="op">=</span> <span class="ident">Ident::new</span>(<span class="ident">r</span>, <span class="ident">Span::call_site</span>());
             <span class="macro">quote!</span>(<span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident"><span class="kw">crate</span>::resources</span>::#<span class="ident">resource_name</span>)
         },
-        <span class="ident">Value::List</span>(<span class="ident">list</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">Value::List</span>(<span class="ident">list</span>) =&gt; {
             <span class="kw">let</span> <span class="ident">tokens</span> <span class="op">=</span> <span class="ident">list</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="ident">value_to_tokens</span>);
             <span class="macro">quote!</span> { [ #(#<span class="ident">tokens</span>),<span class="op">*</span> ].<span class="ident">as_ref</span>() }
         },
@@ -1843,7 +1808,7 @@
 }
 
 <span class="doccomment">/// Imports and miscellaneous attributes added to the top of the file.</span>
-<span class="kw">fn</span> <span class="ident">generate_prelude</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span> {
+<span class="kw">fn</span> <span class="ident">generate_prelude</span>() -&gt; <span class="ident">TokenStream</span> {
     <span class="macro">quote!</span> {
         <span class="doccomment">//! Automatically generated by Rune. DO NOT EDIT!</span>
 
@@ -1866,14 +1831,14 @@
 
 <span class="doccomment">/// The `call()` function - a simple function which invokes the `PIPELINE`</span>
 <span class="doccomment">/// constructed by [`generate_manifest_function()`].</span>
-<span class="kw">fn</span> <span class="ident">generate_call_function</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span> {
+<span class="kw">fn</span> <span class="ident">generate_call_function</span>() -&gt; <span class="ident">TokenStream</span> {
     <span class="macro">quote!</span> {
         <span class="attribute">#[<span class="ident">no_mangle</span>]</span>
         <span class="kw">pub</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">_call</span>(
             <span class="ident">_capability_type</span>: <span class="ident">i32</span>,
             <span class="ident">_input_type</span>: <span class="ident">i32</span>,
             <span class="ident">_capability_idx</span>: <span class="ident">i32</span>,
-        ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">i32</span> {
+        ) -&gt; <span class="ident">i32</span> {
             <span class="kw">unsafe</span> {
                 <span class="kw">let</span> <span class="ident">pipeline</span> <span class="op">=</span> <span class="ident">PIPELINE</span>.<span class="ident">as_mut</span>()
                     .<span class="ident">expect</span>(<span class="string">&quot;The rune hasn&#39;t been initialized&quot;</span>);
@@ -1887,7 +1852,7 @@
 
 <span class="doccomment">/// Generate WebAssembly custom sections which are used to embed metadata in</span>
 <span class="doccomment">/// the compiled Rune.</span>
-<span class="kw">fn</span> <span class="ident">generate_custom_sections</span>(<span class="ident">sections</span>: <span class="kw-2">&amp;</span>[<span class="kw-2">&amp;</span><span class="ident">CustomSection</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span> {
+<span class="kw">fn</span> <span class="ident">generate_custom_sections</span>(<span class="ident">sections</span>: <span class="kw-2">&amp;</span>[<span class="kw-2">&amp;</span><span class="ident">CustomSection</span>]) -&gt; <span class="ident">TokenStream</span> {
     <span class="kw">let</span> <span class="ident">sections</span> <span class="op">=</span> <span class="ident">sections</span>
         .<span class="ident">iter</span>()
         .<span class="ident">enumerate</span>()
@@ -1914,7 +1879,7 @@
 <span class="kw">fn</span> <span class="ident">generate_custom_section</span>(
     <span class="ident">section_number</span>: <span class="ident">usize</span>,
     <span class="ident">s</span>: <span class="kw-2">&amp;</span><span class="ident">CustomSection</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span> {
+) -&gt; <span class="ident">TokenStream</span> {
     <span class="kw">let</span> <span class="ident">unique_ident</span> <span class="op">=</span> <span class="macro">format!</span>(<span class="string">&quot;{}_{}&quot;</span>, <span class="ident">s</span>.<span class="ident">identifier</span>(), <span class="ident">section_number</span>);
     <span class="kw">let</span> <span class="ident">ident</span> <span class="op">=</span> <span class="ident">Ident::new</span>(<span class="kw-2">&amp;</span><span class="ident">unique_ident</span>, <span class="ident">Span::call_site</span>());
     <span class="kw">let</span> <span class="ident">section_name</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="ident">s</span>.<span class="ident">section_name</span>;
@@ -1929,7 +1894,7 @@
 
 <span class="kw">fn</span> <span class="ident">generate_resources_module</span>(
     <span class="ident">resources</span>: <span class="kw-2">&amp;</span>[(<span class="kw-2">&amp;</span><span class="ident">Name</span>, <span class="kw-2">&amp;</span><span class="ident">Resource</span>, <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">ResourceData</span><span class="op">&gt;</span>)],
-) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span> {
+) -&gt; <span class="ident">TokenStream</span> {
     <span class="kw">let</span> <span class="ident">initializers</span> <span class="op">=</span> <span class="ident">resources</span>
         .<span class="ident">iter</span>()
         .<span class="ident">copied</span>()
@@ -1949,7 +1914,7 @@
     <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">Name</span>,
     <span class="ident">res</span>: <span class="kw-2">&amp;</span><span class="ident">Resource</span>,
     <span class="ident">data</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">ResourceData</span><span class="op">&gt;</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span> {
+) -&gt; <span class="ident">TokenStream</span> {
     <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">name</span>.<span class="ident">as_str</span>();
 
     <span class="comment">// First we try to read the resource using the runtime, returning a</span>
@@ -1961,11 +1926,11 @@
     <span class="comment">// We then take the Result and unwrap it, either falling back to a default</span>
     <span class="comment">// value (provided in the Runefile) or blowing up</span>
     <span class="kw">let</span> <span class="ident">bytes</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">data</span> {
-        <span class="prelude-val">Some</span>(<span class="ident">default_value</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="prelude-val">Some</span>(<span class="ident">default_value</span>) =&gt; {
             <span class="kw">let</span> <span class="ident">default_value</span> <span class="op">=</span> <span class="ident">Literal::byte_string</span>(<span class="ident">default_value</span>);
             <span class="macro">quote!</span>(#<span class="ident">maybe_bytes</span>.<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> #<span class="ident">default_value</span>.<span class="ident">as_ref</span>().<span class="ident">into</span>()))
         },
-        <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="prelude-val">None</span> =&gt; {
             <span class="kw">let</span> <span class="ident">error_message</span> <span class="op">=</span>
                 <span class="macro">format!</span>(<span class="string">&quot;Unable to read the \&quot;{}\&quot; resource&quot;</span>, <span class="ident">name</span>);
             <span class="macro">quote!</span>(#<span class="ident">maybe_bytes</span>.<span class="ident">expect</span>(#<span class="ident">error_message</span>))
@@ -1976,7 +1941,7 @@
 
     <span class="comment">// And now we can initialize our &quot;static ref&quot;</span>
     <span class="kw">match</span> <span class="ident">res</span>.<span class="ident">ty</span> {
-        <span class="ident">ResourceType::String</span> <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">ResourceType::String</span> =&gt; {
             <span class="kw">let</span> <span class="ident">error_message</span> <span class="op">=</span>
                 <span class="macro">format!</span>(<span class="string">&quot;The \&quot;{}\&quot; resource isn&#39;t valid UTF-8&quot;</span>, <span class="ident">name</span>);
 
@@ -1987,7 +1952,7 @@
                 };
             }
         },
-        <span class="ident">ResourceType::Binary</span> <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">ResourceType::Binary</span> =&gt; {
             <span class="macro">quote!</span> {
                 <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">static</span> <span class="kw-2">ref</span> #<span class="ident">ident</span>: <span class="ident">alloc::vec::Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span> <span class="op">=</span> #<span class="ident">bytes</span>.<span class="ident">to_vec</span>();
             }
@@ -1998,10 +1963,10 @@
 <span class="kw">fn</span> <span class="ident">generate_models_module</span><span class="op">&lt;</span><span class="lifetime">&#39;world</span>, <span class="ident">N</span>, <span class="ident">M</span><span class="op">&gt;</span>(
     <span class="ident">models</span>: <span class="ident">M</span>,
     <span class="ident">get_name</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">N</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span>
+) -&gt; <span class="ident">TokenStream</span>
 <span class="kw">where</span>
     <span class="ident">M</span>: <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> (<span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">Name</span>, <span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">Model</span>)<span class="op">&gt;</span>,
-    <span class="ident">N</span>: <span class="ident">FnMut</span>(<span class="ident">Entity</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">Name</span><span class="op">&gt;</span>,
+    <span class="ident">N</span>: <span class="ident">FnMut</span>(<span class="ident">Entity</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">Name</span><span class="op">&gt;</span>,
 {
     <span class="kw">let</span> <span class="ident">initializers</span> <span class="op">=</span>
         <span class="ident">models</span>.<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">name</span>, <span class="ident">model</span>)<span class="op">|</span> <span class="ident">model_initializer</span>(<span class="ident">name</span>, <span class="ident">model</span>, <span class="ident">get_name</span>));
@@ -2020,21 +1985,21 @@
     <span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="ident">Name</span>,
     <span class="ident">model</span>: <span class="kw-2">&amp;</span><span class="ident">Model</span>,
     <span class="ident">get_name</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">N</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TokenStream</span>
+) -&gt; <span class="ident">TokenStream</span>
 <span class="kw">where</span>
-    <span class="ident">N</span>: <span class="ident">FnMut</span>(<span class="ident">Entity</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">Name</span><span class="op">&gt;</span>,
+    <span class="ident">N</span>: <span class="ident">FnMut</span>(<span class="ident">Entity</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;world</span> <span class="ident">Name</span><span class="op">&gt;</span>,
 {
     <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">Ident::new</span>(<span class="ident">name</span>, <span class="ident">Span::call_site</span>());
 
     <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">model</span>.<span class="ident">model_file</span> {
-        <span class="ident">ModelFile::FromDisk</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">ModelFile::FromDisk</span>(<span class="kw">_</span>) =&gt; {
             <span class="kw">let</span> <span class="ident">path</span> <span class="op">=</span> <span class="macro">format!</span>(<span class="string">&quot;models/{}&quot;</span>, <span class="ident">name</span>);
 
             <span class="macro">quote!</span> {
                 <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">static</span> <span class="kw-2">ref</span> #<span class="ident">name</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="ident">u8</span>] <span class="op">=</span> <span class="macro">include_bytes!</span>(#<span class="ident">path</span>);
             }
         },
-        <span class="ident">ModelFile::Resource</span>(<span class="ident">resource</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">ModelFile::Resource</span>(<span class="ident">resource</span>) =&gt; {
             <span class="kw">let</span> <span class="ident">resource_name</span> <span class="op">=</span> <span class="ident">get_name</span>(<span class="kw-2">*</span><span class="ident">resource</span>).<span class="ident">unwrap</span>();
             <span class="kw">let</span> <span class="ident">resource_name</span> <span class="op">=</span> <span class="ident">Ident::new</span>(<span class="ident">resource_name</span>, <span class="ident">Span::call_site</span>());
 
@@ -2055,7 +2020,7 @@
 
     <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
 
-    <span class="kw">fn</span> <span class="ident">rustfmt</span>(<span class="ident">tokens</span>: <span class="ident">TokenStream</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">String</span> {
+    <span class="kw">fn</span> <span class="ident">rustfmt</span>(<span class="ident">tokens</span>: <span class="ident">TokenStream</span>) -&gt; <span class="ident">String</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">child</span> <span class="op">=</span> <span class="ident">Command::new</span>(<span class="string">&quot;rustfmt&quot;</span>)
             .<span class="ident">stdin</span>(<span class="ident">Stdio::piped</span>())
             .<span class="ident">stdout</span>(<span class="ident">Stdio::piped</span>())
@@ -2074,14 +2039,14 @@
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">pretty</span> <span class="op">=</span> <span class="ident">String::new</span>();
         <span class="ident">stdout</span>.<span class="ident">read_to_string</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">pretty</span>).<span class="ident">unwrap</span>();
 
-        <span class="kw">let</span> <span class="ident">opening_curly</span> <span class="op">=</span> <span class="ident">pretty</span>.<span class="ident">find</span>(<span class="string">&quot;{&quot;</span>).<span class="ident">unwrap</span>();
-        <span class="kw">let</span> <span class="ident">closing_curly</span> <span class="op">=</span> <span class="ident">pretty</span>.<span class="ident">rfind</span>(<span class="string">&quot;}&quot;</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">opening_curly</span> <span class="op">=</span> <span class="ident">pretty</span>.<span class="ident">find</span>(<span class="string">&#39;{&#39;</span>).<span class="ident">unwrap</span>();
+        <span class="kw">let</span> <span class="ident">closing_curly</span> <span class="op">=</span> <span class="ident">pretty</span>.<span class="ident">rfind</span>(<span class="string">&#39;}&#39;</span>).<span class="ident">unwrap</span>();
 
         <span class="ident">pretty</span>[<span class="ident">opening_curly</span> <span class="op">+</span> <span class="number">1</span>..<span class="ident">closing_curly</span>].<span class="ident">trim</span>().<span class="ident">to_string</span>()
     }
 
     <span class="macro">macro_rules!</span> <span class="ident">assert_quote_eq</span> {
-        (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">left</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">right</span>:<span class="ident">expr</span>) <span class="op">=</span><span class="op">&gt;</span> {{
+        (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">left</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">right</span>:<span class="ident">expr</span>) =&gt; {{
             <span class="kw">let</span> <span class="ident">left</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">left</span>.<span class="ident">to_string</span>();
             <span class="kw">let</span> <span class="ident">right</span> <span class="op">=</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">right</span>.<span class="ident">to_string</span>();
 
@@ -2295,7 +2260,7 @@
         }
     }
 }
-</pre></div>
+</code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="hotg_rune_compiler" data-search-index-js="../../../search-index.js" data-search-js="../../../search.js"></div>
     <script src="../../../main.js"></script><script src="../../../source-script.js"></script><script src="../../../source-files.js"></script>
 </body></html>

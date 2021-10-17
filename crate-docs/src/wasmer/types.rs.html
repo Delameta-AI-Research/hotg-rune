@@ -112,8 +112,7 @@
 <span id="112">112</span>
 <span id="113">113</span>
 <span id="114">114</span>
-</pre><pre class="rust">
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::externals::Function</span>;
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::externals::Function</span>;
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::store</span>::{<span class="ident">Store</span>, <span class="ident">StoreObject</span>};
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::RuntimeError</span>;
 <span class="kw">use</span> <span class="ident">wasmer_types::Value</span>;
@@ -132,19 +131,19 @@
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Val</span> <span class="op">=</span> <span class="ident">Value</span><span class="op">&lt;</span><span class="ident">Function</span><span class="op">&gt;</span>;
 
 <span class="kw">impl</span> <span class="ident">StoreObject</span> <span class="kw">for</span> <span class="ident">Val</span> {
-    <span class="kw">fn</span> <span class="ident">comes_from_same_store</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">store</span>: <span class="kw-2">&amp;</span><span class="ident">Store</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">fn</span> <span class="ident">comes_from_same_store</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">store</span>: <span class="kw-2">&amp;</span><span class="ident">Store</span>) -&gt; <span class="ident">bool</span> {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident"><span class="self">Self</span>::FuncRef</span>(<span class="prelude-val">None</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
-            <span class="ident"><span class="self">Self</span>::FuncRef</span>(<span class="prelude-val">Some</span>(<span class="ident">f</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Store::same</span>(<span class="ident">store</span>, <span class="ident">f</span>.<span class="ident">store</span>()),
+            <span class="ident"><span class="self">Self</span>::FuncRef</span>(<span class="prelude-val">None</span>) =&gt; <span class="bool-val">true</span>,
+            <span class="ident"><span class="self">Self</span>::FuncRef</span>(<span class="prelude-val">Some</span>(<span class="ident">f</span>)) =&gt; <span class="ident">Store::same</span>(<span class="ident">store</span>, <span class="ident">f</span>.<span class="ident">store</span>()),
             <span class="comment">// `ExternRef`s are not tied to specific stores</span>
-            <span class="ident"><span class="self">Self</span>::ExternRef</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
-            <span class="ident"><span class="self">Self</span>::I32</span>(<span class="kw">_</span>) <span class="op">|</span> <span class="ident"><span class="self">Self</span>::I64</span>(<span class="kw">_</span>) <span class="op">|</span> <span class="ident"><span class="self">Self</span>::F32</span>(<span class="kw">_</span>) <span class="op">|</span> <span class="ident"><span class="self">Self</span>::F64</span>(<span class="kw">_</span>) <span class="op">|</span> <span class="ident"><span class="self">Self</span>::V128</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
+            <span class="ident"><span class="self">Self</span>::ExternRef</span>(<span class="kw">_</span>) =&gt; <span class="bool-val">true</span>,
+            <span class="ident"><span class="self">Self</span>::I32</span>(<span class="kw">_</span>) <span class="op">|</span> <span class="ident"><span class="self">Self</span>::I64</span>(<span class="kw">_</span>) <span class="op">|</span> <span class="ident"><span class="self">Self</span>::F32</span>(<span class="kw">_</span>) <span class="op">|</span> <span class="ident"><span class="self">Self</span>::F64</span>(<span class="kw">_</span>) <span class="op">|</span> <span class="ident"><span class="self">Self</span>::V128</span>(<span class="kw">_</span>) =&gt; <span class="bool-val">true</span>,
         }
     }
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Function</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">Val</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">val</span>: <span class="ident">Function</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">val</span>: <span class="ident">Function</span>) -&gt; <span class="self">Self</span> {
         <span class="ident"><span class="self">Self</span>::FuncRef</span>(<span class="prelude-val">Some</span>(<span class="ident">val</span>))
     }
 }
@@ -152,28 +151,28 @@
 <span class="doccomment">/// It provides useful functions for converting back and forth</span>
 <span class="doccomment">/// from [`Val`] into `FuncRef`.</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">ValFuncRef</span> {
-    <span class="kw">fn</span> <span class="ident">into_vm_funcref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">store</span>: <span class="kw-2">&amp;</span><span class="ident">Store</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">VMFuncRef</span>, <span class="ident">RuntimeError</span><span class="op">&gt;</span>;
+    <span class="kw">fn</span> <span class="ident">into_vm_funcref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">store</span>: <span class="kw-2">&amp;</span><span class="ident">Store</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">VMFuncRef</span>, <span class="ident">RuntimeError</span><span class="op">&gt;</span>;
 
-    <span class="kw">fn</span> <span class="ident">from_vm_funcref</span>(<span class="ident">item</span>: <span class="ident">VMFuncRef</span>, <span class="ident">store</span>: <span class="kw-2">&amp;</span><span class="ident">Store</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>;
+    <span class="kw">fn</span> <span class="ident">from_vm_funcref</span>(<span class="ident">item</span>: <span class="ident">VMFuncRef</span>, <span class="ident">store</span>: <span class="kw-2">&amp;</span><span class="ident">Store</span>) -&gt; <span class="self">Self</span>;
 
-    <span class="kw">fn</span> <span class="ident">into_table_reference</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">store</span>: <span class="kw-2">&amp;</span><span class="ident">Store</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">wasmer_vm::TableElement</span>, <span class="ident">RuntimeError</span><span class="op">&gt;</span>;
+    <span class="kw">fn</span> <span class="ident">into_table_reference</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">store</span>: <span class="kw-2">&amp;</span><span class="ident">Store</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">wasmer_vm::TableElement</span>, <span class="ident">RuntimeError</span><span class="op">&gt;</span>;
 
-    <span class="kw">fn</span> <span class="ident">from_table_reference</span>(<span class="ident">item</span>: <span class="ident">wasmer_vm::TableElement</span>, <span class="ident">store</span>: <span class="kw-2">&amp;</span><span class="ident">Store</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>;
+    <span class="kw">fn</span> <span class="ident">from_table_reference</span>(<span class="ident">item</span>: <span class="ident">wasmer_vm::TableElement</span>, <span class="ident">store</span>: <span class="kw-2">&amp;</span><span class="ident">Store</span>) -&gt; <span class="self">Self</span>;
 }
 
 <span class="kw">impl</span> <span class="ident">ValFuncRef</span> <span class="kw">for</span> <span class="ident">Val</span> {
-    <span class="kw">fn</span> <span class="ident">into_vm_funcref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">store</span>: <span class="kw-2">&amp;</span><span class="ident">Store</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">VMFuncRef</span>, <span class="ident">RuntimeError</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">into_vm_funcref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">store</span>: <span class="kw-2">&amp;</span><span class="ident">Store</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">VMFuncRef</span>, <span class="ident">RuntimeError</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">comes_from_same_store</span>(<span class="ident">store</span>) {
             <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">RuntimeError::new</span>(<span class="string">&quot;cross-`Store` values are not supported&quot;</span>));
         }
         <span class="prelude-val">Ok</span>(<span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident"><span class="self">Self</span>::FuncRef</span>(<span class="prelude-val">None</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">VMFuncRef::null</span>(),
-            <span class="ident"><span class="self">Self</span>::FuncRef</span>(<span class="prelude-val">Some</span>(<span class="ident">f</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">f</span>.<span class="ident">vm_funcref</span>(),
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">RuntimeError::new</span>(<span class="string">&quot;val is not func ref&quot;</span>)),
+            <span class="ident"><span class="self">Self</span>::FuncRef</span>(<span class="prelude-val">None</span>) =&gt; <span class="ident">VMFuncRef::null</span>(),
+            <span class="ident"><span class="self">Self</span>::FuncRef</span>(<span class="prelude-val">Some</span>(<span class="ident">f</span>)) =&gt; <span class="ident">f</span>.<span class="ident">vm_funcref</span>(),
+            <span class="kw">_</span> =&gt; <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">RuntimeError::new</span>(<span class="string">&quot;val is not func ref&quot;</span>)),
         })
     }
 
-    <span class="kw">fn</span> <span class="ident">from_vm_funcref</span>(<span class="ident">func_ref</span>: <span class="ident">VMFuncRef</span>, <span class="ident">store</span>: <span class="kw-2">&amp;</span><span class="ident">Store</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">from_vm_funcref</span>(<span class="ident">func_ref</span>: <span class="ident">VMFuncRef</span>, <span class="ident">store</span>: <span class="kw-2">&amp;</span><span class="ident">Store</span>) -&gt; <span class="self">Self</span> {
         <span class="kw">if</span> <span class="ident">func_ref</span>.<span class="ident">is_null</span>() {
             <span class="kw">return</span> <span class="ident"><span class="self">Self</span>::FuncRef</span>(<span class="prelude-val">None</span>);
         }
@@ -205,29 +204,29 @@
         <span class="ident"><span class="self">Self</span>::FuncRef</span>(<span class="prelude-val">Some</span>(<span class="ident">f</span>))
     }
 
-    <span class="kw">fn</span> <span class="ident">into_table_reference</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">store</span>: <span class="kw-2">&amp;</span><span class="ident">Store</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">wasmer_vm::TableElement</span>, <span class="ident">RuntimeError</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">into_table_reference</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">store</span>: <span class="kw-2">&amp;</span><span class="ident">Store</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">wasmer_vm::TableElement</span>, <span class="ident">RuntimeError</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">comes_from_same_store</span>(<span class="ident">store</span>) {
             <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">RuntimeError::new</span>(<span class="string">&quot;cross-`Store` values are not supported&quot;</span>));
         }
         <span class="prelude-val">Ok</span>(<span class="kw">match</span> <span class="self">self</span> {
             <span class="comment">// TODO(reftypes): review this clone</span>
-            <span class="ident"><span class="self">Self</span>::ExternRef</span>(<span class="ident">extern_ref</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident"><span class="self">Self</span>::ExternRef</span>(<span class="ident">extern_ref</span>) =&gt; {
                 <span class="ident">wasmer_vm::TableElement::ExternRef</span>(<span class="ident">extern_ref</span>.<span class="ident">clone</span>().<span class="ident">into</span>())
             }
-            <span class="ident"><span class="self">Self</span>::FuncRef</span>(<span class="prelude-val">None</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">wasmer_vm::TableElement::FuncRef</span>(<span class="ident">VMFuncRef::null</span>()),
-            <span class="ident"><span class="self">Self</span>::FuncRef</span>(<span class="prelude-val">Some</span>(<span class="ident">f</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">wasmer_vm::TableElement::FuncRef</span>(<span class="ident">f</span>.<span class="ident">vm_funcref</span>()),
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">RuntimeError::new</span>(<span class="string">&quot;val is not reference&quot;</span>)),
+            <span class="ident"><span class="self">Self</span>::FuncRef</span>(<span class="prelude-val">None</span>) =&gt; <span class="ident">wasmer_vm::TableElement::FuncRef</span>(<span class="ident">VMFuncRef::null</span>()),
+            <span class="ident"><span class="self">Self</span>::FuncRef</span>(<span class="prelude-val">Some</span>(<span class="ident">f</span>)) =&gt; <span class="ident">wasmer_vm::TableElement::FuncRef</span>(<span class="ident">f</span>.<span class="ident">vm_funcref</span>()),
+            <span class="kw">_</span> =&gt; <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">RuntimeError::new</span>(<span class="string">&quot;val is not reference&quot;</span>)),
         })
     }
 
-    <span class="kw">fn</span> <span class="ident">from_table_reference</span>(<span class="ident">item</span>: <span class="ident">wasmer_vm::TableElement</span>, <span class="ident">store</span>: <span class="kw-2">&amp;</span><span class="ident">Store</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">from_table_reference</span>(<span class="ident">item</span>: <span class="ident">wasmer_vm::TableElement</span>, <span class="ident">store</span>: <span class="kw-2">&amp;</span><span class="ident">Store</span>) -&gt; <span class="self">Self</span> {
         <span class="kw">match</span> <span class="ident">item</span> {
-            <span class="ident">wasmer_vm::TableElement::FuncRef</span>(<span class="ident">f</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::from_vm_funcref</span>(<span class="ident">f</span>, <span class="ident">store</span>),
-            <span class="ident">wasmer_vm::TableElement::ExternRef</span>(<span class="ident">extern_ref</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::ExternRef</span>(<span class="ident">extern_ref</span>.<span class="ident">into</span>()),
+            <span class="ident">wasmer_vm::TableElement::FuncRef</span>(<span class="ident">f</span>) =&gt; <span class="ident"><span class="self">Self</span>::from_vm_funcref</span>(<span class="ident">f</span>, <span class="ident">store</span>),
+            <span class="ident">wasmer_vm::TableElement::ExternRef</span>(<span class="ident">extern_ref</span>) =&gt; <span class="ident"><span class="self">Self</span>::ExternRef</span>(<span class="ident">extern_ref</span>.<span class="ident">into</span>()),
         }
     }
 }
-</pre></div>
+</code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="wasmer" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
     <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script>
 </body></html>

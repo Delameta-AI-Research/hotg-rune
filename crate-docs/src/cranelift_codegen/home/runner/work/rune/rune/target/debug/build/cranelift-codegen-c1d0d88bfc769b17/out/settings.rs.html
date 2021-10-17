@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;work&#x2F;rune&#x2F;rune&#x2F;target&#x2F;debug&#x2F;build&#x2F;cranelift-codegen-c1d0d88bfc769b17&#x2F;out&#x2F;settings.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>settings.rs - source</title><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../../../../../../../../../../../storage.js"></script><script src="../../../../../../../../../../../../crates.js"></script><noscript><link rel="stylesheet" href="../../../../../../../../../../../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../../../../../../../../../../../favicon.svg"><link rel="alternate icon" type="image/png" href="../../../../../../../../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../../../../../../../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../../../../../../../../../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../../../../../../../../../../cranelift_codegen/index.html'><div class='logo-container rust-logo'><img src='../../../../../../../../../../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../../../../../../../../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../../../../../../../../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../../../../../../../../../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;work&#x2F;rune&#x2F;rune&#x2F;target&#x2F;debug&#x2F;build&#x2F;cranelift-codegen-c1d0d88bfc769b17&#x2F;out&#x2F;settings.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>settings.rs - source</title><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../../../../../../../../../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../../../../../../../../../../../storage.js"></script><script src="../../../../../../../../../../../../crates.js"></script><noscript><link rel="stylesheet" href="../../../../../../../../../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../../../../../../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../../../../../../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../../../../../../../../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../../../../../../../../../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../../../../../../../../../../cranelift_codegen/index.html'><div class='logo-container rust-logo'><img src='../../../../../../../../../../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../../../../../../../../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../../../../../../../../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../../../../../../../../../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -710,8 +710,7 @@
 <span id="710">710</span>
 <span id="711">711</span>
 <span id="712">712</span>
-</pre><pre class="rust">
-<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Hash</span>)]</span>
+</pre><pre class="rust"><code><span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Clone</span>, <span class="ident">Hash</span>)]</span>
 <span class="doccomment">/// Flags group `shared`.</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">Flags</span> {
     <span class="ident">bytes</span>: [<span class="ident">u8</span>; <span class="number">9</span>],
@@ -719,7 +718,7 @@
 <span class="kw">impl</span> <span class="ident">Flags</span> {
     <span class="doccomment">/// Create flags shared settings group.</span>
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_variables</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">builder</span>: <span class="ident">Builder</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">builder</span>: <span class="ident">Builder</span>) -&gt; <span class="self">Self</span> {
         <span class="kw">let</span> <span class="ident">bvec</span> <span class="op">=</span> <span class="ident">builder</span>.<span class="ident">state_for</span>(<span class="string">&quot;shared&quot;</span>);
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">shared</span> <span class="op">=</span> <span class="self">Self</span> { <span class="ident">bytes</span>: [<span class="number">0</span>; <span class="number">9</span>] };
         <span class="macro">debug_assert_eq!</span>(<span class="ident">bvec</span>.<span class="ident">len</span>(), <span class="number">9</span>);
@@ -729,14 +728,14 @@
 }
 <span class="kw">impl</span> <span class="ident">Flags</span> {
     <span class="doccomment">/// Iterates the setting values.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">iter</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">Value</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">iter</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">Value</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">bytes</span> <span class="op">=</span> [<span class="number">0</span>; <span class="number">9</span>];
         <span class="ident">bytes</span>.<span class="ident">copy_from_slice</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">bytes</span>[<span class="number">0</span>..<span class="number">9</span>]);
         <span class="ident">DESCRIPTORS</span>.<span class="ident">iter</span>().<span class="ident">filter_map</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">d</span><span class="op">|</span> {
             <span class="kw">let</span> <span class="ident">values</span> <span class="op">=</span> <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">d</span>.<span class="ident">detail</span> {
-                <span class="ident">detail::Detail::Preset</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">None</span>,
-                <span class="ident">detail::Detail::Enum</span> { <span class="ident">last</span>, <span class="ident">enumerators</span> } <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">TEMPLATE</span>.<span class="ident">enums</span>(<span class="kw-2">*</span><span class="ident">last</span>, <span class="kw-2">*</span><span class="ident">enumerators</span>)),
-                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>
+                <span class="ident">detail::Detail::Preset</span> =&gt; <span class="kw">return</span> <span class="prelude-val">None</span>,
+                <span class="ident">detail::Detail::Enum</span> { <span class="ident">last</span>, <span class="ident">enumerators</span> } =&gt; <span class="prelude-val">Some</span>(<span class="ident">TEMPLATE</span>.<span class="ident">enums</span>(<span class="kw-2">*</span><span class="ident">last</span>, <span class="kw-2">*</span><span class="ident">enumerators</span>)),
+                <span class="kw">_</span> =&gt; <span class="prelude-val">None</span>
             };
             <span class="prelude-val">Some</span>(<span class="ident">Value</span>{ <span class="ident">name</span>: <span class="ident">d</span>.<span class="ident">name</span>, <span class="ident">detail</span>: <span class="ident">d</span>.<span class="ident">detail</span>, <span class="ident">values</span>, <span class="ident">value</span>: <span class="ident">bytes</span>[<span class="ident">d</span>.<span class="ident">offset</span> <span class="kw">as</span> <span class="ident">usize</span>] })
         })
@@ -755,24 +754,24 @@
     <span class="ident">ExperimentalLinearScanChecked</span>,
 }
 <span class="kw">impl</span> <span class="ident">fmt::Display</span> <span class="kw">for</span> <span class="ident">Regalloc</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
         <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
-            <span class="ident"><span class="self">Self</span>::Backtracking</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;backtracking&quot;</span>,
-            <span class="ident"><span class="self">Self</span>::BacktrackingChecked</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;backtracking_checked&quot;</span>,
-            <span class="ident"><span class="self">Self</span>::ExperimentalLinearScan</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;experimental_linear_scan&quot;</span>,
-            <span class="ident"><span class="self">Self</span>::ExperimentalLinearScanChecked</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;experimental_linear_scan_checked&quot;</span>,
+            <span class="ident"><span class="self">Self</span>::Backtracking</span> =&gt; <span class="string">&quot;backtracking&quot;</span>,
+            <span class="ident"><span class="self">Self</span>::BacktrackingChecked</span> =&gt; <span class="string">&quot;backtracking_checked&quot;</span>,
+            <span class="ident"><span class="self">Self</span>::ExperimentalLinearScan</span> =&gt; <span class="string">&quot;experimental_linear_scan&quot;</span>,
+            <span class="ident"><span class="self">Self</span>::ExperimentalLinearScanChecked</span> =&gt; <span class="string">&quot;experimental_linear_scan_checked&quot;</span>,
         })
     }
 }
 <span class="kw">impl</span> <span class="ident">str::FromStr</span> <span class="kw">for</span> <span class="ident">Regalloc</span> {
     <span class="kw">type</span> <span class="prelude-val">Err</span> <span class="op">=</span> ();
-    <span class="kw">fn</span> <span class="ident">from_str</span>(<span class="ident">s</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident"><span class="self">Self</span>::Err</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">from_str</span>(<span class="ident">s</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident"><span class="self">Self</span>::Err</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="ident">s</span> {
-            <span class="string">&quot;backtracking&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::Backtracking</span>),
-            <span class="string">&quot;backtracking_checked&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::BacktrackingChecked</span>),
-            <span class="string">&quot;experimental_linear_scan&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::ExperimentalLinearScan</span>),
-            <span class="string">&quot;experimental_linear_scan_checked&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::ExperimentalLinearScanChecked</span>),
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(()),
+            <span class="string">&quot;backtracking&quot;</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::Backtracking</span>),
+            <span class="string">&quot;backtracking_checked&quot;</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::BacktrackingChecked</span>),
+            <span class="string">&quot;experimental_linear_scan&quot;</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::ExperimentalLinearScan</span>),
+            <span class="string">&quot;experimental_linear_scan_checked&quot;</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::ExperimentalLinearScanChecked</span>),
+            <span class="kw">_</span> =&gt; <span class="prelude-val">Err</span>(()),
         }
     }
 }
@@ -787,22 +786,22 @@
     <span class="ident">SpeedAndSize</span>,
 }
 <span class="kw">impl</span> <span class="ident">fmt::Display</span> <span class="kw">for</span> <span class="ident">OptLevel</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
         <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
-            <span class="ident"><span class="self">Self</span>::None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;none&quot;</span>,
-            <span class="ident"><span class="self">Self</span>::Speed</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;speed&quot;</span>,
-            <span class="ident"><span class="self">Self</span>::SpeedAndSize</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;speed_and_size&quot;</span>,
+            <span class="ident"><span class="self">Self</span>::None</span> =&gt; <span class="string">&quot;none&quot;</span>,
+            <span class="ident"><span class="self">Self</span>::Speed</span> =&gt; <span class="string">&quot;speed&quot;</span>,
+            <span class="ident"><span class="self">Self</span>::SpeedAndSize</span> =&gt; <span class="string">&quot;speed_and_size&quot;</span>,
         })
     }
 }
 <span class="kw">impl</span> <span class="ident">str::FromStr</span> <span class="kw">for</span> <span class="ident">OptLevel</span> {
     <span class="kw">type</span> <span class="prelude-val">Err</span> <span class="op">=</span> ();
-    <span class="kw">fn</span> <span class="ident">from_str</span>(<span class="ident">s</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident"><span class="self">Self</span>::Err</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">from_str</span>(<span class="ident">s</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident"><span class="self">Self</span>::Err</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="ident">s</span> {
-            <span class="string">&quot;none&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::None</span>),
-            <span class="string">&quot;speed&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::Speed</span>),
-            <span class="string">&quot;speed_and_size&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::SpeedAndSize</span>),
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(()),
+            <span class="string">&quot;none&quot;</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::None</span>),
+            <span class="string">&quot;speed&quot;</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::Speed</span>),
+            <span class="string">&quot;speed_and_size&quot;</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::SpeedAndSize</span>),
+            <span class="kw">_</span> =&gt; <span class="prelude-val">Err</span>(()),
         }
     }
 }
@@ -819,24 +818,24 @@
     <span class="ident">Coff</span>,
 }
 <span class="kw">impl</span> <span class="ident">fmt::Display</span> <span class="kw">for</span> <span class="ident">TlsModel</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
         <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
-            <span class="ident"><span class="self">Self</span>::None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;none&quot;</span>,
-            <span class="ident"><span class="self">Self</span>::ElfGd</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;elf_gd&quot;</span>,
-            <span class="ident"><span class="self">Self</span>::Macho</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;macho&quot;</span>,
-            <span class="ident"><span class="self">Self</span>::Coff</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;coff&quot;</span>,
+            <span class="ident"><span class="self">Self</span>::None</span> =&gt; <span class="string">&quot;none&quot;</span>,
+            <span class="ident"><span class="self">Self</span>::ElfGd</span> =&gt; <span class="string">&quot;elf_gd&quot;</span>,
+            <span class="ident"><span class="self">Self</span>::Macho</span> =&gt; <span class="string">&quot;macho&quot;</span>,
+            <span class="ident"><span class="self">Self</span>::Coff</span> =&gt; <span class="string">&quot;coff&quot;</span>,
         })
     }
 }
 <span class="kw">impl</span> <span class="ident">str::FromStr</span> <span class="kw">for</span> <span class="ident">TlsModel</span> {
     <span class="kw">type</span> <span class="prelude-val">Err</span> <span class="op">=</span> ();
-    <span class="kw">fn</span> <span class="ident">from_str</span>(<span class="ident">s</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident"><span class="self">Self</span>::Err</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">from_str</span>(<span class="ident">s</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident"><span class="self">Self</span>::Err</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="ident">s</span> {
-            <span class="string">&quot;none&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::None</span>),
-            <span class="string">&quot;elf_gd&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::ElfGd</span>),
-            <span class="string">&quot;macho&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::Macho</span>),
-            <span class="string">&quot;coff&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::Coff</span>),
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(()),
+            <span class="string">&quot;none&quot;</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::None</span>),
+            <span class="string">&quot;elf_gd&quot;</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::ElfGd</span>),
+            <span class="string">&quot;macho&quot;</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::Macho</span>),
+            <span class="string">&quot;coff&quot;</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::Coff</span>),
+            <span class="kw">_</span> =&gt; <span class="prelude-val">Err</span>(()),
         }
     }
 }
@@ -865,36 +864,36 @@
     <span class="ident">Probestack</span>,
 }
 <span class="kw">impl</span> <span class="ident">fmt::Display</span> <span class="kw">for</span> <span class="ident">LibcallCallConv</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
         <span class="ident">f</span>.<span class="ident">write_str</span>(<span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
-            <span class="ident"><span class="self">Self</span>::IsaDefault</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;isa_default&quot;</span>,
-            <span class="ident"><span class="self">Self</span>::Fast</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;fast&quot;</span>,
-            <span class="ident"><span class="self">Self</span>::Cold</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;cold&quot;</span>,
-            <span class="ident"><span class="self">Self</span>::SystemV</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;system_v&quot;</span>,
-            <span class="ident"><span class="self">Self</span>::WindowsFastcall</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;windows_fastcall&quot;</span>,
-            <span class="ident"><span class="self">Self</span>::AppleAarch64</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;apple_aarch64&quot;</span>,
-            <span class="ident"><span class="self">Self</span>::BaldrdashSystemV</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;baldrdash_system_v&quot;</span>,
-            <span class="ident"><span class="self">Self</span>::BaldrdashWindows</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;baldrdash_windows&quot;</span>,
-            <span class="ident"><span class="self">Self</span>::Baldrdash2020</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;baldrdash_2020&quot;</span>,
-            <span class="ident"><span class="self">Self</span>::Probestack</span> <span class="op">=</span><span class="op">&gt;</span> <span class="string">&quot;probestack&quot;</span>,
+            <span class="ident"><span class="self">Self</span>::IsaDefault</span> =&gt; <span class="string">&quot;isa_default&quot;</span>,
+            <span class="ident"><span class="self">Self</span>::Fast</span> =&gt; <span class="string">&quot;fast&quot;</span>,
+            <span class="ident"><span class="self">Self</span>::Cold</span> =&gt; <span class="string">&quot;cold&quot;</span>,
+            <span class="ident"><span class="self">Self</span>::SystemV</span> =&gt; <span class="string">&quot;system_v&quot;</span>,
+            <span class="ident"><span class="self">Self</span>::WindowsFastcall</span> =&gt; <span class="string">&quot;windows_fastcall&quot;</span>,
+            <span class="ident"><span class="self">Self</span>::AppleAarch64</span> =&gt; <span class="string">&quot;apple_aarch64&quot;</span>,
+            <span class="ident"><span class="self">Self</span>::BaldrdashSystemV</span> =&gt; <span class="string">&quot;baldrdash_system_v&quot;</span>,
+            <span class="ident"><span class="self">Self</span>::BaldrdashWindows</span> =&gt; <span class="string">&quot;baldrdash_windows&quot;</span>,
+            <span class="ident"><span class="self">Self</span>::Baldrdash2020</span> =&gt; <span class="string">&quot;baldrdash_2020&quot;</span>,
+            <span class="ident"><span class="self">Self</span>::Probestack</span> =&gt; <span class="string">&quot;probestack&quot;</span>,
         })
     }
 }
 <span class="kw">impl</span> <span class="ident">str::FromStr</span> <span class="kw">for</span> <span class="ident">LibcallCallConv</span> {
     <span class="kw">type</span> <span class="prelude-val">Err</span> <span class="op">=</span> ();
-    <span class="kw">fn</span> <span class="ident">from_str</span>(<span class="ident">s</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident"><span class="self">Self</span>::Err</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">from_str</span>(<span class="ident">s</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident"><span class="self">Self</span>::Err</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="ident">s</span> {
-            <span class="string">&quot;isa_default&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::IsaDefault</span>),
-            <span class="string">&quot;fast&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::Fast</span>),
-            <span class="string">&quot;cold&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::Cold</span>),
-            <span class="string">&quot;system_v&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::SystemV</span>),
-            <span class="string">&quot;windows_fastcall&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::WindowsFastcall</span>),
-            <span class="string">&quot;apple_aarch64&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::AppleAarch64</span>),
-            <span class="string">&quot;baldrdash_system_v&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::BaldrdashSystemV</span>),
-            <span class="string">&quot;baldrdash_windows&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::BaldrdashWindows</span>),
-            <span class="string">&quot;baldrdash_2020&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::Baldrdash2020</span>),
-            <span class="string">&quot;probestack&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::Probestack</span>),
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(()),
+            <span class="string">&quot;isa_default&quot;</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::IsaDefault</span>),
+            <span class="string">&quot;fast&quot;</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::Fast</span>),
+            <span class="string">&quot;cold&quot;</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::Cold</span>),
+            <span class="string">&quot;system_v&quot;</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::SystemV</span>),
+            <span class="string">&quot;windows_fastcall&quot;</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::WindowsFastcall</span>),
+            <span class="string">&quot;apple_aarch64&quot;</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::AppleAarch64</span>),
+            <span class="string">&quot;baldrdash_system_v&quot;</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::BaldrdashSystemV</span>),
+            <span class="string">&quot;baldrdash_windows&quot;</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::BaldrdashWindows</span>),
+            <span class="string">&quot;baldrdash_2020&quot;</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::Baldrdash2020</span>),
+            <span class="string">&quot;probestack&quot;</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident"><span class="self">Self</span>::Probestack</span>),
+            <span class="kw">_</span> =&gt; <span class="prelude-val">Err</span>(()),
         }
     }
 }
@@ -902,11 +901,11 @@
 <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
 <span class="kw">impl</span> <span class="ident">Flags</span> {
     <span class="doccomment">/// Get a view of the boolean predicates.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">predicate_view</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident"><span class="kw">crate</span>::settings::PredicateView</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">predicate_view</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident"><span class="kw">crate</span>::settings::PredicateView</span> {
         <span class="ident"><span class="kw">crate</span>::settings::PredicateView::new</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">bytes</span>[<span class="number">6</span>..])
     }
     <span class="doccomment">/// Dynamic numbered predicate getter.</span>
-    <span class="kw">fn</span> <span class="ident">numbered_predicate</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">p</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">fn</span> <span class="ident">numbered_predicate</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">p</span>: <span class="ident">usize</span>) -&gt; <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">bytes</span>[<span class="number">6</span> <span class="op">+</span> <span class="ident">p</span> <span class="op">/</span> <span class="number">8</span>] <span class="op">&amp;</span> (<span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> (<span class="ident">p</span> <span class="op">%</span> <span class="number">8</span>)) <span class="op">!</span><span class="op">=</span> <span class="number">0</span>
     }
     <span class="doccomment">/// Register allocator to use with the MachInst backend.</span>
@@ -931,21 +930,21 @@
     <span class="doccomment">/// 2020-04-17, it is still experimental and it should not be used in production settings.</span>
     <span class="doccomment">/// - `experimental_linear_scan_checked` is the linear scan allocator with additional self</span>
     <span class="doccomment">/// checks that may take some time to run, and thus these checks are disabled by default.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">regalloc</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Regalloc</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">regalloc</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Regalloc</span> {
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">bytes</span>[<span class="number">0</span>] {
-            <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="number">0</span> =&gt; {
                 <span class="ident">Regalloc::Backtracking</span>
             }
-            <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="number">1</span> =&gt; {
                 <span class="ident">Regalloc::BacktrackingChecked</span>
             }
-            <span class="number">2</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="number">2</span> =&gt; {
                 <span class="ident">Regalloc::ExperimentalLinearScan</span>
             }
-            <span class="number">3</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="number">3</span> =&gt; {
                 <span class="ident">Regalloc::ExperimentalLinearScanChecked</span>
             }
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="kw">_</span> =&gt; {
                 <span class="macro">panic!</span>(<span class="string">&quot;Invalid enum value&quot;</span>)
             }
         }
@@ -957,38 +956,38 @@
     <span class="doccomment">/// - `none`: Minimise compile time by disabling most optimizations.</span>
     <span class="doccomment">/// - `speed`: Generate the fastest possible code</span>
     <span class="doccomment">/// - `speed_and_size`: like &quot;speed&quot;, but also perform transformations aimed at reducing code size.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">opt_level</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">OptLevel</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">opt_level</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">OptLevel</span> {
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">bytes</span>[<span class="number">1</span>] {
-            <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="number">0</span> =&gt; {
                 <span class="ident">OptLevel::None</span>
             }
-            <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="number">1</span> =&gt; {
                 <span class="ident">OptLevel::Speed</span>
             }
-            <span class="number">2</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="number">2</span> =&gt; {
                 <span class="ident">OptLevel::SpeedAndSize</span>
             }
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="kw">_</span> =&gt; {
                 <span class="macro">panic!</span>(<span class="string">&quot;Invalid enum value&quot;</span>)
             }
         }
     }
     <span class="doccomment">/// Defines the model used to perform TLS accesses.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">tls_model</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">TlsModel</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">tls_model</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">TlsModel</span> {
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">bytes</span>[<span class="number">2</span>] {
-            <span class="number">3</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="number">3</span> =&gt; {
                 <span class="ident">TlsModel::Coff</span>
             }
-            <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="number">1</span> =&gt; {
                 <span class="ident">TlsModel::ElfGd</span>
             }
-            <span class="number">2</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="number">2</span> =&gt; {
                 <span class="ident">TlsModel::Macho</span>
             }
-            <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="number">0</span> =&gt; {
                 <span class="ident">TlsModel::None</span>
             }
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="kw">_</span> =&gt; {
                 <span class="macro">panic!</span>(<span class="string">&quot;Invalid enum value&quot;</span>)
             }
         }
@@ -1002,39 +1001,39 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// This list should be kept in sync with the list of calling</span>
     <span class="doccomment">/// conventions available in isa/call_conv.rs.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">libcall_call_conv</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">LibcallCallConv</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">libcall_call_conv</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">LibcallCallConv</span> {
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">bytes</span>[<span class="number">3</span>] {
-            <span class="number">5</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="number">5</span> =&gt; {
                 <span class="ident">LibcallCallConv::AppleAarch64</span>
             }
-            <span class="number">8</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="number">8</span> =&gt; {
                 <span class="ident">LibcallCallConv::Baldrdash2020</span>
             }
-            <span class="number">6</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="number">6</span> =&gt; {
                 <span class="ident">LibcallCallConv::BaldrdashSystemV</span>
             }
-            <span class="number">7</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="number">7</span> =&gt; {
                 <span class="ident">LibcallCallConv::BaldrdashWindows</span>
             }
-            <span class="number">2</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="number">2</span> =&gt; {
                 <span class="ident">LibcallCallConv::Cold</span>
             }
-            <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="number">1</span> =&gt; {
                 <span class="ident">LibcallCallConv::Fast</span>
             }
-            <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="number">0</span> =&gt; {
                 <span class="ident">LibcallCallConv::IsaDefault</span>
             }
-            <span class="number">9</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="number">9</span> =&gt; {
                 <span class="ident">LibcallCallConv::Probestack</span>
             }
-            <span class="number">3</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="number">3</span> =&gt; {
                 <span class="ident">LibcallCallConv::SystemV</span>
             }
-            <span class="number">4</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="number">4</span> =&gt; {
                 <span class="ident">LibcallCallConv::WindowsFastcall</span>
             }
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="kw">_</span> =&gt; {
                 <span class="macro">panic!</span>(<span class="string">&quot;Invalid enum value&quot;</span>)
             }
         }
@@ -1049,7 +1048,7 @@
     <span class="doccomment">/// This setting configures the number of pointer-sized words pushed on the</span>
     <span class="doccomment">/// stack when the Cranelift-generated code is entered. This includes the</span>
     <span class="doccomment">/// pushed return address on x86.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">baldrdash_prologue_words</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u8</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">baldrdash_prologue_words</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u8</span> {
         <span class="self">self</span>.<span class="ident">bytes</span>[<span class="number">4</span>]
     }
     <span class="doccomment">/// The log2 of the size of the stack guard region.</span>
@@ -1058,18 +1057,18 @@
     <span class="doccomment">/// by calling the probestack function.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// The default is 12, which translates to a size of 4096.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">probestack_size_log2</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u8</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">probestack_size_log2</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u8</span> {
         <span class="self">self</span>.<span class="ident">bytes</span>[<span class="number">5</span>]
     }
     <span class="doccomment">/// Run the Cranelift IR verifier at strategic times during compilation.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This makes compilation slower but catches many bugs. The verifier is always enabled by</span>
     <span class="doccomment">/// default, which is useful during development.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">enable_verifier</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">enable_verifier</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">numbered_predicate</span>(<span class="number">0</span>)
     }
     <span class="doccomment">/// Enable Position-Independent Code generation.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_pic</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_pic</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">numbered_predicate</span>(<span class="number">1</span>)
     }
     <span class="doccomment">/// Use colocated libcalls.</span>
@@ -1077,7 +1076,7 @@
     <span class="doccomment">/// Generate code that assumes that libcalls can be declared &quot;colocated&quot;,</span>
     <span class="doccomment">/// meaning they will be defined along with the current function, such that</span>
     <span class="doccomment">/// they can use more efficient addressing.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">use_colocated_libcalls</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">use_colocated_libcalls</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">numbered_predicate</span>(<span class="number">2</span>)
     }
     <span class="doccomment">/// Generate explicit checks around native division instructions to avoid their trapping.</span>
@@ -1087,13 +1086,13 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// On ISAs like ARM where the native division instructions don&#39;t trap,</span>
     <span class="doccomment">/// this setting has no effect - explicit checks are always inserted.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">avoid_div_traps</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">avoid_div_traps</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">numbered_predicate</span>(<span class="number">3</span>)
     }
     <span class="doccomment">/// Enable the use of floating-point instructions.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Disabling use of floating-point instructions is not yet implemented.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">enable_float</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">enable_float</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">numbered_predicate</span>(<span class="number">4</span>)
     }
     <span class="doccomment">/// Enable NaN canonicalization.</span>
@@ -1101,7 +1100,7 @@
     <span class="doccomment">/// This replaces NaNs with a single canonical value, for users requiring</span>
     <span class="doccomment">/// entirely deterministic WebAssembly computation. This is not required</span>
     <span class="doccomment">/// by the WebAssembly spec, so it is not enabled by default.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">enable_nan_canonicalization</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">enable_nan_canonicalization</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">numbered_predicate</span>(<span class="number">5</span>)
     }
     <span class="doccomment">/// Enable the use of the pinned register.</span>
@@ -1109,7 +1108,7 @@
     <span class="doccomment">/// This register is excluded from register allocation, and is completely under the control of</span>
     <span class="doccomment">/// the end-user. It is possible to read it via the get_pinned_reg instruction, and to set it</span>
     <span class="doccomment">/// with the set_pinned_reg instruction.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">enable_pinned_reg</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">enable_pinned_reg</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">numbered_predicate</span>(<span class="number">6</span>)
     }
     <span class="doccomment">/// Use the pinned register as the heap base.</span>
@@ -1121,15 +1120,15 @@
     <span class="doccomment">/// Warning! Enabling this means that the pinned register *must* be maintained to contain the</span>
     <span class="doccomment">/// heap base address at all times, during the lifetime of a function. Using the pinned</span>
     <span class="doccomment">/// register for other purposes when this is set is very likely to cause crashes.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">use_pinned_reg_as_heap_base</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">use_pinned_reg_as_heap_base</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">numbered_predicate</span>(<span class="number">7</span>)
     }
     <span class="doccomment">/// Enable the use of SIMD instructions.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">enable_simd</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">enable_simd</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">numbered_predicate</span>(<span class="number">8</span>)
     }
     <span class="doccomment">/// Enable the use of atomic instructions</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">enable_atomics</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">enable_atomics</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">numbered_predicate</span>(<span class="number">9</span>)
     }
     <span class="doccomment">/// Enable safepoint instruction insertions.</span>
@@ -1137,7 +1136,7 @@
     <span class="doccomment">/// This will allow the emit_stack_maps() function to insert the safepoint</span>
     <span class="doccomment">/// instruction on top of calls and interrupt traps in order to display the</span>
     <span class="doccomment">/// live reference values at that point in the program.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">enable_safepoints</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">enable_safepoints</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">numbered_predicate</span>(<span class="number">10</span>)
     }
     <span class="doccomment">/// Enable various ABI extensions defined by LLVM&#39;s behavior.</span>
@@ -1152,7 +1151,7 @@
     <span class="doccomment">/// registers. The Fastcall implementation otherwise does not support</span>
     <span class="doccomment">/// `i128` arguments, and will panic if they are present and this</span>
     <span class="doccomment">/// option is not set.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">enable_llvm_abi_extensions</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">enable_llvm_abi_extensions</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">numbered_predicate</span>(<span class="number">11</span>)
     }
     <span class="doccomment">/// Generate unwind information.</span>
@@ -1161,23 +1160,23 @@
     <span class="doccomment">/// debugger to trace frames, is needed for GC tracing that relies on</span>
     <span class="doccomment">/// libunwind (such as in Wasmtime), and is unconditionally needed on</span>
     <span class="doccomment">/// certain platforms (such as Windows) that must always be able to unwind.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">unwind_info</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">unwind_info</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">numbered_predicate</span>(<span class="number">12</span>)
     }
     <span class="doccomment">/// Emit not-yet-relocated function addresses as all-ones bit patterns.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">emit_all_ones_funcaddrs</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">emit_all_ones_funcaddrs</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">numbered_predicate</span>(<span class="number">13</span>)
     }
     <span class="doccomment">/// Enable the use of stack probes for supported calling conventions.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">enable_probestack</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">enable_probestack</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">numbered_predicate</span>(<span class="number">14</span>)
     }
     <span class="doccomment">/// Enable if the stack probe adjusts the stack pointer.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">probestack_func_adjusts_sp</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">probestack_func_adjusts_sp</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">numbered_predicate</span>(<span class="number">15</span>)
     }
     <span class="doccomment">/// Enable the use of jump tables in generated machine code.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">enable_jump_tables</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">enable_jump_tables</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">numbered_predicate</span>(<span class="number">16</span>)
     }
     <span class="doccomment">/// Enable Spectre mitigation on heap bounds checks.</span>
@@ -1189,7 +1188,7 @@
     <span class="doccomment">/// This option is enabled by default because it is highly</span>
     <span class="doccomment">/// recommended for secure sandboxing. The embedder should consider</span>
     <span class="doccomment">/// the security implications carefully before disabling this option.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">enable_heap_access_spectre_mitigation</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">enable_heap_access_spectre_mitigation</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">numbered_predicate</span>(<span class="number">17</span>)
     }
 }
@@ -1407,11 +1406,11 @@
     <span class="ident">presets</span>: <span class="kw-2">&amp;</span><span class="ident">PRESETS</span>,
 };
 <span class="doccomment">/// Create a `settings::Builder` for the shared settings group.</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">builder</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Builder</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">builder</span>() -&gt; <span class="ident">Builder</span> {
     <span class="ident">Builder::new</span>(<span class="kw-2">&amp;</span><span class="ident">TEMPLATE</span>)
 }
 <span class="kw">impl</span> <span class="ident">fmt::Display</span> <span class="kw">for</span> <span class="ident">Flags</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
         <span class="macro">writeln!</span>(<span class="ident">f</span>, <span class="string">&quot;[shared]&quot;</span>)<span class="question-mark">?</span>;
         <span class="kw">for</span> <span class="ident">d</span> <span class="kw">in</span> <span class="kw-2">&amp;</span><span class="ident">DESCRIPTORS</span> {
             <span class="kw">if</span> <span class="op">!</span><span class="ident">d</span>.<span class="ident">detail</span>.<span class="ident">is_preset</span>() {
@@ -1423,7 +1422,7 @@
         <span class="prelude-val">Ok</span>(())
     }
 }
-</pre></div>
+</code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../../../../../../../../../../" data-current-crate="cranelift_codegen" data-search-index-js="../../../../../../../../../../../../search-index.js" data-search-js="../../../../../../../../../../../../search.js"></div>
     <script src="../../../../../../../../../../../../main.js"></script><script src="../../../../../../../../../../../../source-script.js"></script><script src="../../../../../../../../../../../../source-files.js"></script>
 </body></html>

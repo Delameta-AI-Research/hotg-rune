@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;legion-0.4.0&#x2F;src&#x2F;internals&#x2F;storage&#x2F;mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="stylesheet" type="text/css" href="../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../../../storage.js"></script><script src="../../../../crates.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../../legion/index.html'><div class='logo-container rust-logo'><img src='../../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;legion-0.4.0&#x2F;src&#x2F;internals&#x2F;storage&#x2F;mod.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>mod.rs - source</title><link rel="stylesheet" type="text/css" href="../../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../../../storage.js"></script><script src="../../../../crates.js"></script><noscript><link rel="stylesheet" href="../../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../../legion/index.html'><div class='logo-container rust-logo'><img src='../../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -470,8 +470,7 @@
 <span id="470">470</span>
 <span id="471">471</span>
 <span id="472">472</span>
-</pre><pre class="rust">
-<span class="kw">use</span> <span class="ident">std</span>::{
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std</span>::{
     <span class="ident">collections</span>::{<span class="ident">HashMap</span>, <span class="ident">HashSet</span>},
     <span class="ident">hash::BuildHasherDefault</span>,
     <span class="ident">ops</span>::{<span class="ident">Deref</span>, <span class="ident">DerefMut</span>, <span class="ident">Index</span>, <span class="ident">IndexMut</span>},
@@ -501,7 +500,7 @@
 
 <span class="kw">impl</span> <span class="ident">ComponentMeta</span> {
     <span class="doccomment">/// Returns the component meta of component type `T`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">of</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Component</span><span class="op">&gt;</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">of</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Component</span><span class="op">&gt;</span>() -&gt; <span class="self">Self</span> {
         <span class="ident">ComponentMeta</span> {
             <span class="ident">size</span>: <span class="ident">std::mem::size_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(),
             <span class="ident">align</span>: <span class="ident">std::mem::align_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(),
@@ -514,12 +513,12 @@
     }
 
     <span class="doccomment">/// Returns the size of the component.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">size</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">size</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
         <span class="self">self</span>.<span class="ident">size</span>
     }
 
     <span class="doccomment">/// Returns the alignment of the component.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">align</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">align</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
         <span class="self">self</span>.<span class="ident">align</span>
     }
 
@@ -548,7 +547,7 @@
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">Version</span> <span class="op">=</span> <span class="ident">u64</span>;
 
 <span class="kw">static</span> <span class="ident">COMPONENT_VERSION</span>: <span class="ident">AtomicU64</span> <span class="op">=</span> <span class="ident">AtomicU64::new</span>(<span class="number">0</span>);
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">next_component_version</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u64</span> {
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">next_component_version</span>() -&gt; <span class="ident">u64</span> {
     <span class="ident">COMPONENT_VERSION</span>.<span class="ident">fetch_add</span>(<span class="number">1</span>, <span class="ident">Ordering::SeqCst</span>)
 }
 
@@ -590,22 +589,22 @@
     <span class="kw">fn</span> <span class="ident">swap_remove</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">archetype</span>: <span class="ident">ArchetypeIndex</span>, <span class="ident">index</span>: <span class="ident">ComponentIndex</span>);
 
     <span class="doccomment">/// Packs archetype slices.</span>
-    <span class="kw">fn</span> <span class="ident">pack</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">epoch_threshold</span>: <span class="ident">Epoch</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span>;
+    <span class="kw">fn</span> <span class="ident">pack</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">epoch_threshold</span>: <span class="ident">Epoch</span>) -&gt; <span class="ident">usize</span>;
 
     <span class="doccomment">/// A heuristic estimating cache misses for an iteration through all components due to archetype fragmentation.</span>
-    <span class="kw">fn</span> <span class="ident">fragmentation</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">f32</span>;
+    <span class="kw">fn</span> <span class="ident">fragmentation</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">f32</span>;
 
     <span class="doccomment">/// Returns the component metadata.</span>
-    <span class="kw">fn</span> <span class="ident">element_vtable</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ComponentMeta</span>;
+    <span class="kw">fn</span> <span class="ident">element_vtable</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">ComponentMeta</span>;
 
     <span class="doccomment">/// Returns a pointer to the given archetype&#39;s component slice.</span>
-    <span class="kw">fn</span> <span class="ident">get_raw</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">archetype</span>: <span class="ident">ArchetypeIndex</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="kw-2">*</span><span class="kw">const</span> <span class="ident">u8</span>, <span class="ident">usize</span>)<span class="op">&gt;</span>;
+    <span class="kw">fn</span> <span class="ident">get_raw</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">archetype</span>: <span class="ident">ArchetypeIndex</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="kw-2">*</span><span class="kw">const</span> <span class="ident">u8</span>, <span class="ident">usize</span>)<span class="op">&gt;</span>;
 
     <span class="doccomment">/// Returns a pointer to the given archetype&#39;s component slice.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Safety</span>
     <span class="doccomment">/// The caller is responsible for ensuring that they have exclusive access to the given archetype&#39;s slice.</span>
-    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">get_mut_raw</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">archetype</span>: <span class="ident">ArchetypeIndex</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>, <span class="ident">usize</span>)<span class="op">&gt;</span>;
+    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">get_mut_raw</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">archetype</span>: <span class="ident">ArchetypeIndex</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">u8</span>, <span class="ident">usize</span>)<span class="op">&gt;</span>;
 
     <span class="doccomment">/// Writes new components into the given archetype&#39;s component slice via a memcopy.</span>
     <span class="doccomment">///</span>
@@ -630,7 +629,7 @@
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>: <span class="ident">Component</span><span class="op">&gt;</span> <span class="ident">ComponentSlice</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">components</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">T</span>], <span class="ident">version</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Version</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">components</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">T</span>], <span class="ident">version</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Version</span>) -&gt; <span class="self">Self</span> {
         <span class="self">Self</span> {
             <span class="ident">components</span>,
             <span class="ident">version</span>,
@@ -638,13 +637,13 @@
     }
 
     <span class="doccomment">/// Converts this slice into its inner value.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_slice</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">T</span>] {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_slice</span>(<span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">T</span>] {
         <span class="self">self</span>.<span class="ident">components</span>
     }
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>: <span class="ident">Component</span><span class="op">&gt;</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">ComponentSlice</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">T</span>] {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">slice</span>: <span class="ident">ComponentSlice</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">slice</span>: <span class="ident">ComponentSlice</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
         <span class="ident">slice</span>.<span class="ident">components</span>
     }
 }
@@ -652,14 +651,14 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>: <span class="ident">Component</span><span class="op">&gt;</span> <span class="ident">Deref</span> <span class="kw">for</span> <span class="ident">ComponentSlice</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Target</span> <span class="op">=</span> [<span class="ident">T</span>];
 
-    <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Target</span> {
+    <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Target</span> {
         <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">components</span>
     }
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>: <span class="ident">Component</span><span class="op">&gt;</span> <span class="ident">Index</span><span class="op">&lt;</span><span class="ident">ComponentIndex</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ComponentSlice</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span>;
-    <span class="kw">fn</span> <span class="ident">index</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">index</span>: <span class="ident">ComponentIndex</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Output</span> {
+    <span class="kw">fn</span> <span class="ident">index</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">index</span>: <span class="ident">ComponentIndex</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Output</span> {
         <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">components</span>[<span class="ident">index</span>.<span class="number">0</span>]
     }
 }
@@ -672,7 +671,7 @@
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>: <span class="ident">Component</span><span class="op">&gt;</span> <span class="ident">ComponentSliceMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">components</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> [<span class="ident">T</span>], <span class="ident">version</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">Version</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">components</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> [<span class="ident">T</span>], <span class="ident">version</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">Version</span>) -&gt; <span class="self">Self</span> {
         <span class="self">Self</span> {
             <span class="ident">components</span>,
             <span class="ident">version</span>,
@@ -681,7 +680,7 @@
 
     <span class="doccomment">/// Converts this slice into its inner value.</span>
     <span class="doccomment">/// This increments the slice&#39;s version.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_slice</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> [<span class="ident">T</span>] {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_slice</span>(<span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> [<span class="ident">T</span>] {
         <span class="kw-2">*</span><span class="self">self</span>.<span class="ident">version</span> <span class="op">=</span> <span class="ident">next_component_version</span>();
         <span class="self">self</span>.<span class="ident">components</span>
     }
@@ -690,20 +689,20 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>: <span class="ident">Component</span><span class="op">&gt;</span> <span class="ident">Deref</span> <span class="kw">for</span> <span class="ident">ComponentSliceMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Target</span> <span class="op">=</span> [<span class="ident">T</span>];
 
-    <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Target</span> {
+    <span class="kw">fn</span> <span class="ident">deref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Target</span> {
         <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">components</span>
     }
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>: <span class="ident">Component</span><span class="op">&gt;</span> <span class="ident">Index</span><span class="op">&lt;</span><span class="ident">ComponentIndex</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ComponentSliceMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Output</span> <span class="op">=</span> <span class="ident">T</span>;
-    <span class="kw">fn</span> <span class="ident">index</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">index</span>: <span class="ident">ComponentIndex</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Output</span> {
+    <span class="kw">fn</span> <span class="ident">index</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">index</span>: <span class="ident">ComponentIndex</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::Output</span> {
         <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">components</span>[<span class="ident">index</span>.<span class="number">0</span>]
     }
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span>: <span class="ident">Component</span><span class="op">&gt;</span> <span class="ident">IndexMut</span><span class="op">&lt;</span><span class="ident">ComponentIndex</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ComponentSliceMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">index_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">index</span>: <span class="ident">ComponentIndex</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident"><span class="self">Self</span>::Output</span> {
+    <span class="kw">fn</span> <span class="ident">index_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">index</span>: <span class="ident">ComponentIndex</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident"><span class="self">Self</span>::Output</span> {
         <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">components</span>[<span class="ident">index</span>.<span class="number">0</span>]
     }
 }
@@ -718,11 +717,11 @@
     <span class="kw">type</span> <span class="ident">IterMut</span>: <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">ComponentSliceMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>;
 
     <span class="doccomment">/// Returns the number of archetype slices stored.</span>
-    <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span>;
+    <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span>;
 
     <span class="doccomment">/// Returns `true` if the storage contains no archetypes.</span>
-    <span class="kw">fn</span> <span class="ident">is_empty</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="number">0</span>
+    <span class="kw">fn</span> <span class="ident">is_empty</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
+        <span class="self">self</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="number">0</span>
     }
 
     <span class="doccomment">/// Copies new components into the specified archetype slice.</span>
@@ -733,24 +732,24 @@
     <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">extend_memcopy</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">archetype</span>: <span class="ident">ArchetypeIndex</span>, <span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">T</span>, <span class="ident">len</span>: <span class="ident">usize</span>);
 
     <span class="doccomment">/// Gets the component slice for the specified archetype.</span>
-    <span class="kw">fn</span> <span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>, <span class="ident">archetype</span>: <span class="ident">ArchetypeIndex</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ComponentSlice</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>;
+    <span class="kw">fn</span> <span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>, <span class="ident">archetype</span>: <span class="ident">ArchetypeIndex</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ComponentSlice</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>;
 
     <span class="doccomment">/// Gets a mutable component slice for the specified archetype.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Safety</span>
     <span class="doccomment">/// Ensure that the requested archetype slice is not concurrently borrowed anywhere else such that memory</span>
     <span class="doccomment">/// is not mutably aliased.</span>
-    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>, <span class="ident">archetype</span>: <span class="ident">ArchetypeIndex</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ComponentSliceMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>;
+    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>, <span class="ident">archetype</span>: <span class="ident">ArchetypeIndex</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ComponentSliceMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>;
 
     <span class="doccomment">/// Iterates through all archetype component slices.</span>
-    <span class="kw">fn</span> <span class="ident">iter</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>, <span class="ident">start_inclusive</span>: <span class="ident">usize</span>, <span class="ident">end_exclusive</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::Iter</span>;
+    <span class="kw">fn</span> <span class="ident">iter</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>, <span class="ident">start_inclusive</span>: <span class="ident">usize</span>, <span class="ident">end_exclusive</span>: <span class="ident">usize</span>) -&gt; <span class="ident"><span class="self">Self</span>::Iter</span>;
 
     <span class="doccomment">/// Iterates through all mutable archetype component slices.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// # Safety</span>
     <span class="doccomment">/// Ensure that all requested archetype slices are not concurrently borrowed anywhere else such that memory</span>
     <span class="doccomment">/// is not mutably aliased.</span>
-    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">iter_mut</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>, <span class="ident">start_inclusive</span>: <span class="ident">usize</span>, <span class="ident">end_exclusive</span>: <span class="ident">usize</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::IterMut</span>;
+    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">iter_mut</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="self">self</span>, <span class="ident">start_inclusive</span>: <span class="ident">usize</span>, <span class="ident">end_exclusive</span>: <span class="ident">usize</span>) -&gt; <span class="ident"><span class="self">Self</span>::IterMut</span>;
 }
 
 <span class="doccomment">/// Contains the storages for all component types in a world.</span>
@@ -769,21 +768,21 @@
         <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>,
         <span class="ident">type_id</span>: <span class="ident">ComponentTypeId</span>,
         <span class="kw-2">mut</span> <span class="ident">create</span>: <span class="ident">F</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw">dyn</span> <span class="ident">UnknownComponentStorage</span>
+    ) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw">dyn</span> <span class="ident">UnknownComponentStorage</span>
     <span class="kw">where</span>
-        <span class="ident">F</span>: <span class="ident">FnMut</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">UnknownComponentStorage</span><span class="op">&gt;</span>,
+        <span class="ident">F</span>: <span class="ident">FnMut</span>() -&gt; <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">UnknownComponentStorage</span><span class="op">&gt;</span>,
     {
         <span class="kw">let</span> <span class="ident">cell</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">storages</span>.<span class="ident">entry</span>(<span class="ident">type_id</span>).<span class="ident">or_insert_with</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">create</span>());
         <span class="ident">cell</span>.<span class="ident">deref_mut</span>()
     }
 
     <span class="doccomment">/// Returns the storage for the given component type.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">type_id</span>: <span class="ident">ComponentTypeId</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw">dyn</span> <span class="ident">UnknownComponentStorage</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">type_id</span>: <span class="ident">ComponentTypeId</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw">dyn</span> <span class="ident">UnknownComponentStorage</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">storages</span>.<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="ident">type_id</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">cell</span><span class="op">|</span> <span class="ident">cell</span>.<span class="ident">deref</span>())
     }
 
     <span class="doccomment">/// Returns the storage for the given component type.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_downcast</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Component</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">T::Storage</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_downcast</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Component</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">T::Storage</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">type_id</span> <span class="op">=</span> <span class="ident">ComponentTypeId::of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>();
         <span class="self">self</span>.<span class="ident">get</span>(<span class="ident">type_id</span>).<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">storage</span><span class="op">|</span> <span class="ident">storage</span>.<span class="ident">downcast_ref</span>())
     }
@@ -792,19 +791,19 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_mut</span>(
         <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>,
         <span class="ident">type_id</span>: <span class="ident">ComponentTypeId</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw">dyn</span> <span class="ident">UnknownComponentStorage</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw">dyn</span> <span class="ident">UnknownComponentStorage</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">storages</span>.<span class="ident">get_mut</span>(<span class="kw-2">&amp;</span><span class="ident">type_id</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">cell</span><span class="op">|</span> <span class="ident">cell</span>.<span class="ident">deref_mut</span>())
     }
 
     <span class="doccomment">/// Returns the storage for the given component type.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_downcast_mut</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Component</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T::Storage</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_downcast_mut</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Component</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T::Storage</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">type_id</span> <span class="op">=</span> <span class="ident">ComponentTypeId::of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>();
         <span class="self">self</span>.<span class="ident">get_mut</span>(<span class="ident">type_id</span>)
             .<span class="ident">and_then</span>(<span class="op">|</span><span class="ident">storage</span><span class="op">|</span> <span class="ident">storage</span>.<span class="ident">downcast_mut</span>())
     }
 
     <span class="doccomment">/// Returns a writer for writing to multiple component storages.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_multi_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MultiMut</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_multi_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="ident">MultiMut</span> {
         <span class="ident">MultiMut::new</span>(<span class="self">self</span>)
     }
 
@@ -826,13 +825,13 @@
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">iter_storages_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw">dyn</span> <span class="ident">UnknownComponentStorage</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">iter_storages_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw">dyn</span> <span class="ident">UnknownComponentStorage</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">storages</span>.<span class="ident">iter_mut</span>().<span class="ident">map</span>(<span class="op">|</span>(<span class="kw">_</span>, <span class="ident">cell</span>)<span class="op">|</span> <span class="ident">cell</span>.<span class="ident">deref_mut</span>())
     }
 }
 
 <span class="kw">impl</span> <span class="ident">std::fmt::Debug</span> <span class="kw">for</span> <span class="ident">Components</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">std::fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">std::fmt::Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">std::fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="ident">std::fmt::Result</span> {
         <span class="ident">f</span>.<span class="ident">debug_list</span>().<span class="ident">entries</span>(<span class="self">self</span>.<span class="ident">storages</span>.<span class="ident">keys</span>()).<span class="ident">finish</span>()
     }
 }
@@ -856,7 +855,7 @@
 
 <span class="kw">impl</span> <span class="ident">PackOptions</span> {
     <span class="doccomment">/// Force a repack.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">force</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">force</span>() -&gt; <span class="self">Self</span> {
         <span class="self">Self</span> {
             <span class="ident">stability_threshold</span>: <span class="number">0</span>,
             <span class="ident">fragmentation_threshold</span>: <span class="number">0.0</span>,
@@ -866,7 +865,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">PackOptions</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
         <span class="self">Self</span> {
             <span class="ident">stability_threshold</span>: <span class="number">120</span>,
             <span class="ident">fragmentation_threshold</span>: <span class="number">1.0</span> <span class="op">/</span> <span class="number">64.0</span>,
@@ -883,7 +882,7 @@
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">MultiMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">components</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">Components</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">components</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">Components</span>) -&gt; <span class="self">Self</span> {
         <span class="self">Self</span> {
             <span class="ident">components</span>,
             <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">debug_assertions</span>)]</span>
@@ -896,7 +895,7 @@
     <span class="doccomment">/// # Safety</span>
     <span class="doccomment">/// The caller must ensure that each component type is only claimed once, as doing otherwise</span>
     <span class="doccomment">/// may result in mutable aliases of the component storage. This is validated in debug builds.</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">claim</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Component</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">T::Storage</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">claim</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Component</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">T::Storage</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">type_id</span> <span class="op">=</span> <span class="ident">ComponentTypeId::of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>();
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">debug_assertions</span>)]</span>
         {
@@ -922,7 +921,7 @@
     <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">claim_unknown</span>(
         <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>,
         <span class="ident">type_id</span>: <span class="ident">ComponentTypeId</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="kw">dyn</span> <span class="ident">UnknownComponentStorage</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="kw">dyn</span> <span class="ident">UnknownComponentStorage</span><span class="op">&gt;</span> {
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">debug_assertions</span>)]</span>
         {
             <span class="macro">assert!</span>(<span class="op">!</span><span class="self">self</span>.<span class="ident">claimed</span>.<span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="ident">type_id</span>));
@@ -939,11 +938,11 @@
             .<span class="ident">map</span>(<span class="op">|</span><span class="ident">cell</span><span class="op">|</span> <span class="ident"><span class="self">Self</span>::extend_lifetime</span>(<span class="ident">cell</span>).<span class="ident">deref_mut</span>())
     }
 
-    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">extend_lifetime</span><span class="op">&lt;</span><span class="lifetime">&#39;b</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">value</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> <span class="kw-2">mut</span> <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">T</span> {
+    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">extend_lifetime</span><span class="op">&lt;</span><span class="lifetime">&#39;b</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">value</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> <span class="kw-2">mut</span> <span class="ident">T</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">T</span> {
         <span class="ident">std::mem::transmute</span>::<span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;b</span> <span class="kw-2">mut</span> <span class="ident">T</span>, <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> <span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">value</span>)
     }
 }
-</pre></div>
+</code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../../" data-current-crate="legion" data-search-index-js="../../../../search-index.js" data-search-js="../../../../search.js"></div>
     <script src="../../../../main.js"></script><script src="../../../../source-script.js"></script><script src="../../../../source-files.js"></script>
 </body></html>

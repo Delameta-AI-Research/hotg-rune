@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;image-0.23.14&#x2F;.&#x2F;src&#x2F;codecs&#x2F;png.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>png.rs - source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../image/index.html'><div class='logo-container rust-logo'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;image-0.23.14&#x2F;.&#x2F;src&#x2F;codecs&#x2F;png.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>png.rs - source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../image/index.html'><div class='logo-container rust-logo'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -690,8 +690,7 @@
 <span id="690">690</span>
 <span id="691">691</span>
 <span id="692">692</span>
-</pre><pre class="rust">
-<span class="doccomment">//! Decoding and Encoding of PNG Images</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Decoding and Encoding of PNG Images</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! PNG (Portable Network Graphics) is an image format that supports lossless compression.</span>
 <span class="doccomment">//!</span>
@@ -736,7 +735,7 @@
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">PNGReader</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">PngReader</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>;
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Read</span><span class="op">&gt;</span> <span class="ident">PngReader</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">new</span>(<span class="kw-2">mut</span> <span class="ident">reader</span>: <span class="ident">png::Reader</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ImageResult</span><span class="op">&lt;</span><span class="ident">PngReader</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">new</span>(<span class="kw-2">mut</span> <span class="ident">reader</span>: <span class="ident">png::Reader</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>) -&gt; <span class="ident">ImageResult</span><span class="op">&lt;</span><span class="ident">PngReader</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">reader</span>.<span class="ident">output_buffer_size</span>();
         <span class="comment">// Since interlaced images do not come in</span>
         <span class="comment">// scanline order it is almost impossible to</span>
@@ -760,7 +759,7 @@
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Read</span><span class="op">&gt;</span> <span class="ident">Read</span> <span class="kw">for</span> <span class="ident">PngReader</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">read</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="kw-2">mut</span> <span class="ident">buf</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">io::Result</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">read</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="kw-2">mut</span> <span class="ident">buf</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) -&gt; <span class="ident">io::Result</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
         <span class="comment">// io::Write::write for slice cannot fail</span>
         <span class="kw">let</span> <span class="ident">readed</span> <span class="op">=</span> <span class="ident">buf</span>.<span class="ident">write</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">buffer</span>[<span class="self">self</span>.<span class="ident">index</span>..]).<span class="ident">unwrap</span>();
 
@@ -769,7 +768,7 @@
 
         <span class="kw">while</span> <span class="self">self</span>.<span class="ident">index</span> <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">len</span>() {
             <span class="kw">match</span> <span class="self">self</span>.<span class="ident">reader</span>.<span class="ident">next_row</span>()<span class="question-mark">?</span> {
-                <span class="prelude-val">Some</span>(<span class="ident">row</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="prelude-val">Some</span>(<span class="ident">row</span>) =&gt; {
                     <span class="comment">// Faster to copy directly to external buffer</span>
                     <span class="kw">let</span> <span class="ident">readed</span>  <span class="op">=</span> <span class="ident">buf</span>.<span class="ident">write</span>(<span class="ident">row</span>).<span class="ident">unwrap</span>();
                     <span class="ident">bytes</span> <span class="op">+</span><span class="op">=</span> <span class="ident">readed</span>;
@@ -777,14 +776,14 @@
                     <span class="self">self</span>.<span class="ident">buffer</span> <span class="op">=</span> (<span class="kw-2">&amp;</span><span class="ident">row</span>[<span class="ident">readed</span>..]).<span class="ident">to_owned</span>();
                     <span class="self">self</span>.<span class="ident">index</span> <span class="op">=</span> <span class="number">0</span>;
                 }
-                <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">bytes</span>)
+                <span class="prelude-val">None</span> =&gt; <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">bytes</span>)
             }
         }
 
         <span class="prelude-val">Ok</span>(<span class="ident">bytes</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">read_to_end</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">buf</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">io::Result</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">read_to_end</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">buf</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>) -&gt; <span class="ident">io::Result</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">bytes</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">len</span>();
         <span class="kw">if</span> <span class="ident">buf</span>.<span class="ident">is_empty</span>() {
             <span class="ident">std::mem::swap</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">buffer</span>, <span class="ident">buf</span>);
@@ -812,7 +811,7 @@
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Read</span><span class="op">&gt;</span> <span class="ident">PngDecoder</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Creates a new decoder that decodes from the stream ```r```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">r</span>: <span class="ident">R</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ImageResult</span><span class="op">&lt;</span><span class="ident">PngDecoder</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">r</span>: <span class="ident">R</span>) -&gt; <span class="ident">ImageResult</span><span class="op">&lt;</span><span class="ident">PngDecoder</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">limits</span> <span class="op">=</span> <span class="ident">png::Limits</span> {
             <span class="ident">bytes</span>: <span class="ident">usize::max_value</span>(),
         };
@@ -824,43 +823,43 @@
         <span class="kw">let</span> (<span class="kw">_</span>, <span class="kw-2">mut</span> <span class="ident">reader</span>) <span class="op">=</span> <span class="ident">decoder</span>.<span class="ident">read_info</span>().<span class="ident">map_err</span>(<span class="ident">ImageError::from_png</span>)<span class="question-mark">?</span>;
         <span class="kw">let</span> (<span class="ident">color_type</span>, <span class="ident">bits</span>) <span class="op">=</span> <span class="ident">reader</span>.<span class="ident">output_color_type</span>();
         <span class="kw">let</span> <span class="ident">color_type</span> <span class="op">=</span> <span class="kw">match</span> (<span class="ident">color_type</span>, <span class="ident">bits</span>) {
-            (<span class="ident">png::ColorType::Grayscale</span>, <span class="ident">png::BitDepth::Eight</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ColorType::L8</span>,
-            (<span class="ident">png::ColorType::Grayscale</span>, <span class="ident">png::BitDepth::Sixteen</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ColorType::L16</span>,
-            (<span class="ident">png::ColorType::GrayscaleAlpha</span>, <span class="ident">png::BitDepth::Eight</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ColorType::La8</span>,
-            (<span class="ident">png::ColorType::GrayscaleAlpha</span>, <span class="ident">png::BitDepth::Sixteen</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ColorType::La16</span>,
-            (<span class="ident">png::ColorType::RGB</span>, <span class="ident">png::BitDepth::Eight</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ColorType::Rgb8</span>,
-            (<span class="ident">png::ColorType::RGB</span>, <span class="ident">png::BitDepth::Sixteen</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ColorType::Rgb16</span>,
-            (<span class="ident">png::ColorType::RGBA</span>, <span class="ident">png::BitDepth::Eight</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ColorType::Rgba8</span>,
-            (<span class="ident">png::ColorType::RGBA</span>, <span class="ident">png::BitDepth::Sixteen</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ColorType::Rgba16</span>,
+            (<span class="ident">png::ColorType::Grayscale</span>, <span class="ident">png::BitDepth::Eight</span>) =&gt; <span class="ident">ColorType::L8</span>,
+            (<span class="ident">png::ColorType::Grayscale</span>, <span class="ident">png::BitDepth::Sixteen</span>) =&gt; <span class="ident">ColorType::L16</span>,
+            (<span class="ident">png::ColorType::GrayscaleAlpha</span>, <span class="ident">png::BitDepth::Eight</span>) =&gt; <span class="ident">ColorType::La8</span>,
+            (<span class="ident">png::ColorType::GrayscaleAlpha</span>, <span class="ident">png::BitDepth::Sixteen</span>) =&gt; <span class="ident">ColorType::La16</span>,
+            (<span class="ident">png::ColorType::RGB</span>, <span class="ident">png::BitDepth::Eight</span>) =&gt; <span class="ident">ColorType::Rgb8</span>,
+            (<span class="ident">png::ColorType::RGB</span>, <span class="ident">png::BitDepth::Sixteen</span>) =&gt; <span class="ident">ColorType::Rgb16</span>,
+            (<span class="ident">png::ColorType::RGBA</span>, <span class="ident">png::BitDepth::Eight</span>) =&gt; <span class="ident">ColorType::Rgba8</span>,
+            (<span class="ident">png::ColorType::RGBA</span>, <span class="ident">png::BitDepth::Sixteen</span>) =&gt; <span class="ident">ColorType::Rgba16</span>,
 
-            (<span class="ident">png::ColorType::Grayscale</span>, <span class="ident">png::BitDepth::One</span>) <span class="op">=</span><span class="op">&gt;</span>
+            (<span class="ident">png::ColorType::Grayscale</span>, <span class="ident">png::BitDepth::One</span>) =&gt;
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">unsupported_color</span>(<span class="ident">ExtendedColorType::L1</span>)),
-            (<span class="ident">png::ColorType::GrayscaleAlpha</span>, <span class="ident">png::BitDepth::One</span>) <span class="op">=</span><span class="op">&gt;</span>
+            (<span class="ident">png::ColorType::GrayscaleAlpha</span>, <span class="ident">png::BitDepth::One</span>) =&gt;
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">unsupported_color</span>(<span class="ident">ExtendedColorType::La1</span>)),
-            (<span class="ident">png::ColorType::RGB</span>, <span class="ident">png::BitDepth::One</span>) <span class="op">=</span><span class="op">&gt;</span>
+            (<span class="ident">png::ColorType::RGB</span>, <span class="ident">png::BitDepth::One</span>) =&gt;
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">unsupported_color</span>(<span class="ident">ExtendedColorType::Rgb1</span>)),
-            (<span class="ident">png::ColorType::RGBA</span>, <span class="ident">png::BitDepth::One</span>) <span class="op">=</span><span class="op">&gt;</span>
+            (<span class="ident">png::ColorType::RGBA</span>, <span class="ident">png::BitDepth::One</span>) =&gt;
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">unsupported_color</span>(<span class="ident">ExtendedColorType::Rgba1</span>)),
 
-            (<span class="ident">png::ColorType::Grayscale</span>, <span class="ident">png::BitDepth::Two</span>) <span class="op">=</span><span class="op">&gt;</span>
+            (<span class="ident">png::ColorType::Grayscale</span>, <span class="ident">png::BitDepth::Two</span>) =&gt;
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">unsupported_color</span>(<span class="ident">ExtendedColorType::L2</span>)),
-            (<span class="ident">png::ColorType::GrayscaleAlpha</span>, <span class="ident">png::BitDepth::Two</span>) <span class="op">=</span><span class="op">&gt;</span>
+            (<span class="ident">png::ColorType::GrayscaleAlpha</span>, <span class="ident">png::BitDepth::Two</span>) =&gt;
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">unsupported_color</span>(<span class="ident">ExtendedColorType::La2</span>)),
-            (<span class="ident">png::ColorType::RGB</span>, <span class="ident">png::BitDepth::Two</span>) <span class="op">=</span><span class="op">&gt;</span>
+            (<span class="ident">png::ColorType::RGB</span>, <span class="ident">png::BitDepth::Two</span>) =&gt;
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">unsupported_color</span>(<span class="ident">ExtendedColorType::Rgb2</span>)),
-            (<span class="ident">png::ColorType::RGBA</span>, <span class="ident">png::BitDepth::Two</span>) <span class="op">=</span><span class="op">&gt;</span>
+            (<span class="ident">png::ColorType::RGBA</span>, <span class="ident">png::BitDepth::Two</span>) =&gt;
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">unsupported_color</span>(<span class="ident">ExtendedColorType::Rgba2</span>)),
 
-            (<span class="ident">png::ColorType::Grayscale</span>, <span class="ident">png::BitDepth::Four</span>) <span class="op">=</span><span class="op">&gt;</span>
+            (<span class="ident">png::ColorType::Grayscale</span>, <span class="ident">png::BitDepth::Four</span>) =&gt;
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">unsupported_color</span>(<span class="ident">ExtendedColorType::L4</span>)),
-            (<span class="ident">png::ColorType::GrayscaleAlpha</span>, <span class="ident">png::BitDepth::Four</span>) <span class="op">=</span><span class="op">&gt;</span>
+            (<span class="ident">png::ColorType::GrayscaleAlpha</span>, <span class="ident">png::BitDepth::Four</span>) =&gt;
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">unsupported_color</span>(<span class="ident">ExtendedColorType::La4</span>)),
-            (<span class="ident">png::ColorType::RGB</span>, <span class="ident">png::BitDepth::Four</span>) <span class="op">=</span><span class="op">&gt;</span>
+            (<span class="ident">png::ColorType::RGB</span>, <span class="ident">png::BitDepth::Four</span>) =&gt;
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">unsupported_color</span>(<span class="ident">ExtendedColorType::Rgb4</span>)),
-            (<span class="ident">png::ColorType::RGBA</span>, <span class="ident">png::BitDepth::Four</span>) <span class="op">=</span><span class="op">&gt;</span>
+            (<span class="ident">png::ColorType::RGBA</span>, <span class="ident">png::BitDepth::Four</span>) =&gt;
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">unsupported_color</span>(<span class="ident">ExtendedColorType::Rgba4</span>)),
 
-            (<span class="ident">png::ColorType::Indexed</span>, <span class="ident">bits</span>) <span class="op">=</span><span class="op">&gt;</span>
+            (<span class="ident">png::ColorType::Indexed</span>, <span class="ident">bits</span>) =&gt;
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">unsupported_color</span>(<span class="ident">ExtendedColorType::Unknown</span>(<span class="ident">bits</span> <span class="kw">as</span> <span class="ident">u8</span>))),
         };
 
@@ -877,7 +876,7 @@
     <span class="doccomment">/// If something is not supported or a limit is violated then the decoding step that requires</span>
     <span class="doccomment">/// them will fail and an error will be returned instead of the frame. No further frames will</span>
     <span class="doccomment">/// be returned.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">apng</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ApngDecoder</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">apng</span>(<span class="self">self</span>) -&gt; <span class="ident">ApngDecoder</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> {
         <span class="ident">ApngDecoder::new</span>(<span class="self">self</span>)
     }
 
@@ -887,12 +886,12 @@
     <span class="doccomment">/// animation. When it is not the common interpretation is to use it as a thumbnail.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// If a non-animated image is converted into an `ApngDecoder` then its iterator is empty.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_apng</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_apng</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">reader</span>.<span class="ident">info</span>().<span class="ident">animation_control</span>.<span class="ident">is_some</span>()
     }
 }
 
-<span class="kw">fn</span> <span class="ident">unsupported_color</span>(<span class="ident">ect</span>: <span class="ident">ExtendedColorType</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ImageError</span> {
+<span class="kw">fn</span> <span class="ident">unsupported_color</span>(<span class="ident">ect</span>: <span class="ident">ExtendedColorType</span>) -&gt; <span class="ident">ImageError</span> {
     <span class="ident">ImageError::Unsupported</span>(<span class="ident">UnsupportedError::from_format_and_kind</span>(
         <span class="ident">ImageFormat::Png</span>.<span class="ident">into</span>(),
         <span class="ident">UnsupportedErrorKind::Color</span>(<span class="ident">ect</span>),
@@ -902,19 +901,19 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">R</span>: <span class="lifetime">&#39;a</span> <span class="op">+</span> <span class="ident">Read</span><span class="op">&gt;</span> <span class="ident">ImageDecoder</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">PngDecoder</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Reader</span> <span class="op">=</span> <span class="ident">PngReader</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>;
 
-    <span class="kw">fn</span> <span class="ident">dimensions</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">u32</span>, <span class="ident">u32</span>) {
+    <span class="kw">fn</span> <span class="ident">dimensions</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (<span class="ident">u32</span>, <span class="ident">u32</span>) {
         <span class="self">self</span>.<span class="ident">reader</span>.<span class="ident">info</span>().<span class="ident">size</span>()
     }
 
-    <span class="kw">fn</span> <span class="ident">color_type</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ColorType</span> {
+    <span class="kw">fn</span> <span class="ident">color_type</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">ColorType</span> {
         <span class="self">self</span>.<span class="ident">color_type</span>
     }
 
-    <span class="kw">fn</span> <span class="ident">into_reader</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ImageResult</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Reader</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">into_reader</span>(<span class="self">self</span>) -&gt; <span class="ident">ImageResult</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Reader</span><span class="op">&gt;</span> {
         <span class="ident">PngReader::new</span>(<span class="self">self</span>.<span class="ident">reader</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">read_image</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">buf</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ImageResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">read_image</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">buf</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) -&gt; <span class="ident">ImageResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">use</span> <span class="ident">byteorder</span>::{<span class="ident">BigEndian</span>, <span class="ident">ByteOrder</span>, <span class="ident">NativeEndian</span>};
 
         <span class="macro">assert_eq!</span>(<span class="ident">u64::try_from</span>(<span class="ident">buf</span>.<span class="ident">len</span>()), <span class="prelude-val">Ok</span>(<span class="self">self</span>.<span class="ident">total_bytes</span>()));
@@ -925,17 +924,17 @@
         <span class="comment">// TODO: assumes equal channel bit depth.</span>
         <span class="kw">let</span> <span class="ident">bpc</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">color_type</span>().<span class="ident">bytes_per_pixel</span>() <span class="op">/</span> <span class="self">self</span>.<span class="ident">color_type</span>().<span class="ident">channel_count</span>();
         <span class="kw">match</span> <span class="ident">bpc</span> {
-            <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> (),  <span class="comment">// No reodering necessary for u8</span>
-            <span class="number">2</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">buf</span>.<span class="ident">chunks_mut</span>(<span class="number">2</span>).<span class="ident">for_each</span>(<span class="op">|</span><span class="ident">c</span><span class="op">|</span> {
+            <span class="number">1</span> =&gt; (),  <span class="comment">// No reodering necessary for u8</span>
+            <span class="number">2</span> =&gt; <span class="ident">buf</span>.<span class="ident">chunks_mut</span>(<span class="number">2</span>).<span class="ident">for_each</span>(<span class="op">|</span><span class="ident">c</span><span class="op">|</span> {
                 <span class="kw">let</span> <span class="ident">v</span> <span class="op">=</span> <span class="ident">BigEndian::read_u16</span>(<span class="ident">c</span>);
                 <span class="ident">NativeEndian::write_u16</span>(<span class="ident">c</span>, <span class="ident">v</span>)
             }),
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable!</span>(),
+            <span class="kw">_</span> =&gt; <span class="macro">unreachable!</span>(),
         }
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="kw">fn</span> <span class="ident">scanline_bytes</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u64</span> {
+    <span class="kw">fn</span> <span class="ident">scanline_bytes</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u64</span> {
         <span class="kw">let</span> <span class="ident">width</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">reader</span>.<span class="ident">info</span>().<span class="ident">width</span>;
         <span class="self">self</span>.<span class="ident">reader</span>.<span class="ident">output_line_size</span>(<span class="ident">width</span>) <span class="kw">as</span> <span class="ident">u64</span>
     }
@@ -963,13 +962,13 @@
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Read</span><span class="op">&gt;</span> <span class="ident">ApngDecoder</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">inner</span>: <span class="ident">PngDecoder</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">inner</span>: <span class="ident">PngDecoder</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
         <span class="kw">let</span> (<span class="ident">width</span>, <span class="ident">height</span>) <span class="op">=</span> <span class="ident">inner</span>.<span class="ident">dimensions</span>();
         <span class="kw">let</span> <span class="ident">info</span> <span class="op">=</span> <span class="ident">inner</span>.<span class="ident">reader</span>.<span class="ident">info</span>();
         <span class="kw">let</span> <span class="ident">remaining</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">info</span>.<span class="ident">animation_control</span>() {
             <span class="comment">// The expected number of fcTL in the remaining image.</span>
-            <span class="prelude-val">Some</span>(<span class="ident">actl</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">actl</span>.<span class="ident">num_frames</span>,
-            <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="number">0</span>,
+            <span class="prelude-val">Some</span>(<span class="ident">actl</span>) =&gt; <span class="ident">actl</span>.<span class="ident">num_frames</span>,
+            <span class="prelude-val">None</span> =&gt; <span class="number">0</span>,
         };
         <span class="comment">// If the IDAT has no fcTL then it is not part of the animation counted by</span>
         <span class="comment">// num_frames. All following fdAT chunks must be preceded by an fcTL</span>
@@ -988,11 +987,11 @@
     <span class="comment">// TODO: thumbnail(&amp;mut self) -&gt; Option&lt;impl ImageDecoder&lt;&#39;_&gt;&gt;</span>
 
     <span class="doccomment">/// Decode one subframe and overlay it on the canvas.</span>
-    <span class="kw">fn</span> <span class="ident">mix_next_frame</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">RgbaImage</span><span class="op">&gt;</span>, <span class="ident">ImageError</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">mix_next_frame</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident">RgbaImage</span><span class="op">&gt;</span>, <span class="ident">ImageError</span><span class="op">&gt;</span> {
         <span class="comment">// Remove this image from remaining.</span>
         <span class="self">self</span>.<span class="ident">remaining</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">remaining</span>.<span class="ident">checked_sub</span>(<span class="number">1</span>) {
-            <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>),
-            <span class="prelude-val">Some</span>(<span class="ident">next</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">next</span>,
+            <span class="prelude-val">None</span> =&gt; <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>),
+            <span class="prelude-val">Some</span>(<span class="ident">next</span>) =&gt; <span class="ident">next</span>,
         };
 
         <span class="comment">// Shorten ourselves to 0 in case of error.</span>
@@ -1010,14 +1009,14 @@
 
         <span class="comment">// Dispose of the previous frame.</span>
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">dispose</span> {
-            <span class="ident">DisposeOp::None</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">DisposeOp::None</span> =&gt; {
                 <span class="self">self</span>.<span class="ident">previous</span>.<span class="ident">clone_from</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">current</span>);
             }
-            <span class="ident">DisposeOp::Background</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">DisposeOp::Background</span> =&gt; {
                 <span class="self">self</span>.<span class="ident">previous</span>.<span class="ident">clone_from</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">current</span>);
                 <span class="self">self</span>.<span class="ident">current</span>.<span class="ident">pixels_mut</span>().<span class="ident">for_each</span>(<span class="op">|</span><span class="ident">pixel</span><span class="op">|</span> <span class="kw-2">*</span><span class="ident">pixel</span> <span class="op">=</span> <span class="ident">Rgba</span>([<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]));
             }
-            <span class="ident">DisposeOp::Previous</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">DisposeOp::Previous</span> =&gt; {
                 <span class="self">self</span>.<span class="ident">current</span>.<span class="ident">clone_from</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">previous</span>);
             }
         }
@@ -1030,14 +1029,14 @@
         <span class="comment">// Find out how to interpret the decoded frame.</span>
         <span class="kw">let</span> (<span class="ident">width</span>, <span class="ident">height</span>, <span class="ident">px</span>, <span class="ident">py</span>, <span class="ident">blend</span>);
         <span class="kw">match</span> <span class="ident">info</span>.<span class="ident">frame_control</span>() {
-            <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="prelude-val">None</span> =&gt; {
                 <span class="ident">width</span> <span class="op">=</span> <span class="ident">info</span>.<span class="ident">width</span>;
                 <span class="ident">height</span> <span class="op">=</span> <span class="ident">info</span>.<span class="ident">height</span>;
                 <span class="ident">px</span> <span class="op">=</span> <span class="number">0</span>;
                 <span class="ident">py</span> <span class="op">=</span> <span class="number">0</span>;
                 <span class="ident">blend</span> <span class="op">=</span> <span class="ident">BlendOp::Source</span>;
             }
-            <span class="prelude-val">Some</span>(<span class="ident">fc</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="prelude-val">Some</span>(<span class="ident">fc</span>) =&gt; {
                 <span class="ident">width</span> <span class="op">=</span> <span class="ident">fc</span>.<span class="ident">width</span>;
                 <span class="ident">height</span> <span class="op">=</span> <span class="ident">fc</span>.<span class="ident">height</span>;
                 <span class="ident">px</span> <span class="op">=</span> <span class="ident">fc</span>.<span class="ident">x_offset</span>;
@@ -1049,34 +1048,34 @@
 
         <span class="comment">// Turn the data into an rgba image proper.</span>
         <span class="kw">let</span> <span class="ident">source</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">color_type</span> {
-            <span class="ident">ColorType::L8</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">ColorType::L8</span> =&gt; {
                 <span class="kw">let</span> <span class="ident">image</span> <span class="op">=</span> <span class="ident">ImageBuffer</span>::<span class="op">&lt;</span><span class="ident">Luma</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span>, <span class="kw">_</span><span class="op">&gt;</span><span class="ident">::from_raw</span>(<span class="ident">width</span>, <span class="ident">height</span>, <span class="ident">buffer</span>).<span class="ident">unwrap</span>();
                 <span class="ident">DynamicImage::ImageLuma8</span>(<span class="ident">image</span>).<span class="ident">into_rgba8</span>()
             }
-            <span class="ident">ColorType::La8</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">ColorType::La8</span> =&gt; {
                 <span class="kw">let</span> <span class="ident">image</span> <span class="op">=</span> <span class="ident">ImageBuffer</span>::<span class="op">&lt;</span><span class="ident">LumaA</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span>, <span class="kw">_</span><span class="op">&gt;</span><span class="ident">::from_raw</span>(<span class="ident">width</span>, <span class="ident">height</span>, <span class="ident">buffer</span>).<span class="ident">unwrap</span>();
                 <span class="ident">DynamicImage::ImageLumaA8</span>(<span class="ident">image</span>).<span class="ident">into_rgba8</span>()
             }
-            <span class="ident">ColorType::Rgb8</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">ColorType::Rgb8</span> =&gt; {
                 <span class="kw">let</span> <span class="ident">image</span> <span class="op">=</span> <span class="ident">ImageBuffer</span>::<span class="op">&lt;</span><span class="ident">Rgb</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span>, <span class="kw">_</span><span class="op">&gt;</span><span class="ident">::from_raw</span>(<span class="ident">width</span>, <span class="ident">height</span>, <span class="ident">buffer</span>).<span class="ident">unwrap</span>();
                 <span class="ident">DynamicImage::ImageRgb8</span>(<span class="ident">image</span>).<span class="ident">into_rgba8</span>()
             }
-            <span class="ident">ColorType::Rgba8</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">ColorType::Rgba8</span> =&gt; {
                 <span class="ident">ImageBuffer</span>::<span class="op">&lt;</span><span class="ident">Rgba</span><span class="op">&lt;</span><span class="kw">_</span><span class="op">&gt;</span>, <span class="kw">_</span><span class="op">&gt;</span><span class="ident">::from_raw</span>(<span class="ident">width</span>, <span class="ident">height</span>, <span class="ident">buffer</span>).<span class="ident">unwrap</span>()
             }
-            <span class="ident">ColorType::L16</span> <span class="op">|</span> <span class="ident">ColorType::Rgb16</span> <span class="op">|</span> <span class="ident">ColorType::La16</span> <span class="op">|</span> <span class="ident">ColorType::Rgba16</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">ColorType::L16</span> <span class="op">|</span> <span class="ident">ColorType::Rgb16</span> <span class="op">|</span> <span class="ident">ColorType::La16</span> <span class="op">|</span> <span class="ident">ColorType::Rgba16</span> =&gt; {
                 <span class="comment">// TODO: to enable remove restriction in `animatable_color_type` method.</span>
                 <span class="macro">unreachable!</span>(<span class="string">&quot;16-bit apng not yet support&quot;</span>)
             }
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable!</span>(<span class="string">&quot;Invalid png color&quot;</span>),
+            <span class="kw">_</span> =&gt; <span class="macro">unreachable!</span>(<span class="string">&quot;Invalid png color&quot;</span>),
         };
 
         <span class="kw">match</span> <span class="ident">blend</span> {
-            <span class="ident">BlendOp::Source</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">BlendOp::Source</span> =&gt; {
                 <span class="self">self</span>.<span class="ident">current</span>.<span class="ident">copy_from</span>(<span class="kw-2">&amp;</span><span class="ident">source</span>, <span class="ident">px</span>, <span class="ident">py</span>)
                     .<span class="ident">expect</span>(<span class="string">&quot;Invalid png image not detected in png&quot;</span>);
             }
-            <span class="ident">BlendOp::Over</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">BlendOp::Over</span> =&gt; {
                 <span class="comment">// TODO: investigate speed, speed-ups, and bounds-checks.</span>
                 <span class="kw">for</span> (<span class="ident">x</span>, <span class="ident">y</span>, <span class="ident">p</span>) <span class="kw">in</span> <span class="ident">source</span>.<span class="ident">enumerate_pixels</span>() {
                     <span class="self">self</span>.<span class="ident">current</span>.<span class="ident">get_pixel_mut</span>(<span class="ident">x</span> <span class="op">+</span> <span class="ident">px</span>, <span class="ident">y</span> <span class="op">+</span> <span class="ident">py</span>).<span class="ident">blend</span>(<span class="ident">p</span>);
@@ -1090,30 +1089,30 @@
         <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">current</span>))
     }
 
-    <span class="kw">fn</span> <span class="ident">animatable_color_type</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">ImageError</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">animatable_color_type</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">ImageError</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">color_type</span> {
-            <span class="ident">ColorType::L8</span> <span class="op">|</span> <span class="ident">ColorType::Rgb8</span> <span class="op">|</span> <span class="ident">ColorType::La8</span> <span class="op">|</span> <span class="ident">ColorType::Rgba8</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(()),
+            <span class="ident">ColorType::L8</span> <span class="op">|</span> <span class="ident">ColorType::Rgb8</span> <span class="op">|</span> <span class="ident">ColorType::La8</span> <span class="op">|</span> <span class="ident">ColorType::Rgba8</span> =&gt; <span class="prelude-val">Ok</span>(()),
             <span class="comment">// TODO: do not handle multi-byte colors. Remember to implement it in `mix_next_frame`.</span>
-            <span class="ident">ColorType::L16</span> <span class="op">|</span> <span class="ident">ColorType::Rgb16</span> <span class="op">|</span> <span class="ident">ColorType::La16</span> <span class="op">|</span> <span class="ident">ColorType::Rgba16</span>  <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">ColorType::L16</span> <span class="op">|</span> <span class="ident">ColorType::Rgb16</span> <span class="op">|</span> <span class="ident">ColorType::La16</span> <span class="op">|</span> <span class="ident">ColorType::Rgba16</span>  =&gt; {
                 <span class="prelude-val">Err</span>(<span class="ident">unsupported_color</span>(<span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">color_type</span>.<span class="ident">into</span>()))
             },
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable!</span>(<span class="string">&quot;{:?} not a valid png color&quot;</span>, <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">color_type</span>),
+            <span class="kw">_</span> =&gt; <span class="macro">unreachable!</span>(<span class="string">&quot;{:?} not a valid png color&quot;</span>, <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">color_type</span>),
         }
     }
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">R</span>: <span class="ident">Read</span> <span class="op">+</span> <span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">AnimationDecoder</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ApngDecoder</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">into_frames</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Frames</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">into_frames</span>(<span class="self">self</span>) -&gt; <span class="ident">Frames</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
         <span class="kw">struct</span> <span class="ident">FrameIterator</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Read</span><span class="op">&gt;</span>(<span class="ident">ApngDecoder</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span>);
 
         <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">R</span>: <span class="ident">Read</span><span class="op">&gt;</span> <span class="ident">Iterator</span> <span class="kw">for</span> <span class="ident">FrameIterator</span><span class="op">&lt;</span><span class="ident">R</span><span class="op">&gt;</span> {
             <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> <span class="ident">ImageResult</span><span class="op">&lt;</span><span class="ident">Frame</span><span class="op">&gt;</span>;
 
-            <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
+            <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Item</span><span class="op">&gt;</span> {
                 <span class="kw">let</span> <span class="ident">image</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="number">0</span>.<span class="ident">mix_next_frame</span>() {
-                    <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="ident">image</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">image</span>.<span class="ident">clone</span>(),
-                    <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">None</span>,
-                    <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="prelude-val">Err</span>(<span class="ident">err</span>)),
+                    <span class="prelude-val">Ok</span>(<span class="prelude-val">Some</span>(<span class="ident">image</span>)) =&gt; <span class="ident">image</span>.<span class="ident">clone</span>(),
+                    <span class="prelude-val">Ok</span>(<span class="prelude-val">None</span>) =&gt; <span class="kw">return</span> <span class="prelude-val">None</span>,
+                    <span class="prelude-val">Err</span>(<span class="ident">err</span>) =&gt; <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="prelude-val">Err</span>(<span class="ident">err</span>)),
                 };
 
                 <span class="kw">let</span> <span class="ident">info</span> <span class="op">=</span> <span class="self">self</span>.<span class="number">0</span>.<span class="ident">inner</span>.<span class="ident">reader</span>.<span class="ident">info</span>();
@@ -1122,8 +1121,8 @@
                 <span class="kw">let</span> <span class="ident">num</span> <span class="op">=</span> <span class="ident">u32::from</span>(<span class="ident">fc</span>.<span class="ident">delay_num</span>) <span class="op">*</span> <span class="number">1_000u32</span>;
                 <span class="kw">let</span> <span class="ident">denom</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">fc</span>.<span class="ident">delay_den</span> {
                     <span class="comment">// The standard dictates to replace by 100 when the denominator is 0.</span>
-                    <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> <span class="number">100</span>,
-                    <span class="ident">d</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">u32::from</span>(<span class="ident">d</span>),
+                    <span class="number">0</span> =&gt; <span class="number">100</span>,
+                    <span class="ident">d</span> =&gt; <span class="ident">u32::from</span>(<span class="ident">d</span>),
                 };
                 <span class="kw">let</span> <span class="ident">delay</span> <span class="op">=</span> <span class="ident">Delay::from_ratio</span>(<span class="ident">Ratio::new</span>(<span class="ident">num</span>, <span class="ident">denom</span>));
                 <span class="prelude-val">Some</span>(<span class="prelude-val">Ok</span>(<span class="ident">Frame::from_parts</span>(<span class="ident">image</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="ident">delay</span>)))
@@ -1194,7 +1193,7 @@
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span> <span class="ident">PngEncoder</span><span class="op">&lt;</span><span class="ident">W</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Create a new encoder that writes its output to ```w```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">w</span>: <span class="ident">W</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PngEncoder</span><span class="op">&lt;</span><span class="ident">W</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">w</span>: <span class="ident">W</span>) -&gt; <span class="ident">PngEncoder</span><span class="op">&lt;</span><span class="ident">W</span><span class="op">&gt;</span> {
         <span class="ident">PngEncoder</span> {
             <span class="ident">w</span>,
             <span class="ident">compression</span>: <span class="ident">CompressionType::Fast</span>,
@@ -1216,7 +1215,7 @@
     <span class="doccomment">/// even interlaced row). We might make it the new default variant in which case choosing a</span>
     <span class="doccomment">/// particular filter method likely produces larger images. Be sure to check the release notes</span>
     <span class="doccomment">/// once in a while.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new_with_quality</span>(<span class="ident">w</span>: <span class="ident">W</span>, <span class="ident">compression</span>: <span class="ident">CompressionType</span>, <span class="ident">filter</span>: <span class="ident">FilterType</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">PngEncoder</span><span class="op">&lt;</span><span class="ident">W</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new_with_quality</span>(<span class="ident">w</span>: <span class="ident">W</span>, <span class="ident">compression</span>: <span class="ident">CompressionType</span>, <span class="ident">filter</span>: <span class="ident">FilterType</span>) -&gt; <span class="ident">PngEncoder</span><span class="op">&lt;</span><span class="ident">W</span><span class="op">&gt;</span> {
         <span class="ident">PngEncoder</span> {
             <span class="ident">w</span>,
             <span class="ident">compression</span>,
@@ -1225,36 +1224,36 @@
     }
 
     <span class="doccomment">/// Encodes the image `data` that has dimensions `width` and `height` and `ColorType` `c`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">encode</span>(<span class="self">self</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">width</span>: <span class="ident">u32</span>, <span class="ident">height</span>: <span class="ident">u32</span>, <span class="ident">color</span>: <span class="ident">ColorType</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ImageResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">encode</span>(<span class="self">self</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">width</span>: <span class="ident">u32</span>, <span class="ident">height</span>: <span class="ident">u32</span>, <span class="ident">color</span>: <span class="ident">ColorType</span>) -&gt; <span class="ident">ImageResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">let</span> (<span class="ident">ct</span>, <span class="ident">bits</span>) <span class="op">=</span> <span class="kw">match</span> <span class="ident">color</span> {
-            <span class="ident">ColorType::L8</span> <span class="op">=</span><span class="op">&gt;</span> (<span class="ident">png::ColorType::Grayscale</span>, <span class="ident">png::BitDepth::Eight</span>),
-            <span class="ident">ColorType::L16</span> <span class="op">=</span><span class="op">&gt;</span> (<span class="ident">png::ColorType::Grayscale</span>,<span class="ident">png::BitDepth::Sixteen</span>),
-            <span class="ident">ColorType::La8</span> <span class="op">=</span><span class="op">&gt;</span> (<span class="ident">png::ColorType::GrayscaleAlpha</span>, <span class="ident">png::BitDepth::Eight</span>),
-            <span class="ident">ColorType::La16</span> <span class="op">=</span><span class="op">&gt;</span> (<span class="ident">png::ColorType::GrayscaleAlpha</span>,<span class="ident">png::BitDepth::Sixteen</span>),
-            <span class="ident">ColorType::Rgb8</span> <span class="op">=</span><span class="op">&gt;</span> (<span class="ident">png::ColorType::RGB</span>, <span class="ident">png::BitDepth::Eight</span>),
-            <span class="ident">ColorType::Rgb16</span> <span class="op">=</span><span class="op">&gt;</span> (<span class="ident">png::ColorType::RGB</span>,<span class="ident">png::BitDepth::Sixteen</span>),
-            <span class="ident">ColorType::Rgba8</span> <span class="op">=</span><span class="op">&gt;</span> (<span class="ident">png::ColorType::RGBA</span>, <span class="ident">png::BitDepth::Eight</span>),
-            <span class="ident">ColorType::Rgba16</span> <span class="op">=</span><span class="op">&gt;</span> (<span class="ident">png::ColorType::RGBA</span>,<span class="ident">png::BitDepth::Sixteen</span>),
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">ImageError::Unsupported</span>(<span class="ident">UnsupportedError::from_format_and_kind</span>(
+            <span class="ident">ColorType::L8</span> =&gt; (<span class="ident">png::ColorType::Grayscale</span>, <span class="ident">png::BitDepth::Eight</span>),
+            <span class="ident">ColorType::L16</span> =&gt; (<span class="ident">png::ColorType::Grayscale</span>,<span class="ident">png::BitDepth::Sixteen</span>),
+            <span class="ident">ColorType::La8</span> =&gt; (<span class="ident">png::ColorType::GrayscaleAlpha</span>, <span class="ident">png::BitDepth::Eight</span>),
+            <span class="ident">ColorType::La16</span> =&gt; (<span class="ident">png::ColorType::GrayscaleAlpha</span>,<span class="ident">png::BitDepth::Sixteen</span>),
+            <span class="ident">ColorType::Rgb8</span> =&gt; (<span class="ident">png::ColorType::RGB</span>, <span class="ident">png::BitDepth::Eight</span>),
+            <span class="ident">ColorType::Rgb16</span> =&gt; (<span class="ident">png::ColorType::RGB</span>,<span class="ident">png::BitDepth::Sixteen</span>),
+            <span class="ident">ColorType::Rgba8</span> =&gt; (<span class="ident">png::ColorType::RGBA</span>, <span class="ident">png::BitDepth::Eight</span>),
+            <span class="ident">ColorType::Rgba16</span> =&gt; (<span class="ident">png::ColorType::RGBA</span>,<span class="ident">png::BitDepth::Sixteen</span>),
+            <span class="kw">_</span> =&gt; <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">ImageError::Unsupported</span>(<span class="ident">UnsupportedError::from_format_and_kind</span>(
                 <span class="ident">ImageFormat::Png</span>.<span class="ident">into</span>(),
                 <span class="ident">UnsupportedErrorKind::Color</span>(<span class="ident">color</span>.<span class="ident">into</span>()),
             ))),
         };
         <span class="kw">let</span> <span class="ident">comp</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">compression</span> {
-            <span class="ident">CompressionType::Default</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">png::Compression::Default</span>,
-            <span class="ident">CompressionType::Fast</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">png::Compression::Fast</span>,
-            <span class="ident">CompressionType::Best</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">png::Compression::Best</span>,
-            <span class="ident">CompressionType::Huffman</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">png::Compression::Huffman</span>,
-            <span class="ident">CompressionType::Rle</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">png::Compression::Rle</span>,
-            <span class="ident">CompressionType::__NonExhaustive</span>(<span class="ident">marker</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">match</span> <span class="ident">marker</span>.<span class="ident">_private</span> {},
+            <span class="ident">CompressionType::Default</span> =&gt; <span class="ident">png::Compression::Default</span>,
+            <span class="ident">CompressionType::Fast</span> =&gt; <span class="ident">png::Compression::Fast</span>,
+            <span class="ident">CompressionType::Best</span> =&gt; <span class="ident">png::Compression::Best</span>,
+            <span class="ident">CompressionType::Huffman</span> =&gt; <span class="ident">png::Compression::Huffman</span>,
+            <span class="ident">CompressionType::Rle</span> =&gt; <span class="ident">png::Compression::Rle</span>,
+            <span class="ident">CompressionType::__NonExhaustive</span>(<span class="ident">marker</span>) =&gt; <span class="kw">match</span> <span class="ident">marker</span>.<span class="ident">_private</span> {},
         };
         <span class="kw">let</span> <span class="ident">filt</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">filter</span> {
-            <span class="ident">FilterType::NoFilter</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">png::FilterType::NoFilter</span>,
-            <span class="ident">FilterType::Sub</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">png::FilterType::Sub</span>,
-            <span class="ident">FilterType::Up</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">png::FilterType::Up</span>,
-            <span class="ident">FilterType::Avg</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">png::FilterType::Avg</span>,
-            <span class="ident">FilterType::Paeth</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">png::FilterType::Paeth</span>,
-            <span class="ident">FilterType::__NonExhaustive</span>(<span class="ident">marker</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">match</span> <span class="ident">marker</span>.<span class="ident">_private</span> {},
+            <span class="ident">FilterType::NoFilter</span> =&gt; <span class="ident">png::FilterType::NoFilter</span>,
+            <span class="ident">FilterType::Sub</span> =&gt; <span class="ident">png::FilterType::Sub</span>,
+            <span class="ident">FilterType::Up</span> =&gt; <span class="ident">png::FilterType::Up</span>,
+            <span class="ident">FilterType::Avg</span> =&gt; <span class="ident">png::FilterType::Avg</span>,
+            <span class="ident">FilterType::Paeth</span> =&gt; <span class="ident">png::FilterType::Paeth</span>,
+            <span class="ident">FilterType::__NonExhaustive</span>(<span class="ident">marker</span>) =&gt; <span class="kw">match</span> <span class="ident">marker</span>.<span class="ident">_private</span> {},
         };
 
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">encoder</span> <span class="op">=</span> <span class="ident">png::Encoder::new</span>(<span class="self">self</span>.<span class="ident">w</span>, <span class="ident">width</span>, <span class="ident">height</span>);
@@ -1274,7 +1273,7 @@
         <span class="ident">width</span>: <span class="ident">u32</span>,
         <span class="ident">height</span>: <span class="ident">u32</span>,
         <span class="ident">color_type</span>: <span class="ident">ColorType</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ImageResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    ) -&gt; <span class="ident">ImageResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">use</span> <span class="ident">byteorder</span>::{<span class="ident">BigEndian</span>, <span class="ident">ByteOrder</span>, <span class="ident">NativeEndian</span>};
 
         <span class="comment">// PNG images are big endian. For 16 bit per channel and larger types,</span>
@@ -1283,8 +1282,8 @@
         <span class="comment">// TODO: assumes equal channel bit depth.</span>
         <span class="kw">let</span> <span class="ident">bpc</span> <span class="op">=</span> <span class="ident">color_type</span>.<span class="ident">bytes_per_pixel</span>() <span class="op">/</span> <span class="ident">color_type</span>.<span class="ident">channel_count</span>();
         <span class="kw">match</span> <span class="ident">bpc</span> {
-            <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">encode</span>(<span class="ident">buf</span>, <span class="ident">width</span>, <span class="ident">height</span>, <span class="ident">color_type</span>),  <span class="comment">// No reodering necessary for u8</span>
-            <span class="number">2</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="number">1</span> =&gt; <span class="self">self</span>.<span class="ident">encode</span>(<span class="ident">buf</span>, <span class="ident">width</span>, <span class="ident">height</span>, <span class="ident">color_type</span>),  <span class="comment">// No reodering necessary for u8</span>
+            <span class="number">2</span> =&gt; {
                 <span class="comment">// Because the buffer is immutable and the PNG encoder does not</span>
                 <span class="comment">// yet take Write/Read traits, create a temporary buffer for</span>
                 <span class="comment">// big endian reordering.</span>
@@ -1294,30 +1293,30 @@
                     .<span class="ident">for_each</span>(<span class="op">|</span>(<span class="ident">b</span>, <span class="ident">r</span>)<span class="op">|</span> <span class="ident">BigEndian::write_u16</span>(<span class="ident">r</span>, <span class="ident">NativeEndian::read_u16</span>(<span class="ident">b</span>)));
                 <span class="self">self</span>.<span class="ident">encode</span>(<span class="kw-2">&amp;</span><span class="ident">reordered</span>, <span class="ident">width</span>, <span class="ident">height</span>, <span class="ident">color_type</span>)
             },
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">unreachable!</span>(),
+            <span class="kw">_</span> =&gt; <span class="macro">unreachable!</span>(),
         }
     }
 }
 
 <span class="kw">impl</span> <span class="ident">ImageError</span> {
-    <span class="kw">fn</span> <span class="ident">from_png</span>(<span class="ident">err</span>: <span class="ident">png::DecodingError</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ImageError</span> {
+    <span class="kw">fn</span> <span class="ident">from_png</span>(<span class="ident">err</span>: <span class="ident">png::DecodingError</span>) -&gt; <span class="ident">ImageError</span> {
         <span class="kw">use</span> <span class="ident">png::DecodingError</span>::<span class="kw-2">*</span>;
         <span class="kw">match</span> <span class="ident">err</span> {
-            <span class="ident">IoError</span>(<span class="ident">err</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ImageError::IoError</span>(<span class="ident">err</span>),
-            <span class="ident">err</span> @ <span class="ident">Format</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ImageError::Decoding</span>(<span class="ident">DecodingError::new</span>(
+            <span class="ident">IoError</span>(<span class="ident">err</span>) =&gt; <span class="ident">ImageError::IoError</span>(<span class="ident">err</span>),
+            <span class="ident">err</span> @ <span class="ident">Format</span>(<span class="kw">_</span>) =&gt; <span class="ident">ImageError::Decoding</span>(<span class="ident">DecodingError::new</span>(
                 <span class="ident">ImageFormat::Png</span>.<span class="ident">into</span>(),
                 <span class="ident">err</span>,
             )),
-            <span class="ident">LimitsExceeded</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ImageError::Limits</span>(<span class="ident">LimitError::from_kind</span>(
+            <span class="ident">LimitsExceeded</span> =&gt; <span class="ident">ImageError::Limits</span>(<span class="ident">LimitError::from_kind</span>(
                 <span class="ident">LimitErrorKind::InsufficientMemory</span>,
             )),
             <span class="comment">// Other is used when the buffer to `Reader::next_frame` is too small.</span>
-            <span class="ident">Other</span>(<span class="ident">message</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ImageError::Parameter</span>(<span class="ident">ParameterError::from_kind</span>(
+            <span class="ident">Other</span>(<span class="ident">message</span>) =&gt; <span class="ident">ImageError::Parameter</span>(<span class="ident">ParameterError::from_kind</span>(
                 <span class="ident">ParameterErrorKind::Generic</span>(<span class="ident">message</span>.<span class="ident">into_owned</span>())
             )),
             <span class="ident">err</span> @ <span class="ident">InvalidSignature</span>
             <span class="op">|</span> <span class="ident">err</span> @ <span class="ident">CrcMismatch</span> { .. }
-            <span class="op">|</span> <span class="ident">err</span> @ <span class="ident">CorruptFlateStream</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="op">|</span> <span class="ident">err</span> @ <span class="ident">CorruptFlateStream</span> =&gt; {
                 <span class="ident">ImageError::Decoding</span>(<span class="ident">DecodingError::new</span>(
                     <span class="ident">ImageFormat::Png</span>.<span class="ident">into</span>(),
                     <span class="ident">err</span>,
@@ -1328,13 +1327,13 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">CompressionType</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
         <span class="ident">CompressionType::Fast</span>
     }
 }
 
 <span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">FilterType</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
         <span class="ident">FilterType::Sub</span>
     }
 }
@@ -1383,7 +1382,7 @@
             .<span class="ident">expect</span>(<span class="string">&quot;Caused by a png error&quot;</span>);
     }
 }
-</pre></div>
+</code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="image" data-search-index-js="../../../search-index.js" data-search-js="../../../search.js"></div>
     <script src="../../../main.js"></script><script src="../../../source-script.js"></script><script src="../../../source-files.js"></script>
 </body></html>

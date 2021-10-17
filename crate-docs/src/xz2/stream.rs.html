@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;xz2-0.1.6&#x2F;src&#x2F;stream.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>stream.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../xz2/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;xz2-0.1.6&#x2F;src&#x2F;stream.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>stream.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../xz2/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -841,8 +841,7 @@
 <span id="841">841</span>
 <span id="842">842</span>
 <span id="843">843</span>
-</pre><pre class="rust">
-<span class="doccomment">//! Raw in-memory LZMA streams.</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Raw in-memory LZMA streams.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! The `Stream` type exported by this module is the primary type which performs</span>
 <span class="doccomment">//! encoding/decoding of LZMA streams. Each `Stream` is either an encoder or</span>
@@ -1119,7 +1118,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// The `check` argument is the integrity check to insert at the end of the</span>
     <span class="doccomment">/// stream. The default of `Crc64` is typically appropriate.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new_easy_encoder</span>(<span class="ident">preset</span>: <span class="ident">u32</span>, <span class="ident">check</span>: <span class="ident">Check</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Stream</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new_easy_encoder</span>(<span class="ident">preset</span>: <span class="ident">u32</span>, <span class="ident">check</span>: <span class="ident">Check</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Stream</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="kw">unsafe</span> {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">init</span> <span class="op">=</span> <span class="ident">Stream</span> { <span class="ident">raw</span>: <span class="ident">mem::zeroed</span>() };
             <span class="ident">cvt</span>(<span class="ident">lzma_sys::lzma_easy_encoder</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">init</span>.<span class="ident">raw</span>,
@@ -1142,7 +1141,7 @@
     <span class="doccomment">/// The valid action values for `process` are `Run` and `Finish`. No kind</span>
     <span class="doccomment">/// of flushing is supported, because the file format doesn&#39;t make it</span>
     <span class="doccomment">/// possible.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new_lzma_encoder</span>(<span class="ident">options</span>: <span class="kw-2">&amp;</span><span class="ident">LzmaOptions</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Stream</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new_lzma_encoder</span>(<span class="ident">options</span>: <span class="kw-2">&amp;</span><span class="ident">LzmaOptions</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Stream</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="kw">unsafe</span> {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">init</span> <span class="op">=</span> <span class="ident">Stream</span> { <span class="ident">raw</span>: <span class="ident">mem::zeroed</span>() };
             <span class="ident">cvt</span>(<span class="ident">lzma_sys::lzma_alone_encoder</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">init</span>.<span class="ident">raw</span>, <span class="kw-2">&amp;</span><span class="ident">options</span>.<span class="ident">raw</span>))<span class="question-mark">?</span>;
@@ -1155,7 +1154,7 @@
     <span class="doccomment">/// This function is similar to `new_easy_encoder` but a custom filter chain</span>
     <span class="doccomment">/// is specified.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new_stream_encoder</span>(<span class="ident">filters</span>: <span class="kw-2">&amp;</span><span class="ident">Filters</span>,
-                              <span class="ident">check</span>: <span class="ident">Check</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Stream</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+                              <span class="ident">check</span>: <span class="ident">Check</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Stream</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="kw">unsafe</span> {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">init</span> <span class="op">=</span> <span class="ident">Stream</span> { <span class="ident">raw</span>: <span class="ident">mem::zeroed</span>() };
             <span class="ident">cvt</span>(<span class="ident">lzma_sys::lzma_stream_encoder</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">init</span>.<span class="ident">raw</span>,
@@ -1171,7 +1170,7 @@
     <span class="doccomment">/// `TELL_ANY_CHECK`, `TELL_NO_CHECK`, `TELL_UNSUPPORTED_CHECK`,</span>
     <span class="doccomment">/// `TELL_IGNORE_CHECK`, or `CONCATENATED`.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new_stream_decoder</span>(<span class="ident">memlimit</span>: <span class="ident">u64</span>,
-                              <span class="ident">flags</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Stream</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+                              <span class="ident">flags</span>: <span class="ident">u32</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Stream</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="kw">unsafe</span> {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">init</span> <span class="op">=</span> <span class="ident">Stream</span> { <span class="ident">raw</span>: <span class="ident">mem::zeroed</span>() };
             <span class="ident">cvt</span>(<span class="ident">lzma_sys::lzma_stream_decoder</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">init</span>.<span class="ident">raw</span>,
@@ -1184,7 +1183,7 @@
     <span class="doccomment">/// Initialize a .lzma stream decoder.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// The maximum memory usage can also be specified.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new_lzma_decoder</span>(<span class="ident">memlimit</span>: <span class="ident">u64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Stream</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new_lzma_decoder</span>(<span class="ident">memlimit</span>: <span class="ident">u64</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Stream</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="kw">unsafe</span> {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">init</span> <span class="op">=</span> <span class="ident">Stream</span> { <span class="ident">raw</span>: <span class="ident">mem::zeroed</span>() };
             <span class="ident">cvt</span>(<span class="ident">lzma_sys::lzma_alone_decoder</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">init</span>.<span class="ident">raw</span>,
@@ -1195,7 +1194,7 @@
 
     <span class="doccomment">/// Initialize a decoder which will choose a stream/lzma formats depending</span>
     <span class="doccomment">/// on the input stream.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new_auto_decoder</span>(<span class="ident">memlimit</span>: <span class="ident">u64</span>, <span class="ident">flags</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Stream</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new_auto_decoder</span>(<span class="ident">memlimit</span>: <span class="ident">u64</span>, <span class="ident">flags</span>: <span class="ident">u32</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Stream</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="kw">unsafe</span> {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">init</span> <span class="op">=</span> <span class="ident">Stream</span> { <span class="ident">raw</span>: <span class="ident">mem::zeroed</span>() };
             <span class="ident">cvt</span>(<span class="ident">lzma_sys::lzma_auto_decoder</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">init</span>.<span class="ident">raw</span>,
@@ -1213,7 +1212,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">process</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>,
                    <span class="ident">input</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
                    <span class="ident">output</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>],
-                   <span class="ident">action</span>: <span class="ident">Action</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Status</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+                   <span class="ident">action</span>: <span class="ident">Action</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Status</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">raw</span>.<span class="ident">next_in</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">as_ptr</span>();
         <span class="self">self</span>.<span class="ident">raw</span>.<span class="ident">avail_in</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">len</span>();
         <span class="self">self</span>.<span class="ident">raw</span>.<span class="ident">next_out</span> <span class="op">=</span> <span class="ident">output</span>.<span class="ident">as_mut_ptr</span>();
@@ -1232,7 +1231,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">process_vec</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>,
                        <span class="ident">input</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>],
                        <span class="ident">output</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>,
-                       <span class="ident">action</span>: <span class="ident">Action</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Status</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+                       <span class="ident">action</span>: <span class="ident">Action</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Status</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">cap</span> <span class="op">=</span> <span class="ident">output</span>.<span class="ident">capacity</span>();
         <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> <span class="ident">output</span>.<span class="ident">len</span>();
 
@@ -1249,19 +1248,19 @@
     }
 
     <span class="doccomment">/// Returns the total amount of input bytes consumed by this stream.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">total_in</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u64</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">total_in</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u64</span> {
         <span class="self">self</span>.<span class="ident">raw</span>.<span class="ident">total_in</span>
     }
 
     <span class="doccomment">/// Returns the total amount of bytes produced by this stream.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">total_out</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u64</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">total_out</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u64</span> {
         <span class="self">self</span>.<span class="ident">raw</span>.<span class="ident">total_out</span>
     }
 
     <span class="doccomment">/// Get the current memory usage limit.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This is only supported if the underlying stream supports a memlimit.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">memlimit</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u64</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">memlimit</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u64</span> {
         <span class="kw">unsafe</span> { <span class="ident">lzma_sys::lzma_memlimit_get</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">raw</span>) }
     }
 
@@ -1269,7 +1268,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// This can return `Error::MemLimit` if the new limit is too small or</span>
     <span class="doccomment">/// `Error::Program` if this stream doesn&#39;t take a memory limit.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_memlimit</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">limit</span>: <span class="ident">u64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">set_memlimit</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">limit</span>: <span class="ident">u64</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="ident">cvt</span>(<span class="kw">unsafe</span> { <span class="ident">lzma_sys::lzma_memlimit_set</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">raw</span>, <span class="ident">limit</span>) })
             .<span class="ident">map</span>(<span class="op">|</span><span class="kw">_</span><span class="op">|</span> ())
     }
@@ -1280,7 +1279,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// The `preset` argument is the compression level to use, typically in the</span>
     <span class="doccomment">/// range of 0-9.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new_preset</span>(<span class="ident">preset</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">LzmaOptions</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new_preset</span>(<span class="ident">preset</span>: <span class="ident">u32</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">LzmaOptions</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="kw">unsafe</span> {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">options</span> <span class="op">=</span> <span class="ident">LzmaOptions</span> { <span class="ident">raw</span>: <span class="ident">mem::zeroed</span>() };
             <span class="kw">let</span> <span class="ident">ret</span> <span class="op">=</span> <span class="ident">lzma_sys::lzma_lzma_preset</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">options</span>.<span class="ident">raw</span>, <span class="ident">preset</span>);
@@ -1298,7 +1297,7 @@
     <span class="doccomment">/// uncompressed data is kept in memory.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// The minimum dictionary size is 4096 bytes and the default is 2^23, 8MB.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">dict_size</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">size</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">LzmaOptions</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">dict_size</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">size</span>: <span class="ident">u32</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">LzmaOptions</span> {
         <span class="self">self</span>.<span class="ident">raw</span>.<span class="ident">dict_size</span> <span class="op">=</span> <span class="ident">size</span>;
         <span class="self">self</span>
     }
@@ -1311,7 +1310,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// The maximum value to this is 4 and the default is 3. It is not currently</span>
     <span class="doccomment">/// supported if this plus `literal_position_bits` is greater than 4.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">literal_context_bits</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">bits</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">LzmaOptions</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">literal_context_bits</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">bits</span>: <span class="ident">u32</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">LzmaOptions</span> {
         <span class="self">self</span>.<span class="ident">raw</span>.<span class="ident">lc</span> <span class="op">=</span> <span class="ident">bits</span>;
         <span class="self">self</span>
     }
@@ -1323,7 +1322,7 @@
     <span class="doccomment">/// `position_bits` for more information about alignment.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// The default for this is 0.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">literal_position_bits</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">bits</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">LzmaOptions</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">literal_position_bits</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">bits</span>: <span class="ident">u32</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">LzmaOptions</span> {
         <span class="self">self</span>.<span class="ident">raw</span>.<span class="ident">lp</span> <span class="op">=</span> <span class="ident">bits</span>;
         <span class="self">self</span>
     }
@@ -1344,13 +1343,13 @@
     <span class="doccomment">/// and LZMA2 still slightly favor 16-byte alignment. It might be worth</span>
     <span class="doccomment">/// taking into account when designing file formats that are likely to be</span>
     <span class="doccomment">/// often compressed with LZMA1 or LZMA2.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">position_bits</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">bits</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">LzmaOptions</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">position_bits</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">bits</span>: <span class="ident">u32</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">LzmaOptions</span> {
         <span class="self">self</span>.<span class="ident">raw</span>.<span class="ident">pb</span> <span class="op">=</span> <span class="ident">bits</span>;
         <span class="self">self</span>
     }
 
     <span class="doccomment">/// Configures the compression mode.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mode</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">mode</span>: <span class="ident">Mode</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">LzmaOptions</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">mode</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">mode</span>: <span class="ident">Mode</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">LzmaOptions</span> {
         <span class="self">self</span>.<span class="ident">raw</span>.<span class="ident">mode</span> <span class="op">=</span> <span class="ident">mode</span> <span class="kw">as</span> <span class="ident">lzma_sys::lzma_mode</span>;
         <span class="self">self</span>
     }
@@ -1370,13 +1369,13 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// The exact minimum value depends on the match finder. The maximum is 273,</span>
     <span class="doccomment">/// which is the maximum length of a match that LZMA1 and LZMA2 can encode.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">nice_len</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">len</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">LzmaOptions</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">nice_len</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">len</span>: <span class="ident">u32</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">LzmaOptions</span> {
         <span class="self">self</span>.<span class="ident">raw</span>.<span class="ident">nice_len</span> <span class="op">=</span> <span class="ident">len</span>;
         <span class="self">self</span>
     }
 
     <span class="doccomment">/// Configures the match finder ID.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">match_finder</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">mf</span>: <span class="ident">MatchFinder</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">LzmaOptions</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">match_finder</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">mf</span>: <span class="ident">MatchFinder</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">LzmaOptions</span> {
         <span class="self">self</span>.<span class="ident">raw</span>.<span class="ident">mf</span> <span class="op">=</span> <span class="ident">mf</span> <span class="kw">as</span> <span class="ident">lzma_sys::lzma_match_finder</span>;
         <span class="self">self</span>
     }
@@ -1407,7 +1406,7 @@
     <span class="doccomment">/// remain fast enough with typical input, but malicious input could cause</span>
     <span class="doccomment">/// the match finder to slow down dramatically, possibly creating a denial</span>
     <span class="doccomment">/// of service attack.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">depth</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">depth</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">LzmaOptions</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">depth</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">depth</span>: <span class="ident">u32</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">LzmaOptions</span> {
         <span class="self">self</span>.<span class="ident">raw</span>.<span class="ident">depth</span> <span class="op">=</span> <span class="ident">depth</span>;
         <span class="self">self</span>
     }
@@ -1415,7 +1414,7 @@
 
 <span class="kw">impl</span> <span class="ident">Check</span> {
     <span class="doccomment">/// Test if this check is supported in this build of liblzma.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_supported</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_supported</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="kw">let</span> <span class="ident">ret</span> <span class="op">=</span> <span class="kw">unsafe</span> {
             <span class="ident">lzma_sys::lzma_check_is_supported</span>(<span class="kw-2">*</span><span class="self">self</span> <span class="kw">as</span> <span class="ident">lzma_sys::lzma_check</span>)
         };
@@ -1425,7 +1424,7 @@
 
 <span class="kw">impl</span> <span class="ident">MatchFinder</span> {
     <span class="doccomment">/// Test if this match finder is supported in this build of liblzma.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_supported</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_supported</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="kw">let</span> <span class="ident">ret</span> <span class="op">=</span> <span class="kw">unsafe</span> {
             <span class="ident">lzma_sys::lzma_mf_is_supported</span>(<span class="kw-2">*</span><span class="self">self</span> <span class="kw">as</span> <span class="ident">lzma_sys::lzma_match_finder</span>)
         };
@@ -1435,7 +1434,7 @@
 
 <span class="kw">impl</span> <span class="ident">Filters</span> {
     <span class="doccomment">/// Creates a new filter chain with no filters.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Filters</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="ident">Filters</span> {
         <span class="ident">Filters</span> {
             <span class="ident">inner</span>: <span class="macro">vec!</span>[<span class="ident">lzma_sys::lzma_filter</span> {
                 <span class="ident">id</span>: <span class="ident">lzma_sys::LZMA_VLI_UNKNOWN</span>,
@@ -1453,7 +1452,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// LZMA1 shouldn&#39;t be used for new applications unless you _really_ know</span>
     <span class="doccomment">/// what you are doing.  LZMA2 is almost always a better choice.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">lzma1</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">opts</span>: <span class="kw-2">&amp;</span><span class="ident">LzmaOptions</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Filters</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">lzma1</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">opts</span>: <span class="kw-2">&amp;</span><span class="ident">LzmaOptions</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Filters</span> {
         <span class="self">self</span>.<span class="ident">lzma_opts</span>.<span class="ident">push_back</span>(<span class="ident">opts</span>.<span class="ident">raw</span>);
         <span class="kw">let</span> <span class="ident">ptr</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">lzma_opts</span>.<span class="ident">back</span>().<span class="ident">unwrap</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span>;
         <span class="self">self</span>.<span class="ident">push</span>(<span class="ident">lzma_sys::lzma_filter</span> {
@@ -1469,7 +1468,7 @@
     <span class="doccomment">/// trying to compress uncompressible data), possibility to change</span>
     <span class="doccomment">/// `literal_context_bits`/`literal_position_bits`/`position_bits` in the</span>
     <span class="doccomment">/// middle of encoding, and some other internal improvements.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">lzma2</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">opts</span>: <span class="kw-2">&amp;</span><span class="ident">LzmaOptions</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Filters</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">lzma2</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">opts</span>: <span class="kw-2">&amp;</span><span class="ident">LzmaOptions</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Filters</span> {
         <span class="self">self</span>.<span class="ident">lzma_opts</span>.<span class="ident">push_back</span>(<span class="ident">opts</span>.<span class="ident">raw</span>);
         <span class="kw">let</span> <span class="ident">ptr</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">lzma_opts</span>.<span class="ident">back</span>().<span class="ident">unwrap</span>() <span class="kw">as</span> <span class="kw-2">*</span><span class="kw">const</span> <span class="kw">_</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span>;
         <span class="self">self</span>.<span class="ident">push</span>(<span class="ident">lzma_sys::lzma_filter</span> {
@@ -1481,7 +1480,7 @@
     <span class="comment">// TODO: delta filter</span>
 
     <span class="doccomment">/// Add a filter for x86 binaries.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">x86</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Filters</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">x86</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Filters</span> {
         <span class="self">self</span>.<span class="ident">push</span>(<span class="ident">lzma_sys::lzma_filter</span> {
             <span class="ident">id</span>: <span class="ident">lzma_sys::LZMA_FILTER_X86</span>,
             <span class="ident">options</span>: <span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span>,
@@ -1489,7 +1488,7 @@
     }
 
     <span class="doccomment">/// Add a filter for PowerPC binaries.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">powerpc</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Filters</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">powerpc</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Filters</span> {
         <span class="self">self</span>.<span class="ident">push</span>(<span class="ident">lzma_sys::lzma_filter</span> {
             <span class="ident">id</span>: <span class="ident">lzma_sys::LZMA_FILTER_POWERPC</span>,
             <span class="ident">options</span>: <span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span>,
@@ -1497,7 +1496,7 @@
     }
 
     <span class="doccomment">/// Add a filter for IA-64 (itanium) binaries.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ia64</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Filters</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ia64</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Filters</span> {
         <span class="self">self</span>.<span class="ident">push</span>(<span class="ident">lzma_sys::lzma_filter</span> {
             <span class="ident">id</span>: <span class="ident">lzma_sys::LZMA_FILTER_IA64</span>,
             <span class="ident">options</span>: <span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span>,
@@ -1505,7 +1504,7 @@
     }
 
     <span class="doccomment">/// Add a filter for ARM binaries.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">arm</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Filters</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">arm</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Filters</span> {
         <span class="self">self</span>.<span class="ident">push</span>(<span class="ident">lzma_sys::lzma_filter</span> {
             <span class="ident">id</span>: <span class="ident">lzma_sys::LZMA_FILTER_ARM</span>,
             <span class="ident">options</span>: <span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span>,
@@ -1513,7 +1512,7 @@
     }
 
     <span class="doccomment">/// Add a filter for ARM-Thumb binaries.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">arm_thumb</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Filters</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">arm_thumb</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Filters</span> {
         <span class="self">self</span>.<span class="ident">push</span>(<span class="ident">lzma_sys::lzma_filter</span> {
             <span class="ident">id</span>: <span class="ident">lzma_sys::LZMA_FILTER_ARMTHUMB</span>,
             <span class="ident">options</span>: <span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span>,
@@ -1521,14 +1520,14 @@
     }
 
     <span class="doccomment">/// Add a filter for SPARC binaries.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">sparc</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Filters</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">sparc</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Filters</span> {
         <span class="self">self</span>.<span class="ident">push</span>(<span class="ident">lzma_sys::lzma_filter</span> {
             <span class="ident">id</span>: <span class="ident">lzma_sys::LZMA_FILTER_SPARC</span>,
             <span class="ident">options</span>: <span class="number">0</span> <span class="kw">as</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="kw">_</span>,
         })
     }
 
-    <span class="kw">fn</span> <span class="ident">push</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">filter</span>: <span class="ident">lzma_sys::lzma_filter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Filters</span> {
+    <span class="kw">fn</span> <span class="ident">push</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">filter</span>: <span class="ident">lzma_sys::lzma_filter</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Filters</span> {
         <span class="kw">let</span> <span class="ident">pos</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">len</span>() <span class="op">-</span> <span class="number">1</span>;
         <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">insert</span>(<span class="ident">pos</span>, <span class="ident">filter</span>);
         <span class="self">self</span>
@@ -1537,7 +1536,7 @@
 
 <span class="kw">impl</span> <span class="ident">MtStreamBuilder</span> {
     <span class="doccomment">/// Creates a new blank builder to create a multithreaded encoding `Stream`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">MtStreamBuilder</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="ident">MtStreamBuilder</span> {
         <span class="kw">unsafe</span> {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">init</span> <span class="op">=</span> <span class="ident">MtStreamBuilder</span> {
                 <span class="ident">raw</span>: <span class="ident">mem::zeroed</span>(),
@@ -1549,7 +1548,7 @@
     }
 
     <span class="doccomment">/// Configures the number of worker threads to use</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">threads</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">threads</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">threads</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">threads</span>: <span class="ident">u32</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span> {
         <span class="self">self</span>.<span class="ident">raw</span>.<span class="ident">threads</span> <span class="op">=</span> <span class="ident">threads</span>;
         <span class="self">self</span>
     }
@@ -1575,7 +1574,7 @@
     <span class="doccomment">/// For each thread, about 3 * `block_size` bytes of memory will be</span>
     <span class="doccomment">/// allocated. This may change in later liblzma versions. If so, the memory</span>
     <span class="doccomment">/// usage will probably be reduced, not increased.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">block_size</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">block_size</span>: <span class="ident">u64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">block_size</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">block_size</span>: <span class="ident">u64</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span> {
         <span class="self">self</span>.<span class="ident">raw</span>.<span class="ident">block_size</span> <span class="op">=</span> <span class="ident">block_size</span>;
         <span class="self">self</span>
     }
@@ -1600,7 +1599,7 @@
     <span class="doccomment">/// value of 0, which will disable the timeout mechanism and will make</span>
     <span class="doccomment">/// `process` block until all the input is consumed or the output</span>
     <span class="doccomment">/// buffer has been filled.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">timeout_ms</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">timeout</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">timeout_ms</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">timeout</span>: <span class="ident">u32</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span> {
         <span class="self">self</span>.<span class="ident">raw</span>.<span class="ident">timeout</span> <span class="op">=</span> <span class="ident">timeout</span>;
         <span class="self">self</span>
     }
@@ -1609,31 +1608,31 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// The preset is set just like with `Stream::new_easy_encoder`. The preset</span>
     <span class="doccomment">/// is ignored if filters below have been specified.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">preset</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">preset</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">preset</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">preset</span>: <span class="ident">u32</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span> {
         <span class="self">self</span>.<span class="ident">raw</span>.<span class="ident">preset</span> <span class="op">=</span> <span class="ident">preset</span>;
         <span class="self">self</span>
     }
 
     <span class="doccomment">/// Configure a custom filter chain</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">filters</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">filters</span>: <span class="ident">Filters</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">filters</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">filters</span>: <span class="ident">Filters</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span> {
         <span class="self">self</span>.<span class="ident">raw</span>.<span class="ident">filters</span> <span class="op">=</span> <span class="ident">filters</span>.<span class="ident">inner</span>.<span class="ident">as_ptr</span>();
         <span class="self">self</span>.<span class="ident">filters</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">filters</span>);
         <span class="self">self</span>
     }
 
     <span class="doccomment">/// Configures the integrity check type</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">check</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">check</span>: <span class="ident">Check</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">check</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">check</span>: <span class="ident">Check</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span> {
         <span class="self">self</span>.<span class="ident">raw</span>.<span class="ident">check</span> <span class="op">=</span> <span class="ident">check</span> <span class="kw">as</span> <span class="ident">lzma_sys::lzma_check</span>;
         <span class="self">self</span>
     }
 
     <span class="doccomment">/// Calculate approximate memory usage of multithreaded .xz encoder</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">memusage</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u64</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">memusage</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u64</span> {
         <span class="kw">unsafe</span> { <span class="ident">lzma_sys::lzma_stream_encoder_mt_memusage</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">raw</span>) }
     }
 
     <span class="doccomment">/// Initialize multithreaded .xz stream encoder.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">encoder</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Stream</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">encoder</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Stream</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="kw">unsafe</span> {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">init</span> <span class="op">=</span> <span class="ident">Stream</span> { <span class="ident">raw</span>: <span class="ident">mem::zeroed</span>() };
             <span class="ident">cvt</span>(<span class="ident">lzma_sys::lzma_stream_encoder_mt</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">init</span>.<span class="ident">raw</span>,
@@ -1643,36 +1642,36 @@
     }
 }
 
-<span class="kw">fn</span> <span class="ident">cvt</span>(<span class="ident">rc</span>: <span class="ident">lzma_sys::lzma_ret</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Status</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">cvt</span>(<span class="ident">rc</span>: <span class="ident">lzma_sys::lzma_ret</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Status</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
     <span class="kw">match</span> <span class="ident">rc</span> {
-        <span class="ident">lzma_sys::LZMA_OK</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">Status::Ok</span>),
-        <span class="ident">lzma_sys::LZMA_STREAM_END</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">Status::StreamEnd</span>),
-        <span class="ident">lzma_sys::LZMA_NO_CHECK</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">Error::NoCheck</span>),
-        <span class="ident">lzma_sys::LZMA_UNSUPPORTED_CHECK</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">Error::UnsupportedCheck</span>),
-        <span class="ident">lzma_sys::LZMA_GET_CHECK</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">Status::GetCheck</span>),
-        <span class="ident">lzma_sys::LZMA_MEM_ERROR</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">Error::Mem</span>),
-        <span class="ident">lzma_sys::LZMA_MEMLIMIT_ERROR</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">Error::MemLimit</span>),
-        <span class="ident">lzma_sys::LZMA_FORMAT_ERROR</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">Error::Format</span>),
-        <span class="ident">lzma_sys::LZMA_OPTIONS_ERROR</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">Error::Options</span>),
-        <span class="ident">lzma_sys::LZMA_DATA_ERROR</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">Error::Data</span>),
-        <span class="ident">lzma_sys::LZMA_BUF_ERROR</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Ok</span>(<span class="ident">Status::MemNeeded</span>),
-        <span class="ident">lzma_sys::LZMA_PROG_ERROR</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">Error::Program</span>),
-        <span class="ident">c</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(<span class="string">&quot;unknown return code: {}&quot;</span>, <span class="ident">c</span>),
+        <span class="ident">lzma_sys::LZMA_OK</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident">Status::Ok</span>),
+        <span class="ident">lzma_sys::LZMA_STREAM_END</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident">Status::StreamEnd</span>),
+        <span class="ident">lzma_sys::LZMA_NO_CHECK</span> =&gt; <span class="prelude-val">Err</span>(<span class="ident">Error::NoCheck</span>),
+        <span class="ident">lzma_sys::LZMA_UNSUPPORTED_CHECK</span> =&gt; <span class="prelude-val">Err</span>(<span class="ident">Error::UnsupportedCheck</span>),
+        <span class="ident">lzma_sys::LZMA_GET_CHECK</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident">Status::GetCheck</span>),
+        <span class="ident">lzma_sys::LZMA_MEM_ERROR</span> =&gt; <span class="prelude-val">Err</span>(<span class="ident">Error::Mem</span>),
+        <span class="ident">lzma_sys::LZMA_MEMLIMIT_ERROR</span> =&gt; <span class="prelude-val">Err</span>(<span class="ident">Error::MemLimit</span>),
+        <span class="ident">lzma_sys::LZMA_FORMAT_ERROR</span> =&gt; <span class="prelude-val">Err</span>(<span class="ident">Error::Format</span>),
+        <span class="ident">lzma_sys::LZMA_OPTIONS_ERROR</span> =&gt; <span class="prelude-val">Err</span>(<span class="ident">Error::Options</span>),
+        <span class="ident">lzma_sys::LZMA_DATA_ERROR</span> =&gt; <span class="prelude-val">Err</span>(<span class="ident">Error::Data</span>),
+        <span class="ident">lzma_sys::LZMA_BUF_ERROR</span> =&gt; <span class="prelude-val">Ok</span>(<span class="ident">Status::MemNeeded</span>),
+        <span class="ident">lzma_sys::LZMA_PROG_ERROR</span> =&gt; <span class="prelude-val">Err</span>(<span class="ident">Error::Program</span>),
+        <span class="ident">c</span> =&gt; <span class="macro">panic!</span>(<span class="string">&quot;unknown return code: {}&quot;</span>, <span class="ident">c</span>),
     }
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">Error</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">io::Error</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">e</span>: <span class="ident">Error</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">io::Error</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">e</span>: <span class="ident">Error</span>) -&gt; <span class="ident">io::Error</span> {
         <span class="ident">io::Error::new</span>(<span class="ident">io::ErrorKind::Other</span>, <span class="ident">e</span>)
     }
 }
 
 <span class="kw">impl</span> <span class="ident">error::Error</span> <span class="kw">for</span> <span class="ident">Error</span> {
-    <span class="kw">fn</span> <span class="ident">description</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">str</span> { <span class="string">&quot;lzma data error&quot;</span> }
+    <span class="kw">fn</span> <span class="ident">description</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">str</span> { <span class="string">&quot;lzma data error&quot;</span> }
 }
 
 <span class="kw">impl</span> <span class="ident">fmt::Display</span> <span class="kw">for</span> <span class="ident">Error</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
         <span class="ident">error::Error::description</span>(<span class="self">self</span>).<span class="ident">fmt</span>(<span class="ident">f</span>)
     }
 }
@@ -1685,7 +1684,7 @@
     }
 }
 
-</pre></div>
+</code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="xz2" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
     <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script>
 </body></html>

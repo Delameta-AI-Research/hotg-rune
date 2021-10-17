@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;pyo3-build-config-0.14.5&#x2F;src&#x2F;lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../pyo3_build_config/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;pyo3-build-config-0.14.5&#x2F;src&#x2F;lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../pyo3_build_config/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -189,8 +189,7 @@
 <span id="189">189</span>
 <span id="190">190</span>
 <span id="191">191</span>
-</pre><pre class="rust">
-<span class="doccomment">//! Configuration used by PyO3 for conditional support of varying Python versions.</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Configuration used by PyO3 for conditional support of varying Python versions.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! This crate exposes two functions, [`use_pyo3_cfgs`] and [`add_extension_module_link_args`],</span>
 <span class="doccomment">//! which are intended to be called from build scripts to simplify building crates which depend on</span>
@@ -241,7 +240,7 @@
 }
 
 <span class="kw">fn</span> <span class="ident">_add_extension_module_link_args</span>(<span class="ident">target_os</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>, <span class="kw-2">mut</span> <span class="ident">writer</span>: <span class="kw">impl</span> <span class="ident">std::io::Write</span>) {
-    <span class="kw">if</span> <span class="ident">target_os</span> <span class="op">=</span><span class="op">=</span> <span class="string">&quot;macos&quot;</span> {
+    <span class="kw">if</span> <span class="ident">target_os</span> <span class="op">==</span> <span class="string">&quot;macos&quot;</span> {
         <span class="macro">writeln!</span>(<span class="ident">writer</span>, <span class="string">&quot;cargo:rustc-cdylib-link-arg=-undefined&quot;</span>).<span class="ident">unwrap</span>();
         <span class="macro">writeln!</span>(<span class="ident">writer</span>, <span class="string">&quot;cargo:rustc-cdylib-link-arg=dynamic_lookup&quot;</span>).<span class="ident">unwrap</span>();
     }
@@ -252,7 +251,7 @@
 <span class="doccomment">/// Because this will never change in a given compilation run, this is cached in a `once_cell`.</span>
 <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;resolve-config&quot;</span>)]</span>
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">InterpreterConfig</span> {
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get</span>() -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">InterpreterConfig</span> {
     <span class="kw">static</span> <span class="ident">CONFIG</span>: <span class="ident">OnceCell</span><span class="op">&lt;</span><span class="ident">InterpreterConfig</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">OnceCell::new</span>();
     <span class="ident">CONFIG</span>.<span class="ident">get_or_init</span>(<span class="op">|</span><span class="op">|</span> {
         <span class="kw">if</span> <span class="op">!</span><span class="ident">CONFIG_FILE</span>.<span class="ident">is_empty</span>() {
@@ -292,13 +291,13 @@
 <span class="kw">const</span> <span class="ident">HOST_CONFIG</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="macro">include_str!</span>(<span class="macro">concat!</span>(<span class="macro">env!</span>(<span class="string">&quot;OUT_DIR&quot;</span>), <span class="string">&quot;/pyo3-build-config.txt&quot;</span>));
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;resolve-config&quot;</span>)]</span>
-<span class="kw">fn</span> <span class="ident">abi3_config</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">InterpreterConfig</span> {
+<span class="kw">fn</span> <span class="ident">abi3_config</span>() -&gt; <span class="ident">InterpreterConfig</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">interpreter_config</span> <span class="op">=</span> <span class="ident">InterpreterConfig::from_reader</span>(<span class="ident">Cursor::new</span>(<span class="ident">ABI3_CONFIG</span>))
         .<span class="ident">expect</span>(<span class="string">&quot;failed to parse hardcoded PyO3 abi3 config&quot;</span>);
     <span class="comment">// If running from a build script on Windows, tweak the hardcoded abi3 config to contain</span>
     <span class="comment">// the standard lib name (this is necessary so that abi3 extension modules using</span>
     <span class="comment">// PYO3_NO_PYTHON on Windows can link)</span>
-    <span class="kw">if</span> <span class="ident">std::env::var</span>(<span class="string">&quot;CARGO_CFG_TARGET_OS&quot;</span>).<span class="ident">map_or</span>(<span class="bool-val">false</span>, <span class="op">|</span><span class="ident">target_os</span><span class="op">|</span> <span class="ident">target_os</span> <span class="op">=</span><span class="op">=</span> <span class="string">&quot;windows&quot;</span>) {
+    <span class="kw">if</span> <span class="ident">std::env::var</span>(<span class="string">&quot;CARGO_CFG_TARGET_OS&quot;</span>).<span class="ident">map_or</span>(<span class="bool-val">false</span>, <span class="op">|</span><span class="ident">target_os</span><span class="op">|</span> <span class="ident">target_os</span> <span class="op">==</span> <span class="string">&quot;windows&quot;</span>) {
         <span class="macro">assert_eq!</span>(<span class="ident">interpreter_config</span>.<span class="ident">lib_name</span>, <span class="prelude-val">None</span>);
         <span class="ident">interpreter_config</span>.<span class="ident">lib_name</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="string">&quot;python3&quot;</span>.<span class="ident">to_owned</span>())
     }
@@ -331,7 +330,7 @@
     <span class="doccomment">/// required to generate a new config (as it&#39;s the first build script which has access to the</span>
     <span class="doccomment">/// correct value for CARGO_CFG_TARGET_OS).</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;resolve-config&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">resolve_interpreter_config</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">InterpreterConfig</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">resolve_interpreter_config</span>() -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">InterpreterConfig</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="op">!</span><span class="ident">CONFIG_FILE</span>.<span class="ident">is_empty</span>() {
             <span class="ident">InterpreterConfig::from_reader</span>(<span class="ident">Cursor::new</span>(<span class="ident">CONFIG_FILE</span>))
         } <span class="kw">else</span> <span class="kw">if</span> <span class="op">!</span><span class="ident">ABI3_CONFIG</span>.<span class="ident">is_empty</span>() {
@@ -381,7 +380,7 @@
         );
     }
 }
-</pre></div>
+</code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="pyo3_build_config" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
     <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script>
 </body></html>

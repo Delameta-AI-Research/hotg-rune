@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;weezl-0.1.5&#x2F;src&#x2F;encode.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>encode.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../weezl/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">   1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;weezl-0.1.5&#x2F;src&#x2F;encode.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>encode.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../weezl/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">   1</span>
 <span id="2">   2</span>
 <span id="3">   3</span>
 <span id="4">   4</span>
@@ -1124,8 +1124,7 @@
 <span id="1124">1124</span>
 <span id="1125">1125</span>
 <span id="1126">1126</span>
-</pre><pre class="rust">
-<span class="doccomment">//! A module for all encoding needs.</span>
+</pre><pre class="rust"><code><span class="doccomment">//! A module for all encoding needs.</span>
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::error</span>::{<span class="ident">BufferResult</span>, <span class="ident">LzwError</span>, <span class="ident">LzwStatus</span>, <span class="ident">VectorResult</span>};
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">BitOrder</span>, <span class="ident">Code</span>, <span class="ident">StreamBuf</span>, <span class="ident">MAX_CODESIZE</span>, <span class="ident">MAX_ENTRIES</span>, <span class="ident">STREAM_BUF_SIZE</span>};
 
@@ -1204,8 +1203,8 @@
 }
 
 <span class="kw">trait</span> <span class="ident">Stateful</span> {
-    <span class="kw">fn</span> <span class="ident">advance</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">inp</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">BufferResult</span>;
-    <span class="kw">fn</span> <span class="ident">mark_ended</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span>;
+    <span class="kw">fn</span> <span class="ident">advance</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">inp</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) -&gt; <span class="ident">BufferResult</span>;
+    <span class="kw">fn</span> <span class="ident">mark_ended</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="ident">bool</span>;
     <span class="doccomment">/// Reset the state tracking if end code has been written.</span>
     <span class="kw">fn</span> <span class="ident">restart</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>);
     <span class="doccomment">/// Reset the encoder to the beginning, dropping all buffers etc.</span>
@@ -1248,7 +1247,7 @@
 }
 
 <span class="kw">trait</span> <span class="ident">Buffer</span> {
-    <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">size</span>: <span class="ident">u8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span>;
+    <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">size</span>: <span class="ident">u8</span>) -&gt; <span class="self">Self</span>;
     <span class="doccomment">/// Reset the code size in the buffer.</span>
     <span class="kw">fn</span> <span class="ident">reset</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">min_size</span>: <span class="ident">u8</span>);
     <span class="doccomment">/// Apply effects of a Clear Code.</span>
@@ -1256,17 +1255,17 @@
     <span class="doccomment">/// Insert a code into the buffer.</span>
     <span class="kw">fn</span> <span class="ident">buffer_code</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">code</span>: <span class="ident">Code</span>);
     <span class="doccomment">/// Push bytes if the buffer space is getting small.</span>
-    <span class="kw">fn</span> <span class="ident">push_out</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span>;
+    <span class="kw">fn</span> <span class="ident">push_out</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) -&gt; <span class="ident">bool</span>;
     <span class="doccomment">/// Flush all full bytes, returning if at least one more byte remains.</span>
-    <span class="kw">fn</span> <span class="ident">flush_out</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span>;
+    <span class="kw">fn</span> <span class="ident">flush_out</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) -&gt; <span class="ident">bool</span>;
     <span class="doccomment">/// Pad the buffer to a full byte.</span>
     <span class="kw">fn</span> <span class="ident">buffer_pad</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>);
     <span class="doccomment">/// Increase the maximum code size.</span>
     <span class="kw">fn</span> <span class="ident">bump_code_size</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>);
     <span class="doccomment">/// Return the maximum code with the current code size.</span>
-    <span class="kw">fn</span> <span class="ident">max_code</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Code</span>;
+    <span class="kw">fn</span> <span class="ident">max_code</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Code</span>;
     <span class="doccomment">/// Return the current code size in bits.</span>
-    <span class="kw">fn</span> <span class="ident">code_size</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u8</span>;
+    <span class="kw">fn</span> <span class="ident">code_size</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u8</span>;
 }
 
 <span class="doccomment">/// One tree node for at most each code.</span>
@@ -1313,12 +1312,12 @@
     <span class="doccomment">/// # Panics</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// The `size` needs to be in the interval `2..=12`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">order</span>: <span class="ident">BitOrder</span>, <span class="ident">size</span>: <span class="ident">u8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">order</span>: <span class="ident">BitOrder</span>, <span class="ident">size</span>: <span class="ident">u8</span>) -&gt; <span class="self">Self</span> {
         <span class="kw">type</span> <span class="ident">Boxed</span> <span class="op">=</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Stateful</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="lifetime">&#39;static</span><span class="op">&gt;</span>;
         <span class="ident"><span class="kw">super</span>::assert_encode_size</span>(<span class="ident">size</span>);
         <span class="kw">let</span> <span class="ident">state</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">order</span> {
-            <span class="ident">BitOrder::Lsb</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Box::new</span>(<span class="ident">EncodeState</span>::<span class="op">&lt;</span><span class="ident">LsbBuffer</span><span class="op">&gt;</span><span class="ident">::new</span>(<span class="ident">size</span>)) <span class="kw">as</span> <span class="ident">Boxed</span>,
-            <span class="ident">BitOrder::Msb</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">Box::new</span>(<span class="ident">EncodeState</span>::<span class="op">&lt;</span><span class="ident">MsbBuffer</span><span class="op">&gt;</span><span class="ident">::new</span>(<span class="ident">size</span>)) <span class="kw">as</span> <span class="ident">Boxed</span>,
+            <span class="ident">BitOrder::Lsb</span> =&gt; <span class="ident">Box::new</span>(<span class="ident">EncodeState</span>::<span class="op">&lt;</span><span class="ident">LsbBuffer</span><span class="op">&gt;</span><span class="ident">::new</span>(<span class="ident">size</span>)) <span class="kw">as</span> <span class="ident">Boxed</span>,
+            <span class="ident">BitOrder::Msb</span> =&gt; <span class="ident">Box::new</span>(<span class="ident">EncodeState</span>::<span class="op">&lt;</span><span class="ident">MsbBuffer</span><span class="op">&gt;</span><span class="ident">::new</span>(<span class="ident">size</span>)) <span class="kw">as</span> <span class="ident">Boxed</span>,
         };
 
         <span class="ident">Encoder</span> { <span class="ident">state</span> }
@@ -1333,16 +1332,16 @@
     <span class="doccomment">/// # Panics</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// The `size` needs to be in the interval `2..=12`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_tiff_size_switch</span>(<span class="ident">order</span>: <span class="ident">BitOrder</span>, <span class="ident">size</span>: <span class="ident">u8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">with_tiff_size_switch</span>(<span class="ident">order</span>: <span class="ident">BitOrder</span>, <span class="ident">size</span>: <span class="ident">u8</span>) -&gt; <span class="self">Self</span> {
         <span class="kw">type</span> <span class="ident">Boxed</span> <span class="op">=</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">Stateful</span> <span class="op">+</span> <span class="ident">Send</span> <span class="op">+</span> <span class="lifetime">&#39;static</span><span class="op">&gt;</span>;
         <span class="ident"><span class="kw">super</span>::assert_encode_size</span>(<span class="ident">size</span>);
         <span class="kw">let</span> <span class="ident">state</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">order</span> {
-            <span class="ident">BitOrder::Lsb</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">BitOrder::Lsb</span> =&gt; {
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">state</span> <span class="op">=</span> <span class="ident">Box::new</span>(<span class="ident">EncodeState</span>::<span class="op">&lt;</span><span class="ident">LsbBuffer</span><span class="op">&gt;</span><span class="ident">::new</span>(<span class="ident">size</span>));
                 <span class="ident">state</span>.<span class="ident">is_tiff</span> <span class="op">=</span> <span class="bool-val">true</span>;
                 <span class="ident">state</span> <span class="kw">as</span> <span class="ident">Boxed</span>
             }
-            <span class="ident">BitOrder::Msb</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">BitOrder::Msb</span> =&gt; {
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">state</span> <span class="op">=</span> <span class="ident">Box::new</span>(<span class="ident">EncodeState</span>::<span class="op">&lt;</span><span class="ident">MsbBuffer</span><span class="op">&gt;</span><span class="ident">::new</span>(<span class="ident">size</span>));
                 <span class="ident">state</span>.<span class="ident">is_tiff</span> <span class="op">=</span> <span class="bool-val">true</span>;
                 <span class="ident">state</span> <span class="kw">as</span> <span class="ident">Boxed</span>
@@ -1364,7 +1363,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// [`into_stream`]: #method.into_stream</span>
     <span class="doccomment">/// [`finish`]: #method.finish</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">encode_bytes</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">inp</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">BufferResult</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">encode_bytes</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">inp</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) -&gt; <span class="ident">BufferResult</span> {
         <span class="self">self</span>.<span class="ident">state</span>.<span class="ident">advance</span>(<span class="ident">inp</span>, <span class="ident">out</span>)
     }
 
@@ -1388,7 +1387,7 @@
     <span class="doccomment">///     .encode(data)</span>
     <span class="doccomment">///     .expect(&quot;All bytes valid for code size&quot;);</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">encode</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>, <span class="ident">LzwError</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">encode</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">data</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>, <span class="ident">LzwError</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">output</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
         <span class="self">self</span>.<span class="ident">into_vec</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">output</span>).<span class="ident">encode_all</span>(<span class="ident">data</span>).<span class="ident">status</span><span class="question-mark">?</span>;
         <span class="prelude-val">Ok</span>(<span class="ident">output</span>)
@@ -1396,7 +1395,7 @@
 
     <span class="doccomment">/// Construct a encoder into a writer.</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;std&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_stream</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">writer</span>: <span class="ident">W</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">IntoStream</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, <span class="ident">W</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_stream</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">writer</span>: <span class="ident">W</span>) -&gt; <span class="ident">IntoStream</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, <span class="ident">W</span><span class="op">&gt;</span> {
         <span class="ident">IntoStream</span> {
             <span class="ident">encoder</span>: <span class="self">self</span>,
             <span class="ident">writer</span>,
@@ -1407,7 +1406,7 @@
 
     <span class="doccomment">/// Construct a encoder into an async writer.</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;async&quot;</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_async</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">futures::io::AsyncWrite</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">writer</span>: <span class="ident">W</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">IntoAsync</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, <span class="ident">W</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_async</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">futures::io::AsyncWrite</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">writer</span>: <span class="ident">W</span>) -&gt; <span class="ident">IntoAsync</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, <span class="ident">W</span><span class="op">&gt;</span> {
         <span class="ident">IntoAsync</span> {
             <span class="ident">encoder</span>: <span class="self">self</span>,
             <span class="ident">writer</span>,
@@ -1423,7 +1422,7 @@
     <span class="doccomment">/// Compared to `into_stream` this interface allows a high-level access to encoding without</span>
     <span class="doccomment">/// requires the `std`-feature. Also, it can make full use of the extra buffer control that the</span>
     <span class="doccomment">/// special target exposes.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_vec</span><span class="op">&lt;</span><span class="lifetime">&#39;lt</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;lt</span> <span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">vec</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;lt</span> <span class="kw-2">mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">IntoVec</span><span class="op">&lt;</span><span class="lifetime">&#39;lt</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_vec</span><span class="op">&lt;</span><span class="lifetime">&#39;lt</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="lifetime">&#39;lt</span> <span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">vec</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;lt</span> <span class="kw-2">mut</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>) -&gt; <span class="ident">IntoVec</span><span class="op">&lt;</span><span class="lifetime">&#39;lt</span><span class="op">&gt;</span> {
         <span class="ident">IntoVec</span> {
             <span class="ident">encoder</span>: <span class="self">self</span>,
             <span class="ident">vector</span>: <span class="ident">vec</span>,
@@ -1464,12 +1463,12 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// This will drain the supplied reader. It will not encode an end marker after all data has</span>
     <span class="doccomment">/// been processed.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">encode</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">read</span>: <span class="kw">impl</span> <span class="ident">BufRead</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">StreamResult</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">encode</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">read</span>: <span class="kw">impl</span> <span class="ident">BufRead</span>) -&gt; <span class="ident">StreamResult</span> {
         <span class="self">self</span>.<span class="ident">encode_part</span>(<span class="ident">read</span>, <span class="bool-val">false</span>)
     }
 
     <span class="doccomment">/// Encode data from a reader and an end marker.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">encode_all</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">read</span>: <span class="kw">impl</span> <span class="ident">BufRead</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">StreamResult</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">encode_all</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">read</span>: <span class="kw">impl</span> <span class="ident">BufRead</span>) -&gt; <span class="ident">StreamResult</span> {
         <span class="self">self</span>.<span class="ident">encode_part</span>(<span class="ident">read</span>, <span class="bool-val">true</span>)
     }
 
@@ -1500,7 +1499,7 @@
         <span class="self">self</span>.<span class="ident">buffer</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">StreamBuf::Borrowed</span>(<span class="ident">buffer</span>));
     }
 
-    <span class="kw">fn</span> <span class="ident">encode_part</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="kw-2">mut</span> <span class="ident">read</span>: <span class="kw">impl</span> <span class="ident">BufRead</span>, <span class="ident">finish</span>: <span class="ident">bool</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">StreamResult</span> {
+    <span class="kw">fn</span> <span class="ident">encode_part</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="kw-2">mut</span> <span class="ident">read</span>: <span class="kw">impl</span> <span class="ident">BufRead</span>, <span class="ident">finish</span>: <span class="ident">bool</span>) -&gt; <span class="ident">StreamResult</span> {
         <span class="kw">let</span> <span class="ident">IntoStream</span> {
             <span class="ident">encoder</span>,
             <span class="ident">writer</span>,
@@ -1520,8 +1519,8 @@
 
         <span class="kw">let</span> <span class="ident">outbuf</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>] <span class="op">=</span>
             <span class="kw">match</span> { <span class="ident">buffer</span>.<span class="ident">get_or_insert_with</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">StreamBuf::Owned</span>(<span class="macro">vec!</span>[<span class="number">0u8</span>; <span class="kw-2">*</span><span class="ident">default_size</span>])) } {
-                <span class="ident">StreamBuf::Borrowed</span>(<span class="ident">slice</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="ident">slice</span>,
-                <span class="ident">StreamBuf::Owned</span>(<span class="ident">vec</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="ident">vec</span>,
+                <span class="ident">StreamBuf::Borrowed</span>(<span class="ident">slice</span>) =&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="ident">slice</span>,
+                <span class="ident">StreamBuf::Owned</span>(<span class="ident">vec</span>) =&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">*</span><span class="ident">vec</span>,
             };
         <span class="macro">assert!</span>(<span class="op">!</span><span class="ident">outbuf</span>.<span class="ident">is_empty</span>());
 
@@ -1564,9 +1563,9 @@
         <span class="kw">let</span> <span class="ident">status</span> <span class="op">=</span> <span class="ident">core::iter::repeat_with</span>(<span class="ident">once</span>)
             <span class="comment">// scan+fuse can be replaced with map_while</span>
             .<span class="ident">scan</span>((), <span class="op">|</span>(), <span class="ident">result</span><span class="op">|</span> <span class="kw">match</span> <span class="ident">result</span> {
-                <span class="prelude-val">Ok</span>(<span class="ident">Progress::Ok</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="prelude-val">Ok</span>(())),
-                <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="prelude-val">Err</span>(<span class="ident">err</span>)),
-                <span class="prelude-val">Ok</span>(<span class="ident">Progress::Done</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
+                <span class="prelude-val">Ok</span>(<span class="ident">Progress::Ok</span>) =&gt; <span class="prelude-val">Some</span>(<span class="prelude-val">Ok</span>(())),
+                <span class="prelude-val">Err</span>(<span class="ident">err</span>) =&gt; <span class="prelude-val">Some</span>(<span class="prelude-val">Err</span>(<span class="ident">err</span>)),
+                <span class="prelude-val">Ok</span>(<span class="ident">Progress::Done</span>) =&gt; <span class="prelude-val">None</span>,
             })
             .<span class="ident">fuse</span>()
             .<span class="ident">collect</span>();
@@ -1581,16 +1580,16 @@
 
 <span class="kw">impl</span> <span class="ident">IntoVec</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Encode data from a slice.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">encode</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">read</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">VectorResult</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">encode</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">read</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) -&gt; <span class="ident">VectorResult</span> {
         <span class="self">self</span>.<span class="ident">encode_part</span>(<span class="ident">read</span>, <span class="bool-val">false</span>)
     }
 
     <span class="doccomment">/// Decode data from a reader, adding an end marker.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">encode_all</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">read</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">VectorResult</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">encode_all</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">read</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) -&gt; <span class="ident">VectorResult</span> {
         <span class="self">self</span>.<span class="ident">encode_part</span>(<span class="ident">read</span>, <span class="bool-val">true</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">grab_buffer</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>], <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Encoder</span>) {
+    <span class="kw">fn</span> <span class="ident">grab_buffer</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; (<span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>], <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Encoder</span>) {
         <span class="kw">const</span> <span class="ident">CHUNK_SIZE</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="number">12</span>;
         <span class="kw">let</span> <span class="ident">decoder</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">encoder</span>;
         <span class="kw">let</span> <span class="ident">length</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">vector</span>.<span class="ident">len</span>();
@@ -1603,7 +1602,7 @@
         (<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">vector</span>[<span class="ident">length</span>..], <span class="ident">decoder</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">encode_part</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">part</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">finish</span>: <span class="ident">bool</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">VectorResult</span> {
+    <span class="kw">fn</span> <span class="ident">encode_part</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">part</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="ident">finish</span>: <span class="ident">bool</span>) -&gt; <span class="ident">VectorResult</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">VectorResult</span> {
             <span class="ident">consumed_in</span>: <span class="number">0</span>,
             <span class="ident">consumed_out</span>: <span class="number">0</span>,
@@ -1654,9 +1653,9 @@
         <span class="kw">let</span> <span class="ident">status</span>: <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="kw">_</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">core::iter::repeat_with</span>(<span class="ident">once</span>)
             <span class="comment">// scan+fuse can be replaced with map_while</span>
             .<span class="ident">scan</span>((), <span class="op">|</span>(), <span class="ident">result</span><span class="op">|</span> <span class="kw">match</span> <span class="ident">result</span> {
-                <span class="prelude-val">Ok</span>(<span class="ident">Progress::Ok</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="prelude-val">Ok</span>(())),
-                <span class="prelude-val">Err</span>(<span class="ident">err</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="prelude-val">Err</span>(<span class="ident">err</span>)),
-                <span class="prelude-val">Ok</span>(<span class="ident">Progress::Done</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
+                <span class="prelude-val">Ok</span>(<span class="ident">Progress::Ok</span>) =&gt; <span class="prelude-val">Some</span>(<span class="prelude-val">Ok</span>(())),
+                <span class="prelude-val">Err</span>(<span class="ident">err</span>) =&gt; <span class="prelude-val">Some</span>(<span class="prelude-val">Err</span>(<span class="ident">err</span>)),
+                <span class="prelude-val">Ok</span>(<span class="ident">Progress::Done</span>) =&gt; <span class="prelude-val">None</span>,
             })
             .<span class="ident">fuse</span>()
             .<span class="ident">collect</span>();
@@ -1677,7 +1676,7 @@
 <span class="kw">mod</span> <span class="ident">impl_encode_into_async</span>;
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">B</span>: <span class="ident">Buffer</span><span class="op">&gt;</span> <span class="ident">EncodeState</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">min_size</span>: <span class="ident">u8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">min_size</span>: <span class="ident">u8</span>) -&gt; <span class="self">Self</span> {
         <span class="kw">let</span> <span class="ident">clear_code</span> <span class="op">=</span> <span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="ident">min_size</span>;
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">tree</span> <span class="op">=</span> <span class="ident">Tree::default</span>();
         <span class="ident">tree</span>.<span class="ident">init</span>(<span class="ident">min_size</span>);
@@ -1696,7 +1695,7 @@
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">B</span>: <span class="ident">Buffer</span><span class="op">&gt;</span> <span class="ident">Stateful</span> <span class="kw">for</span> <span class="ident">EncodeState</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">advance</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="kw-2">mut</span> <span class="ident">inp</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="kw-2">mut</span> <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">BufferResult</span> {
+    <span class="kw">fn</span> <span class="ident">advance</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="kw-2">mut</span> <span class="ident">inp</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>], <span class="kw-2">mut</span> <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) -&gt; <span class="ident">BufferResult</span> {
         <span class="kw">let</span> <span class="ident">c_in</span> <span class="op">=</span> <span class="ident">inp</span>.<span class="ident">len</span>();
         <span class="kw">let</span> <span class="ident">c_out</span> <span class="op">=</span> <span class="ident">out</span>.<span class="ident">len</span>();
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">status</span> <span class="op">=</span> <span class="prelude-val">Ok</span>(<span class="ident">LzwStatus::Ok</span>);
@@ -1740,8 +1739,8 @@
 
                 <span class="ident">inp</span> <span class="op">=</span> <span class="ident">bytes</span>.<span class="ident">as_slice</span>();
                 <span class="kw">match</span> <span class="self">self</span>.<span class="ident">tree</span>.<span class="ident">iterate</span>(<span class="self">self</span>.<span class="ident">current_code</span>, <span class="ident">byte</span>) {
-                    <span class="prelude-val">Ok</span>(<span class="ident">code</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="self">self</span>.<span class="ident">current_code</span> <span class="op">=</span> <span class="ident">code</span>,
-                    <span class="prelude-val">Err</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="prelude-val">Ok</span>(<span class="ident">code</span>) =&gt; <span class="self">self</span>.<span class="ident">current_code</span> <span class="op">=</span> <span class="ident">code</span>,
+                    <span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; {
                         <span class="ident">next_code</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="self">self</span>.<span class="ident">current_code</span>);
 
                         <span class="self">self</span>.<span class="ident">current_code</span> <span class="op">=</span> <span class="ident">u16::from</span>(<span class="ident">byte</span>);
@@ -1752,8 +1751,8 @@
 
             <span class="kw">match</span> <span class="ident">next_code</span> {
                 <span class="comment">// No more bytes, no code produced.</span>
-                <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">break</span>,
-                <span class="prelude-val">Some</span>(<span class="ident">code</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="prelude-val">None</span> =&gt; <span class="kw">break</span>,
+                <span class="prelude-val">Some</span>(<span class="ident">code</span>) =&gt; {
                     <span class="self">self</span>.<span class="ident">buffer_code</span>(<span class="ident">code</span>);
 
                     <span class="kw">if</span> <span class="self">self</span>.<span class="ident">tree</span>.<span class="ident">keys</span>.<span class="ident">len</span>() <span class="op">+</span> <span class="ident">usize::from</span>(<span class="self">self</span>.<span class="ident">is_tiff</span>)
@@ -1772,7 +1771,7 @@
             }
         }
 
-        <span class="kw">if</span> <span class="ident">inp</span>.<span class="ident">is_empty</span>() <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">current_code</span> <span class="op">=</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">end_code</span>() {
+        <span class="kw">if</span> <span class="ident">inp</span>.<span class="ident">is_empty</span>() <span class="op">&amp;&amp;</span> <span class="self">self</span>.<span class="ident">current_code</span> <span class="op">==</span> <span class="self">self</span>.<span class="ident">end_code</span>() {
             <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">flush_out</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">out</span>) {
                 <span class="ident">status</span> <span class="op">=</span> <span class="prelude-val">Ok</span>(<span class="ident">LzwStatus::Done</span>);
             }
@@ -1785,7 +1784,7 @@
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">mark_ended</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">fn</span> <span class="ident">mark_ended</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="ident">core::mem::replace</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">has_ended</span>, <span class="bool-val">true</span>)
     }
 
@@ -1803,15 +1802,15 @@
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">B</span>: <span class="ident">Buffer</span><span class="op">&gt;</span> <span class="ident">EncodeState</span><span class="op">&lt;</span><span class="ident">B</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">push_out</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">fn</span> <span class="ident">push_out</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) -&gt; <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">push_out</span>(<span class="ident">out</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">flush_out</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">fn</span> <span class="ident">flush_out</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) -&gt; <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">flush_out</span>(<span class="ident">out</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">end_code</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Code</span> {
+    <span class="kw">fn</span> <span class="ident">end_code</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Code</span> {
         <span class="self">self</span>.<span class="ident">clear_code</span> <span class="op">+</span> <span class="number">1</span>
     }
 
@@ -1825,7 +1824,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Buffer</span> <span class="kw">for</span> <span class="ident">MsbBuffer</span> {
-    <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">min_size</span>: <span class="ident">u8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">min_size</span>: <span class="ident">u8</span>) -&gt; <span class="self">Self</span> {
         <span class="ident">MsbBuffer</span> {
             <span class="ident">code_size</span>: <span class="ident">min_size</span> <span class="op">+</span> <span class="number">1</span>,
             <span class="ident">buffer</span>: <span class="number">0</span>,
@@ -1849,7 +1848,7 @@
         <span class="self">self</span>.<span class="ident">bits_in_buffer</span> <span class="op">+</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">code_size</span>;
     }
 
-    <span class="kw">fn</span> <span class="ident">push_out</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">fn</span> <span class="ident">push_out</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) -&gt; <span class="ident">bool</span> {
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">bits_in_buffer</span> <span class="op">+</span> <span class="number">2</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">code_size</span> <span class="op">&lt;</span> <span class="number">64</span> {
             <span class="kw">return</span> <span class="bool-val">false</span>;
         }
@@ -1857,7 +1856,7 @@
         <span class="self">self</span>.<span class="ident">flush_out</span>(<span class="ident">out</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">flush_out</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">fn</span> <span class="ident">flush_out</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) -&gt; <span class="ident">bool</span> {
         <span class="kw">let</span> <span class="ident">want</span> <span class="op">=</span> <span class="ident">usize::from</span>(<span class="self">self</span>.<span class="ident">bits_in_buffer</span> <span class="op">/</span> <span class="number">8</span>);
         <span class="kw">let</span> <span class="ident">count</span> <span class="op">=</span> <span class="ident">want</span>.<span class="ident">min</span>((<span class="kw-2">*</span><span class="ident">out</span>).<span class="ident">len</span>());
         <span class="kw">let</span> (<span class="ident">bytes</span>, <span class="ident">tail</span>) <span class="op">=</span> <span class="ident">core::mem::replace</span>(<span class="ident">out</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> []).<span class="ident">split_at_mut</span>(<span class="ident">count</span>);
@@ -1881,17 +1880,17 @@
         <span class="self">self</span>.<span class="ident">code_size</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
     }
 
-    <span class="kw">fn</span> <span class="ident">max_code</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Code</span> {
+    <span class="kw">fn</span> <span class="ident">max_code</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Code</span> {
         (<span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">code_size</span>) <span class="op">-</span> <span class="number">1</span>
     }
 
-    <span class="kw">fn</span> <span class="ident">code_size</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u8</span> {
+    <span class="kw">fn</span> <span class="ident">code_size</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u8</span> {
         <span class="self">self</span>.<span class="ident">code_size</span>
     }
 }
 
 <span class="kw">impl</span> <span class="ident">Buffer</span> <span class="kw">for</span> <span class="ident">LsbBuffer</span> {
-    <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">min_size</span>: <span class="ident">u8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">min_size</span>: <span class="ident">u8</span>) -&gt; <span class="self">Self</span> {
         <span class="ident">LsbBuffer</span> {
             <span class="ident">code_size</span>: <span class="ident">min_size</span> <span class="op">+</span> <span class="number">1</span>,
             <span class="ident">buffer</span>: <span class="number">0</span>,
@@ -1914,7 +1913,7 @@
         <span class="self">self</span>.<span class="ident">bits_in_buffer</span> <span class="op">+</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">code_size</span>;
     }
 
-    <span class="kw">fn</span> <span class="ident">push_out</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">fn</span> <span class="ident">push_out</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) -&gt; <span class="ident">bool</span> {
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">bits_in_buffer</span> <span class="op">+</span> <span class="number">2</span> <span class="op">*</span> <span class="self">self</span>.<span class="ident">code_size</span> <span class="op">&lt;</span> <span class="number">64</span> {
             <span class="kw">return</span> <span class="bool-val">false</span>;
         }
@@ -1922,7 +1921,7 @@
         <span class="self">self</span>.<span class="ident">flush_out</span>(<span class="ident">out</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">flush_out</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">fn</span> <span class="ident">flush_out</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">out</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) -&gt; <span class="ident">bool</span> {
         <span class="kw">let</span> <span class="ident">want</span> <span class="op">=</span> <span class="ident">usize::from</span>(<span class="self">self</span>.<span class="ident">bits_in_buffer</span> <span class="op">/</span> <span class="number">8</span>);
         <span class="kw">let</span> <span class="ident">count</span> <span class="op">=</span> <span class="ident">want</span>.<span class="ident">min</span>((<span class="kw-2">*</span><span class="ident">out</span>).<span class="ident">len</span>());
         <span class="kw">let</span> (<span class="ident">bytes</span>, <span class="ident">tail</span>) <span class="op">=</span> <span class="ident">core::mem::replace</span>(<span class="ident">out</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> []).<span class="ident">split_at_mut</span>(<span class="ident">count</span>);
@@ -1946,11 +1945,11 @@
         <span class="self">self</span>.<span class="ident">code_size</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
     }
 
-    <span class="kw">fn</span> <span class="ident">max_code</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Code</span> {
+    <span class="kw">fn</span> <span class="ident">max_code</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Code</span> {
         (<span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="self">self</span>.<span class="ident">code_size</span>) <span class="op">-</span> <span class="number">1</span>
     }
 
-    <span class="kw">fn</span> <span class="ident">code_size</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u8</span> {
+    <span class="kw">fn</span> <span class="ident">code_size</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u8</span> {
         <span class="self">self</span>.<span class="ident">code_size</span>
     }
 }
@@ -1983,11 +1982,11 @@
         <span class="self">self</span>.<span class="ident">keys</span>[<span class="number">1</span> <span class="op">&lt;</span><span class="op">&lt;</span> <span class="ident">min_size</span>] <span class="op">=</span> <span class="ident">FullKey::Full</span>(<span class="number">0</span>).<span class="ident">into</span>();
     }
 
-    <span class="kw">fn</span> <span class="ident">at_key</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">code</span>: <span class="ident">Code</span>, <span class="ident">ch</span>: <span class="ident">u8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Code</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">at_key</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">code</span>: <span class="ident">Code</span>, <span class="ident">ch</span>: <span class="ident">u8</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Code</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">key</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">keys</span>[<span class="ident">usize::from</span>(<span class="ident">code</span>)];
         <span class="kw">match</span> <span class="ident">FullKey::from</span>(<span class="ident">key</span>) {
-            <span class="ident">FullKey::NoSuccessor</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
-            <span class="ident">FullKey::Simple</span>(<span class="ident">idx</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">FullKey::NoSuccessor</span> =&gt; <span class="prelude-val">None</span>,
+            <span class="ident">FullKey::Simple</span>(<span class="ident">idx</span>) =&gt; {
                 <span class="kw">let</span> <span class="ident">nexts</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">simples</span>[<span class="ident">usize::from</span>(<span class="ident">idx</span>)];
                 <span class="kw">let</span> <span class="ident">successors</span> <span class="op">=</span> <span class="ident">nexts</span>
                     .<span class="ident">codes</span>
@@ -1995,14 +1994,14 @@
                     .<span class="ident">zip</span>(<span class="ident">nexts</span>.<span class="ident">chars</span>.<span class="ident">iter</span>())
                     .<span class="ident">take</span>(<span class="ident">usize::from</span>(<span class="ident">nexts</span>.<span class="ident">count</span>));
                 <span class="kw">for</span> (<span class="kw-2">&amp;</span><span class="ident">scode</span>, <span class="kw-2">&amp;</span><span class="ident">sch</span>) <span class="kw">in</span> <span class="ident">successors</span> {
-                    <span class="kw">if</span> <span class="ident">sch</span> <span class="op">=</span><span class="op">=</span> <span class="ident">ch</span> {
+                    <span class="kw">if</span> <span class="ident">sch</span> <span class="op">==</span> <span class="ident">ch</span> {
                         <span class="kw">return</span> <span class="prelude-val">Some</span>(<span class="ident">scode</span>);
                     }
                 }
 
                 <span class="prelude-val">None</span>
             }
-            <span class="ident">FullKey::Full</span>(<span class="ident">idx</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">FullKey::Full</span>(<span class="ident">idx</span>) =&gt; {
                 <span class="kw">let</span> <span class="ident">full</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">complex</span>[<span class="ident">usize::from</span>(<span class="ident">idx</span>)];
                 <span class="kw">let</span> <span class="ident">precode</span> <span class="op">=</span> <span class="ident">full</span>.<span class="ident">char_continuation</span>[<span class="ident">usize::from</span>(<span class="ident">ch</span>)];
                 <span class="kw">if</span> <span class="ident">usize::from</span>(<span class="ident">precode</span>) <span class="op">&lt;</span> <span class="ident">MAX_ENTRIES</span> {
@@ -2016,7 +2015,7 @@
 
     <span class="doccomment">/// Iterate to the next char.</span>
     <span class="doccomment">/// Return Ok when it was already in the tree or creates a new entry for it and returns Err.</span>
-    <span class="kw">fn</span> <span class="ident">iterate</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">code</span>: <span class="ident">Code</span>, <span class="ident">ch</span>: <span class="ident">u8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Code</span>, <span class="ident">Code</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">iterate</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">code</span>: <span class="ident">Code</span>, <span class="ident">ch</span>: <span class="ident">u8</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Code</span>, <span class="ident">Code</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">next</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">at_key</span>(<span class="ident">code</span>, <span class="ident">ch</span>) {
             <span class="prelude-val">Ok</span>(<span class="ident">next</span>)
         } <span class="kw">else</span> {
@@ -2024,12 +2023,12 @@
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">append</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">code</span>: <span class="ident">Code</span>, <span class="ident">ch</span>: <span class="ident">u8</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Code</span> {
+    <span class="kw">fn</span> <span class="ident">append</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">code</span>: <span class="ident">Code</span>, <span class="ident">ch</span>: <span class="ident">u8</span>) -&gt; <span class="ident">Code</span> {
         <span class="kw">let</span> <span class="ident">next</span>: <span class="ident">Code</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">keys</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">u16</span>;
         <span class="kw">let</span> <span class="ident">key</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">keys</span>[<span class="ident">usize::from</span>(<span class="ident">code</span>)];
         <span class="comment">// TODO: with debug assertions, check for non-existence</span>
         <span class="kw">match</span> <span class="ident">FullKey::from</span>(<span class="ident">key</span>) {
-            <span class="ident">FullKey::NoSuccessor</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">FullKey::NoSuccessor</span> =&gt; {
                 <span class="kw">let</span> <span class="ident">new_key</span> <span class="op">=</span> <span class="ident">FullKey::Simple</span>(<span class="self">self</span>.<span class="ident">simples</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">u16</span>);
                 <span class="self">self</span>.<span class="ident">simples</span>.<span class="ident">push</span>(<span class="ident">Simple::default</span>());
                 <span class="kw">let</span> <span class="ident">simples</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">simples</span>.<span class="ident">last_mut</span>().<span class="ident">unwrap</span>();
@@ -2038,14 +2037,14 @@
                 <span class="ident">simples</span>.<span class="ident">count</span> <span class="op">=</span> <span class="number">1</span>;
                 <span class="self">self</span>.<span class="ident">keys</span>[<span class="ident">usize::from</span>(<span class="ident">code</span>)] <span class="op">=</span> <span class="ident">new_key</span>.<span class="ident">into</span>();
             }
-            <span class="ident">FullKey::Simple</span>(<span class="ident">idx</span>) <span class="kw">if</span> <span class="ident">usize::from</span>(<span class="self">self</span>.<span class="ident">simples</span>[<span class="ident">usize::from</span>(<span class="ident">idx</span>)].<span class="ident">count</span>) <span class="op">&lt;</span> <span class="ident">SHORT</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">FullKey::Simple</span>(<span class="ident">idx</span>) <span class="kw">if</span> <span class="ident">usize::from</span>(<span class="self">self</span>.<span class="ident">simples</span>[<span class="ident">usize::from</span>(<span class="ident">idx</span>)].<span class="ident">count</span>) <span class="op">&lt;</span> <span class="ident">SHORT</span> =&gt; {
                 <span class="kw">let</span> <span class="ident">nexts</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">simples</span>[<span class="ident">usize::from</span>(<span class="ident">idx</span>)];
                 <span class="kw">let</span> <span class="ident">nidx</span> <span class="op">=</span> <span class="ident">usize::from</span>(<span class="ident">nexts</span>.<span class="ident">count</span>);
                 <span class="ident">nexts</span>.<span class="ident">chars</span>[<span class="ident">nidx</span>] <span class="op">=</span> <span class="ident">ch</span>;
                 <span class="ident">nexts</span>.<span class="ident">codes</span>[<span class="ident">nidx</span>] <span class="op">=</span> <span class="ident">next</span>;
                 <span class="ident">nexts</span>.<span class="ident">count</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
             }
-            <span class="ident">FullKey::Simple</span>(<span class="ident">idx</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">FullKey::Simple</span>(<span class="ident">idx</span>) =&gt; {
                 <span class="kw">let</span> <span class="ident">new_key</span> <span class="op">=</span> <span class="ident">FullKey::Full</span>(<span class="self">self</span>.<span class="ident">complex</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">u16</span>);
                 <span class="kw">let</span> <span class="ident">simples</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">simples</span>[<span class="ident">usize::from</span>(<span class="ident">idx</span>)];
                 <span class="self">self</span>.<span class="ident">complex</span>.<span class="ident">push</span>(<span class="ident">Full</span> {
@@ -2057,7 +2056,7 @@
                 }
                 <span class="self">self</span>.<span class="ident">keys</span>[<span class="ident">usize::from</span>(<span class="ident">code</span>)] <span class="op">=</span> <span class="ident">new_key</span>.<span class="ident">into</span>();
             }
-            <span class="ident">FullKey::Full</span>(<span class="ident">idx</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">FullKey::Full</span>(<span class="ident">idx</span>) =&gt; {
                 <span class="kw">let</span> <span class="ident">full</span> <span class="op">=</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">complex</span>[<span class="ident">usize::from</span>(<span class="ident">idx</span>)];
                 <span class="ident">full</span>.<span class="ident">char_continuation</span>[<span class="ident">usize::from</span>(<span class="ident">ch</span>)] <span class="op">=</span> <span class="ident">next</span>;
             }
@@ -2068,13 +2067,13 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">FullKey</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
         <span class="ident">FullKey::NoSuccessor</span>
     }
 }
 
 <span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">Simple</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
         <span class="ident">Simple</span> {
             <span class="ident">codes</span>: [<span class="number">0</span>; <span class="ident">SHORT</span>],
             <span class="ident">chars</span>: [<span class="number">0</span>; <span class="ident">SHORT</span>],
@@ -2084,21 +2083,21 @@
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">CompressedKey</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">FullKey</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">CompressedKey</span>(<span class="ident">key</span>): <span class="ident">CompressedKey</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">CompressedKey</span>(<span class="ident">key</span>): <span class="ident">CompressedKey</span>) -&gt; <span class="self">Self</span> {
         <span class="kw">match</span> (<span class="ident">key</span> <span class="op">&gt;</span><span class="op">&gt;</span> <span class="ident">MAX_CODESIZE</span>) <span class="op">&amp;</span> <span class="number">0xf</span> {
-            <span class="number">0</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">FullKey::Full</span>(<span class="ident">key</span> <span class="op">&amp;</span> <span class="number">0xfff</span>),
-            <span class="number">1</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">FullKey::Simple</span>(<span class="ident">key</span> <span class="op">&amp;</span> <span class="number">0xfff</span>),
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">FullKey::NoSuccessor</span>,
+            <span class="number">0</span> =&gt; <span class="ident">FullKey::Full</span>(<span class="ident">key</span> <span class="op">&amp;</span> <span class="number">0xfff</span>),
+            <span class="number">1</span> =&gt; <span class="ident">FullKey::Simple</span>(<span class="ident">key</span> <span class="op">&amp;</span> <span class="number">0xfff</span>),
+            <span class="kw">_</span> =&gt; <span class="ident">FullKey::NoSuccessor</span>,
         }
     }
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">FullKey</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">CompressedKey</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">full</span>: <span class="ident">FullKey</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">full</span>: <span class="ident">FullKey</span>) -&gt; <span class="self">Self</span> {
         <span class="ident">CompressedKey</span>(<span class="kw">match</span> <span class="ident">full</span> {
-            <span class="ident">FullKey::NoSuccessor</span> <span class="op">=</span><span class="op">&gt;</span> <span class="number">0x2000</span>,
-            <span class="ident">FullKey::Simple</span>(<span class="ident">code</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="number">0x1000</span> <span class="op">|</span> <span class="ident">code</span>,
-            <span class="ident">FullKey::Full</span>(<span class="ident">code</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">code</span>,
+            <span class="ident">FullKey::NoSuccessor</span> =&gt; <span class="number">0x2000</span>,
+            <span class="ident">FullKey::Simple</span>(<span class="ident">code</span>) =&gt; <span class="number">0x1000</span> <span class="op">|</span> <span class="ident">code</span>,
+            <span class="ident">FullKey::Full</span>(<span class="ident">code</span>) =&gt; <span class="ident">code</span>,
         })
     }
 }
@@ -2172,7 +2171,7 @@
         <span class="kw">let</span> <span class="kw">_</span> <span class="op">=</span> <span class="ident">Encoder::new</span>(<span class="ident">BitOrder::Msb</span>, <span class="number">14</span>);
     }
 
-    <span class="kw">fn</span> <span class="ident">make_decoded</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">make_decoded</span>() -&gt; <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span> {
         <span class="kw">const</span> <span class="ident">FILE</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="ident">u8</span>] <span class="op">=</span>
             <span class="macro">include_bytes!</span>(<span class="macro">concat!</span>(<span class="macro">env!</span>(<span class="string">&quot;CARGO_MANIFEST_DIR&quot;</span>), <span class="string">&quot;/Cargo.lock&quot;</span>));
         <span class="kw">return</span> <span class="ident">Vec::from</span>(<span class="ident">FILE</span>);
@@ -2191,9 +2190,9 @@
         <span class="ident">istream</span>.<span class="ident">encode</span>(<span class="kw-2">&amp;</span><span class="ident">encoded</span>[..]).<span class="ident">status</span>.<span class="ident">unwrap</span>();
 
         <span class="kw">match</span> <span class="ident">istream</span>.<span class="ident">buffer</span> {
-            <span class="prelude-val">Some</span>(<span class="ident">StreamBuf::Borrowed</span>(<span class="kw">_</span>)) <span class="op">=</span><span class="op">&gt;</span> {}
-            <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(<span class="string">&quot;Decoded without buffer??&quot;</span>),
-            <span class="prelude-val">Some</span>(<span class="ident">StreamBuf::Owned</span>(<span class="kw">_</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(<span class="string">&quot;Unexpected buffer allocation&quot;</span>),
+            <span class="prelude-val">Some</span>(<span class="ident">StreamBuf::Borrowed</span>(<span class="kw">_</span>)) =&gt; {}
+            <span class="prelude-val">None</span> =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Decoded without buffer??&quot;</span>),
+            <span class="prelude-val">Some</span>(<span class="ident">StreamBuf::Owned</span>(<span class="kw">_</span>)) =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Unexpected buffer allocation&quot;</span>),
         }
     }
 
@@ -2204,11 +2203,11 @@
         <span class="kw">const</span> <span class="ident">BUF_SIZE</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="number">512</span>;
 
         <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">std::io::Write</span><span class="op">&gt;</span> <span class="ident">std::io::Write</span> <span class="kw">for</span> <span class="ident">WriteTap</span><span class="op">&lt;</span><span class="ident">W</span><span class="op">&gt;</span> {
-            <span class="kw">fn</span> <span class="ident">write</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">buf</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">std::io::Result</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
+            <span class="kw">fn</span> <span class="ident">write</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">buf</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) -&gt; <span class="ident">std::io::Result</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
                 <span class="macro">assert!</span>(<span class="ident">buf</span>.<span class="ident">len</span>() <span class="op">&lt;</span><span class="op">=</span> <span class="ident">BUF_SIZE</span>);
                 <span class="self">self</span>.<span class="number">0</span>.<span class="ident">write</span>(<span class="ident">buf</span>)
             }
-            <span class="kw">fn</span> <span class="ident">flush</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">std::io::Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+            <span class="kw">fn</span> <span class="ident">flush</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="ident">std::io::Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
                 <span class="self">self</span>.<span class="number">0</span>.<span class="ident">flush</span>()
             }
         }
@@ -2222,9 +2221,9 @@
         <span class="ident">istream</span>.<span class="ident">encode</span>(<span class="kw-2">&amp;</span><span class="ident">encoded</span>[..]).<span class="ident">status</span>.<span class="ident">unwrap</span>();
 
         <span class="kw">match</span> <span class="ident">istream</span>.<span class="ident">buffer</span> {
-            <span class="prelude-val">Some</span>(<span class="ident">StreamBuf::Owned</span>(<span class="ident">vec</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">assert!</span>(<span class="ident">vec</span>.<span class="ident">len</span>() <span class="op">&lt;</span><span class="op">=</span> <span class="ident">BUF_SIZE</span>),
-            <span class="prelude-val">Some</span>(<span class="ident">StreamBuf::Borrowed</span>(<span class="kw">_</span>)) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(<span class="string">&quot;Unexpected borrowed buffer, where from?&quot;</span>),
-            <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(<span class="string">&quot;Decoded without buffer??&quot;</span>),
+            <span class="prelude-val">Some</span>(<span class="ident">StreamBuf::Owned</span>(<span class="ident">vec</span>)) =&gt; <span class="macro">assert!</span>(<span class="ident">vec</span>.<span class="ident">len</span>() <span class="op">&lt;</span><span class="op">=</span> <span class="ident">BUF_SIZE</span>),
+            <span class="prelude-val">Some</span>(<span class="ident">StreamBuf::Borrowed</span>(<span class="kw">_</span>)) =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Unexpected borrowed buffer, where from?&quot;</span>),
+            <span class="prelude-val">None</span> =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Decoded without buffer??&quot;</span>),
         }
     }
 
@@ -2251,7 +2250,7 @@
         }
     }
 }
-</pre></div>
+</code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="weezl" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
     <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script>
 </body></html>

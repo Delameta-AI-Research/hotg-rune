@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;legion-0.4.0&#x2F;src&#x2F;internals&#x2F;world.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>world.rs - source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../legion/index.html'><div class='logo-container rust-logo'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">   1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;legion-0.4.0&#x2F;src&#x2F;internals&#x2F;world.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>world.rs - source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../legion/index.html'><div class='logo-container rust-logo'><img src='../../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">   1</span>
 <span id="2">   2</span>
 <span id="3">   3</span>
 <span id="4">   4</span>
@@ -1529,8 +1529,7 @@
 <span id="1529">1529</span>
 <span id="1530">1530</span>
 <span id="1531">1531</span>
-</pre><pre class="rust">
-<span class="doccomment">//! Contains types related to the [`World`] entity collection.</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Contains types related to the [`World`] entity collection.</span>
 
 <span class="kw">use</span> <span class="ident">std</span>::{
     <span class="ident">collections::HashMap</span>,
@@ -1578,18 +1577,18 @@
 <span class="doccomment">/// both [`World`] and [`SubWorld`]</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">EntityStore</span> {
     <span class="doccomment">/// Returns the world&#39;s unique ID.</span>
-    <span class="kw">fn</span> <span class="ident">id</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">WorldId</span>;
+    <span class="kw">fn</span> <span class="ident">id</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">WorldId</span>;
 
     <span class="doccomment">/// Returns an entity entry which can be used to access entity metadata and components.</span>
-    <span class="kw">fn</span> <span class="ident">entry_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">entity</span>: <span class="ident">Entity</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">EntryRef</span>, <span class="ident">EntityAccessError</span><span class="op">&gt;</span>;
+    <span class="kw">fn</span> <span class="ident">entry_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">entity</span>: <span class="ident">Entity</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">EntryRef</span>, <span class="ident">EntityAccessError</span><span class="op">&gt;</span>;
 
     <span class="doccomment">/// Returns a mutable entity entry which can be used to access entity metadata and components.</span>
-    <span class="kw">fn</span> <span class="ident">entry_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">entity</span>: <span class="ident">Entity</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">EntryMut</span>, <span class="ident">EntityAccessError</span><span class="op">&gt;</span>;
+    <span class="kw">fn</span> <span class="ident">entry_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">entity</span>: <span class="ident">Entity</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">EntryMut</span>, <span class="ident">EntityAccessError</span><span class="op">&gt;</span>;
 
     <span class="doccomment">/// Returns a component storage accessor for component types declared in the specified [`View`].</span>
     <span class="kw">fn</span> <span class="ident">get_component_storage</span><span class="op">&lt;</span><span class="ident">V</span>: <span class="kw">for</span><span class="op">&lt;</span><span class="lifetime">&#39;b</span><span class="op">&gt;</span> <span class="ident">View</span><span class="op">&lt;</span><span class="lifetime">&#39;b</span><span class="op">&gt;</span><span class="op">&gt;</span>(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">StorageAccessor</span>, <span class="ident">EntityAccessError</span><span class="op">&gt;</span>;
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">StorageAccessor</span>, <span class="ident">EntityAccessError</span><span class="op">&gt;</span>;
 }
 
 <span class="doccomment">/// Unique identifier for a [`World`].</span>
@@ -1598,13 +1597,13 @@
 <span class="kw">static</span> <span class="ident">WORLD_ID_COUNTER</span>: <span class="ident">AtomicU64</span> <span class="op">=</span> <span class="ident">AtomicU64::new</span>(<span class="number">0</span>);
 
 <span class="kw">impl</span> <span class="ident">WorldId</span> {
-    <span class="kw">fn</span> <span class="ident">next</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">next</span>() -&gt; <span class="self">Self</span> {
         <span class="ident">WorldId</span>(<span class="ident">WORLD_ID_COUNTER</span>.<span class="ident">fetch_add</span>(<span class="number">1</span>, <span class="ident">Ordering::Relaxed</span>))
     }
 }
 
 <span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">WorldId</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
         <span class="ident"><span class="self">Self</span>::next</span>()
     }
 }
@@ -1636,23 +1635,23 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">World</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
         <span class="ident"><span class="self">Self</span>::new</span>(<span class="ident">WorldOptions::default</span>())
     }
 }
 
 <span class="kw">impl</span> <span class="ident">World</span> {
     <span class="doccomment">/// Creates a new world with the given options,</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">options</span>: <span class="ident">WorldOptions</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">options</span>: <span class="ident">WorldOptions</span>) -&gt; <span class="self">Self</span> {
         <span class="kw">let</span> <span class="ident">groups</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Group</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">options</span>.<span class="ident">groups</span>.<span class="ident">into_iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">def</span><span class="op">|</span> <span class="ident">def</span>.<span class="ident">into</span>()).<span class="ident">collect</span>();
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">group_members</span> <span class="op">=</span> <span class="ident">HashMap::default</span>();
         <span class="kw">for</span> (<span class="ident">i</span>, <span class="ident">group</span>) <span class="kw">in</span> <span class="ident">groups</span>.<span class="ident">iter</span>().<span class="ident">enumerate</span>() {
             <span class="kw">for</span> <span class="ident">comp</span> <span class="kw">in</span> <span class="ident">group</span>.<span class="ident">components</span>() {
                 <span class="kw">match</span> <span class="ident">group_members</span>.<span class="ident">entry</span>(<span class="ident">comp</span>) {
-                    <span class="ident">MapEntry::Vacant</span>(<span class="ident">entry</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="ident">MapEntry::Vacant</span>(<span class="ident">entry</span>) =&gt; {
                         <span class="ident">entry</span>.<span class="ident">insert</span>(<span class="ident">i</span>);
                     }
-                    <span class="ident">MapEntry::Occupied</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                    <span class="ident">MapEntry::Occupied</span>(<span class="kw">_</span>) =&gt; {
                         <span class="macro">panic!</span>(<span class="string">&quot;components can only belong to a single group&quot;</span>);
                     }
                 }
@@ -1673,22 +1672,22 @@
     }
 
     <span class="doccomment">/// Returns the world&#39;s unique ID.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">id</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">WorldId</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">id</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">WorldId</span> {
         <span class="self">self</span>.<span class="ident">id</span>
     }
 
     <span class="doccomment">/// Returns the number of entities in the world.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">usize</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">len</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">usize</span> {
         <span class="self">self</span>.<span class="ident">entities</span>.<span class="ident">len</span>()
     }
 
     <span class="doccomment">/// Returns `true` if the world contains no entities.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_empty</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-        <span class="self">self</span>.<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="number">0</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_empty</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
+        <span class="self">self</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="number">0</span>
     }
 
     <span class="doccomment">/// Returns `true` if the world contains an entity with the given ID.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">entity</span>: <span class="ident">Entity</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">contains</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">entity</span>: <span class="ident">Entity</span>) -&gt; <span class="ident">bool</span> {
         <span class="self">self</span>.<span class="ident">entities</span>.<span class="ident">contains</span>(<span class="ident">entity</span>)
     }
 
@@ -1729,7 +1728,7 @@
     <span class="doccomment">/// let mut world = World::default();</span>
     <span class="doccomment">/// let _entity = world.push((1usize,));</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">push</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">components</span>: <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Entity</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">push</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">components</span>: <span class="ident">T</span>) -&gt; <span class="ident">Entity</span>
     <span class="kw">where</span>
         <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>: <span class="ident">IntoComponentSource</span>,
     {
@@ -1765,7 +1764,7 @@
     <span class="doccomment">/// );</span>
     <span class="doccomment">/// ```</span>
     <span class="doccomment">/// SoA inserts require all vectors to have the same length. These inserts are faster than inserting via an iterator of tuples.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">extend</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">components</span>: <span class="kw">impl</span> <span class="ident">IntoComponentSource</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span>[<span class="ident">Entity</span>] {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">extend</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">components</span>: <span class="kw">impl</span> <span class="ident">IntoComponentSource</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">Entity</span>] {
         <span class="kw">let</span> <span class="ident">replaced</span> <span class="op">=</span> {
             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">components</span> <span class="op">=</span> <span class="ident">components</span>.<span class="ident">into</span>();
 
@@ -1789,7 +1788,7 @@
     }
 
     <span class="doccomment">/// Removes the specified entity from the world. Returns `true` if an entity was removed.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">remove</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">entity</span>: <span class="ident">Entity</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">remove</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">entity</span>: <span class="ident">Entity</span>) -&gt; <span class="ident">bool</span> {
         <span class="kw">let</span> <span class="ident">location</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">entities</span>.<span class="ident">remove</span>(<span class="ident">entity</span>);
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">location</span>) <span class="op">=</span> <span class="ident">location</span> {
             <span class="self">self</span>.<span class="ident">remove_at_location</span>(<span class="ident">location</span>);
@@ -1836,7 +1835,7 @@
     <span class="doccomment">///     entry.add_component(0.2f32);</span>
     <span class="doccomment">/// }</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">entry</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">entity</span>: <span class="ident">Entity</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Entry</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">entry</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">entity</span>: <span class="ident">Entity</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Entry</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">entities</span>
             .<span class="ident">get</span>(<span class="ident">entity</span>)
             .<span class="ident">map</span>(<span class="kw">move</span> <span class="op">|</span><span class="ident">location</span><span class="op">|</span> <span class="ident">Entry::new</span>(<span class="ident">location</span>, <span class="self">self</span>))
@@ -1845,7 +1844,7 @@
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">entry_unchecked</span>(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
         <span class="ident">entity</span>: <span class="ident">Entity</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">EntryMut</span>, <span class="ident">EntityAccessError</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">EntryMut</span>, <span class="ident">EntityAccessError</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">entities</span>
             .<span class="ident">get</span>(<span class="ident">entity</span>)
             .<span class="ident">map</span>(<span class="op">|</span><span class="ident">location</span><span class="op">|</span> {
@@ -1881,15 +1880,15 @@
     }
 
     <span class="doccomment">/// Returns the raw component storage.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">components</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">Components</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">components</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">Components</span> {
         <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">components</span>
     }
 
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">components_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Components</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">components_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Components</span> {
         <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">components</span>
     }
 
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">archetypes</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span>[<span class="ident">Archetype</span>] {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">archetypes</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>[<span class="ident">Archetype</span>] {
         <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">archetypes</span>
     }
 
@@ -1898,8 +1897,8 @@
         <span class="ident">ArchetypeIndex</span>(<span class="ident">from</span>): <span class="ident">ArchetypeIndex</span>,
         <span class="ident">ArchetypeIndex</span>(<span class="ident">to</span>): <span class="ident">ArchetypeIndex</span>,
         <span class="ident">ComponentIndex</span>(<span class="ident">idx</span>): <span class="ident">ComponentIndex</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ComponentIndex</span> {
-        <span class="kw">if</span> <span class="ident">from</span> <span class="op">=</span><span class="op">=</span> <span class="ident">to</span> {
+    ) -&gt; <span class="ident">ComponentIndex</span> {
+        <span class="kw">if</span> <span class="ident">from</span> <span class="op">==</span> <span class="ident">to</span> {
             <span class="kw">return</span> <span class="ident">ComponentIndex</span>(<span class="ident">idx</span>);
         }
 
@@ -1952,7 +1951,7 @@
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">get_archetype_for_components</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">ArchetypeSource</span><span class="op">&gt;</span>(
         <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>,
         <span class="ident">components</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ArchetypeIndex</span> {
+    ) -&gt; <span class="ident">ArchetypeIndex</span> {
         <span class="kw">let</span> <span class="ident">index</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">index</span>.<span class="ident">search</span>(<span class="kw-2">&amp;</span><span class="ident">components</span>.<span class="ident">filter</span>()).<span class="ident">next</span>();
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">index</span>) <span class="op">=</span> <span class="ident">index</span> {
             <span class="ident">index</span>
@@ -1961,7 +1960,7 @@
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">insert_archetype</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">layout</span>: <span class="ident">EntityLayout</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ArchetypeIndex</span> {
+    <span class="kw">fn</span> <span class="ident">insert_archetype</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">layout</span>: <span class="ident">EntityLayout</span>) -&gt; <span class="ident">ArchetypeIndex</span> {
         <span class="comment">// create and insert new archetype</span>
         <span class="self">self</span>.<span class="ident">index</span>.<span class="ident">push</span>(<span class="kw-2">&amp;</span><span class="ident">layout</span>);
         <span class="kw">let</span> <span class="ident">arch_index</span> <span class="op">=</span> <span class="ident">ArchetypeIndex</span>(<span class="self">self</span>.<span class="ident">archetypes</span>.<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">u32</span>);
@@ -1980,8 +1979,8 @@
             .<span class="ident">map</span>(<span class="op">|</span><span class="ident">type_id</span><span class="op">|</span> {
                 (
                     <span class="kw">match</span> <span class="ident">group_members</span>.<span class="ident">entry</span>(<span class="kw-2">*</span><span class="ident">type_id</span>) {
-                        <span class="ident">MapEntry::Occupied</span>(<span class="ident">entry</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="ident">entry</span>.<span class="ident">get</span>(),
-                        <span class="ident">MapEntry::Vacant</span>(<span class="ident">entry</span>) <span class="op">=</span><span class="op">&gt;</span> {
+                        <span class="ident">MapEntry::Occupied</span>(<span class="ident">entry</span>) =&gt; <span class="kw-2">*</span><span class="ident">entry</span>.<span class="ident">get</span>(),
+                        <span class="ident">MapEntry::Vacant</span>(<span class="ident">entry</span>) =&gt; {
                             <span class="comment">// create a group for the component (by itself) if it does not already have one</span>
                             <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">group</span> <span class="op">=</span> <span class="ident">GroupDef::new</span>();
                             <span class="ident">group</span>.<span class="ident">add</span>(<span class="kw-2">*</span><span class="ident">type_id</span>);
@@ -2004,7 +2003,7 @@
                         .<span class="ident">layout</span>()
                         .<span class="ident">component_types</span>()
                         .<span class="ident">iter</span>()
-                        .<span class="ident">position</span>(<span class="op">|</span><span class="ident">t</span><span class="op">|</span> <span class="ident">t</span> <span class="op">=</span><span class="op">=</span> <span class="ident">type_id</span>)
+                        .<span class="ident">position</span>(<span class="op">|</span><span class="ident">t</span><span class="op">|</span> <span class="ident">t</span> <span class="op">==</span> <span class="ident">type_id</span>)
                         .<span class="ident">unwrap</span>();
                     <span class="ident">archetype</span>.<span class="ident">layout</span>().<span class="ident">component_constructors</span>()[<span class="ident">index</span>]()
                 });
@@ -2039,7 +2038,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// In this second example, `left` is provided access _only_ to `&amp;Position`. `right` is granted permission</span>
     <span class="doccomment">/// to everything _but_ `&amp;mut Position`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">split</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">IntoView</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">SubWorld</span>, <span class="ident">SubWorld</span>) {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">split</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">IntoView</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; (<span class="ident">SubWorld</span>, <span class="ident">SubWorld</span>) {
         <span class="kw">let</span> <span class="ident">permissions</span> <span class="op">=</span> <span class="ident">T::View::requires_permissions</span>();
         <span class="kw">let</span> (<span class="ident">left</span>, <span class="ident">right</span>) <span class="op">=</span> <span class="ident">ComponentAccess::All</span>.<span class="ident">split</span>(<span class="ident">permissions</span>);
 
@@ -2057,7 +2056,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">split_for_query</span><span class="op">&lt;</span><span class="lifetime">&#39;q</span>, <span class="ident">V</span>: <span class="ident">IntoView</span>, <span class="ident">F</span>: <span class="ident">EntityFilter</span><span class="op">&gt;</span>(
         <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>,
         <span class="kw">_</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;q</span> <span class="ident">Query</span><span class="op">&lt;</span><span class="ident">V</span>, <span class="ident">F</span><span class="op">&gt;</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">SubWorld</span>, <span class="ident">SubWorld</span>) {
+    ) -&gt; (<span class="ident">SubWorld</span>, <span class="ident">SubWorld</span>) {
         <span class="self">self</span>.<span class="ident">split</span>::<span class="op">&lt;</span><span class="ident">V</span><span class="op">&gt;</span>()
     }
 
@@ -2143,7 +2142,7 @@
         <span class="ident">source</span>: <span class="kw-2">&amp;</span><span class="ident">World</span>,
         <span class="ident">filter</span>: <span class="kw-2">&amp;</span><span class="ident">F</span>,
         <span class="ident">merger</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">M</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">Entity</span>, <span class="ident">Entity</span>, <span class="ident">EntityHasher</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">Entity</span>, <span class="ident">Entity</span>, <span class="ident">EntityHasher</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">allocator</span> <span class="op">=</span> <span class="ident">Allocate::new</span>();
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">reallocated</span> <span class="op">=</span> <span class="ident">HashMap::default</span>();
 
@@ -2163,14 +2162,14 @@
 
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">reallocated</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">reallocated</span>);
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">mappings</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">merger</span>.<span class="ident">entity_map</span>() {
-            <span class="ident">EntityRewrite::Auto</span>(<span class="prelude-val">Some</span>(<span class="kw-2">mut</span> <span class="ident">overrides</span>)) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">EntityRewrite::Auto</span>(<span class="prelude-val">Some</span>(<span class="kw-2">mut</span> <span class="ident">overrides</span>)) =&gt; {
                 <span class="kw">for</span> (<span class="ident">a</span>, <span class="ident">b</span>) <span class="kw">in</span> <span class="ident">reallocated</span>.<span class="ident">as_ref</span>().<span class="ident">unwrap</span>().<span class="ident">iter</span>() {
                     <span class="ident">overrides</span>.<span class="ident">entry</span>(<span class="kw-2">*</span><span class="ident">a</span>).<span class="ident">or_insert</span>(<span class="kw-2">*</span><span class="ident">b</span>);
                 }
                 <span class="ident">overrides</span>
             }
-            <span class="ident">EntityRewrite::Auto</span>(<span class="prelude-val">None</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">reallocated</span>.<span class="ident">take</span>().<span class="ident">unwrap</span>(),
-            <span class="ident">EntityRewrite::Explicit</span>(<span class="ident">overrides</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">overrides</span>,
+            <span class="ident">EntityRewrite::Auto</span>(<span class="prelude-val">None</span>) =&gt; <span class="ident">reallocated</span>.<span class="ident">take</span>().<span class="ident">unwrap</span>(),
+            <span class="ident">EntityRewrite::Explicit</span>(<span class="ident">overrides</span>) =&gt; <span class="ident">overrides</span>,
         };
 
         <span class="comment">// set the entity mappings as context for Entity::clone</span>
@@ -2237,7 +2236,7 @@
         <span class="ident">source</span>: <span class="kw-2">&amp;</span><span class="ident">World</span>,
         <span class="ident">entity</span>: <span class="ident">Entity</span>,
         <span class="ident">merger</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">M</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Entity</span> {
+    ) -&gt; <span class="ident">Entity</span> {
         <span class="comment">// determine the destination ID</span>
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">allocator</span> <span class="op">=</span> <span class="ident">Allocate::new</span>();
         <span class="kw">let</span> <span class="ident">dst_entity</span> <span class="op">=</span> <span class="ident">merger</span>.<span class="ident">assign_id</span>(<span class="ident">entity</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">allocator</span>);
@@ -2267,16 +2266,16 @@
         <span class="ident">writer</span>.<span class="ident">push</span>(<span class="ident">dst_entity</span>);
 
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">mappings</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">merger</span>.<span class="ident">entity_map</span>() {
-            <span class="ident">EntityRewrite::Auto</span>(<span class="prelude-val">Some</span>(<span class="kw-2">mut</span> <span class="ident">overrides</span>)) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">EntityRewrite::Auto</span>(<span class="prelude-val">Some</span>(<span class="kw-2">mut</span> <span class="ident">overrides</span>)) =&gt; {
                 <span class="ident">overrides</span>.<span class="ident">entry</span>(<span class="ident">entity</span>).<span class="ident">or_insert</span>(<span class="ident">dst_entity</span>);
                 <span class="ident">overrides</span>
             }
-            <span class="ident">EntityRewrite::Auto</span>(<span class="prelude-val">None</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">EntityRewrite::Auto</span>(<span class="prelude-val">None</span>) =&gt; {
                 <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">map</span> <span class="op">=</span> <span class="ident">HashMap::default</span>();
                 <span class="ident">map</span>.<span class="ident">insert</span>(<span class="ident">entity</span>, <span class="ident">dst_entity</span>);
                 <span class="ident">map</span>
             }
-            <span class="ident">EntityRewrite::Explicit</span>(<span class="ident">overrides</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">overrides</span>,
+            <span class="ident">EntityRewrite::Explicit</span>(<span class="ident">overrides</span>) =&gt; <span class="ident">overrides</span>,
         };
 
         <span class="comment">// set the entity mappings as context for Entity::clone</span>
@@ -2364,7 +2363,7 @@
         <span class="ident">filter</span>: <span class="ident">F</span>,
         <span class="ident">world_serializer</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">W</span>,
         <span class="ident">entity_serializer</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">E</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident"><span class="kw">crate</span>::internals::serialize::ser::SerializableWorld</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">F</span>, <span class="ident">W</span>, <span class="ident">E</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="ident"><span class="kw">crate</span>::internals::serialize::ser::SerializableWorld</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">F</span>, <span class="ident">W</span>, <span class="ident">E</span><span class="op">&gt;</span> {
         <span class="ident"><span class="kw">crate</span>::internals::serialize::ser::SerializableWorld::new</span>(
             <span class="kw-2">&amp;</span><span class="self">self</span>,
             <span class="ident">filter</span>,
@@ -2375,7 +2374,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">EntityStore</span> <span class="kw">for</span> <span class="ident">World</span> {
-    <span class="kw">fn</span> <span class="ident">entry_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">entity</span>: <span class="ident">Entity</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">EntryRef</span>, <span class="ident">EntityAccessError</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">entry_ref</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">entity</span>: <span class="ident">Entity</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">EntryRef</span>, <span class="ident">EntityAccessError</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">entities</span>
             .<span class="ident">get</span>(<span class="ident">entity</span>)
             .<span class="ident">map</span>(<span class="op">|</span><span class="ident">location</span><span class="op">|</span> {
@@ -2389,14 +2388,14 @@
             .<span class="ident">ok_or</span>(<span class="ident">EntityAccessError::EntityNotFound</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">entry_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">entity</span>: <span class="ident">Entity</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">EntryMut</span>, <span class="ident">EntityAccessError</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">entry_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">entity</span>: <span class="ident">Entity</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">EntryMut</span>, <span class="ident">EntityAccessError</span><span class="op">&gt;</span> {
         <span class="comment">// safety: we have exclusive access to the world</span>
         <span class="kw">unsafe</span> { <span class="self">self</span>.<span class="ident">entry_unchecked</span>(<span class="ident">entity</span>) }
     }
 
     <span class="kw">fn</span> <span class="ident">get_component_storage</span><span class="op">&lt;</span><span class="ident">V</span>: <span class="kw">for</span><span class="op">&lt;</span><span class="lifetime">&#39;b</span><span class="op">&gt;</span> <span class="ident">View</span><span class="op">&lt;</span><span class="lifetime">&#39;b</span><span class="op">&gt;</span><span class="op">&gt;</span>(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">StorageAccessor</span>, <span class="ident">EntityAccessError</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">StorageAccessor</span>, <span class="ident">EntityAccessError</span><span class="op">&gt;</span> {
         <span class="prelude-val">Ok</span>(<span class="ident">StorageAccessor::new</span>(
             <span class="self">self</span>.<span class="ident">id</span>,
             <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">index</span>,
@@ -2408,7 +2407,7 @@
         ))
     }
 
-    <span class="kw">fn</span> <span class="ident">id</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">WorldId</span> {
+    <span class="kw">fn</span> <span class="ident">id</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">WorldId</span> {
         <span class="self">self</span>.<span class="ident">id</span>
     }
 }
@@ -2435,7 +2434,7 @@
         <span class="ident">groups</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">Group</span>],
         <span class="ident">group_members</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">ComponentTypeId</span>, <span class="ident">usize</span><span class="op">&gt;</span>,
         <span class="ident">allowed_archetypes</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">BitSet</span><span class="op">&gt;</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    ) -&gt; <span class="self">Self</span> {
         <span class="self">Self</span> {
             <span class="ident">id</span>,
             <span class="ident">index</span>,
@@ -2450,46 +2449,46 @@
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">with_allowed_archetypes</span>(
         <span class="kw-2">mut</span> <span class="self">self</span>,
         <span class="ident">allowed_archetypes</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">BitSet</span><span class="op">&gt;</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    ) -&gt; <span class="self">Self</span> {
         <span class="self">self</span>.<span class="ident">allowed_archetypes</span> <span class="op">=</span> <span class="ident">allowed_archetypes</span>;
         <span class="self">self</span>
     }
 
     <span class="doccomment">/// Returns the world ID.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">id</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">WorldId</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">id</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">WorldId</span> {
         <span class="self">self</span>.<span class="ident">id</span>
     }
 
     <span class="doccomment">/// Returns `true` if the given archetype is accessable from this storage accessor.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">can_access_archetype</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ArchetypeIndex</span>(<span class="ident">archetype</span>): <span class="ident">ArchetypeIndex</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">can_access_archetype</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">ArchetypeIndex</span>(<span class="ident">archetype</span>): <span class="ident">ArchetypeIndex</span>) -&gt; <span class="ident">bool</span> {
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">allowed_archetypes</span> {
-            <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
-            <span class="prelude-val">Some</span>(<span class="ident">archetypes</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">archetypes</span>.<span class="ident">contains</span>(<span class="ident">archetype</span> <span class="kw">as</span> <span class="ident">usize</span>),
+            <span class="prelude-val">None</span> =&gt; <span class="bool-val">true</span>,
+            <span class="prelude-val">Some</span>(<span class="ident">archetypes</span>) =&gt; <span class="ident">archetypes</span>.<span class="ident">contains</span>(<span class="ident">archetype</span> <span class="kw">as</span> <span class="ident">usize</span>),
         }
     }
 
     <span class="doccomment">/// Returns the archetype layout index.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">layout_index</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">SearchIndex</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">layout_index</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">SearchIndex</span> {
         <span class="self">self</span>.<span class="ident">index</span>
     }
 
     <span class="doccomment">/// Returns the component storage.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">components</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Components</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">components</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Components</span> {
         <span class="self">self</span>.<span class="ident">components</span>
     }
 
     <span class="doccomment">/// Returns the archetypes.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">archetypes</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">Archetype</span>] {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">archetypes</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">Archetype</span>] {
         <span class="self">self</span>.<span class="ident">archetypes</span>
     }
 
     <span class="doccomment">/// Returns group definitions.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">groups</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">Group</span>] {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">groups</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">Group</span>] {
         <span class="self">self</span>.<span class="ident">groups</span>
     }
 
     <span class="doccomment">/// Returns the group the given component belongs to.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">group</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">type_id</span>: <span class="ident">ComponentTypeId</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">usize</span>, <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Group</span>)<span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">group</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">type_id</span>: <span class="ident">ComponentTypeId</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">usize</span>, <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">Group</span>)<span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">group_members</span>
             .<span class="ident">get</span>(<span class="kw-2">&amp;</span><span class="ident">type_id</span>)
             .<span class="ident">map</span>(<span class="op">|</span><span class="ident">i</span><span class="op">|</span> (<span class="kw-2">*</span><span class="ident">i</span>, <span class="self">self</span>.<span class="ident">groups</span>.<span class="ident">get</span>(<span class="kw-2">*</span><span class="ident">i</span>).<span class="ident">unwrap</span>()))
@@ -2500,25 +2499,25 @@
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">Merger</span> {
     <span class="doccomment">/// Indicates if the merger prefers to merge into a new empty archetype.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">prefers_new_archetype</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">fn</span> <span class="ident">prefers_new_archetype</span>() -&gt; <span class="ident">bool</span> {
         <span class="bool-val">false</span>
     }
 
     <span class="doccomment">/// Indicates how the merger wishes entity IDs to be adjusted while cloning a world.</span>
-    <span class="kw">fn</span> <span class="ident">entity_map</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">EntityRewrite</span> {
+    <span class="kw">fn</span> <span class="ident">entity_map</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="ident">EntityRewrite</span> {
         <span class="ident">EntityRewrite::default</span>()
     }
 
     <span class="doccomment">/// Returns the ID to use in the destination world when cloning the given entity.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_variables</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">assign_id</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">existing</span>: <span class="ident">Entity</span>, <span class="ident">allocator</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Allocate</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Entity</span> {
+    <span class="kw">fn</span> <span class="ident">assign_id</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">existing</span>: <span class="ident">Entity</span>, <span class="ident">allocator</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Allocate</span>) -&gt; <span class="ident">Entity</span> {
         <span class="ident">allocator</span>.<span class="ident">next</span>().<span class="ident">unwrap</span>()
     }
 
     <span class="doccomment">/// Calculates the destination entity layout for the given source layout.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">convert_layout</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">source_layout</span>: <span class="ident">EntityLayout</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">EntityLayout</span> {
+    <span class="kw">fn</span> <span class="ident">convert_layout</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">source_layout</span>: <span class="ident">EntityLayout</span>) -&gt; <span class="ident">EntityLayout</span> {
         <span class="ident">source_layout</span>
     }
 
@@ -2543,7 +2542,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">EntityRewrite</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
         <span class="ident"><span class="self">Self</span>::Auto</span>(<span class="prelude-val">None</span>)
     }
 }
@@ -2557,7 +2556,7 @@
         <span class="ident">ComponentTypeId</span>,
         (
             <span class="ident">ComponentTypeId</span>,
-            <span class="kw">fn</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">UnknownComponentStorage</span><span class="op">&gt;</span>,
+            <span class="kw">fn</span>() -&gt; <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">UnknownComponentStorage</span><span class="op">&gt;</span>,
             <span class="ident">Box</span><span class="op">&lt;</span>
                 <span class="kw">dyn</span> <span class="ident">FnMut</span>(
                     <span class="ident">Range</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>,
@@ -2572,7 +2571,7 @@
 
 <span class="kw">impl</span> <span class="ident">Duplicate</span> {
     <span class="doccomment">/// Creates a new duplicate merger.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="self">Self</span> {
         <span class="ident"><span class="self">Self</span>::default</span>()
     }
 
@@ -2608,7 +2607,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">register_convert</span><span class="op">&lt;</span>
         <span class="ident">Source</span>: <span class="ident">Component</span>,
         <span class="ident">Target</span>: <span class="ident">Component</span>,
-        <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="kw-2">&amp;</span><span class="ident">Source</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Target</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
+        <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="kw-2">&amp;</span><span class="ident">Source</span>) -&gt; <span class="ident">Target</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
     <span class="op">&gt;</span>(
         <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>,
         <span class="kw-2">mut</span> <span class="ident">convert</span>: <span class="ident">F</span>,
@@ -2649,7 +2648,7 @@
         <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>,
         <span class="ident">src_type</span>: <span class="ident">ComponentTypeId</span>,
         <span class="ident">dst_type</span>: <span class="ident">ComponentTypeId</span>,
-        <span class="ident">constructor</span>: <span class="kw">fn</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">UnknownComponentStorage</span><span class="op">&gt;</span>,
+        <span class="ident">constructor</span>: <span class="kw">fn</span>() -&gt; <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">UnknownComponentStorage</span><span class="op">&gt;</span>,
         <span class="ident">duplicate_fn</span>: <span class="ident">Box</span><span class="op">&lt;</span>
             <span class="kw">dyn</span> <span class="ident">FnMut</span>(<span class="ident">Range</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>, <span class="kw-2">&amp;</span><span class="ident">Archetype</span>, <span class="kw-2">&amp;</span><span class="kw">dyn</span> <span class="ident">UnknownComponentStorage</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">ArchetypeWriter</span>),
         <span class="op">&gt;</span>,
@@ -2660,7 +2659,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Merger</span> <span class="kw">for</span> <span class="ident">Duplicate</span> {
-    <span class="kw">fn</span> <span class="ident">convert_layout</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">source_layout</span>: <span class="ident">EntityLayout</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">EntityLayout</span> {
+    <span class="kw">fn</span> <span class="ident">convert_layout</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">source_layout</span>: <span class="ident">EntityLayout</span>) -&gt; <span class="ident">EntityLayout</span> {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">layout</span> <span class="op">=</span> <span class="ident">EntityLayout::new</span>();
         <span class="kw">for</span> <span class="ident">src_type</span> <span class="kw">in</span> <span class="ident">source_layout</span>.<span class="ident">component_types</span>() {
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>((<span class="ident">dst_type</span>, <span class="ident">constructor</span>, <span class="kw">_</span>)) <span class="op">=</span> <span class="self">self</span>.<span class="ident">duplicate_fns</span>.<span class="ident">get</span>(<span class="ident">src_type</span>) {
@@ -3061,7 +3060,7 @@
             .<span class="ident">is_err</span>());
     }
 }
-</pre></div>
+</code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="legion" data-search-index-js="../../../search-index.js" data-search-js="../../../search.js"></div>
     <script src="../../../main.js"></script><script src="../../../source-script.js"></script><script src="../../../source-files.js"></script>
 </body></html>

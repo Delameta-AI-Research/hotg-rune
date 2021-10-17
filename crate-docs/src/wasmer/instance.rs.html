@@ -173,8 +173,7 @@
 <span id="173">173</span>
 <span id="174">174</span>
 <span id="175">175</span>
-</pre><pre class="rust">
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::exports::Exports</span>;
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::exports::Exports</span>;
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::externals::Extern</span>;
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::module::Module</span>;
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::store::Store</span>;
@@ -206,7 +205,7 @@
 <span class="kw">mod</span> <span class="ident">send_test</span> {
     <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
 
-    <span class="kw">fn</span> <span class="ident">is_send</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Send</span><span class="op">&gt;</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">fn</span> <span class="ident">is_send</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Send</span><span class="op">&gt;</span>() -&gt; <span class="ident">bool</span> {
         <span class="bool-val">true</span>
     }
 
@@ -240,16 +239,16 @@
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">wasmer_engine::InstantiationError</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">InstantiationError</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">other</span>: <span class="ident">wasmer_engine::InstantiationError</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">other</span>: <span class="ident">wasmer_engine::InstantiationError</span>) -&gt; <span class="self">Self</span> {
         <span class="kw">match</span> <span class="ident">other</span> {
-            <span class="ident">wasmer_engine::InstantiationError::Link</span>(<span class="ident">e</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::Link</span>(<span class="ident">e</span>),
-            <span class="ident">wasmer_engine::InstantiationError::Start</span>(<span class="ident">e</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::Start</span>(<span class="ident">e</span>),
+            <span class="ident">wasmer_engine::InstantiationError::Link</span>(<span class="ident">e</span>) =&gt; <span class="ident"><span class="self">Self</span>::Link</span>(<span class="ident">e</span>),
+            <span class="ident">wasmer_engine::InstantiationError::Start</span>(<span class="ident">e</span>) =&gt; <span class="ident"><span class="self">Self</span>::Start</span>(<span class="ident">e</span>),
         }
     }
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">HostEnvInitError</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">InstantiationError</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">other</span>: <span class="ident">HostEnvInitError</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">other</span>: <span class="ident">HostEnvInitError</span>) -&gt; <span class="self">Self</span> {
         <span class="ident"><span class="self">Self</span>::HostEnvInitialization</span>(<span class="ident">other</span>)
     }
 }
@@ -288,7 +287,7 @@
     <span class="doccomment">/// Those are, as defined by the spec:</span>
     <span class="doccomment">///  * Link errors that happen when plugging the imports into the instance</span>
     <span class="doccomment">///  * Runtime errors that happen when running the module `start` function.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">module</span>: <span class="kw-2">&amp;</span><span class="ident">Module</span>, <span class="ident">resolver</span>: <span class="kw-2">&amp;</span><span class="kw">dyn</span> <span class="ident">Resolver</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">InstantiationError</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">module</span>: <span class="kw-2">&amp;</span><span class="ident">Module</span>, <span class="ident">resolver</span>: <span class="kw-2">&amp;</span><span class="kw">dyn</span> <span class="ident">Resolver</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">InstantiationError</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">store</span> <span class="op">=</span> <span class="ident">module</span>.<span class="ident">store</span>();
         <span class="kw">let</span> <span class="ident">handle</span> <span class="op">=</span> <span class="ident">module</span>.<span class="ident">instantiate</span>(<span class="ident">resolver</span>)<span class="question-mark">?</span>;
         <span class="kw">let</span> <span class="ident">exports</span> <span class="op">=</span> <span class="ident">module</span>
@@ -327,29 +326,29 @@
     }
 
     <span class="doccomment">/// Gets the [`Module`] associated with this instance.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">module</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">Module</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">module</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">Module</span> {
         <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">module</span>
     }
 
     <span class="doccomment">/// Returns the [`Store`] where the `Instance` belongs.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">store</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">Store</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">store</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">Store</span> {
         <span class="self">self</span>.<span class="ident">module</span>.<span class="ident">store</span>()
     }
 
     <span class="attribute">#[<span class="ident">doc</span>(<span class="ident">hidden</span>)]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vmctx_ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">VMContext</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">vmctx_ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">VMContext</span> {
         <span class="self">self</span>.<span class="ident">handle</span>.<span class="ident">lock</span>().<span class="ident">unwrap</span>().<span class="ident">vmctx_ptr</span>()
     }
 }
 
 <span class="kw">impl</span> <span class="ident">fmt::Debug</span> <span class="kw">for</span> <span class="ident">Instance</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">fmt::Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
         <span class="ident">f</span>.<span class="ident">debug_struct</span>(<span class="string">&quot;Instance&quot;</span>)
             .<span class="ident">field</span>(<span class="string">&quot;exports&quot;</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">exports</span>)
             .<span class="ident">finish</span>()
     }
 }
-</pre></div>
+</code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="wasmer" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
     <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script>
 </body></html>

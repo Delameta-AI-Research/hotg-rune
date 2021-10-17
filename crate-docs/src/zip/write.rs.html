@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;zip-0.5.13&#x2F;src&#x2F;write.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>write.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../zip/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">   1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;zip-0.5.13&#x2F;src&#x2F;write.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>write.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../zip/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">   1</span>
 <span id="2">   2</span>
 <span id="3">   3</span>
 <span id="4">   4</span>
@@ -1264,8 +1264,7 @@
 <span id="1264">1264</span>
 <span id="1265">1265</span>
 <span id="1266">1266</span>
-</pre><pre class="rust">
-<span class="doccomment">//! Types for creating ZIP archives</span>
+</pre><pre class="rust"><code><span class="doccomment">//! Types for creating ZIP archives</span>
 
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::compression::CompressionMethod</span>;
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::read</span>::{<span class="ident">central_header_to_zip_file</span>, <span class="ident">ZipArchive</span>, <span class="ident">ZipFile</span>};
@@ -1365,7 +1364,7 @@
 
 <span class="kw">impl</span> <span class="ident">FileOptions</span> {
     <span class="doccomment">/// Construct a new FileOptions object</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="ident">FileOptions</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="ident">FileOptions</span> {
         <span class="ident">FileOptions</span> {
             <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(
                 <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;deflate&quot;</span>,
@@ -1392,7 +1391,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// The default is `CompressionMethod::Deflated`. If the deflate compression feature is</span>
     <span class="doccomment">/// disabled, `CompressionMethod::Stored` becomes the default.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">compression_method</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">method</span>: <span class="ident">CompressionMethod</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">FileOptions</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">compression_method</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">method</span>: <span class="ident">CompressionMethod</span>) -&gt; <span class="ident">FileOptions</span> {
         <span class="self">self</span>.<span class="ident">compression_method</span> <span class="op">=</span> <span class="ident">method</span>;
         <span class="self">self</span>
     }
@@ -1401,7 +1400,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// The default is the current timestamp if the &#39;time&#39; feature is enabled, and 1980-01-01</span>
     <span class="doccomment">/// otherwise</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">last_modified_time</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">mod_time</span>: <span class="ident">DateTime</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">FileOptions</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">last_modified_time</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">mod_time</span>: <span class="ident">DateTime</span>) -&gt; <span class="ident">FileOptions</span> {
         <span class="self">self</span>.<span class="ident">last_modified_time</span> <span class="op">=</span> <span class="ident">mod_time</span>;
         <span class="self">self</span>
     }
@@ -1411,7 +1410,7 @@
     <span class="doccomment">/// The format is represented with unix-style permissions.</span>
     <span class="doccomment">/// The default is `0o644`, which represents `rw-r--r--` for files,</span>
     <span class="doccomment">/// and `0o755`, which represents `rwxr-xr-x` for directories</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">unix_permissions</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">mode</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">FileOptions</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">unix_permissions</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">mode</span>: <span class="ident">u32</span>) -&gt; <span class="ident">FileOptions</span> {
         <span class="self">self</span>.<span class="ident">permissions</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">mode</span> <span class="op">&amp;</span> <span class="number">0o777</span>);
         <span class="self">self</span>
     }
@@ -1421,20 +1420,20 @@
     <span class="doccomment">/// If set to `false` and the file exceeds the limit, an I/O error is thrown. If set to `true`,</span>
     <span class="doccomment">/// readers will require ZIP64 support and if the file does not exceed the limit, 20 B are</span>
     <span class="doccomment">/// wasted. The default is `false`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">large_file</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">large</span>: <span class="ident">bool</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">FileOptions</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">large_file</span>(<span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">large</span>: <span class="ident">bool</span>) -&gt; <span class="ident">FileOptions</span> {
         <span class="self">self</span>.<span class="ident">large_file</span> <span class="op">=</span> <span class="ident">large</span>;
         <span class="self">self</span>
     }
 }
 
 <span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">FileOptions</span> {
-    <span class="kw">fn</span> <span class="ident">default</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">default</span>() -&gt; <span class="self">Self</span> {
         <span class="ident"><span class="self">Self</span>::default</span>()
     }
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span> <span class="op">+</span> <span class="ident">io::Seek</span><span class="op">&gt;</span> <span class="ident">Write</span> <span class="kw">for</span> <span class="ident">ZipWriter</span><span class="op">&lt;</span><span class="ident">W</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">write</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">buf</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">io::Result</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">write</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">buf</span>: <span class="kw-2">&amp;</span>[<span class="ident">u8</span>]) -&gt; <span class="ident">io::Result</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">writing_to_file</span> {
             <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">io::Error::new</span>(
                 <span class="ident">io::ErrorKind::Other</span>,
@@ -1442,7 +1441,7 @@
             ));
         }
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">ref_mut</span>() {
-            <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">w</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">w</span>) =&gt; {
                 <span class="kw">if</span> <span class="self">self</span>.<span class="ident">writing_to_extra_field</span> {
                     <span class="self">self</span>.<span class="ident">files</span>.<span class="ident">last_mut</span>().<span class="ident">unwrap</span>().<span class="ident">extra_field</span>.<span class="ident">write</span>(<span class="ident">buf</span>)
                 } <span class="kw">else</span> {
@@ -1462,17 +1461,17 @@
                     <span class="ident">write_result</span>
                 }
             }
-            <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">io::Error::new</span>(
+            <span class="prelude-val">None</span> =&gt; <span class="prelude-val">Err</span>(<span class="ident">io::Error::new</span>(
                 <span class="ident">io::ErrorKind::BrokenPipe</span>,
                 <span class="string">&quot;ZipWriter was already closed&quot;</span>,
             )),
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">flush</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">io::Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">flush</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="ident">io::Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">ref_mut</span>() {
-            <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">w</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">w</span>.<span class="ident">flush</span>(),
-            <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Err</span>(<span class="ident">io::Error::new</span>(
+            <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">w</span>) =&gt; <span class="ident">w</span>.<span class="ident">flush</span>(),
+            <span class="prelude-val">None</span> =&gt; <span class="prelude-val">Err</span>(<span class="ident">io::Error::new</span>(
                 <span class="ident">io::ErrorKind::BrokenPipe</span>,
                 <span class="string">&quot;ZipWriter was already closed&quot;</span>,
             )),
@@ -1489,7 +1488,7 @@
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">A</span>: <span class="ident">Read</span> <span class="op">+</span> <span class="ident">Write</span> <span class="op">+</span> <span class="ident">io::Seek</span><span class="op">&gt;</span> <span class="ident">ZipWriter</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Initializes the archive from an existing ZIP archive, making it ready for append.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new_append</span>(<span class="kw-2">mut</span> <span class="ident">readwriter</span>: <span class="ident">A</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ZipResult</span><span class="op">&lt;</span><span class="ident">ZipWriter</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new_append</span>(<span class="kw-2">mut</span> <span class="ident">readwriter</span>: <span class="ident">A</span>) -&gt; <span class="ident">ZipResult</span><span class="op">&lt;</span><span class="ident">ZipWriter</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span><span class="op">&gt;</span> {
         <span class="kw">let</span> (<span class="ident">footer</span>, <span class="ident">cde_start_pos</span>) <span class="op">=</span> <span class="ident">spec::CentralDirectoryEnd::find_and_parse</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">readwriter</span>)<span class="question-mark">?</span>;
 
         <span class="kw">if</span> <span class="ident">footer</span>.<span class="ident">disk_number</span> <span class="op">!</span><span class="op">=</span> <span class="ident">footer</span>.<span class="ident">disk_with_central_directory</span> {
@@ -1530,7 +1529,7 @@
     <span class="doccomment">/// Initializes the archive.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Before writing to this object, the [`ZipWriter::start_file`] function should be called.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">inner</span>: <span class="ident">W</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ZipWriter</span><span class="op">&lt;</span><span class="ident">W</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">inner</span>: <span class="ident">W</span>) -&gt; <span class="ident">ZipWriter</span><span class="op">&lt;</span><span class="ident">W</span><span class="op">&gt;</span> {
         <span class="ident">ZipWriter</span> {
             <span class="ident">inner</span>: <span class="ident">GenericZipWriter::Storer</span>(<span class="ident">inner</span>),
             <span class="ident">files</span>: <span class="ident">Vec::new</span>(),
@@ -1565,7 +1564,7 @@
         <span class="ident">name</span>: <span class="ident">S</span>,
         <span class="ident">options</span>: <span class="ident">FileOptions</span>,
         <span class="ident">raw_values</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ZipRawValues</span><span class="op">&gt;</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ZipResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span>
+    ) -&gt; <span class="ident">ZipResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">S</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
     {
@@ -1617,7 +1616,7 @@
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="kw">fn</span> <span class="ident">finish_file</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ZipResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">finish_file</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="ident">ZipResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">writing_to_extra_field</span> {
             <span class="comment">// Implicitly calling [`ZipWriter::end_extra_data`] for empty files.</span>
             <span class="self">self</span>.<span class="ident">end_extra_data</span>()<span class="question-mark">?</span>;
@@ -1627,8 +1626,8 @@
 
         <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">writing_raw</span> {
             <span class="kw">let</span> <span class="ident">file</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">files</span>.<span class="ident">last_mut</span>() {
-                <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Ok</span>(()),
-                <span class="prelude-val">Some</span>(<span class="ident">f</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">f</span>,
+                <span class="prelude-val">None</span> =&gt; <span class="kw">return</span> <span class="prelude-val">Ok</span>(()),
+                <span class="prelude-val">Some</span>(<span class="ident">f</span>) =&gt; <span class="ident">f</span>,
             };
             <span class="ident">file</span>.<span class="ident">crc32</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">stats</span>.<span class="ident">hasher</span>.<span class="ident">clone</span>().<span class="ident">finalize</span>();
             <span class="ident">file</span>.<span class="ident">uncompressed_size</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">stats</span>.<span class="ident">bytes_written</span>;
@@ -1648,7 +1647,7 @@
     <span class="doccomment">/// Create a file in the archive and start writing its&#39; contents.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// The data should be written using the [`io::Write`] implementation on this [`ZipWriter`]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">start_file</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">name</span>: <span class="ident">S</span>, <span class="kw-2">mut</span> <span class="ident">options</span>: <span class="ident">FileOptions</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ZipResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">start_file</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">name</span>: <span class="ident">S</span>, <span class="kw-2">mut</span> <span class="ident">options</span>: <span class="ident">FileOptions</span>) -&gt; <span class="ident">ZipResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">S</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
     {
@@ -1674,7 +1673,7 @@
         <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>,
         <span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">std::path::Path</span>,
         <span class="ident">options</span>: <span class="ident">FileOptions</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ZipResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    ) -&gt; <span class="ident">ZipResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">start_file</span>(<span class="ident">path_to_string</span>(<span class="ident">path</span>), <span class="ident">options</span>)
     }
 
@@ -1688,7 +1687,7 @@
         <span class="ident">name</span>: <span class="ident">S</span>,
         <span class="ident">options</span>: <span class="ident">FileOptions</span>,
         <span class="ident">align</span>: <span class="ident">u16</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u64</span>, <span class="ident">ZipError</span><span class="op">&gt;</span>
+    ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">u64</span>, <span class="ident">ZipError</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">S</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
     {
@@ -1774,7 +1773,7 @@
         <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>,
         <span class="ident">name</span>: <span class="ident">S</span>,
         <span class="kw-2">mut</span> <span class="ident">options</span>: <span class="ident">FileOptions</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ZipResult</span><span class="op">&lt;</span><span class="ident">u64</span><span class="op">&gt;</span>
+    ) -&gt; <span class="ident">ZipResult</span><span class="op">&lt;</span><span class="ident">u64</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">S</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
     {
@@ -1791,7 +1790,7 @@
     <span class="doccomment">/// End local and start central extra data. Requires [`ZipWriter::start_file_with_extra_data`].</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Returns the final starting offset of the file data.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">end_local_start_central_extra_data</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ZipResult</span><span class="op">&lt;</span><span class="ident">u64</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">end_local_start_central_extra_data</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="ident">ZipResult</span><span class="op">&lt;</span><span class="ident">u64</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">data_start</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">end_extra_data</span>()<span class="question-mark">?</span>;
         <span class="self">self</span>.<span class="ident">files</span>.<span class="ident">last_mut</span>().<span class="ident">unwrap</span>().<span class="ident">extra_field</span>.<span class="ident">clear</span>();
         <span class="self">self</span>.<span class="ident">writing_to_extra_field</span> <span class="op">=</span> <span class="bool-val">true</span>;
@@ -1802,7 +1801,7 @@
     <span class="doccomment">/// End extra data and start file data. Requires [`ZipWriter::start_file_with_extra_data`].</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Returns the final starting offset of the file data.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">end_extra_data</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ZipResult</span><span class="op">&lt;</span><span class="ident">u64</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">end_extra_data</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="ident">ZipResult</span><span class="op">&lt;</span><span class="ident">u64</span><span class="op">&gt;</span> {
         <span class="comment">// Require `start_file_with_extra_data()`. Ensures `file` is some.</span>
         <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">writing_to_extra_field</span> {
             <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">ZipError::Io</span>(<span class="ident">io::Error::new</span>(
@@ -1866,7 +1865,7 @@
     <span class="doccomment">///     Ok(())</span>
     <span class="doccomment">/// }</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">raw_copy_file_rename</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="kw-2">mut</span> <span class="ident">file</span>: <span class="ident">ZipFile</span>, <span class="ident">name</span>: <span class="ident">S</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ZipResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">raw_copy_file_rename</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="kw-2">mut</span> <span class="ident">file</span>: <span class="ident">ZipFile</span>, <span class="ident">name</span>: <span class="ident">S</span>) -&gt; <span class="ident">ZipResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">S</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
     {
@@ -1915,7 +1914,7 @@
     <span class="doccomment">///     Ok(())</span>
     <span class="doccomment">/// }</span>
     <span class="doccomment">/// ```</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">raw_copy_file</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">file</span>: <span class="ident">ZipFile</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ZipResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">raw_copy_file</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">file</span>: <span class="ident">ZipFile</span>) -&gt; <span class="ident">ZipResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">file</span>.<span class="ident">name</span>().<span class="ident">to_owned</span>();
         <span class="self">self</span>.<span class="ident">raw_copy_file_rename</span>(<span class="ident">file</span>, <span class="ident">name</span>)
     }
@@ -1923,7 +1922,7 @@
     <span class="doccomment">/// Add a directory entry.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// You can&#39;t write data to the file afterwards.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_directory</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">name</span>: <span class="ident">S</span>, <span class="kw-2">mut</span> <span class="ident">options</span>: <span class="ident">FileOptions</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ZipResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">add_directory</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">name</span>: <span class="ident">S</span>, <span class="kw-2">mut</span> <span class="ident">options</span>: <span class="ident">FileOptions</span>) -&gt; <span class="ident">ZipResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">S</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
     {
@@ -1936,8 +1935,8 @@
         <span class="kw">let</span> <span class="ident">name_as_string</span> <span class="op">=</span> <span class="ident">name</span>.<span class="ident">into</span>();
         <span class="comment">// Append a slash to the filename if it does not end with it.</span>
         <span class="kw">let</span> <span class="ident">name_with_slash</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">name_as_string</span>.<span class="ident">chars</span>().<span class="ident">last</span>() {
-            <span class="prelude-val">Some</span>(<span class="string">&#39;/&#39;</span>) <span class="op">|</span> <span class="prelude-val">Some</span>(<span class="string">&#39;\\&#39;</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">name_as_string</span>,
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">name_as_string</span> <span class="op">+</span> <span class="string">&quot;/&quot;</span>,
+            <span class="prelude-val">Some</span>(<span class="string">&#39;/&#39;</span>) <span class="op">|</span> <span class="prelude-val">Some</span>(<span class="string">&#39;\\&#39;</span>) =&gt; <span class="ident">name_as_string</span>,
+            <span class="kw">_</span> =&gt; <span class="ident">name_as_string</span> <span class="op">+</span> <span class="string">&quot;/&quot;</span>,
         };
 
         <span class="self">self</span>.<span class="ident">start_entry</span>(<span class="ident">name_with_slash</span>, <span class="ident">options</span>, <span class="prelude-val">None</span>)<span class="question-mark">?</span>;
@@ -1957,7 +1956,7 @@
         <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>,
         <span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">std::path::Path</span>,
         <span class="ident">options</span>: <span class="ident">FileOptions</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ZipResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    ) -&gt; <span class="ident">ZipResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">add_directory</span>(<span class="ident">path_to_string</span>(<span class="ident">path</span>), <span class="ident">options</span>)
     }
 
@@ -1965,13 +1964,13 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// This will return the writer, but one should normally not append any data to the end of the file.</span>
     <span class="doccomment">/// Note that the zipfile will also be finished on drop.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">finish</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ZipResult</span><span class="op">&lt;</span><span class="ident">W</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">finish</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="ident">ZipResult</span><span class="op">&lt;</span><span class="ident">W</span><span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">finalize</span>()<span class="question-mark">?</span>;
         <span class="kw">let</span> <span class="ident">inner</span> <span class="op">=</span> <span class="ident">mem::replace</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">inner</span>, <span class="ident">GenericZipWriter::Closed</span>);
         <span class="prelude-val">Ok</span>(<span class="ident">inner</span>.<span class="ident">unwrap</span>())
     }
 
-    <span class="kw">fn</span> <span class="ident">finalize</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ZipResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">finalize</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="ident">ZipResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">finish_file</span>()<span class="question-mark">?</span>;
 
         {
@@ -2048,30 +2047,30 @@
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span> <span class="op">+</span> <span class="ident">io::Seek</span><span class="op">&gt;</span> <span class="ident">GenericZipWriter</span><span class="op">&lt;</span><span class="ident">W</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">switch_to</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">compression</span>: <span class="ident">CompressionMethod</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ZipResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">switch_to</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">compression</span>: <span class="ident">CompressionMethod</span>) -&gt; <span class="ident">ZipResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">current_compression</span>() {
-            <span class="prelude-val">Some</span>(<span class="ident">method</span>) <span class="kw">if</span> <span class="ident">method</span> <span class="op">=</span><span class="op">=</span> <span class="ident">compression</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Ok</span>(()),
-            <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="prelude-val">Some</span>(<span class="ident">method</span>) <span class="kw">if</span> <span class="ident">method</span> <span class="op">==</span> <span class="ident">compression</span> =&gt; <span class="kw">return</span> <span class="prelude-val">Ok</span>(()),
+            <span class="prelude-val">None</span> =&gt; {
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">io::Error::new</span>(
                     <span class="ident">io::ErrorKind::BrokenPipe</span>,
                     <span class="string">&quot;ZipWriter was already closed&quot;</span>,
                 )
                 .<span class="ident">into</span>())
             }
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {}
+            <span class="kw">_</span> =&gt; {}
         }
 
         <span class="kw">let</span> <span class="ident">bare</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">mem::replace</span>(<span class="self">self</span>, <span class="ident">GenericZipWriter::Closed</span>) {
-            <span class="ident">GenericZipWriter::Storer</span>(<span class="ident">w</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">w</span>,
+            <span class="ident">GenericZipWriter::Storer</span>(<span class="ident">w</span>) =&gt; <span class="ident">w</span>,
             <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(
                 <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;deflate&quot;</span>,
                 <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;deflate-miniz&quot;</span>,
                 <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;deflate-zlib&quot;</span>
             ))]</span>
-            <span class="ident">GenericZipWriter::Deflater</span>(<span class="ident">w</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">w</span>.<span class="ident">finish</span>()<span class="question-mark">?</span>,
+            <span class="ident">GenericZipWriter::Deflater</span>(<span class="ident">w</span>) =&gt; <span class="ident">w</span>.<span class="ident">finish</span>()<span class="question-mark">?</span>,
             <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;bzip2&quot;</span>)]</span>
-            <span class="ident">GenericZipWriter::Bzip2</span>(<span class="ident">w</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">w</span>.<span class="ident">finish</span>()<span class="question-mark">?</span>,
-            <span class="ident">GenericZipWriter::Closed</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">GenericZipWriter::Bzip2</span>(<span class="ident">w</span>) =&gt; <span class="ident">w</span>.<span class="ident">finish</span>()<span class="question-mark">?</span>,
+            <span class="ident">GenericZipWriter::Closed</span> =&gt; {
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">io::Error::new</span>(
                     <span class="ident">io::ErrorKind::BrokenPipe</span>,
                     <span class="string">&quot;ZipWriter was already closed&quot;</span>,
@@ -2083,21 +2082,21 @@
         <span class="kw-2">*</span><span class="self">self</span> <span class="op">=</span> {
             <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">deprecated</span>)]</span>
             <span class="kw">match</span> <span class="ident">compression</span> {
-                <span class="ident">CompressionMethod::Stored</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">GenericZipWriter::Storer</span>(<span class="ident">bare</span>),
+                <span class="ident">CompressionMethod::Stored</span> =&gt; <span class="ident">GenericZipWriter::Storer</span>(<span class="ident">bare</span>),
                 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(
                     <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;deflate&quot;</span>,
                     <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;deflate-miniz&quot;</span>,
                     <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;deflate-zlib&quot;</span>
                 ))]</span>
-                <span class="ident">CompressionMethod::Deflated</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">GenericZipWriter::Deflater</span>(<span class="ident">DeflateEncoder::new</span>(
+                <span class="ident">CompressionMethod::Deflated</span> =&gt; <span class="ident">GenericZipWriter::Deflater</span>(<span class="ident">DeflateEncoder::new</span>(
                     <span class="ident">bare</span>,
                     <span class="ident">flate2::Compression::default</span>(),
                 )),
                 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;bzip2&quot;</span>)]</span>
-                <span class="ident">CompressionMethod::Bzip2</span> <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="ident">CompressionMethod::Bzip2</span> =&gt; {
                     <span class="ident">GenericZipWriter::Bzip2</span>(<span class="ident">BzEncoder::new</span>(<span class="ident">bare</span>, <span class="ident">bzip2::Compression::default</span>()))
                 }
-                <span class="ident">CompressionMethod::Unsupported</span>(..) <span class="op">=</span><span class="op">&gt;</span> {
+                <span class="ident">CompressionMethod::Unsupported</span>(..) =&gt; {
                     <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">ZipError::UnsupportedArchive</span>(<span class="string">&quot;Unsupported compression&quot;</span>))
                 }
             }
@@ -2106,59 +2105,59 @@
         <span class="prelude-val">Ok</span>(())
     }
 
-    <span class="kw">fn</span> <span class="ident">ref_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw">dyn</span> <span class="ident">Write</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">ref_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw">dyn</span> <span class="ident">Write</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
-            <span class="ident">GenericZipWriter::Storer</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">w</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">w</span> <span class="kw">as</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw">dyn</span> <span class="ident">Write</span>),
+            <span class="ident">GenericZipWriter::Storer</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">w</span>) =&gt; <span class="prelude-val">Some</span>(<span class="ident">w</span> <span class="kw">as</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw">dyn</span> <span class="ident">Write</span>),
             <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(
                 <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;deflate&quot;</span>,
                 <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;deflate-miniz&quot;</span>,
                 <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;deflate-zlib&quot;</span>
             ))]</span>
-            <span class="ident">GenericZipWriter::Deflater</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">w</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">w</span> <span class="kw">as</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw">dyn</span> <span class="ident">Write</span>),
+            <span class="ident">GenericZipWriter::Deflater</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">w</span>) =&gt; <span class="prelude-val">Some</span>(<span class="ident">w</span> <span class="kw">as</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw">dyn</span> <span class="ident">Write</span>),
             <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;bzip2&quot;</span>)]</span>
-            <span class="ident">GenericZipWriter::Bzip2</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">w</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">w</span> <span class="kw">as</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw">dyn</span> <span class="ident">Write</span>),
-            <span class="ident">GenericZipWriter::Closed</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
+            <span class="ident">GenericZipWriter::Bzip2</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">w</span>) =&gt; <span class="prelude-val">Some</span>(<span class="ident">w</span> <span class="kw">as</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="kw">dyn</span> <span class="ident">Write</span>),
+            <span class="ident">GenericZipWriter::Closed</span> =&gt; <span class="prelude-val">None</span>,
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">is_closed</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">fn</span> <span class="ident">is_closed</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
-            <span class="ident">GenericZipWriter::Closed</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>,
+            <span class="ident">GenericZipWriter::Closed</span> =&gt; <span class="bool-val">true</span>,
+            <span class="kw">_</span> =&gt; <span class="bool-val">false</span>,
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">get_plain</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span> {
+    <span class="kw">fn</span> <span class="ident">get_plain</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
-            <span class="ident">GenericZipWriter::Storer</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">w</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">w</span>,
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(<span class="string">&quot;Should have switched to stored beforehand&quot;</span>),
+            <span class="ident">GenericZipWriter::Storer</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">w</span>) =&gt; <span class="ident">w</span>,
+            <span class="kw">_</span> =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Should have switched to stored beforehand&quot;</span>),
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">current_compression</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">CompressionMethod</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">current_compression</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">CompressionMethod</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
-            <span class="ident">GenericZipWriter::Storer</span>(..) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">CompressionMethod::Stored</span>),
+            <span class="ident">GenericZipWriter::Storer</span>(..) =&gt; <span class="prelude-val">Some</span>(<span class="ident">CompressionMethod::Stored</span>),
             <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">any</span>(
                 <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;deflate&quot;</span>,
                 <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;deflate-miniz&quot;</span>,
                 <span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;deflate-zlib&quot;</span>
             ))]</span>
-            <span class="ident">GenericZipWriter::Deflater</span>(..) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">CompressionMethod::Deflated</span>),
+            <span class="ident">GenericZipWriter::Deflater</span>(..) =&gt; <span class="prelude-val">Some</span>(<span class="ident">CompressionMethod::Deflated</span>),
             <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;bzip2&quot;</span>)]</span>
-            <span class="ident">GenericZipWriter::Bzip2</span>(..) <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">Some</span>(<span class="ident">CompressionMethod::Bzip2</span>),
-            <span class="ident">GenericZipWriter::Closed</span> <span class="op">=</span><span class="op">&gt;</span> <span class="prelude-val">None</span>,
+            <span class="ident">GenericZipWriter::Bzip2</span>(..) =&gt; <span class="prelude-val">Some</span>(<span class="ident">CompressionMethod::Bzip2</span>),
+            <span class="ident">GenericZipWriter::Closed</span> =&gt; <span class="prelude-val">None</span>,
         }
     }
 
-    <span class="kw">fn</span> <span class="ident">unwrap</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">W</span> {
+    <span class="kw">fn</span> <span class="ident">unwrap</span>(<span class="self">self</span>) -&gt; <span class="ident">W</span> {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">GenericZipWriter::Storer</span>(<span class="ident">w</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">w</span>,
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(<span class="string">&quot;Should have switched to stored beforehand&quot;</span>),
+            <span class="ident">GenericZipWriter::Storer</span>(<span class="ident">w</span>) =&gt; <span class="ident">w</span>,
+            <span class="kw">_</span> =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Should have switched to stored beforehand&quot;</span>),
         }
     }
 }
 
-<span class="kw">fn</span> <span class="ident">write_local_file_header</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">writer</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span>, <span class="ident">file</span>: <span class="kw-2">&amp;</span><span class="ident">ZipFileData</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ZipResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">write_local_file_header</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">writer</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span>, <span class="ident">file</span>: <span class="kw-2">&amp;</span><span class="ident">ZipFileData</span>) -&gt; <span class="ident">ZipResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
     <span class="comment">// local file header signature</span>
     <span class="ident">writer</span>.<span class="ident">write_u32</span>::<span class="op">&lt;</span><span class="ident">LittleEndian</span><span class="op">&gt;</span>(<span class="ident">spec::LOCAL_FILE_HEADER_SIGNATURE</span>)<span class="question-mark">?</span>;
     <span class="comment">// version needed to extract</span>
@@ -2208,7 +2207,7 @@
 <span class="kw">fn</span> <span class="ident">update_local_file_header</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Write</span> <span class="op">+</span> <span class="ident">io::Seek</span><span class="op">&gt;</span>(
     <span class="ident">writer</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span>,
     <span class="ident">file</span>: <span class="kw-2">&amp;</span><span class="ident">ZipFileData</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ZipResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+) -&gt; <span class="ident">ZipResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
     <span class="kw">const</span> <span class="ident">CRC32_OFFSET</span>: <span class="ident">u64</span> <span class="op">=</span> <span class="number">14</span>;
     <span class="ident">writer</span>.<span class="ident">seek</span>(<span class="ident">io::SeekFrom::Start</span>(<span class="ident">file</span>.<span class="ident">header_start</span> <span class="op">+</span> <span class="ident">CRC32_OFFSET</span>))<span class="question-mark">?</span>;
     <span class="ident">writer</span>.<span class="ident">write_u32</span>::<span class="op">&lt;</span><span class="ident">LittleEndian</span><span class="op">&gt;</span>(<span class="ident">file</span>.<span class="ident">crc32</span>)<span class="question-mark">?</span>;
@@ -2237,7 +2236,7 @@
     <span class="prelude-val">Ok</span>(())
 }
 
-<span class="kw">fn</span> <span class="ident">write_central_directory_header</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">writer</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span>, <span class="ident">file</span>: <span class="kw-2">&amp;</span><span class="ident">ZipFileData</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ZipResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">write_central_directory_header</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">writer</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span>, <span class="ident">file</span>: <span class="kw-2">&amp;</span><span class="ident">ZipFileData</span>) -&gt; <span class="ident">ZipResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
     <span class="comment">// buffer zip64 extra field to determine its variable length</span>
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">zip64_extra_field</span> <span class="op">=</span> [<span class="number">0</span>; <span class="number">28</span>];
     <span class="kw">let</span> <span class="ident">zip64_extra_field_length</span> <span class="op">=</span>
@@ -2307,7 +2306,7 @@
     <span class="prelude-val">Ok</span>(())
 }
 
-<span class="kw">fn</span> <span class="ident">validate_extra_data</span>(<span class="ident">file</span>: <span class="kw-2">&amp;</span><span class="ident">ZipFileData</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ZipResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">validate_extra_data</span>(<span class="ident">file</span>: <span class="kw-2">&amp;</span><span class="ident">ZipFileData</span>) -&gt; <span class="ident">ZipResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">data</span> <span class="op">=</span> <span class="ident">file</span>.<span class="ident">extra_field</span>.<span class="ident">as_slice</span>();
 
     <span class="kw">if</span> <span class="ident">data</span>.<span class="ident">len</span>() <span class="op">&gt;</span> <span class="number">0xFFFF</span> {
@@ -2329,7 +2328,7 @@
         <span class="kw">let</span> <span class="ident">size</span> <span class="op">=</span> <span class="ident">data</span>.<span class="ident">read_u16</span>::<span class="op">&lt;</span><span class="ident">LittleEndian</span><span class="op">&gt;</span>()<span class="question-mark">?</span> <span class="kw">as</span> <span class="ident">usize</span>;
         <span class="kw">let</span> <span class="ident">left</span> <span class="op">=</span> <span class="ident">left</span> <span class="op">-</span> <span class="number">4</span>;
 
-        <span class="kw">if</span> <span class="ident">kind</span> <span class="op">=</span><span class="op">=</span> <span class="number">0x0001</span> {
+        <span class="kw">if</span> <span class="ident">kind</span> <span class="op">==</span> <span class="number">0x0001</span> {
             <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">ZipError::Io</span>(<span class="ident">io::Error::new</span>(
                 <span class="ident">io::ErrorKind::Other</span>,
                 <span class="string">&quot;No custom ZIP64 extra data allowed&quot;</span>,
@@ -2338,7 +2337,7 @@
 
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;unreserved&quot;</span>))]</span>
         {
-            <span class="kw">if</span> <span class="ident">kind</span> <span class="op">&lt;</span><span class="op">=</span> <span class="number">31</span> <span class="op">|</span><span class="op">|</span> <span class="ident">EXTRA_FIELD_MAPPING</span>.<span class="ident">iter</span>().<span class="ident">any</span>(<span class="op">|</span><span class="kw-2">&amp;</span><span class="ident">mapped</span><span class="op">|</span> <span class="ident">mapped</span> <span class="op">=</span><span class="op">=</span> <span class="ident">kind</span>) {
+            <span class="kw">if</span> <span class="ident">kind</span> <span class="op">&lt;</span><span class="op">=</span> <span class="number">31</span> <span class="op">|</span><span class="op">|</span> <span class="ident">EXTRA_FIELD_MAPPING</span>.<span class="ident">iter</span>().<span class="ident">any</span>(<span class="op">|</span><span class="kw-2">&amp;</span><span class="ident">mapped</span><span class="op">|</span> <span class="ident">mapped</span> <span class="op">==</span> <span class="ident">kind</span>) {
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">ZipError::Io</span>(<span class="ident">io::Error::new</span>(
                     <span class="ident">io::ErrorKind::Other</span>,
                     <span class="macro">format!</span>(
@@ -2362,7 +2361,7 @@
     <span class="prelude-val">Ok</span>(())
 }
 
-<span class="kw">fn</span> <span class="ident">write_local_zip64_extra_field</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">writer</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span>, <span class="ident">file</span>: <span class="kw-2">&amp;</span><span class="ident">ZipFileData</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ZipResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">write_local_zip64_extra_field</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">writer</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span>, <span class="ident">file</span>: <span class="kw-2">&amp;</span><span class="ident">ZipFileData</span>) -&gt; <span class="ident">ZipResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
     <span class="comment">// This entry in the Local header MUST include BOTH original</span>
     <span class="comment">// and compressed file size fields.</span>
     <span class="ident">writer</span>.<span class="ident">write_u16</span>::<span class="op">&lt;</span><span class="ident">LittleEndian</span><span class="op">&gt;</span>(<span class="number">0x0001</span>)<span class="question-mark">?</span>;
@@ -2377,7 +2376,7 @@
 <span class="kw">fn</span> <span class="ident">update_local_zip64_extra_field</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Write</span> <span class="op">+</span> <span class="ident">io::Seek</span><span class="op">&gt;</span>(
     <span class="ident">writer</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span>,
     <span class="ident">file</span>: <span class="kw-2">&amp;</span><span class="ident">ZipFileData</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ZipResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+) -&gt; <span class="ident">ZipResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">zip64_extra_field</span> <span class="op">=</span> <span class="ident">file</span>.<span class="ident">header_start</span> <span class="op">+</span> <span class="number">30</span> <span class="op">+</span> <span class="ident">file</span>.<span class="ident">file_name</span>.<span class="ident">as_bytes</span>().<span class="ident">len</span>() <span class="kw">as</span> <span class="ident">u64</span>;
     <span class="ident">writer</span>.<span class="ident">seek</span>(<span class="ident">io::SeekFrom::Start</span>(<span class="ident">zip64_extra_field</span> <span class="op">+</span> <span class="number">4</span>))<span class="question-mark">?</span>;
     <span class="ident">writer</span>.<span class="ident">write_u64</span>::<span class="op">&lt;</span><span class="ident">LittleEndian</span><span class="op">&gt;</span>(<span class="ident">file</span>.<span class="ident">uncompressed_size</span>)<span class="question-mark">?</span>;
@@ -2387,7 +2386,7 @@
     <span class="prelude-val">Ok</span>(())
 }
 
-<span class="kw">fn</span> <span class="ident">write_central_zip64_extra_field</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">writer</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span>, <span class="ident">file</span>: <span class="kw-2">&amp;</span><span class="ident">ZipFileData</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ZipResult</span><span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">write_central_zip64_extra_field</span><span class="op">&lt;</span><span class="ident">T</span>: <span class="ident">Write</span><span class="op">&gt;</span>(<span class="ident">writer</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span>, <span class="ident">file</span>: <span class="kw-2">&amp;</span><span class="ident">ZipFileData</span>) -&gt; <span class="ident">ZipResult</span><span class="op">&lt;</span><span class="ident">u16</span><span class="op">&gt;</span> {
     <span class="comment">// The order of the fields in the zip64 extended</span>
     <span class="comment">// information record is fixed, but the fields MUST</span>
     <span class="comment">// only appear if the corresponding Local or Central</span>
@@ -2425,7 +2424,7 @@
     <span class="prelude-val">Ok</span>(<span class="ident">size</span>)
 }
 
-<span class="kw">fn</span> <span class="ident">path_to_string</span>(<span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">std::path::Path</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">String</span> {
+<span class="kw">fn</span> <span class="ident">path_to_string</span>(<span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">std::path::Path</span>) -&gt; <span class="ident">String</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">path_str</span> <span class="op">=</span> <span class="ident">String::new</span>();
     <span class="kw">for</span> <span class="ident">component</span> <span class="kw">in</span> <span class="ident">path</span>.<span class="ident">components</span>() {
         <span class="kw">if</span> <span class="kw">let</span> <span class="ident">std::path::Component::Normal</span>(<span class="ident">os_str</span>) <span class="op">=</span> <span class="ident">component</span> {
@@ -2531,7 +2530,7 @@
     <span class="number">0x5455</span>, <span class="number">0x554e</span>, <span class="number">0x5855</span>, <span class="number">0x6375</span>, <span class="number">0x6542</span>, <span class="number">0x7075</span>, <span class="number">0x756e</span>, <span class="number">0x7855</span>, <span class="number">0xa11e</span>, <span class="number">0xa220</span>, <span class="number">0xfd4a</span>, <span class="number">0x9901</span>,
     <span class="number">0x9902</span>,
 ];
-</pre></div>
+</code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="zip" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
     <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script>
 </body></html>

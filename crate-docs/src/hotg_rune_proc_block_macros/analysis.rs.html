@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `crates&#x2F;proc-block-macros&#x2F;src&#x2F;analysis.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>analysis.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../hotg_rune_proc_block_macros/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `crates&#x2F;proc-block-macros&#x2F;src&#x2F;analysis.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>analysis.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../hotg_rune_proc_block_macros/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -669,8 +669,7 @@
 <span id="669">669</span>
 <span id="670">670</span>
 <span id="671">671</span>
-</pre><pre class="rust">
-<span class="kw">use</span> <span class="ident">std::str::FromStr</span>;
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::str::FromStr</span>;
 <span class="kw">use</span> <span class="ident">proc_macro2</span>::{<span class="ident">Ident</span>, <span class="ident">Group</span>};
 <span class="kw">use</span> <span class="ident">hotg_rune_core::ElementType</span>;
 <span class="kw">use</span> <span class="ident">quote::quote</span>;
@@ -694,14 +693,14 @@
     },
 };
 
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">analyse</span>(<span class="ident">input</span>: <span class="kw-2">&amp;</span><span class="ident">DeriveInput</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">DeriveOutput</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">analyse</span>(<span class="ident">input</span>: <span class="kw-2">&amp;</span><span class="ident">DeriveInput</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">DeriveOutput</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">type_name</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">ident</span>.<span class="ident">clone</span>();
     <span class="kw">let</span> <span class="ident">exports</span> <span class="op">=</span> <span class="ident">export_path</span>(<span class="kw-2">&amp;</span><span class="ident">input</span>.<span class="ident">attrs</span>)<span class="question-mark">?</span>;
 
     <span class="kw">let</span> (<span class="ident">description</span>, <span class="ident">available_transforms</span>, <span class="ident">transform_assertions</span>) <span class="op">=</span>
         <span class="ident">analyse_struct_attributes</span>(<span class="kw-2">&amp;</span><span class="ident">input</span>.<span class="ident">ident</span>, <span class="kw-2">&amp;</span><span class="ident">exports</span>, <span class="kw-2">&amp;</span><span class="ident">input</span>.<span class="ident">attrs</span>)<span class="question-mark">?</span>;
 
-    <span class="kw">let</span> (<span class="ident">setters</span>, <span class="ident">setter_assertions</span>) <span class="op">=</span> <span class="ident">analyse_properties</span>(<span class="kw-2">&amp;</span><span class="ident">input</span>)<span class="question-mark">?</span>;
+    <span class="kw">let</span> (<span class="ident">setters</span>, <span class="ident">setter_assertions</span>) <span class="op">=</span> <span class="ident">analyse_properties</span>(<span class="ident">input</span>)<span class="question-mark">?</span>;
 
     <span class="kw">let</span> <span class="ident">descriptor</span> <span class="op">=</span> <span class="ident">ProcBlockDescriptor</span> {
         <span class="ident">type_name</span>: <span class="ident">type_name</span>.<span class="ident">to_string</span>().<span class="ident">into</span>(),
@@ -728,7 +727,7 @@
     <span class="ident">proc_block_type</span>: <span class="kw-2">&amp;</span><span class="ident">Ident</span>,
     <span class="ident">exports</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>,
     <span class="ident">attrs</span>: <span class="kw-2">&amp;</span>[<span class="ident">syn::Attribute</span>],
-) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>
+) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>
     (
         <span class="ident">String</span>,
         <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">TransformDescriptor</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;</span><span class="op">&gt;</span>,
@@ -767,19 +766,19 @@
     ))
 }
 
-<span class="kw">fn</span> <span class="ident">to_rust_tensor</span>(<span class="ident">exports</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>, <span class="ident">ty</span>: <span class="kw-2">&amp;</span><span class="ident">ElementType</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">syn::Type</span> {
+<span class="kw">fn</span> <span class="ident">to_rust_tensor</span>(<span class="ident">exports</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>, <span class="ident">ty</span>: <span class="kw-2">&amp;</span><span class="ident">ElementType</span>) -&gt; <span class="ident">syn::Type</span> {
     <span class="kw">let</span> <span class="ident">element_type</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">ty</span> {
-        <span class="ident">ElementType::U8</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote!</span>(<span class="ident">u8</span>),
-        <span class="ident">ElementType::I8</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote!</span>(<span class="ident">i8</span>),
-        <span class="ident">ElementType::U16</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote!</span>(<span class="ident">u16</span>),
-        <span class="ident">ElementType::I16</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote!</span>(<span class="ident">i16</span>),
-        <span class="ident">ElementType::U32</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote!</span>(<span class="ident">u32</span>),
-        <span class="ident">ElementType::F32</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote!</span>(<span class="ident">f32</span>),
-        <span class="ident">ElementType::I32</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote!</span>(<span class="ident">i32</span>),
-        <span class="ident">ElementType::U64</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote!</span>(<span class="ident">u64</span>),
-        <span class="ident">ElementType::F64</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote!</span>(<span class="ident">f64</span>),
-        <span class="ident">ElementType::I64</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote!</span>(<span class="ident">i64</span>),
-        <span class="ident">ElementType::String</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro">quote!</span>(#<span class="ident">exports::Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span>, <span class="ident">str</span><span class="op">&gt;</span>),
+        <span class="ident">ElementType::U8</span> =&gt; <span class="macro">quote!</span>(<span class="ident">u8</span>),
+        <span class="ident">ElementType::I8</span> =&gt; <span class="macro">quote!</span>(<span class="ident">i8</span>),
+        <span class="ident">ElementType::U16</span> =&gt; <span class="macro">quote!</span>(<span class="ident">u16</span>),
+        <span class="ident">ElementType::I16</span> =&gt; <span class="macro">quote!</span>(<span class="ident">i16</span>),
+        <span class="ident">ElementType::U32</span> =&gt; <span class="macro">quote!</span>(<span class="ident">u32</span>),
+        <span class="ident">ElementType::F32</span> =&gt; <span class="macro">quote!</span>(<span class="ident">f32</span>),
+        <span class="ident">ElementType::I32</span> =&gt; <span class="macro">quote!</span>(<span class="ident">i32</span>),
+        <span class="ident">ElementType::U64</span> =&gt; <span class="macro">quote!</span>(<span class="ident">u64</span>),
+        <span class="ident">ElementType::F64</span> =&gt; <span class="macro">quote!</span>(<span class="ident">f64</span>),
+        <span class="ident">ElementType::I64</span> =&gt; <span class="macro">quote!</span>(<span class="ident">i64</span>),
+        <span class="ident">ElementType::String</span> =&gt; <span class="macro">quote!</span>(#<span class="ident">exports::Cow</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span>, <span class="ident">str</span><span class="op">&gt;</span>),
     };
 
     <span class="ident">syn::parse2</span>(<span class="macro">quote!</span>(#<span class="ident">exports::Tensor</span><span class="op">&lt;</span>#<span class="ident">element_type</span><span class="op">&gt;</span>))
@@ -788,12 +787,12 @@
 
 <span class="kw">fn</span> <span class="ident">transforms</span>(
     <span class="ident">attrs</span>: <span class="kw-2">&amp;</span>[<span class="ident">Attribute</span>],
-) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">TransformDescriptor</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">TransformDescriptor</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">transforms</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
 
     <span class="kw">for</span> <span class="ident">attr</span> <span class="kw">in</span> <span class="ident">attrs</span> {
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">name</span>) <span class="op">=</span> <span class="ident">attr</span>.<span class="ident">path</span>.<span class="ident">get_ident</span>() {
-            <span class="kw">if</span> <span class="ident">name</span> <span class="op">=</span><span class="op">=</span> <span class="string">&quot;transform&quot;</span> {
+            <span class="kw">if</span> <span class="ident">name</span> <span class="op">==</span> <span class="string">&quot;transform&quot;</span> {
                 <span class="kw">let</span> <span class="ident">parenthesized_key_values</span>: <span class="ident">Group</span> <span class="op">=</span>
                     <span class="ident">syn::parse2</span>(<span class="ident">attr</span>.<span class="ident">tokens</span>.<span class="ident">clone</span>())<span class="question-mark">?</span>;
 
@@ -811,13 +810,13 @@
 <span class="doccomment">/// `#[transform(inputs =..., outputs = ...)]`.</span>
 <span class="kw">fn</span> <span class="ident">parse_transform_descriptor</span>(
     <span class="ident">tokens</span>: <span class="ident">ParseStream</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">TransformDescriptor</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">TransformDescriptor</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">ident</span>: <span class="ident">Ident</span> <span class="op">=</span> <span class="ident">tokens</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>;
     <span class="kw">if</span> <span class="ident">ident</span> <span class="op">!</span><span class="op">=</span> <span class="string">&quot;inputs&quot;</span> {
         <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::new</span>(<span class="ident">ident</span>.<span class="ident">span</span>(), <span class="string">&quot;Expected \&quot;inputs\&quot;&quot;</span>));
     }
     <span class="kw">let</span> <span class="kw">_</span>: <span class="macro">Token!</span>[<span class="op">=</span>] <span class="op">=</span> <span class="ident">tokens</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="ident">inputs</span> <span class="op">=</span> <span class="ident">parse_tensor_descriptors</span>(<span class="kw-2">&amp;</span><span class="ident">tokens</span>)<span class="question-mark">?</span>;
+    <span class="kw">let</span> <span class="ident">inputs</span> <span class="op">=</span> <span class="ident">parse_tensor_descriptors</span>(<span class="ident">tokens</span>)<span class="question-mark">?</span>;
     <span class="kw">let</span> <span class="kw">_</span>: <span class="macro">Token!</span>[,] <span class="op">=</span> <span class="ident">tokens</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>;
 
     <span class="kw">let</span> <span class="ident">ident</span>: <span class="ident">Ident</span> <span class="op">=</span> <span class="ident">tokens</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>;
@@ -825,7 +824,7 @@
         <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::new</span>(<span class="ident">ident</span>.<span class="ident">span</span>(), <span class="string">&quot;Expected \&quot;outputs\&quot;&quot;</span>));
     }
     <span class="kw">let</span> <span class="kw">_</span>: <span class="macro">Token!</span>[<span class="op">=</span>] <span class="op">=</span> <span class="ident">tokens</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>;
-    <span class="kw">let</span> <span class="ident">outputs</span> <span class="op">=</span> <span class="ident">parse_tensor_descriptors</span>(<span class="kw-2">&amp;</span><span class="ident">tokens</span>)<span class="question-mark">?</span>;
+    <span class="kw">let</span> <span class="ident">outputs</span> <span class="op">=</span> <span class="ident">parse_tensor_descriptors</span>(<span class="ident">tokens</span>)<span class="question-mark">?</span>;
 
     <span class="prelude-val">Ok</span>(<span class="ident">TransformDescriptor</span> { <span class="ident">inputs</span>, <span class="ident">outputs</span> })
 }
@@ -834,7 +833,7 @@
 <span class="doccomment">/// descriptors inside parens (`([f32; 1], [u8; 1024])`).</span>
 <span class="kw">fn</span> <span class="ident">parse_tensor_descriptors</span>(
     <span class="ident">tokens</span>: <span class="ident">ParseStream</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">TensorDescriptors</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">TensorDescriptors</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
     <span class="kw">if</span> <span class="ident">tokens</span>.<span class="ident">peek</span>(<span class="ident">syn::token::Paren</span>) {
         <span class="comment">// We&#39;ve got multiple comma-separated tensor descriptors in a tuple.</span>
         <span class="kw">let</span> <span class="ident">inner</span>;
@@ -856,7 +855,7 @@
 
 <span class="kw">fn</span> <span class="ident">parse_tensor_descriptor</span>(
     <span class="ident">input</span>: <span class="ident">ParseStream</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">TensorDescriptor</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">TensorDescriptor</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
     <span class="kw">if</span> <span class="ident">input</span>.<span class="ident">peek</span>(<span class="ident">syn::token::Bracket</span>) {
         <span class="kw">let</span> <span class="ident">TypeArray</span> { <span class="ident">elem</span>, <span class="ident">len</span>, .. } <span class="op">=</span> <span class="ident">input</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>;
 
@@ -864,15 +863,15 @@
         <span class="kw">let</span> <span class="ident">dimensions</span> <span class="op">=</span> <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">len</span> {
             <span class="ident">syn::Expr::Lit</span>(<span class="ident">ExprLit</span> {
                 <span class="ident">lit</span>: <span class="ident">Lit::Int</span>(<span class="ident">int</span>), ..
-            }) <span class="op">=</span><span class="op">&gt;</span> {
+            }) =&gt; {
                 <span class="kw">let</span> <span class="ident">rank</span>: <span class="ident">usize</span> <span class="op">=</span> <span class="ident">int</span>.<span class="ident">base10_parse</span>()<span class="question-mark">?</span>;
                 <span class="ident">Dimensions::from</span>(<span class="macro">vec!</span>[<span class="ident">Dimension::Any</span>; <span class="ident">rank</span>])
             },
-            <span class="ident">syn::Expr::Verbatim</span>(<span class="ident">v</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="ident">syn::Expr::Verbatim</span>(<span class="ident">v</span>) =&gt; {
                 <span class="kw">let</span> <span class="kw">_</span>: <span class="macro">Token!</span>[<span class="kw">_</span>] <span class="op">=</span> <span class="ident">syn::parse2</span>(<span class="ident">v</span>.<span class="ident">clone</span>())<span class="question-mark">?</span>;
                 <span class="ident">Dimensions::Arbitrary</span>
             },
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {
+            <span class="kw">_</span> =&gt; {
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::new</span>(
                     <span class="ident">len</span>.<span class="ident">span</span>(),
                     <span class="string">&quot;Expected a constant length&quot;</span>,
@@ -893,9 +892,9 @@
     }
 }
 
-<span class="kw">fn</span> <span class="ident">known_type_from_syn_type</span>(<span class="ident">ty</span>: <span class="kw-2">&amp;</span><span class="ident">syn::Type</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ElementType</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">known_type_from_syn_type</span>(<span class="ident">ty</span>: <span class="kw-2">&amp;</span><span class="ident">syn::Type</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ElementType</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
     <span class="kw">match</span> <span class="ident">ty</span> {
-        <span class="ident">syn::Type::Path</span>(<span class="ident">p</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">syn::Type::Path</span>(<span class="ident">p</span>) =&gt; {
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">id</span>) <span class="op">=</span> <span class="ident">p</span>.<span class="ident">path</span>.<span class="ident">get_ident</span>() {
                 <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">id</span>.<span class="ident">to_string</span>();
 
@@ -903,24 +902,24 @@
                     .<span class="ident">map_err</span>(<span class="op">|</span><span class="ident">e</span><span class="op">|</span> <span class="ident">Error::new</span>(<span class="ident">ty</span>.<span class="ident">span</span>(), <span class="ident">e</span>));
             }
         },
-        <span class="ident">syn::Type::Reference</span>(<span class="ident">TypeReference</span> { <span class="ident">elem</span>, .. }) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="kw-2">*</span><span class="ident">elem</span> {
-            <span class="ident">syn::Type::Path</span>(<span class="ident">TypePath</span> { <span class="ident">path</span>, .. }) <span class="kw">if</span> <span class="ident">path</span>.<span class="ident">is_ident</span>(<span class="string">&quot;str&quot;</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="ident">syn::Type::Reference</span>(<span class="ident">TypeReference</span> { <span class="ident">elem</span>, .. }) =&gt; <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="kw-2">*</span><span class="ident">elem</span> {
+            <span class="ident">syn::Type::Path</span>(<span class="ident">TypePath</span> { <span class="ident">path</span>, .. }) <span class="kw">if</span> <span class="ident">path</span>.<span class="ident">is_ident</span>(<span class="string">&quot;str&quot;</span>) =&gt; {
                 <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="ident">ElementType::String</span>);
             },
-            <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {},
+            <span class="kw">_</span> =&gt; {},
         },
-        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> {},
+        <span class="kw">_</span> =&gt; {},
     }
 
     <span class="prelude-val">Err</span>(<span class="ident">Error::new</span>(<span class="ident">ty</span>.<span class="ident">span</span>(), <span class="string">&quot;Unknown tensor element type&quot;</span>))
 }
 
-<span class="kw">fn</span> <span class="ident">doc_comments</span>(<span class="ident">attrs</span>: <span class="kw-2">&amp;</span>[<span class="ident">Attribute</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">doc_comments</span>(<span class="ident">attrs</span>: <span class="kw-2">&amp;</span>[<span class="ident">Attribute</span>]) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">docs</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
 
     <span class="kw">for</span> <span class="ident">attr</span> <span class="kw">in</span> <span class="ident">attrs</span> {
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">name</span>) <span class="op">=</span> <span class="ident">attr</span>.<span class="ident">path</span>.<span class="ident">get_ident</span>() {
-            <span class="kw">if</span> <span class="ident">name</span> <span class="op">=</span><span class="op">=</span> <span class="string">&quot;doc&quot;</span> {
+            <span class="kw">if</span> <span class="ident">name</span> <span class="op">==</span> <span class="string">&quot;doc&quot;</span> {
                 <span class="kw">let</span> <span class="ident">DocAttr</span>(<span class="ident">doc</span>) <span class="op">=</span> <span class="ident">syn::parse2</span>(<span class="ident">attr</span>.<span class="ident">tokens</span>.<span class="ident">clone</span>())<span class="question-mark">?</span>;
                 <span class="ident">docs</span>.<span class="ident">push</span>(<span class="ident">doc</span>);
             }
@@ -930,7 +929,7 @@
     <span class="prelude-val">Ok</span>(<span class="ident">concatenate_doc_comments</span>(<span class="kw-2">&amp;</span><span class="ident">docs</span>))
 }
 
-<span class="kw">fn</span> <span class="ident">concatenate_doc_comments</span>(<span class="ident">docs</span>: <span class="kw-2">&amp;</span>[<span class="ident">String</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">String</span> {
+<span class="kw">fn</span> <span class="ident">concatenate_doc_comments</span>(<span class="ident">docs</span>: <span class="kw-2">&amp;</span>[<span class="ident">String</span>]) -&gt; <span class="ident">String</span> {
     <span class="ident">docs</span>.<span class="ident">iter</span>().<span class="ident">map</span>(<span class="op">|</span><span class="ident">s</span><span class="op">|</span> <span class="ident">remove_leading_space</span>(<span class="ident">s</span>)).<span class="ident">fold</span>(
         <span class="ident">String::new</span>(),
         <span class="op">|</span><span class="kw-2">mut</span> <span class="ident">buffer</span>, <span class="ident">line</span><span class="op">|</span> {
@@ -946,7 +945,7 @@
 <span class="kw">struct</span> <span class="ident">DocAttr</span>(<span class="ident">String</span>);
 
 <span class="kw">impl</span> <span class="ident">Parse</span> <span class="kw">for</span> <span class="ident">DocAttr</span> {
-    <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">input</span>: <span class="ident">ParseStream</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">input</span>: <span class="ident">ParseStream</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">span</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">span</span>();
         <span class="kw">let</span> <span class="kw">_</span>: <span class="macro">syn::Token!</span>[<span class="op">=</span>] <span class="op">=</span> <span class="ident">input</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>;
         <span class="kw">let</span> <span class="ident">docs</span>: <span class="ident">LitStr</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>;
@@ -959,14 +958,14 @@
     }
 }
 
-<span class="kw">fn</span> <span class="ident">remove_leading_space</span>(<span class="ident">s</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident">str</span> { <span class="ident">s</span>.<span class="ident">strip_prefix</span>(<span class="string">&#39; &#39;</span>).<span class="ident">unwrap_or</span>(<span class="ident">s</span>) }
+<span class="kw">fn</span> <span class="ident">remove_leading_space</span>(<span class="ident">s</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">str</span> { <span class="ident">s</span>.<span class="ident">strip_prefix</span>(<span class="string">&#39; &#39;</span>).<span class="ident">unwrap_or</span>(<span class="ident">s</span>) }
 
 <span class="kw">fn</span> <span class="ident">analyse_properties</span>(
     <span class="ident">input</span>: <span class="kw-2">&amp;</span><span class="ident">DeriveInput</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">Setters</span>, <span class="ident">SetterAssertions</span>), <span class="ident">Error</span><span class="op">&gt;</span> {
+) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(<span class="ident">Setters</span>, <span class="ident">SetterAssertions</span>), <span class="ident">Error</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">input</span>.<span class="ident">data</span> {
-        <span class="ident">syn::Data::Struct</span>(<span class="ident">s</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">s</span>,
-        <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::new</span>(<span class="ident">input</span>.<span class="ident">span</span>(), <span class="string">&quot;&quot;</span>)),
+        <span class="ident">syn::Data::Struct</span>(<span class="ident">s</span>) =&gt; <span class="ident">s</span>,
+        <span class="kw">_</span> =&gt; <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::new</span>(<span class="ident">input</span>.<span class="ident">span</span>(), <span class="string">&quot;&quot;</span>)),
     };
 
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">setters</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
@@ -1006,7 +1005,7 @@
     <span class="ident">possible_types</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">syn::Type</span><span class="op">&gt;</span>,
 }
 
-<span class="kw">fn</span> <span class="ident">parse_parameter</span>(<span class="ident">field</span>: <span class="kw-2">&amp;</span><span class="ident">syn::Field</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ParsedField</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">parse_parameter</span>(<span class="ident">field</span>: <span class="kw-2">&amp;</span><span class="ident">syn::Field</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ParsedField</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">attrs</span> <span class="op">=</span> <span class="ident">field_attributes</span>(<span class="kw-2">&amp;</span><span class="ident">field</span>.<span class="ident">attrs</span>)<span class="question-mark">?</span>;
 
     <span class="kw">let</span> <span class="ident">is_skipped</span> <span class="op">=</span>
@@ -1016,8 +1015,8 @@
     }
 
     <span class="kw">let</span> <span class="ident">property</span> <span class="op">=</span> <span class="kw">match</span> <span class="kw-2">&amp;</span><span class="ident">field</span>.<span class="ident">ident</span> {
-        <span class="prelude-val">Some</span>(<span class="ident">id</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">id</span>.<span class="ident">clone</span>(),
-        <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> {
+        <span class="prelude-val">Some</span>(<span class="ident">id</span>) =&gt; <span class="ident">id</span>.<span class="ident">clone</span>(),
+        <span class="prelude-val">None</span> =&gt; {
             <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::new</span>(<span class="ident">field</span>.<span class="ident">span</span>(), <span class="string">&quot;All fields must be named&quot;</span>))
         },
     };
@@ -1034,7 +1033,7 @@
     }))
 }
 
-<span class="kw">fn</span> <span class="ident">field_attributes</span>(<span class="ident">attrs</span>: <span class="kw-2">&amp;</span>[<span class="ident">Attribute</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">FieldAttribute</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">field_attributes</span>(<span class="ident">attrs</span>: <span class="kw-2">&amp;</span>[<span class="ident">Attribute</span>]) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">FieldAttribute</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">pairs</span> <span class="op">=</span> <span class="ident">Vec::new</span>();
 
     <span class="kw">for</span> <span class="ident">attr</span> <span class="kw">in</span> <span class="ident">attrs</span> {
@@ -1052,14 +1051,14 @@
 }
 
 <span class="kw">impl</span> <span class="ident">Parse</span> <span class="kw">for</span> <span class="ident">FieldAttribute</span> {
-    <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">input</span>: <span class="ident">ParseStream</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">input</span>: <span class="ident">ParseStream</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">ident</span>: <span class="ident">Ident</span> <span class="op">=</span> <span class="ident">input</span>.<span class="ident">parse</span>()<span class="question-mark">?</span>;
 
         <span class="kw">if</span> <span class="ident">input</span>.<span class="ident">peek</span>(<span class="macro">Token!</span>[<span class="op">=</span>]) {
             <span class="macro">todo!</span>(<span class="string">&quot;Handle key=value attributes: {:?}&quot;</span>, <span class="ident">input</span>);
         }
 
-        <span class="kw">if</span> <span class="ident">ident</span> <span class="op">=</span><span class="op">=</span> <span class="string">&quot;skip&quot;</span> {
+        <span class="kw">if</span> <span class="ident">ident</span> <span class="op">==</span> <span class="string">&quot;skip&quot;</span> {
             <span class="prelude-val">Ok</span>(<span class="ident">FieldAttribute::Skipped</span>)
         } <span class="kw">else</span> {
             <span class="macro">todo!</span>(<span class="string">&quot;Handle #[proc_block({})]&quot;</span>, <span class="ident">ident</span>)
@@ -1070,7 +1069,7 @@
 <span class="kw">struct</span> <span class="ident">NameValuePairs</span>(<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">FieldAttribute</span><span class="op">&gt;</span>);
 
 <span class="kw">impl</span> <span class="ident">Parse</span> <span class="kw">for</span> <span class="ident">NameValuePairs</span> {
-    <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">input</span>: <span class="ident">ParseStream</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">syn::Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">parse</span>(<span class="ident">input</span>: <span class="ident">ParseStream</span>) -&gt; <span class="ident">syn::Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">pairs</span>: <span class="ident">Punctuated</span><span class="op">&lt;</span><span class="ident">FieldAttribute</span>, <span class="macro">Token!</span>[,]<span class="op">&gt;</span> <span class="op">=</span>
             <span class="ident">Punctuated::parse_terminated</span>(<span class="ident">input</span>)<span class="question-mark">?</span>;
 
@@ -1081,7 +1080,7 @@
 <span class="kw">fn</span> <span class="ident">make_custom_section</span>(
     <span class="ident">proc_block_type</span>: <span class="kw-2">&amp;</span><span class="ident">Ident</span>,
     <span class="ident">descriptor</span>: <span class="kw-2">&amp;</span><span class="ident">ProcBlockDescriptor</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>,
-) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">CustomSection</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">CustomSection</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">payload</span> <span class="op">=</span>
         <span class="ident">serde_json::to_vec</span>(<span class="ident">descriptor</span>).<span class="ident">expect</span>(<span class="string">&quot;Serializing should never fail&quot;</span>);
 
@@ -1091,7 +1090,7 @@
     })
 }
 
-<span class="kw">fn</span> <span class="ident">export_path</span>(<span class="ident">_attrs</span>: <span class="kw-2">&amp;</span>[<span class="ident">syn::Attribute</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Path</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
+<span class="kw">fn</span> <span class="ident">export_path</span>(<span class="ident">_attrs</span>: <span class="kw-2">&amp;</span>[<span class="ident">syn::Attribute</span>]) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Path</span>, <span class="ident">Error</span><span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">default</span> <span class="op">=</span> <span class="ident">syn::parse_str</span>(<span class="string">&quot;hotg_rune_proc_blocks::internal&quot;</span>)
         .<span class="ident">expect</span>(<span class="string">&quot;Hard-coded values should always parse&quot;</span>);
 
@@ -1236,53 +1235,53 @@
     <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
 
     <span class="macro">macro_rules!</span> <span class="ident">parse_tensor_type</span> {
-        (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">rest</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">rest</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) =&gt; {
             <span class="macro">parse_tensor_type!</span>(@<span class="ident">collect</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>, [] $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">rest</span>)<span class="kw-2">*</span>);
         };
-        (@<span class="ident">collect</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span>, [$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ty</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>] <span class="op">=</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">should_be</span>:<span class="ident">expr</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        (@<span class="ident">collect</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span>, [$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ty</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>] =&gt; <span class="macro-nonterminal">$</span><span class="macro-nonterminal">should_be</span>:<span class="ident">expr</span>) =&gt; {
             <span class="attribute">#[<span class="ident">test</span>]</span>
             <span class="kw">fn</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>() {
                 <span class="kw">let</span> <span class="ident">tokens</span> <span class="op">=</span> <span class="macro">quote!</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ty</span>)<span class="kw-2">*</span>);
 
                 <span class="kw">let</span> <span class="ident">got</span>: <span class="ident">TensorDescriptor</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">parse_tensor_descriptor</span>.<span class="ident">parse2</span>(<span class="ident">tokens</span>.<span class="ident">clone</span>()) {
-                    <span class="prelude-val">Ok</span>(<span class="ident">d</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">d</span>,
-                    <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(<span class="string">&quot;Unable to parse \&quot;{}\&quot;: {}&quot;</span>, <span class="ident">tokens</span>.<span class="ident">to_string</span>(), <span class="ident">e</span>),
+                    <span class="prelude-val">Ok</span>(<span class="ident">d</span>) =&gt; <span class="ident">d</span>,
+                    <span class="prelude-val">Err</span>(<span class="ident">e</span>) =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Unable to parse \&quot;{}\&quot;: {}&quot;</span>, <span class="ident">tokens</span>.<span class="ident">to_string</span>(), <span class="ident">e</span>),
                 };
 
                 <span class="macro">assert_eq!</span>(<span class="ident">got</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">should_be</span>);
             }
         };
-        (@<span class="ident">collect</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span>, [$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ty</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>] <span class="macro-nonterminal">$</span><span class="macro-nonterminal">next</span>:<span class="ident">tt</span> $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">rest</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        (@<span class="ident">collect</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span>, [$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ty</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>] <span class="macro-nonterminal">$</span><span class="macro-nonterminal">next</span>:<span class="ident">tt</span> $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">rest</span>:<span class="ident">tt</span>)<span class="kw-2">*</span>) =&gt; {
             <span class="macro">parse_tensor_type!</span>(@<span class="ident">collect</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>, [$(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">ty</span>)<span class="op">*</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">next</span>] $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">rest</span>)<span class="kw-2">*</span>);
         };
     }
 
-    <span class="macro">parse_tensor_type!</span>(<span class="ident">one_dimension_tensor</span>, <span class="ident">i16</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">TensorDescriptor</span> {
+    <span class="macro">parse_tensor_type!</span>(<span class="ident">one_dimension_tensor</span>, <span class="ident">i16</span> =&gt; <span class="ident">TensorDescriptor</span> {
        <span class="ident">element_type</span>: <span class="ident">ElementType::I16</span>,
        <span class="ident">dimensions</span>: <span class="macro">vec!</span>[<span class="ident">Dimension::Value</span>(<span class="number">1</span>)].<span class="ident">into</span>(),
     });
-    <span class="macro">parse_tensor_type!</span>(<span class="ident">parse_f32_rank_3</span>, [<span class="ident">f32</span>; <span class="number">3</span>] <span class="op">=</span><span class="op">&gt;</span> <span class="ident">TensorDescriptor</span> {
+    <span class="macro">parse_tensor_type!</span>(<span class="ident">parse_f32_rank_3</span>, [<span class="ident">f32</span>; <span class="number">3</span>] =&gt; <span class="ident">TensorDescriptor</span> {
        <span class="ident">element_type</span>: <span class="ident">ElementType::F32</span>,
        <span class="ident">dimensions</span>: <span class="macro">vec!</span>[<span class="ident">Dimension::Any</span>, <span class="ident">Dimension::Any</span>, <span class="ident">Dimension::Any</span>].<span class="ident">into</span>(),
     });
-    <span class="macro">parse_tensor_type!</span>(<span class="ident">parse_arbitrary_length</span>, [<span class="ident">u8</span>; <span class="kw">_</span>] <span class="op">=</span><span class="op">&gt;</span> <span class="ident">TensorDescriptor</span> {
+    <span class="macro">parse_tensor_type!</span>(<span class="ident">parse_arbitrary_length</span>, [<span class="ident">u8</span>; <span class="kw">_</span>] =&gt; <span class="ident">TensorDescriptor</span> {
        <span class="ident">element_type</span>: <span class="ident">ElementType::U8</span>,
        <span class="ident">dimensions</span>: <span class="ident">Dimensions::Arbitrary</span>,
     });
-    <span class="macro">parse_tensor_type!</span>(<span class="ident">parse_str_type</span>, <span class="ident">utf8</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">TensorDescriptor</span> {
+    <span class="macro">parse_tensor_type!</span>(<span class="ident">parse_str_type</span>, <span class="ident">utf8</span> =&gt; <span class="ident">TensorDescriptor</span> {
        <span class="ident">element_type</span>: <span class="ident">ElementType::String</span>,
        <span class="ident">dimensions</span>: <span class="macro">vec!</span>[<span class="ident">Dimension::Value</span>(<span class="number">1</span>)].<span class="ident">into</span>(),
     });
 
     <span class="macro">macro_rules!</span> <span class="ident">parse_transform_attribute</span> {
-        (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span>, <span class="attribute">#[<span class="ident">transform</span>( $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">attr</span>:<span class="ident">tt</span>)<span class="op">*</span> )]</span> <span class="op">=</span><span class="op">&gt;</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">should_be</span>:<span class="ident">expr</span> $(,)<span class="question-mark">?</span>) <span class="op">=</span><span class="op">&gt;</span> {
+        (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>:<span class="ident">ident</span>, <span class="attribute">#[<span class="ident">transform</span>( $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">attr</span>:<span class="ident">tt</span>)<span class="op">*</span> )]</span> =&gt; <span class="macro-nonterminal">$</span><span class="macro-nonterminal">should_be</span>:<span class="ident">expr</span> $(,)<span class="question-mark">?</span>) =&gt; {
             <span class="attribute">#[<span class="ident">test</span>]</span>
             <span class="kw">fn</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">name</span>() {
                 <span class="kw">let</span> <span class="ident">tokens</span> <span class="op">=</span> <span class="macro">quote!</span>($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">attr</span>)<span class="kw-2">*</span>);
 
                 <span class="kw">let</span> <span class="ident">got</span>: <span class="ident">TransformDescriptor</span><span class="op">&lt;</span><span class="lifetime">&#39;static</span><span class="op">&gt;</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">parse_transform_descriptor</span>.<span class="ident">parse2</span>(<span class="ident">tokens</span>.<span class="ident">clone</span>()) {
-                    <span class="prelude-val">Ok</span>(<span class="ident">d</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">d</span>,
-                    <span class="prelude-val">Err</span>(<span class="ident">e</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(<span class="string">&quot;Unable to parse \&quot;{}\&quot;: {}&quot;</span>, <span class="ident">tokens</span>.<span class="ident">to_string</span>(), <span class="ident">e</span>),
+                    <span class="prelude-val">Ok</span>(<span class="ident">d</span>) =&gt; <span class="ident">d</span>,
+                    <span class="prelude-val">Err</span>(<span class="ident">e</span>) =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Unable to parse \&quot;{}\&quot;: {}&quot;</span>, <span class="ident">tokens</span>.<span class="ident">to_string</span>(), <span class="ident">e</span>),
                 };
 
                 <span class="macro">assert_eq!</span>(<span class="ident">got</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">should_be</span>);
@@ -1291,7 +1290,7 @@
     }
 
     <span class="macro">parse_transform_attribute!</span>(<span class="ident">transform_single_to_single</span>,
-        <span class="attribute">#[<span class="ident">transform</span>(<span class="ident">inputs</span> <span class="op">=</span> [<span class="ident">f32</span>; <span class="number">1</span>]</span>, <span class="ident">outputs</span> <span class="op">=</span> [<span class="ident">f32</span>; <span class="number">1</span>])] <span class="op">=</span><span class="op">&gt;</span>
+        <span class="attribute">#[<span class="ident">transform</span>(<span class="ident">inputs</span> <span class="op">=</span> [<span class="ident">f32</span>; <span class="number">1</span>]</span>, <span class="ident">outputs</span> <span class="op">=</span> [<span class="ident">f32</span>; <span class="number">1</span>])] =&gt;
         <span class="ident">TransformDescriptor</span> {
             <span class="ident">inputs</span>: <span class="ident">TensorDescriptors</span>(<span class="ident">Cow::Borrowed</span>(<span class="kw-2">&amp;</span>[
                 <span class="ident">TensorDescriptor</span> {
@@ -1313,7 +1312,7 @@
     );
 
     <span class="macro">parse_transform_attribute!</span>(<span class="ident">transform_attribute_with_multiple_inputs</span>,
-        <span class="attribute">#[<span class="ident">transform</span>(<span class="ident">inputs</span> <span class="op">=</span> ([<span class="ident">f32</span>; <span class="number">1</span>]</span>, [<span class="ident">u8</span>; <span class="number">2</span>]), <span class="ident">outputs</span> <span class="op">=</span> [<span class="ident">f32</span>; <span class="number">1</span>])] <span class="op">=</span><span class="op">&gt;</span>
+        <span class="attribute">#[<span class="ident">transform</span>(<span class="ident">inputs</span> <span class="op">=</span> ([<span class="ident">f32</span>; <span class="number">1</span>]</span>, [<span class="ident">u8</span>; <span class="number">2</span>]), <span class="ident">outputs</span> <span class="op">=</span> [<span class="ident">f32</span>; <span class="number">1</span>])] =&gt;
         <span class="ident">TransformDescriptor</span> {
             <span class="ident">inputs</span>: <span class="ident">TensorDescriptors</span>(<span class="ident">Cow::Borrowed</span>(<span class="kw-2">&amp;</span>[
                 <span class="ident">TensorDescriptor</span> {
@@ -1341,7 +1340,7 @@
         },
     );
 }
-</pre></div>
+</code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="hotg_rune_proc_block_macros" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
     <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script>
 </body></html>

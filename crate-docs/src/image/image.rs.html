@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;image-0.23.14&#x2F;.&#x2F;src&#x2F;image.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>image.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../image/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">   1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;image-0.23.14&#x2F;.&#x2F;src&#x2F;image.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>image.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../image/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">   1</span>
 <span id="2">   2</span>
 <span id="3">   3</span>
 <span id="4">   4</span>
@@ -1379,8 +1379,7 @@
 <span id="1379">1379</span>
 <span id="1380">1380</span>
 <span id="1381">1381</span>
-</pre><pre class="rust">
-<span class="attribute">#![<span class="ident">allow</span>(<span class="ident">clippy::too_many_arguments</span>)]</span>
+</pre><pre class="rust"><code><span class="attribute">#![<span class="ident">allow</span>(<span class="ident">clippy::too_many_arguments</span>)]</span>
 <span class="kw">use</span> <span class="ident">std::convert::TryFrom</span>;
 <span class="kw">use</span> <span class="ident">std::ffi::OsStr</span>;
 <span class="kw">use</span> <span class="ident">std::io</span>;
@@ -1459,26 +1458,26 @@
     <span class="doccomment">/// assert_eq!(format, Some(ImageFormat::Jpeg));</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_extension</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>(<span class="ident">ext</span>: <span class="ident">S</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">S</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">OsStr</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_extension</span><span class="op">&lt;</span><span class="ident">S</span><span class="op">&gt;</span>(<span class="ident">ext</span>: <span class="ident">S</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">S</span>: <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">OsStr</span><span class="op">&gt;</span> {
         <span class="comment">// thin wrapper function to strip generics</span>
-        <span class="kw">fn</span> <span class="ident">inner</span>(<span class="ident">ext</span>: <span class="kw-2">&amp;</span><span class="ident">OsStr</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ImageFormat</span><span class="op">&gt;</span> {
+        <span class="kw">fn</span> <span class="ident">inner</span>(<span class="ident">ext</span>: <span class="kw-2">&amp;</span><span class="ident">OsStr</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">ImageFormat</span><span class="op">&gt;</span> {
             <span class="kw">let</span> <span class="ident">ext</span> <span class="op">=</span> <span class="ident">ext</span>.<span class="ident">to_str</span>()<span class="question-mark">?</span>.<span class="ident">to_ascii_lowercase</span>();
 
             <span class="prelude-val">Some</span>(<span class="kw">match</span> <span class="ident">ext</span>.<span class="ident">as_str</span>() {
-                <span class="string">&quot;avif&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ImageFormat::Avif</span>,
-                <span class="string">&quot;jpg&quot;</span> <span class="op">|</span> <span class="string">&quot;jpeg&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ImageFormat::Jpeg</span>,
-                <span class="string">&quot;png&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ImageFormat::Png</span>,
-                <span class="string">&quot;gif&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ImageFormat::Gif</span>,
-                <span class="string">&quot;webp&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ImageFormat::WebP</span>,
-                <span class="string">&quot;tif&quot;</span> <span class="op">|</span> <span class="string">&quot;tiff&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ImageFormat::Tiff</span>,
-                <span class="string">&quot;tga&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ImageFormat::Tga</span>,
-                <span class="string">&quot;dds&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ImageFormat::Dds</span>,
-                <span class="string">&quot;bmp&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ImageFormat::Bmp</span>,
-                <span class="string">&quot;ico&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ImageFormat::Ico</span>,
-                <span class="string">&quot;hdr&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ImageFormat::Hdr</span>,
-                <span class="string">&quot;pbm&quot;</span> <span class="op">|</span> <span class="string">&quot;pam&quot;</span> <span class="op">|</span> <span class="string">&quot;ppm&quot;</span> <span class="op">|</span> <span class="string">&quot;pgm&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ImageFormat::Pnm</span>,
-                <span class="string">&quot;ff&quot;</span> <span class="op">|</span> <span class="string">&quot;farbfeld&quot;</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ImageFormat::Farbfeld</span>,
-                <span class="kw">_</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw">return</span> <span class="prelude-val">None</span>,
+                <span class="string">&quot;avif&quot;</span> =&gt; <span class="ident">ImageFormat::Avif</span>,
+                <span class="string">&quot;jpg&quot;</span> <span class="op">|</span> <span class="string">&quot;jpeg&quot;</span> =&gt; <span class="ident">ImageFormat::Jpeg</span>,
+                <span class="string">&quot;png&quot;</span> =&gt; <span class="ident">ImageFormat::Png</span>,
+                <span class="string">&quot;gif&quot;</span> =&gt; <span class="ident">ImageFormat::Gif</span>,
+                <span class="string">&quot;webp&quot;</span> =&gt; <span class="ident">ImageFormat::WebP</span>,
+                <span class="string">&quot;tif&quot;</span> <span class="op">|</span> <span class="string">&quot;tiff&quot;</span> =&gt; <span class="ident">ImageFormat::Tiff</span>,
+                <span class="string">&quot;tga&quot;</span> =&gt; <span class="ident">ImageFormat::Tga</span>,
+                <span class="string">&quot;dds&quot;</span> =&gt; <span class="ident">ImageFormat::Dds</span>,
+                <span class="string">&quot;bmp&quot;</span> =&gt; <span class="ident">ImageFormat::Bmp</span>,
+                <span class="string">&quot;ico&quot;</span> =&gt; <span class="ident">ImageFormat::Ico</span>,
+                <span class="string">&quot;hdr&quot;</span> =&gt; <span class="ident">ImageFormat::Hdr</span>,
+                <span class="string">&quot;pbm&quot;</span> <span class="op">|</span> <span class="string">&quot;pam&quot;</span> <span class="op">|</span> <span class="string">&quot;ppm&quot;</span> <span class="op">|</span> <span class="string">&quot;pgm&quot;</span> =&gt; <span class="ident">ImageFormat::Pnm</span>,
+                <span class="string">&quot;ff&quot;</span> <span class="op">|</span> <span class="string">&quot;farbfeld&quot;</span> =&gt; <span class="ident">ImageFormat::Farbfeld</span>,
+                <span class="kw">_</span> =&gt; <span class="kw">return</span> <span class="prelude-val">None</span>,
             })
         }
 
@@ -1498,16 +1497,16 @@
     <span class="doccomment">/// # Ok::&lt;(), image::error::ImageError&gt;(())</span>
     <span class="doccomment">/// ```</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_path</span><span class="op">&lt;</span><span class="ident">P</span><span class="op">&gt;</span>(<span class="ident">path</span>: <span class="ident">P</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ImageResult</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">P</span> : <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">from_path</span><span class="op">&lt;</span><span class="ident">P</span><span class="op">&gt;</span>(<span class="ident">path</span>: <span class="ident">P</span>) -&gt; <span class="ident">ImageResult</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">P</span> : <span class="ident">AsRef</span><span class="op">&lt;</span><span class="ident">Path</span><span class="op">&gt;</span> {
         <span class="comment">// thin wrapper function to strip generics</span>
-        <span class="kw">fn</span> <span class="ident">inner</span>(<span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ImageResult</span><span class="op">&lt;</span><span class="ident">ImageFormat</span><span class="op">&gt;</span> {
+        <span class="kw">fn</span> <span class="ident">inner</span>(<span class="ident">path</span>: <span class="kw-2">&amp;</span><span class="ident">Path</span>) -&gt; <span class="ident">ImageResult</span><span class="op">&lt;</span><span class="ident">ImageFormat</span><span class="op">&gt;</span> {
             <span class="kw">let</span> <span class="ident">exact_ext</span> <span class="op">=</span> <span class="ident">path</span>.<span class="ident">extension</span>();
             <span class="ident">exact_ext</span>
                 .<span class="ident">and_then</span>(<span class="ident">ImageFormat::from_extension</span>)
                 .<span class="ident">ok_or_else</span>(<span class="op">|</span><span class="op">|</span> {
                     <span class="kw">let</span> <span class="ident">format_hint</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">exact_ext</span> {
-                        <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ImageFormatHint::Unknown</span>,
-                        <span class="prelude-val">Some</span>(<span class="ident">os</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ImageFormatHint::PathExtension</span>(<span class="ident">os</span>.<span class="ident">into</span>()),
+                        <span class="prelude-val">None</span> =&gt; <span class="ident">ImageFormatHint::Unknown</span>,
+                        <span class="prelude-val">Some</span>(<span class="ident">os</span>) =&gt; <span class="ident">ImageFormatHint::PathExtension</span>(<span class="ident">os</span>.<span class="ident">into</span>()),
                     };
                     <span class="ident">ImageError::Unsupported</span>(<span class="ident">format_hint</span>.<span class="ident">into</span>())
                 })
@@ -1518,45 +1517,45 @@
 
     <span class="doccomment">/// Return if the ImageFormat can be decoded by the lib.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">can_read</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">can_read</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="comment">// Needs to be updated once a new variant&#39;s decoder is added to free_functions.rs::load</span>
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">ImageFormat::Png</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
-            <span class="ident">ImageFormat::Gif</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
-            <span class="ident">ImageFormat::Jpeg</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
-            <span class="ident">ImageFormat::WebP</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
-            <span class="ident">ImageFormat::Tiff</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
-            <span class="ident">ImageFormat::Tga</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
-            <span class="ident">ImageFormat::Dds</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>,
-            <span class="ident">ImageFormat::Bmp</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
-            <span class="ident">ImageFormat::Ico</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
-            <span class="ident">ImageFormat::Hdr</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
-            <span class="ident">ImageFormat::Pnm</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
-            <span class="ident">ImageFormat::Farbfeld</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
-            <span class="ident">ImageFormat::Avif</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
-            <span class="ident">ImageFormat::__NonExhaustive</span>(<span class="ident">marker</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">match</span> <span class="ident">marker</span>.<span class="ident">_private</span> {},
+            <span class="ident">ImageFormat::Png</span> =&gt; <span class="bool-val">true</span>,
+            <span class="ident">ImageFormat::Gif</span> =&gt; <span class="bool-val">true</span>,
+            <span class="ident">ImageFormat::Jpeg</span> =&gt; <span class="bool-val">true</span>,
+            <span class="ident">ImageFormat::WebP</span> =&gt; <span class="bool-val">true</span>,
+            <span class="ident">ImageFormat::Tiff</span> =&gt; <span class="bool-val">true</span>,
+            <span class="ident">ImageFormat::Tga</span> =&gt; <span class="bool-val">true</span>,
+            <span class="ident">ImageFormat::Dds</span> =&gt; <span class="bool-val">false</span>,
+            <span class="ident">ImageFormat::Bmp</span> =&gt; <span class="bool-val">true</span>,
+            <span class="ident">ImageFormat::Ico</span> =&gt; <span class="bool-val">true</span>,
+            <span class="ident">ImageFormat::Hdr</span> =&gt; <span class="bool-val">true</span>,
+            <span class="ident">ImageFormat::Pnm</span> =&gt; <span class="bool-val">true</span>,
+            <span class="ident">ImageFormat::Farbfeld</span> =&gt; <span class="bool-val">true</span>,
+            <span class="ident">ImageFormat::Avif</span> =&gt; <span class="bool-val">true</span>,
+            <span class="ident">ImageFormat::__NonExhaustive</span>(<span class="ident">marker</span>) =&gt; <span class="kw">match</span> <span class="ident">marker</span>.<span class="ident">_private</span> {},
         }
     }
 
     <span class="doccomment">/// Return if the ImageFormat can be encoded by the lib.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">can_write</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">can_write</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="comment">// Needs to be updated once a new variant&#39;s encoder is added to free_functions.rs::save_buffer_with_format_impl</span>
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">ImageFormat::Gif</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
-            <span class="ident">ImageFormat::Ico</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
-            <span class="ident">ImageFormat::Jpeg</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
-            <span class="ident">ImageFormat::Png</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
-            <span class="ident">ImageFormat::Bmp</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
-            <span class="ident">ImageFormat::Tiff</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
-            <span class="ident">ImageFormat::Tga</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
-            <span class="ident">ImageFormat::Pnm</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
-            <span class="ident">ImageFormat::Farbfeld</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
-            <span class="ident">ImageFormat::Avif</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
-            <span class="ident">ImageFormat::WebP</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>,
-            <span class="ident">ImageFormat::Hdr</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>,
-            <span class="ident">ImageFormat::Dds</span> <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>,
-            <span class="ident">ImageFormat::__NonExhaustive</span>(<span class="ident">marker</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">match</span> <span class="ident">marker</span>.<span class="ident">_private</span> {},
+            <span class="ident">ImageFormat::Gif</span> =&gt; <span class="bool-val">true</span>,
+            <span class="ident">ImageFormat::Ico</span> =&gt; <span class="bool-val">true</span>,
+            <span class="ident">ImageFormat::Jpeg</span> =&gt; <span class="bool-val">true</span>,
+            <span class="ident">ImageFormat::Png</span> =&gt; <span class="bool-val">true</span>,
+            <span class="ident">ImageFormat::Bmp</span> =&gt; <span class="bool-val">true</span>,
+            <span class="ident">ImageFormat::Tiff</span> =&gt; <span class="bool-val">true</span>,
+            <span class="ident">ImageFormat::Tga</span> =&gt; <span class="bool-val">true</span>,
+            <span class="ident">ImageFormat::Pnm</span> =&gt; <span class="bool-val">true</span>,
+            <span class="ident">ImageFormat::Farbfeld</span> =&gt; <span class="bool-val">true</span>,
+            <span class="ident">ImageFormat::Avif</span> =&gt; <span class="bool-val">true</span>,
+            <span class="ident">ImageFormat::WebP</span> =&gt; <span class="bool-val">false</span>,
+            <span class="ident">ImageFormat::Hdr</span> =&gt; <span class="bool-val">false</span>,
+            <span class="ident">ImageFormat::Dds</span> =&gt; <span class="bool-val">false</span>,
+            <span class="ident">ImageFormat::__NonExhaustive</span>(<span class="ident">marker</span>) =&gt; <span class="kw">match</span> <span class="ident">marker</span>.<span class="ident">_private</span> {},
         }
     }
 
@@ -1569,23 +1568,23 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// The method name `extensions` remains reserved for introducing another method in the future</span>
     <span class="doccomment">/// that yields a slice of `OsStr` which is blocked by several features of const evaluation.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">extensions_str</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>] {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">extensions_str</span>(<span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> [<span class="kw-2">&amp;</span><span class="lifetime">&#39;static</span> <span class="ident">str</span>] {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">ImageFormat::Png</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span>[<span class="string">&quot;png&quot;</span>],
-            <span class="ident">ImageFormat::Jpeg</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span>[<span class="string">&quot;jpg&quot;</span>, <span class="string">&quot;jpeg&quot;</span>],
-            <span class="ident">ImageFormat::Gif</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span>[<span class="string">&quot;gif&quot;</span>],
-            <span class="ident">ImageFormat::WebP</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span>[<span class="string">&quot;webp&quot;</span>],
-            <span class="ident">ImageFormat::Pnm</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span>[<span class="string">&quot;pbm&quot;</span>, <span class="string">&quot;pam&quot;</span>, <span class="string">&quot;ppm&quot;</span>, <span class="string">&quot;pgm&quot;</span>],
-            <span class="ident">ImageFormat::Tiff</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span>[<span class="string">&quot;tiff&quot;</span>, <span class="string">&quot;tif&quot;</span>],
-            <span class="ident">ImageFormat::Tga</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span>[<span class="string">&quot;tga&quot;</span>],
-            <span class="ident">ImageFormat::Dds</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span>[<span class="string">&quot;dds&quot;</span>],
-            <span class="ident">ImageFormat::Bmp</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span>[<span class="string">&quot;bmp&quot;</span>],
-            <span class="ident">ImageFormat::Ico</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span>[<span class="string">&quot;ico&quot;</span>],
-            <span class="ident">ImageFormat::Hdr</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span>[<span class="string">&quot;hdr&quot;</span>],
-            <span class="ident">ImageFormat::Farbfeld</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span>[<span class="string">&quot;ff&quot;</span>],
+            <span class="ident">ImageFormat::Png</span> =&gt; <span class="kw-2">&amp;</span>[<span class="string">&quot;png&quot;</span>],
+            <span class="ident">ImageFormat::Jpeg</span> =&gt; <span class="kw-2">&amp;</span>[<span class="string">&quot;jpg&quot;</span>, <span class="string">&quot;jpeg&quot;</span>],
+            <span class="ident">ImageFormat::Gif</span> =&gt; <span class="kw-2">&amp;</span>[<span class="string">&quot;gif&quot;</span>],
+            <span class="ident">ImageFormat::WebP</span> =&gt; <span class="kw-2">&amp;</span>[<span class="string">&quot;webp&quot;</span>],
+            <span class="ident">ImageFormat::Pnm</span> =&gt; <span class="kw-2">&amp;</span>[<span class="string">&quot;pbm&quot;</span>, <span class="string">&quot;pam&quot;</span>, <span class="string">&quot;ppm&quot;</span>, <span class="string">&quot;pgm&quot;</span>],
+            <span class="ident">ImageFormat::Tiff</span> =&gt; <span class="kw-2">&amp;</span>[<span class="string">&quot;tiff&quot;</span>, <span class="string">&quot;tif&quot;</span>],
+            <span class="ident">ImageFormat::Tga</span> =&gt; <span class="kw-2">&amp;</span>[<span class="string">&quot;tga&quot;</span>],
+            <span class="ident">ImageFormat::Dds</span> =&gt; <span class="kw-2">&amp;</span>[<span class="string">&quot;dds&quot;</span>],
+            <span class="ident">ImageFormat::Bmp</span> =&gt; <span class="kw-2">&amp;</span>[<span class="string">&quot;bmp&quot;</span>],
+            <span class="ident">ImageFormat::Ico</span> =&gt; <span class="kw-2">&amp;</span>[<span class="string">&quot;ico&quot;</span>],
+            <span class="ident">ImageFormat::Hdr</span> =&gt; <span class="kw-2">&amp;</span>[<span class="string">&quot;hdr&quot;</span>],
+            <span class="ident">ImageFormat::Farbfeld</span> =&gt; <span class="kw-2">&amp;</span>[<span class="string">&quot;ff&quot;</span>],
             <span class="comment">// According to: https://aomediacodec.github.io/av1-avif/#mime-registration</span>
-            <span class="ident">ImageFormat::Avif</span> <span class="op">=</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span>[<span class="string">&quot;avif&quot;</span>],
-            <span class="ident">ImageFormat::__NonExhaustive</span>(<span class="ident">marker</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="kw">match</span> <span class="ident">marker</span>.<span class="ident">_private</span> {},
+            <span class="ident">ImageFormat::Avif</span> =&gt; <span class="kw-2">&amp;</span>[<span class="string">&quot;avif&quot;</span>],
+            <span class="ident">ImageFormat::__NonExhaustive</span>(<span class="ident">marker</span>) =&gt; <span class="kw">match</span> <span class="ident">marker</span>.<span class="ident">_private</span> {},
         }
     }
 }
@@ -1639,28 +1638,28 @@
 }
 
 <span class="kw">impl</span> <span class="ident">From</span><span class="op">&lt;</span><span class="ident">ImageFormat</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">ImageOutputFormat</span> {
-    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">fmt</span>: <span class="ident">ImageFormat</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">fmt</span>: <span class="ident">ImageFormat</span>) -&gt; <span class="self">Self</span> {
         <span class="kw">match</span> <span class="ident">fmt</span> {
             <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;png&quot;</span>)]</span>
-            <span class="ident">ImageFormat::Png</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ImageOutputFormat::Png</span>,
+            <span class="ident">ImageFormat::Png</span> =&gt; <span class="ident">ImageOutputFormat::Png</span>,
             <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;jpeg&quot;</span>)]</span>
-            <span class="ident">ImageFormat::Jpeg</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ImageOutputFormat::Jpeg</span>(<span class="number">75</span>),
+            <span class="ident">ImageFormat::Jpeg</span> =&gt; <span class="ident">ImageOutputFormat::Jpeg</span>(<span class="number">75</span>),
             <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;pnm&quot;</span>)]</span>
-            <span class="ident">ImageFormat::Pnm</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ImageOutputFormat::Pnm</span>(<span class="ident">PNMSubtype::ArbitraryMap</span>),
+            <span class="ident">ImageFormat::Pnm</span> =&gt; <span class="ident">ImageOutputFormat::Pnm</span>(<span class="ident">PNMSubtype::ArbitraryMap</span>),
             <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;gif&quot;</span>)]</span>
-            <span class="ident">ImageFormat::Gif</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ImageOutputFormat::Gif</span>,
+            <span class="ident">ImageFormat::Gif</span> =&gt; <span class="ident">ImageOutputFormat::Gif</span>,
             <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;ico&quot;</span>)]</span>
-            <span class="ident">ImageFormat::Ico</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ImageOutputFormat::Ico</span>,
+            <span class="ident">ImageFormat::Ico</span> =&gt; <span class="ident">ImageOutputFormat::Ico</span>,
             <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;bmp&quot;</span>)]</span>
-            <span class="ident">ImageFormat::Bmp</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ImageOutputFormat::Bmp</span>,
+            <span class="ident">ImageFormat::Bmp</span> =&gt; <span class="ident">ImageOutputFormat::Bmp</span>,
             <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;farbfeld&quot;</span>)]</span>
-            <span class="ident">ImageFormat::Farbfeld</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ImageOutputFormat::Farbfeld</span>,
+            <span class="ident">ImageFormat::Farbfeld</span> =&gt; <span class="ident">ImageOutputFormat::Farbfeld</span>,
             <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;tga&quot;</span>)]</span>
-            <span class="ident">ImageFormat::Tga</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ImageOutputFormat::Tga</span>,
+            <span class="ident">ImageFormat::Tga</span> =&gt; <span class="ident">ImageOutputFormat::Tga</span>,
             <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;avif&quot;</span>)]</span>
-            <span class="ident">ImageFormat::Avif</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ImageOutputFormat::Avif</span>,
+            <span class="ident">ImageFormat::Avif</span> =&gt; <span class="ident">ImageOutputFormat::Avif</span>,
 
-            <span class="ident">f</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">ImageOutputFormat::Unsupported</span>(<span class="macro">format!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">f</span>)),
+            <span class="ident">f</span> =&gt; <span class="ident">ImageOutputFormat::Unsupported</span>(<span class="macro">format!</span>(<span class="string">&quot;{:?}&quot;</span>, <span class="ident">f</span>)),
         }
     }
 }
@@ -1685,7 +1684,7 @@
     <span class="doccomment">/// actually using this struct would instantly OOM so just get it out of the way now.</span>
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
     <span class="comment">// When no image formats that use it are enabled</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">scanline_bytes</span>: <span class="ident">u64</span>, <span class="ident">total_bytes</span>: <span class="ident">u64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">scanline_bytes</span>: <span class="ident">u64</span>, <span class="ident">total_bytes</span>: <span class="ident">u64</span>) -&gt; <span class="self">Self</span> {
         <span class="self">Self</span> {
             <span class="ident">scanline_bytes</span>: <span class="ident">usize::try_from</span>(<span class="ident">scanline_bytes</span>).<span class="ident">unwrap</span>(),
             <span class="ident">buffer</span>: <span class="ident">Vec::new</span>(),
@@ -1697,12 +1696,12 @@
 
     <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">dead_code</span>)]</span>
     <span class="comment">// When no image formats that use it are enabled</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">read</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">buf</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>], <span class="kw-2">mut</span> <span class="ident">read_scanline</span>: <span class="ident">F</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">io::Result</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>
+    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">read</span><span class="op">&lt;</span><span class="ident">F</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">buf</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>], <span class="kw-2">mut</span> <span class="ident">read_scanline</span>: <span class="ident">F</span>) -&gt; <span class="ident">io::Result</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>
     <span class="kw">where</span>
-        <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">io::Result</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>,
+        <span class="ident">F</span>: <span class="ident">FnMut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) -&gt; <span class="ident">io::Result</span><span class="op">&lt;</span><span class="ident">usize</span><span class="op">&gt;</span>,
     {
-        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">len</span>() <span class="op">=</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">consumed</span> {
-            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">offset</span> <span class="op">=</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">total_bytes</span> {
+        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">len</span>() <span class="op">==</span> <span class="self">self</span>.<span class="ident">consumed</span> {
+            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">offset</span> <span class="op">==</span> <span class="self">self</span>.<span class="ident">total_bytes</span> {
                 <span class="kw">return</span> <span class="prelude-val">Ok</span>(<span class="number">0</span>);
             } <span class="kw">else</span> <span class="kw">if</span> <span class="ident">buf</span>.<span class="ident">len</span>() <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">scanline_bytes</span> {
                 <span class="comment">// If there is nothing buffered and the user requested a full scanline worth of</span>
@@ -1722,7 +1721,7 @@
                 <span class="self">self</span>.<span class="ident">buffer</span>.<span class="ident">resize</span>(<span class="ident">bytes_read</span>, <span class="number">0</span>);
                 <span class="self">self</span>.<span class="ident">offset</span> <span class="op">+</span><span class="op">=</span> <span class="ident">u64::try_from</span>(<span class="ident">bytes_read</span>).<span class="ident">unwrap</span>();
 
-                <span class="macro">assert!</span>(<span class="ident">bytes_read</span> <span class="op">=</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">scanline_bytes</span> <span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">offset</span> <span class="op">=</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">total_bytes</span>);
+                <span class="macro">assert!</span>(<span class="ident">bytes_read</span> <span class="op">==</span> <span class="self">self</span>.<span class="ident">scanline_bytes</span> <span class="op">|</span><span class="op">|</span> <span class="self">self</span>.<span class="ident">offset</span> <span class="op">==</span> <span class="self">self</span>.<span class="ident">total_bytes</span>);
             }
         }
 
@@ -1748,11 +1747,11 @@
                                           <span class="ident">progress_callback</span>: <span class="ident">F</span>,
                                           <span class="ident">decoder</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">D</span>,
                                           <span class="kw-2">mut</span> <span class="ident">seek_scanline</span>: <span class="ident">F1</span>,
-                                          <span class="kw-2">mut</span> <span class="ident">read_scanline</span>: <span class="ident">F2</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ImageResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span>
+                                          <span class="kw-2">mut</span> <span class="ident">read_scanline</span>: <span class="ident">F2</span>) -&gt; <span class="ident">ImageResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span>
     <span class="kw">where</span> <span class="ident">D</span>: <span class="ident">ImageDecoder</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>,
           <span class="ident">F</span>: <span class="ident">Fn</span>(<span class="ident">Progress</span>),
-          <span class="ident">F1</span>: <span class="ident">FnMut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">D</span>, <span class="ident">u64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">io::Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span>,
-          <span class="ident">F2</span>: <span class="ident">FnMut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">D</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">E</span><span class="op">&gt;</span>,
+          <span class="ident">F1</span>: <span class="ident">FnMut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">D</span>, <span class="ident">u64</span>) -&gt; <span class="ident">io::Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span>,
+          <span class="ident">F2</span>: <span class="ident">FnMut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">D</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">E</span><span class="op">&gt;</span>,
           <span class="ident">ImageError</span>: <span class="ident">From</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span>,
 {
     <span class="kw">let</span> (<span class="ident">x</span>, <span class="ident">y</span>, <span class="ident">width</span>, <span class="ident">height</span>) <span class="op">=</span> (<span class="ident">u64::from</span>(<span class="ident">x</span>), <span class="ident">u64::from</span>(<span class="ident">y</span>), <span class="ident">u64::from</span>(<span class="ident">width</span>), <span class="ident">u64::from</span>(<span class="ident">height</span>));
@@ -1774,11 +1773,11 @@
     {
         <span class="comment">// Read a range of the image starting from byte number `start` and continuing until byte</span>
         <span class="comment">// number `end`. Updates `current_scanline` and `bytes_read` appropiately.</span>
-        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">read_image_range</span> <span class="op">=</span> <span class="op">|</span><span class="kw-2">mut</span> <span class="ident">start</span>: <span class="ident">u64</span>, <span class="ident">end</span>: <span class="ident">u64</span><span class="op">|</span> <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ImageResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">read_image_range</span> <span class="op">=</span> <span class="op">|</span><span class="kw-2">mut</span> <span class="ident">start</span>: <span class="ident">u64</span>, <span class="ident">end</span>: <span class="ident">u64</span><span class="op">|</span> -&gt; <span class="ident">ImageResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
             <span class="comment">// If the first scanline we need is already stored in the temporary buffer, then handle</span>
             <span class="comment">// it first.</span>
             <span class="kw">let</span> <span class="ident">target_scanline</span> <span class="op">=</span> <span class="ident">start</span> <span class="op">/</span> <span class="ident">scanline_bytes</span>;
-            <span class="kw">if</span> <span class="ident">tmp_scanline</span> <span class="op">=</span><span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">target_scanline</span>) {
+            <span class="kw">if</span> <span class="ident">tmp_scanline</span> <span class="op">==</span> <span class="prelude-val">Some</span>(<span class="ident">target_scanline</span>) {
                 <span class="kw">let</span> <span class="ident">position</span> <span class="op">=</span> <span class="ident">target_scanline</span> <span class="op">*</span> <span class="ident">scanline_bytes</span>;
                 <span class="kw">let</span> <span class="ident">offset</span> <span class="op">=</span> <span class="ident">start</span>.<span class="ident">saturating_sub</span>(<span class="ident">position</span>);
                 <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> (<span class="ident">end</span> <span class="op">-</span> <span class="ident">start</span>)
@@ -1792,7 +1791,7 @@
 
                 <span class="ident">progress_callback</span>(<span class="ident">Progress</span> {<span class="ident">current</span>: <span class="ident">bytes_read</span>, <span class="ident">total</span>: <span class="ident">total_bytes</span>});
 
-                <span class="kw">if</span> <span class="ident">start</span> <span class="op">=</span><span class="op">=</span> <span class="ident">end</span> {
+                <span class="kw">if</span> <span class="ident">start</span> <span class="op">==</span> <span class="ident">end</span> {
                     <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
                 }
             }
@@ -1832,7 +1831,7 @@
         };
 
         <span class="kw">if</span> <span class="ident">x</span> <span class="op">+</span> <span class="ident">width</span> <span class="op">&gt;</span> <span class="ident">u64::from</span>(<span class="ident">dimensions</span>.<span class="number">0</span>) <span class="op">|</span><span class="op">|</span> <span class="ident">y</span> <span class="op">+</span> <span class="ident">height</span> <span class="op">&gt;</span> <span class="ident">u64::from</span>(<span class="ident">dimensions</span>.<span class="number">1</span>)
-            <span class="op">|</span><span class="op">|</span> <span class="ident">width</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> <span class="ident">height</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> {
+            <span class="op">|</span><span class="op">|</span> <span class="ident">width</span> <span class="op">==</span> <span class="number">0</span> <span class="op">|</span><span class="op">|</span> <span class="ident">height</span> <span class="op">==</span> <span class="number">0</span> {
                 <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">ImageError::Parameter</span>(<span class="ident">ParameterError::from_kind</span>(
                     <span class="ident">ParameterErrorKind::DimensionMismatch</span>,
                 )));
@@ -1844,7 +1843,7 @@
         }
 
         <span class="ident">progress_callback</span>(<span class="ident">Progress</span> {<span class="ident">current</span>: <span class="number">0</span>, <span class="ident">total</span>: <span class="ident">total_bytes</span>});
-        <span class="kw">if</span> <span class="ident">x</span> <span class="op">=</span><span class="op">=</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">width</span> <span class="op">=</span><span class="op">=</span> <span class="ident">u64::from</span>(<span class="ident">dimensions</span>.<span class="number">0</span>) {
+        <span class="kw">if</span> <span class="ident">x</span> <span class="op">==</span> <span class="number">0</span> <span class="op">&amp;&amp;</span> <span class="ident">width</span> <span class="op">==</span> <span class="ident">u64::from</span>(<span class="ident">dimensions</span>.<span class="number">0</span>) {
             <span class="kw">let</span> <span class="ident">start</span> <span class="op">=</span> <span class="ident">x</span> <span class="op">*</span> <span class="ident">bytes_per_pixel</span> <span class="op">+</span> <span class="ident">y</span> <span class="op">*</span> <span class="ident">row_bytes</span>;
             <span class="kw">let</span> <span class="ident">end</span> <span class="op">=</span> (<span class="ident">x</span> <span class="op">+</span> <span class="ident">width</span>) <span class="op">*</span> <span class="ident">bytes_per_pixel</span> <span class="op">+</span> (<span class="ident">y</span> <span class="op">+</span> <span class="ident">height</span> <span class="op">-</span> <span class="number">1</span>) <span class="op">*</span> <span class="ident">row_bytes</span>;
             <span class="ident">read_image_range</span>(<span class="ident">start</span>, <span class="ident">end</span>)<span class="question-mark">?</span>;
@@ -1865,7 +1864,7 @@
 <span class="doccomment">/// of the output buffer is guaranteed.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// Panics if there isn&#39;t enough memory to decode the image.</span>
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">decoder_to_vec</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">decoder</span>: <span class="kw">impl</span> <span class="ident">ImageDecoder</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ImageResult</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">decoder_to_vec</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">decoder</span>: <span class="kw">impl</span> <span class="ident">ImageDecoder</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>) -&gt; <span class="ident">ImageResult</span><span class="op">&lt;</span><span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span><span class="op">&gt;</span>
 <span class="kw">where</span>
     <span class="ident">T</span>: <span class="ident"><span class="kw">crate</span>::traits::Primitive</span> <span class="op">+</span> <span class="ident">bytemuck::Pod</span>,
 {
@@ -1887,19 +1886,19 @@
 
 <span class="kw">impl</span> <span class="ident">Progress</span> {
     <span class="doccomment">/// A measure of completed decoding.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">current</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u64</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">current</span>(<span class="self">self</span>) -&gt; <span class="ident">u64</span> {
         <span class="self">self</span>.<span class="ident">current</span>
     }
 
     <span class="doccomment">/// A measure of all necessary decoding work.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// This is in general greater or equal than `current`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">total</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u64</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">total</span>(<span class="self">self</span>) -&gt; <span class="ident">u64</span> {
         <span class="self">self</span>.<span class="ident">total</span>
     }
 
     <span class="doccomment">/// Calculate a measure for remaining decoding work.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">remaining</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u64</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">remaining</span>(<span class="self">self</span>) -&gt; <span class="ident">u64</span> {
         <span class="self">self</span>.<span class="ident">total</span>.<span class="ident">max</span>(<span class="self">self</span>.<span class="ident">current</span>) <span class="op">-</span> <span class="self">self</span>.<span class="ident">current</span>
     }
 }
@@ -1910,20 +1909,20 @@
     <span class="kw">type</span> <span class="ident">Reader</span>: <span class="ident">Read</span> <span class="op">+</span> <span class="lifetime">&#39;a</span>;
 
     <span class="doccomment">/// Returns a tuple containing the width and height of the image</span>
-    <span class="kw">fn</span> <span class="ident">dimensions</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">u32</span>, <span class="ident">u32</span>);
+    <span class="kw">fn</span> <span class="ident">dimensions</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (<span class="ident">u32</span>, <span class="ident">u32</span>);
 
     <span class="doccomment">/// Returns the color type of the image data produced by this decoder</span>
-    <span class="kw">fn</span> <span class="ident">color_type</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ColorType</span>;
+    <span class="kw">fn</span> <span class="ident">color_type</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">ColorType</span>;
 
     <span class="doccomment">/// Retuns the color type of the image file before decoding</span>
-    <span class="kw">fn</span> <span class="ident">original_color_type</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ExtendedColorType</span> {
+    <span class="kw">fn</span> <span class="ident">original_color_type</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">ExtendedColorType</span> {
         <span class="self">self</span>.<span class="ident">color_type</span>().<span class="ident">into</span>()
     }
 
     <span class="doccomment">/// Returns a reader that can be used to obtain the bytes of the image. For the best</span>
     <span class="doccomment">/// performance, always try to read at least `scanline_bytes` from the reader at a time. Reading</span>
     <span class="doccomment">/// fewer bytes will cause the reader to perform internal buffering.</span>
-    <span class="kw">fn</span> <span class="ident">into_reader</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ImageResult</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Reader</span><span class="op">&gt;</span>;
+    <span class="kw">fn</span> <span class="ident">into_reader</span>(<span class="self">self</span>) -&gt; <span class="ident">ImageResult</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Reader</span><span class="op">&gt;</span>;
 
     <span class="doccomment">/// Returns the total number of bytes in the decoded image.</span>
     <span class="doccomment">///</span>
@@ -1931,14 +1930,14 @@
     <span class="doccomment">/// `read_image_with_progress`. The returned value may exceed usize::MAX, in</span>
     <span class="doccomment">/// which case it isn&#39;t actually possible to construct a buffer to decode all the image data</span>
     <span class="doccomment">/// into.</span>
-    <span class="kw">fn</span> <span class="ident">total_bytes</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u64</span> {
+    <span class="kw">fn</span> <span class="ident">total_bytes</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u64</span> {
         <span class="kw">let</span> <span class="ident">dimensions</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">dimensions</span>();
         <span class="ident">u64::from</span>(<span class="ident">dimensions</span>.<span class="number">0</span>) <span class="op">*</span> <span class="ident">u64::from</span>(<span class="ident">dimensions</span>.<span class="number">1</span>) <span class="op">*</span> <span class="ident">u64::from</span>(<span class="self">self</span>.<span class="ident">color_type</span>().<span class="ident">bytes_per_pixel</span>())
     }
 
     <span class="doccomment">/// Returns the minimum number of bytes that can be efficiently read from this decoder. This may</span>
     <span class="doccomment">/// be as few as 1 or as many as `total_bytes()`.</span>
-    <span class="kw">fn</span> <span class="ident">scanline_bytes</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u64</span> {
+    <span class="kw">fn</span> <span class="ident">scanline_bytes</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u64</span> {
         <span class="self">self</span>.<span class="ident">total_bytes</span>()
     }
 
@@ -1962,7 +1961,7 @@
     <span class="doccomment">///     decoder.read_image(buf.as_bytes());</span>
     <span class="doccomment">///     buf</span>
     <span class="doccomment">/// }</span>
-    <span class="kw">fn</span> <span class="ident">read_image</span>(<span class="self">self</span>, <span class="ident">buf</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ImageResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">read_image</span>(<span class="self">self</span>, <span class="ident">buf</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) -&gt; <span class="ident">ImageResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">read_image_with_progress</span>(<span class="ident">buf</span>, <span class="op">|</span><span class="kw">_</span><span class="op">|</span> {})
     }
 
@@ -1972,7 +1971,7 @@
         <span class="self">self</span>,
         <span class="ident">buf</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>],
         <span class="ident">progress_callback</span>: <span class="ident">F</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ImageResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    ) -&gt; <span class="ident">ImageResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="macro">assert_eq!</span>(<span class="ident">u64::try_from</span>(<span class="ident">buf</span>.<span class="ident">len</span>()), <span class="prelude-val">Ok</span>(<span class="self">self</span>.<span class="ident">total_bytes</span>()));
 
         <span class="kw">let</span> <span class="ident">total_bytes</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">total_bytes</span>() <span class="kw">as</span> <span class="ident">usize</span>;
@@ -2011,7 +2010,7 @@
         <span class="ident">width</span>: <span class="ident">u32</span>,
         <span class="ident">height</span>: <span class="ident">u32</span>,
         <span class="ident">buf</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>],
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ImageResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+    ) -&gt; <span class="ident">ImageResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">read_rect_with_progress</span>(<span class="ident">x</span>, <span class="ident">y</span>, <span class="ident">width</span>, <span class="ident">height</span>, <span class="ident">buf</span>, <span class="op">|</span><span class="kw">_</span><span class="op">|</span>{})
     }
 
@@ -2035,13 +2034,13 @@
         <span class="ident">height</span>: <span class="ident">u32</span>,
         <span class="ident">buf</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>],
         <span class="ident">progress_callback</span>: <span class="ident">F</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ImageResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span>;
+    ) -&gt; <span class="ident">ImageResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span>;
 }
 
 <span class="doccomment">/// AnimationDecoder trait</span>
 <span class="kw">pub</span> <span class="kw">trait</span> <span class="ident">AnimationDecoder</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Consume the decoder producing a series of frames.</span>
-    <span class="kw">fn</span> <span class="ident">into_frames</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Frames</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>;
+    <span class="kw">fn</span> <span class="ident">into_frames</span>(<span class="self">self</span>) -&gt; <span class="ident">Frames</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span>;
 }
 
 <span class="doccomment">/// The trait all encoders implement</span>
@@ -2062,7 +2061,7 @@
         <span class="ident">width</span>: <span class="ident">u32</span>,
         <span class="ident">height</span>: <span class="ident">u32</span>,
         <span class="ident">color_type</span>: <span class="ident">ColorType</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ImageResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span>;
+    ) -&gt; <span class="ident">ImageResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span>;
 }
 
 <span class="doccomment">/// Immutable pixel iterator</span>
@@ -2078,7 +2077,7 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">I</span>: <span class="ident">GenericImageView</span><span class="op">&gt;</span> <span class="ident">Iterator</span> <span class="kw">for</span> <span class="ident">Pixels</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">I</span><span class="op">&gt;</span> {
     <span class="kw">type</span> <span class="ident">Item</span> <span class="op">=</span> (<span class="ident">u32</span>, <span class="ident">u32</span>, <span class="ident">I::Pixel</span>);
 
-    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">u32</span>, <span class="ident">u32</span>, <span class="ident">I::Pixel</span>)<span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">next</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span>(<span class="ident">u32</span>, <span class="ident">u32</span>, <span class="ident">I::Pixel</span>)<span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">x</span> <span class="op">&gt;</span><span class="op">=</span> <span class="self">self</span>.<span class="ident">width</span> {
             <span class="self">self</span>.<span class="ident">x</span> <span class="op">=</span> <span class="number">0</span>;
             <span class="self">self</span>.<span class="ident">y</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
@@ -2098,7 +2097,7 @@
 }
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">I</span>: <span class="question-mark">?</span><span class="ident">Sized</span><span class="op">&gt;</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">Pixels</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, <span class="ident">I</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
         <span class="ident">Pixels</span> { ..<span class="kw-2">*</span><span class="self">self</span> }
     }
 }
@@ -2114,25 +2113,25 @@
     <span class="kw">type</span> <span class="ident">InnerImageView</span>: <span class="ident">GenericImageView</span><span class="op">&lt;</span><span class="ident">Pixel</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::Pixel</span><span class="op">&gt;</span>;
 
     <span class="doccomment">/// The width and height of this image.</span>
-    <span class="kw">fn</span> <span class="ident">dimensions</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">u32</span>, <span class="ident">u32</span>);
+    <span class="kw">fn</span> <span class="ident">dimensions</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (<span class="ident">u32</span>, <span class="ident">u32</span>);
 
     <span class="doccomment">/// The width of this image.</span>
-    <span class="kw">fn</span> <span class="ident">width</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span> {
+    <span class="kw">fn</span> <span class="ident">width</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u32</span> {
         <span class="kw">let</span> (<span class="ident">w</span>, <span class="kw">_</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">dimensions</span>();
         <span class="ident">w</span>
     }
 
     <span class="doccomment">/// The height of this image.</span>
-    <span class="kw">fn</span> <span class="ident">height</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u32</span> {
+    <span class="kw">fn</span> <span class="ident">height</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u32</span> {
         <span class="kw">let</span> (<span class="kw">_</span>, <span class="ident">h</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">dimensions</span>();
         <span class="ident">h</span>
     }
 
     <span class="doccomment">/// The bounding rectangle of this image.</span>
-    <span class="kw">fn</span> <span class="ident">bounds</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">u32</span>, <span class="ident">u32</span>, <span class="ident">u32</span>, <span class="ident">u32</span>);
+    <span class="kw">fn</span> <span class="ident">bounds</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (<span class="ident">u32</span>, <span class="ident">u32</span>, <span class="ident">u32</span>, <span class="ident">u32</span>);
 
     <span class="doccomment">/// Returns true if this x, y coordinate is contained inside the image.</span>
-    <span class="kw">fn</span> <span class="ident">in_bounds</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">fn</span> <span class="ident">in_bounds</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>) -&gt; <span class="ident">bool</span> {
         <span class="kw">let</span> (<span class="ident">ix</span>, <span class="ident">iy</span>, <span class="ident">iw</span>, <span class="ident">ih</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">bounds</span>();
         <span class="ident">x</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">ix</span> <span class="op">&amp;&amp;</span> <span class="ident">x</span> <span class="op">&lt;</span> <span class="ident">ix</span> <span class="op">+</span> <span class="ident">iw</span> <span class="op">&amp;&amp;</span> <span class="ident">y</span> <span class="op">&gt;</span><span class="op">=</span> <span class="ident">iy</span> <span class="op">&amp;&amp;</span> <span class="ident">y</span> <span class="op">&lt;</span> <span class="ident">iy</span> <span class="op">+</span> <span class="ident">ih</span>
     }
@@ -2144,7 +2143,7 @@
     <span class="doccomment">/// Panics if `(x, y)` is out of bounds.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// TODO: change this signature to &amp;P</span>
-    <span class="kw">fn</span> <span class="ident">get_pixel</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::Pixel</span>;
+    <span class="kw">fn</span> <span class="ident">get_pixel</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>) -&gt; <span class="ident"><span class="self">Self</span>::Pixel</span>;
 
     <span class="doccomment">/// Returns the pixel located at (x, y). Indexed from top left.</span>
     <span class="doccomment">///</span>
@@ -2154,14 +2153,14 @@
     <span class="doccomment">/// The coordinates must be [`in_bounds`] of the image.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// [`in_bounds`]: #method.in_bounds</span>
-    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">unsafe_get_pixel</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::Pixel</span> {
+    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">unsafe_get_pixel</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>) -&gt; <span class="ident"><span class="self">Self</span>::Pixel</span> {
         <span class="self">self</span>.<span class="ident">get_pixel</span>(<span class="ident">x</span>, <span class="ident">y</span>)
     }
 
     <span class="doccomment">/// Returns an Iterator over the pixels of this image.</span>
     <span class="doccomment">/// The iterator yields the coordinates of each pixel</span>
     <span class="doccomment">/// along with their value</span>
-    <span class="kw">fn</span> <span class="ident">pixels</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">Pixels</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">pixels</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">Pixels</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
         <span class="kw">let</span> (<span class="ident">width</span>, <span class="ident">height</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">dimensions</span>();
 
         <span class="ident">Pixels</span> {
@@ -2174,12 +2173,12 @@
     }
 
     <span class="doccomment">/// Returns a reference to the underlying image.</span>
-    <span class="kw">fn</span> <span class="ident">inner</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::InnerImageView</span>;
+    <span class="kw">fn</span> <span class="ident">inner</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::InnerImageView</span>;
 
     <span class="doccomment">/// Returns an subimage that is an immutable view into this image.</span>
     <span class="doccomment">/// You can use [`GenericImage::sub_image`] if you need a mutable view instead.</span>
     <span class="doccomment">/// The coordinates set the position of the top left corner of the view.</span>
-    <span class="kw">fn</span> <span class="ident">view</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>, <span class="ident">width</span>: <span class="ident">u32</span>, <span class="ident">height</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">SubImage</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::InnerImageView</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">view</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>, <span class="ident">width</span>: <span class="ident">u32</span>, <span class="ident">height</span>: <span class="ident">u32</span>) -&gt; <span class="ident">SubImage</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::InnerImageView</span><span class="op">&gt;</span> {
         <span class="ident">SubImage::new</span>(<span class="self">self</span>.<span class="ident">inner</span>(), <span class="ident">x</span>, <span class="ident">y</span>, <span class="ident">width</span>, <span class="ident">height</span>)
     }
 }
@@ -2196,7 +2195,7 @@
     <span class="doccomment">/// # Panics</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// Panics if `(x, y)` is out of bounds.</span>
-    <span class="kw">fn</span> <span class="ident">get_pixel_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident"><span class="self">Self</span>::Pixel</span>;
+    <span class="kw">fn</span> <span class="ident">get_pixel_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident"><span class="self">Self</span>::Pixel</span>;
 
     <span class="doccomment">/// Put a pixel at location (x, y). Indexed from top left.</span>
     <span class="doccomment">///</span>
@@ -2237,7 +2236,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// [`GenericImageView::view`]: trait.GenericImageView.html#method.view</span>
     <span class="doccomment">/// [`FlatSamples`]: flat/struct.FlatSamples.html</span>
-    <span class="kw">fn</span> <span class="ident">copy_from</span><span class="op">&lt;</span><span class="ident">O</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">O</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ImageResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span>
+    <span class="kw">fn</span> <span class="ident">copy_from</span><span class="op">&lt;</span><span class="ident">O</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">other</span>: <span class="kw-2">&amp;</span><span class="ident">O</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>) -&gt; <span class="ident">ImageResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">O</span>: <span class="ident">GenericImageView</span><span class="op">&lt;</span><span class="ident">Pixel</span> <span class="op">=</span> <span class="ident"><span class="self">Self</span>::Pixel</span><span class="op">&gt;</span>,
     {
@@ -2265,7 +2264,7 @@
     <span class="doccomment">/// # Returns</span>
     <span class="doccomment">/// `true` if the copy was successful, `false` if the image could not</span>
     <span class="doccomment">/// be copied due to size constraints.</span>
-    <span class="kw">fn</span> <span class="ident">copy_within</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">source</span>: <span class="ident">Rect</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">fn</span> <span class="ident">copy_within</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">source</span>: <span class="ident">Rect</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>) -&gt; <span class="ident">bool</span> {
         <span class="kw">let</span> <span class="ident">Rect</span> { <span class="ident">x</span>: <span class="ident">sx</span>, <span class="ident">y</span>: <span class="ident">sy</span>, <span class="ident">width</span>, <span class="ident">height</span> } <span class="op">=</span> <span class="ident">source</span>;
         <span class="kw">let</span> <span class="ident">dx</span> <span class="op">=</span> <span class="ident">x</span>;
         <span class="kw">let</span> <span class="ident">dy</span> <span class="op">=</span> <span class="ident">y</span>;
@@ -2277,7 +2276,7 @@
         <span class="comment">// since `.rev()` creates a new dype we would either have to go with dynamic dispatch for the ranges</span>
         <span class="comment">// or have quite a lot of code bloat. A macro gives us static dispatch with less visible bloat.</span>
         <span class="macro">macro_rules!</span> <span class="ident">copy_within_impl_</span> {
-            (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">xiter</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">yiter</span>:<span class="ident">expr</span>) <span class="op">=</span><span class="op">&gt;</span> {
+            (<span class="macro-nonterminal">$</span><span class="macro-nonterminal">xiter</span>:<span class="ident">expr</span>, <span class="macro-nonterminal">$</span><span class="macro-nonterminal">yiter</span>:<span class="ident">expr</span>) =&gt; {
                 <span class="kw">for</span> <span class="ident">y</span> <span class="kw">in</span> <span class="macro-nonterminal">$</span><span class="macro-nonterminal">yiter</span> {
                     <span class="kw">let</span> <span class="ident">sy</span> <span class="op">=</span> <span class="ident">sy</span> <span class="op">+</span> <span class="ident">y</span>;
                     <span class="kw">let</span> <span class="ident">dy</span> <span class="op">=</span> <span class="ident">dy</span> <span class="op">+</span> <span class="ident">y</span>;
@@ -2292,16 +2291,16 @@
         }
         <span class="comment">// check how target and source rectangles relate to each other so we dont overwrite data before we copied it.</span>
         <span class="kw">match</span> (<span class="ident">sx</span> <span class="op">&lt;</span> <span class="ident">dx</span>, <span class="ident">sy</span> <span class="op">&lt;</span> <span class="ident">dy</span>) {
-            (<span class="bool-val">true</span>, <span class="bool-val">true</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">copy_within_impl_!</span>((<span class="number">0</span>..<span class="ident">width</span>).<span class="ident">rev</span>(), (<span class="number">0</span>..<span class="ident">height</span>).<span class="ident">rev</span>()),
-            (<span class="bool-val">true</span>, <span class="bool-val">false</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">copy_within_impl_!</span>((<span class="number">0</span>..<span class="ident">width</span>).<span class="ident">rev</span>(), <span class="number">0</span>..<span class="ident">height</span>),
-            (<span class="bool-val">false</span>, <span class="bool-val">true</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">copy_within_impl_!</span>(<span class="number">0</span>..<span class="ident">width</span>, (<span class="number">0</span>..<span class="ident">height</span>).<span class="ident">rev</span>()),
-            (<span class="bool-val">false</span>, <span class="bool-val">false</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">copy_within_impl_!</span>(<span class="number">0</span>..<span class="ident">width</span>, <span class="number">0</span>..<span class="ident">height</span>),
+            (<span class="bool-val">true</span>, <span class="bool-val">true</span>) =&gt; <span class="macro">copy_within_impl_!</span>((<span class="number">0</span>..<span class="ident">width</span>).<span class="ident">rev</span>(), (<span class="number">0</span>..<span class="ident">height</span>).<span class="ident">rev</span>()),
+            (<span class="bool-val">true</span>, <span class="bool-val">false</span>) =&gt; <span class="macro">copy_within_impl_!</span>((<span class="number">0</span>..<span class="ident">width</span>).<span class="ident">rev</span>(), <span class="number">0</span>..<span class="ident">height</span>),
+            (<span class="bool-val">false</span>, <span class="bool-val">true</span>) =&gt; <span class="macro">copy_within_impl_!</span>(<span class="number">0</span>..<span class="ident">width</span>, (<span class="number">0</span>..<span class="ident">height</span>).<span class="ident">rev</span>()),
+            (<span class="bool-val">false</span>, <span class="bool-val">false</span>) =&gt; <span class="macro">copy_within_impl_!</span>(<span class="number">0</span>..<span class="ident">width</span>, <span class="number">0</span>..<span class="ident">height</span>),
         }
         <span class="bool-val">true</span>
     }
 
     <span class="doccomment">/// Returns a mutable reference to the underlying image.</span>
-    <span class="kw">fn</span> <span class="ident">inner_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident"><span class="self">Self</span>::InnerImage</span>;
+    <span class="kw">fn</span> <span class="ident">inner_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident"><span class="self">Self</span>::InnerImage</span>;
 
     <span class="doccomment">/// Returns a mutable subimage that is a view into this image.</span>
     <span class="doccomment">/// If you want an immutable subimage instead, use [`GenericImageView::view`]</span>
@@ -2312,7 +2311,7 @@
         <span class="ident">y</span>: <span class="ident">u32</span>,
         <span class="ident">width</span>: <span class="ident">u32</span>,
         <span class="ident">height</span>: <span class="ident">u32</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">SubImage</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident"><span class="self">Self</span>::InnerImage</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="ident">SubImage</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident"><span class="self">Self</span>::InnerImage</span><span class="op">&gt;</span> {
         <span class="ident">SubImage::new</span>(<span class="self">self</span>.<span class="ident">inner_mut</span>(), <span class="ident">x</span>, <span class="ident">y</span>, <span class="ident">width</span>, <span class="ident">height</span>)
     }
 }
@@ -2340,7 +2339,7 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span> <span class="ident">SubImage</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Construct a new subimage</span>
     <span class="doccomment">/// The coordinates set the position of the top left corner of the SubImage.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">image</span>: <span class="ident">I</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>, <span class="ident">width</span>: <span class="ident">u32</span>, <span class="ident">height</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">SubImage</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">image</span>: <span class="ident">I</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>, <span class="ident">width</span>: <span class="ident">u32</span>, <span class="ident">height</span>: <span class="ident">u32</span>) -&gt; <span class="ident">SubImage</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span> {
         <span class="ident">SubImage</span> {
             <span class="ident">image</span>,
             <span class="ident">xoffset</span>: <span class="ident">x</span>,
@@ -2359,7 +2358,7 @@
     }
 
     <span class="doccomment">/// Convert this subimage to an ImageBuffer</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_image</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ImageBuffer</span><span class="op">&lt;</span><span class="ident">DerefPixel</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">DerefSubpixel</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_image</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">ImageBuffer</span><span class="op">&lt;</span><span class="ident">DerefPixel</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>, <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">DerefSubpixel</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span><span class="op">&gt;</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">I</span>: <span class="ident">Deref</span>,
         <span class="ident">I::Target</span>: <span class="ident">GenericImage</span> <span class="op">+</span> <span class="lifetime">&#39;static</span>,
@@ -2387,25 +2386,25 @@
     <span class="kw">type</span> <span class="ident">Pixel</span> <span class="op">=</span> <span class="ident">DerefPixel</span><span class="op">&lt;</span><span class="ident">I</span><span class="op">&gt;</span>;
     <span class="kw">type</span> <span class="ident">InnerImageView</span> <span class="op">=</span> <span class="ident">I::Target</span>;
 
-    <span class="kw">fn</span> <span class="ident">dimensions</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">u32</span>, <span class="ident">u32</span>) {
+    <span class="kw">fn</span> <span class="ident">dimensions</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (<span class="ident">u32</span>, <span class="ident">u32</span>) {
         (<span class="self">self</span>.<span class="ident">xstride</span>, <span class="self">self</span>.<span class="ident">ystride</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">bounds</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">u32</span>, <span class="ident">u32</span>, <span class="ident">u32</span>, <span class="ident">u32</span>) {
+    <span class="kw">fn</span> <span class="ident">bounds</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (<span class="ident">u32</span>, <span class="ident">u32</span>, <span class="ident">u32</span>, <span class="ident">u32</span>) {
         (<span class="self">self</span>.<span class="ident">xoffset</span>, <span class="self">self</span>.<span class="ident">yoffset</span>, <span class="self">self</span>.<span class="ident">xstride</span>, <span class="self">self</span>.<span class="ident">ystride</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">get_pixel</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident"><span class="self">Self</span>::Pixel</span> {
+    <span class="kw">fn</span> <span class="ident">get_pixel</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>) -&gt; <span class="ident"><span class="self">Self</span>::Pixel</span> {
         <span class="self">self</span>.<span class="ident">image</span>.<span class="ident">get_pixel</span>(<span class="ident">x</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">xoffset</span>, <span class="ident">y</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">yoffset</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">view</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>, <span class="ident">width</span>: <span class="ident">u32</span>, <span class="ident">height</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">SubImage</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::InnerImageView</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">view</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>, <span class="ident">width</span>: <span class="ident">u32</span>, <span class="ident">height</span>: <span class="ident">u32</span>) -&gt; <span class="ident">SubImage</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::InnerImageView</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">xoffset</span> <span class="op">+</span> <span class="ident">x</span>;
         <span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">yoffset</span> <span class="op">+</span> <span class="ident">y</span>;
         <span class="ident">SubImage::new</span>(<span class="self">self</span>.<span class="ident">inner</span>(), <span class="ident">x</span>, <span class="ident">y</span>, <span class="ident">width</span>, <span class="ident">height</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">inner</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::InnerImageView</span> {
+    <span class="kw">fn</span> <span class="ident">inner</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident"><span class="self">Self</span>::InnerImageView</span> {
         <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">image</span>
     }
 }
@@ -2418,7 +2417,7 @@
 {
     <span class="kw">type</span> <span class="ident">InnerImage</span> <span class="op">=</span> <span class="ident">I::Target</span>;
 
-    <span class="kw">fn</span> <span class="ident">get_pixel_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident"><span class="self">Self</span>::Pixel</span> {
+    <span class="kw">fn</span> <span class="ident">get_pixel_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident"><span class="self">Self</span>::Pixel</span> {
         <span class="self">self</span>.<span class="ident">image</span>.<span class="ident">get_pixel_mut</span>(<span class="ident">x</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">xoffset</span>, <span class="ident">y</span> <span class="op">+</span> <span class="self">self</span>.<span class="ident">yoffset</span>)
     }
 
@@ -2439,13 +2438,13 @@
         <span class="ident">y</span>: <span class="ident">u32</span>,
         <span class="ident">width</span>: <span class="ident">u32</span>,
         <span class="ident">height</span>: <span class="ident">u32</span>,
-    ) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">SubImage</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident"><span class="self">Self</span>::InnerImage</span><span class="op">&gt;</span> {
+    ) -&gt; <span class="ident">SubImage</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident"><span class="self">Self</span>::InnerImage</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">x</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">xoffset</span> <span class="op">+</span> <span class="ident">x</span>;
         <span class="kw">let</span> <span class="ident">y</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">yoffset</span> <span class="op">+</span> <span class="ident">y</span>;
         <span class="ident">SubImage::new</span>(<span class="self">self</span>.<span class="ident">inner_mut</span>(), <span class="ident">x</span>, <span class="ident">y</span>, <span class="ident">width</span>, <span class="ident">height</span>)
     }
 
-    <span class="kw">fn</span> <span class="ident">inner_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident"><span class="self">Self</span>::InnerImage</span> {
+    <span class="kw">fn</span> <span class="ident">inner_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident"><span class="self">Self</span>::InnerImage</span> {
         <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">image</span>
     }
 }
@@ -2465,18 +2464,18 @@
     <span class="kw">fn</span> <span class="ident">test_image_alpha_blending</span>() {
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">target</span> <span class="op">=</span> <span class="ident">ImageBuffer::new</span>(<span class="number">1</span>, <span class="number">1</span>);
         <span class="ident">target</span>.<span class="ident">put_pixel</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="ident">Rgba</span>([<span class="number">255u8</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>]));
-        <span class="macro">assert!</span>(<span class="kw-2">*</span><span class="ident">target</span>.<span class="ident">get_pixel</span>(<span class="number">0</span>, <span class="number">0</span>) <span class="op">=</span><span class="op">=</span> <span class="ident">Rgba</span>([<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>]));
+        <span class="macro">assert!</span>(<span class="kw-2">*</span><span class="ident">target</span>.<span class="ident">get_pixel</span>(<span class="number">0</span>, <span class="number">0</span>) <span class="op">==</span> <span class="ident">Rgba</span>([<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>]));
         <span class="ident">target</span>.<span class="ident">blend_pixel</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="ident">Rgba</span>([<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>, <span class="number">255</span>]));
-        <span class="macro">assert!</span>(<span class="kw-2">*</span><span class="ident">target</span>.<span class="ident">get_pixel</span>(<span class="number">0</span>, <span class="number">0</span>) <span class="op">=</span><span class="op">=</span> <span class="ident">Rgba</span>([<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>, <span class="number">255</span>]));
+        <span class="macro">assert!</span>(<span class="kw-2">*</span><span class="ident">target</span>.<span class="ident">get_pixel</span>(<span class="number">0</span>, <span class="number">0</span>) <span class="op">==</span> <span class="ident">Rgba</span>([<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>, <span class="number">255</span>]));
 
         <span class="comment">// Blending an alpha channel onto a solid background</span>
         <span class="ident">target</span>.<span class="ident">blend_pixel</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="ident">Rgba</span>([<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">127</span>]));
-        <span class="macro">assert!</span>(<span class="kw-2">*</span><span class="ident">target</span>.<span class="ident">get_pixel</span>(<span class="number">0</span>, <span class="number">0</span>) <span class="op">=</span><span class="op">=</span> <span class="ident">Rgba</span>([<span class="number">127</span>, <span class="number">127</span>, <span class="number">0</span>, <span class="number">255</span>]));
+        <span class="macro">assert!</span>(<span class="kw-2">*</span><span class="ident">target</span>.<span class="ident">get_pixel</span>(<span class="number">0</span>, <span class="number">0</span>) <span class="op">==</span> <span class="ident">Rgba</span>([<span class="number">127</span>, <span class="number">127</span>, <span class="number">0</span>, <span class="number">255</span>]));
 
         <span class="comment">// Blending two alpha channels</span>
         <span class="ident">target</span>.<span class="ident">put_pixel</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="ident">Rgba</span>([<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>, <span class="number">127</span>]));
         <span class="ident">target</span>.<span class="ident">blend_pixel</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="ident">Rgba</span>([<span class="number">255</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">127</span>]));
-        <span class="macro">assert!</span>(<span class="kw-2">*</span><span class="ident">target</span>.<span class="ident">get_pixel</span>(<span class="number">0</span>, <span class="number">0</span>) <span class="op">=</span><span class="op">=</span> <span class="ident">Rgba</span>([<span class="number">169</span>, <span class="number">85</span>, <span class="number">0</span>, <span class="number">190</span>]));
+        <span class="macro">assert!</span>(<span class="kw-2">*</span><span class="ident">target</span>.<span class="ident">get_pixel</span>(<span class="number">0</span>, <span class="number">0</span>) <span class="op">==</span> <span class="ident">Rgba</span>([<span class="number">169</span>, <span class="number">85</span>, <span class="number">0</span>, <span class="number">190</span>]));
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -2505,7 +2504,7 @@
         <span class="comment">// Clone a view into non-mutable to a separate buffer</span>
         <span class="kw">let</span> <span class="ident">cloned</span> <span class="op">=</span> <span class="ident">source</span>.<span class="ident">view</span>(<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>).<span class="ident">to_image</span>();
 
-        <span class="macro">assert!</span>(<span class="ident">cloned</span>.<span class="ident">get_pixel</span>(<span class="number">0</span>, <span class="number">0</span>) <span class="op">=</span><span class="op">=</span> <span class="ident">source</span>.<span class="ident">get_pixel</span>(<span class="number">1</span>, <span class="number">1</span>));
+        <span class="macro">assert!</span>(<span class="ident">cloned</span>.<span class="ident">get_pixel</span>(<span class="number">0</span>, <span class="number">0</span>) <span class="op">==</span> <span class="ident">source</span>.<span class="ident">get_pixel</span>(<span class="number">1</span>, <span class="number">1</span>));
     }
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
@@ -2532,10 +2531,10 @@
         <span class="kw">struct</span> <span class="ident">MockDecoder</span> {<span class="ident">scanline_number</span>: <span class="ident">u64</span>, <span class="ident">scanline_bytes</span>: <span class="ident">u64</span>}
         <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">ImageDecoder</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">MockDecoder</span> {
             <span class="kw">type</span> <span class="ident">Reader</span> <span class="op">=</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">io::Read</span><span class="op">&gt;</span>;
-            <span class="kw">fn</span> <span class="ident">dimensions</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">u32</span>, <span class="ident">u32</span>) {(<span class="number">5</span>, <span class="number">5</span>)}
-            <span class="kw">fn</span> <span class="ident">color_type</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ColorType</span> {  <span class="ident">ColorType::L8</span> }
-            <span class="kw">fn</span> <span class="ident">into_reader</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ImageResult</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Reader</span><span class="op">&gt;</span> {<span class="macro">unimplemented!</span>()}
-            <span class="kw">fn</span> <span class="ident">scanline_bytes</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u64</span> { <span class="self">self</span>.<span class="ident">scanline_bytes</span> }
+            <span class="kw">fn</span> <span class="ident">dimensions</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (<span class="ident">u32</span>, <span class="ident">u32</span>) {(<span class="number">5</span>, <span class="number">5</span>)}
+            <span class="kw">fn</span> <span class="ident">color_type</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">ColorType</span> {  <span class="ident">ColorType::L8</span> }
+            <span class="kw">fn</span> <span class="ident">into_reader</span>(<span class="self">self</span>) -&gt; <span class="ident">ImageResult</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Reader</span><span class="op">&gt;</span> {<span class="macro">unimplemented!</span>()}
+            <span class="kw">fn</span> <span class="ident">scanline_bytes</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u64</span> { <span class="self">self</span>.<span class="ident">scanline_bytes</span> }
         }
 
         <span class="kw">const</span> <span class="ident">DATA</span>: [<span class="ident">u8</span>; <span class="number">25</span>] <span class="op">=</span> [<span class="number">0</span>,  <span class="number">1</span>,  <span class="number">2</span>,  <span class="number">3</span>,  <span class="number">4</span>,
@@ -2544,11 +2543,11 @@
                                 <span class="number">15</span>, <span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>,
                                 <span class="number">20</span>, <span class="number">21</span>, <span class="number">22</span>, <span class="number">23</span>, <span class="number">24</span>];
 
-        <span class="kw">fn</span> <span class="ident">seek_scanline</span>(<span class="ident">m</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">MockDecoder</span>, <span class="ident">n</span>: <span class="ident">u64</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">io::Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+        <span class="kw">fn</span> <span class="ident">seek_scanline</span>(<span class="ident">m</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">MockDecoder</span>, <span class="ident">n</span>: <span class="ident">u64</span>) -&gt; <span class="ident">io::Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
             <span class="ident">m</span>.<span class="ident">scanline_number</span> <span class="op">=</span> <span class="ident">n</span>;
             <span class="prelude-val">Ok</span>(())
         }
-        <span class="kw">fn</span> <span class="ident">read_scanline</span>(<span class="ident">m</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">MockDecoder</span>, <span class="ident">buf</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">io::Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+        <span class="kw">fn</span> <span class="ident">read_scanline</span>(<span class="ident">m</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">MockDecoder</span>, <span class="ident">buf</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) -&gt; <span class="ident">io::Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
             <span class="kw">let</span> <span class="ident">bytes_read</span> <span class="op">=</span> <span class="ident">m</span>.<span class="ident">scanline_number</span> <span class="op">*</span> <span class="ident">m</span>.<span class="ident">scanline_bytes</span>;
             <span class="kw">if</span> <span class="ident">bytes_read</span> <span class="op">&gt;</span><span class="op">=</span> <span class="number">25</span> {
                 <span class="kw">return</span> <span class="prelude-val">Ok</span>(());
@@ -2602,22 +2601,22 @@
         <span class="kw">struct</span> <span class="ident">MockDecoder</span>;
         <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="ident">ImageDecoder</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">MockDecoder</span> {
             <span class="kw">type</span> <span class="ident">Reader</span> <span class="op">=</span> <span class="ident">Box</span><span class="op">&lt;</span><span class="kw">dyn</span> <span class="ident">io::Read</span><span class="op">&gt;</span>;
-            <span class="kw">fn</span> <span class="ident">dimensions</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> (<span class="ident">u32</span>, <span class="ident">u32</span>) {(<span class="number">5</span>, <span class="number">5</span>)}
-            <span class="kw">fn</span> <span class="ident">color_type</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ColorType</span> {  <span class="ident">ColorType::L8</span> }
-            <span class="kw">fn</span> <span class="ident">into_reader</span>(<span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ImageResult</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Reader</span><span class="op">&gt;</span> {<span class="macro">unimplemented!</span>()}
-            <span class="kw">fn</span> <span class="ident">scanline_bytes</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">u64</span> { <span class="number">25</span> }
+            <span class="kw">fn</span> <span class="ident">dimensions</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; (<span class="ident">u32</span>, <span class="ident">u32</span>) {(<span class="number">5</span>, <span class="number">5</span>)}
+            <span class="kw">fn</span> <span class="ident">color_type</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">ColorType</span> {  <span class="ident">ColorType::L8</span> }
+            <span class="kw">fn</span> <span class="ident">into_reader</span>(<span class="self">self</span>) -&gt; <span class="ident">ImageResult</span><span class="op">&lt;</span><span class="ident"><span class="self">Self</span>::Reader</span><span class="op">&gt;</span> {<span class="macro">unimplemented!</span>()}
+            <span class="kw">fn</span> <span class="ident">scanline_bytes</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">u64</span> { <span class="number">25</span> }
         }
 
         <span class="comment">// Ensure that seek scanline is called only once.</span>
         <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">seeks</span> <span class="op">=</span> <span class="number">0</span>;
-        <span class="kw">let</span> <span class="ident">seek_scanline</span> <span class="op">=</span> <span class="op">|</span><span class="ident">_d</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">MockDecoder</span>, <span class="ident">n</span>: <span class="ident">u64</span><span class="op">|</span> <span class="op">-</span><span class="op">&gt;</span> <span class="ident">io::Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+        <span class="kw">let</span> <span class="ident">seek_scanline</span> <span class="op">=</span> <span class="op">|</span><span class="ident">_d</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">MockDecoder</span>, <span class="ident">n</span>: <span class="ident">u64</span><span class="op">|</span> -&gt; <span class="ident">io::Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
             <span class="ident">seeks</span> <span class="op">+</span><span class="op">=</span> <span class="number">1</span>;
             <span class="macro">assert_eq!</span>(<span class="ident">n</span>, <span class="number">0</span>);
             <span class="macro">assert_eq!</span>(<span class="ident">seeks</span>, <span class="number">1</span>);
             <span class="prelude-val">Ok</span>(())
         };
 
-        <span class="kw">fn</span> <span class="ident">read_scanline</span>(<span class="ident">_m</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">MockDecoder</span>, <span class="ident">buf</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">io::Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
+        <span class="kw">fn</span> <span class="ident">read_scanline</span>(<span class="ident">_m</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">MockDecoder</span>, <span class="ident">buf</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">u8</span>]) -&gt; <span class="ident">io::Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
             <span class="ident">buf</span>.<span class="ident">copy_from_slice</span>(<span class="kw-2">&amp;</span><span class="ident">DATA</span>);
             <span class="prelude-val">Ok</span>(())
         }
@@ -2632,7 +2631,7 @@
 
     <span class="attribute">#[<span class="ident">test</span>]</span>
     <span class="kw">fn</span> <span class="ident">test_image_format_from_path</span>() {
-        <span class="kw">fn</span> <span class="ident">from_path</span>(<span class="ident">s</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ImageResult</span><span class="op">&lt;</span><span class="ident">ImageFormat</span><span class="op">&gt;</span> {
+        <span class="kw">fn</span> <span class="ident">from_path</span>(<span class="ident">s</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="ident">ImageResult</span><span class="op">&lt;</span><span class="ident">ImageFormat</span><span class="op">&gt;</span> {
             <span class="ident">ImageFormat::from_path</span>(<span class="ident">Path::new</span>(<span class="ident">s</span>))
         }
         <span class="macro">assert_eq!</span>(<span class="ident">from_path</span>(<span class="string">&quot;./a.jpg&quot;</span>).<span class="ident">unwrap</span>(), <span class="ident">ImageFormat::Jpeg</span>);
@@ -2754,14 +2753,14 @@
             <span class="kw">for</span> <span class="ident">ext</span> <span class="kw">in</span> <span class="ident">format</span>.<span class="ident">extensions_str</span>() {
                 <span class="macro">assert!</span>(<span class="ident">file</span>.<span class="ident">set_extension</span>(<span class="ident">ext</span>));
                 <span class="kw">match</span> <span class="ident">ImageFormat::from_path</span>(<span class="kw-2">&amp;</span><span class="ident">file</span>) {
-                    <span class="prelude-val">Err</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">panic!</span>(<span class="string">&quot;Path {} not recognized as {:?}&quot;</span>, <span class="ident">file</span>.<span class="ident">display</span>(), <span class="ident">format</span>),
-                    <span class="prelude-val">Ok</span>(<span class="ident">result</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="macro">assert_eq!</span>(<span class="ident">format</span>, <span class="ident">result</span>),
+                    <span class="prelude-val">Err</span>(<span class="kw">_</span>) =&gt; <span class="macro">panic!</span>(<span class="string">&quot;Path {} not recognized as {:?}&quot;</span>, <span class="ident">file</span>.<span class="ident">display</span>(), <span class="ident">format</span>),
+                    <span class="prelude-val">Ok</span>(<span class="ident">result</span>) =&gt; <span class="macro">assert_eq!</span>(<span class="ident">format</span>, <span class="ident">result</span>),
                 }
             }
         }
     }
 }
-</pre></div>
+</code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="image" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
     <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script>
 </body></html>

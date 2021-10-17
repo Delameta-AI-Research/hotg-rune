@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;ndarray-0.15.3&#x2F;src&#x2F;lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../ndarray/index.html'><div class='logo-container rust-logo'><img src='https:&#x2F;&#x2F;rust-ndarray.github.io&#x2F;images&#x2F;rust-ndarray_logo.svg' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">   1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;ndarray-0.15.3&#x2F;src&#x2F;lib.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>lib.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../ndarray/index.html'><div class='logo-container rust-logo'><img src='https:&#x2F;&#x2F;rust-ndarray.github.io&#x2F;images&#x2F;rust-ndarray_logo.svg' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">   1</span>
 <span id="2">   2</span>
 <span id="3">   3</span>
 <span id="4">   4</span>
@@ -1632,8 +1632,7 @@
 <span id="1632">1632</span>
 <span id="1633">1633</span>
 <span id="1634">1634</span>
-</pre><pre class="rust">
-<span class="comment">// Copyright 2014-2020 bluss and ndarray developers.</span>
+</pre><pre class="rust"><code><span class="comment">// Copyright 2014-2020 bluss and ndarray developers.</span>
 <span class="comment">//</span>
 <span class="comment">// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or</span>
 <span class="comment">// http://www.apache.org/licenses/LICENSE-2.0&gt; or the MIT license</span>
@@ -3091,7 +3090,7 @@
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">OwnedArcRepr</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span>(<span class="ident">Arc</span><span class="op">&lt;</span><span class="ident">OwnedRepr</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span><span class="op">&gt;</span>);
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span> <span class="ident">Clone</span> <span class="kw">for</span> <span class="ident">OwnedArcRepr</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span> {
-    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">clone</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self</span> {
         <span class="ident">OwnedArcRepr</span>(<span class="self">self</span>.<span class="number">0</span>.<span class="ident">clone</span>())
     }
 }
@@ -3109,7 +3108,7 @@
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span> <span class="ident">RawViewRepr</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span> {
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="self">Self</span> {
         <span class="ident">RawViewRepr</span> { <span class="ident">ptr</span>: <span class="ident">PhantomData</span> }
     }
 }
@@ -3127,7 +3126,7 @@
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span> <span class="ident">ViewRepr</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span> {
     <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">always</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">new</span>() <span class="op">-</span><span class="op">&gt;</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">new</span>() -&gt; <span class="self">Self</span> {
         <span class="ident">ViewRepr</span> { <span class="ident">life</span>: <span class="ident">PhantomData</span> }
     }
 }
@@ -3145,18 +3144,18 @@
 
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span><span class="op">&gt;</span> <span class="ident">CowRepr</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Returns `true` iff the data is the `View` variant.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_view</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_view</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">CowRepr::View</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
-            <span class="ident">CowRepr::Owned</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>,
+            <span class="ident">CowRepr::View</span>(<span class="kw">_</span>) =&gt; <span class="bool-val">true</span>,
+            <span class="ident">CowRepr::Owned</span>(<span class="kw">_</span>) =&gt; <span class="bool-val">false</span>,
         }
     }
 
     <span class="doccomment">/// Returns `true` iff the data is the `Owned` variant.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_owned</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">is_owned</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
         <span class="kw">match</span> <span class="self">self</span> {
-            <span class="ident">CowRepr::View</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">false</span>,
-            <span class="ident">CowRepr::Owned</span>(<span class="kw">_</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="bool-val">true</span>,
+            <span class="ident">CowRepr::View</span>(<span class="kw">_</span>) =&gt; <span class="bool-val">false</span>,
+            <span class="ident">CowRepr::Owned</span>(<span class="kw">_</span>) =&gt; <span class="bool-val">true</span>,
         }
     }
 }
@@ -3180,13 +3179,13 @@
     <span class="ident">D</span>: <span class="ident">Dimension</span>,
 {
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">broadcast_unwrap</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">dim</span>: <span class="ident">E</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ArrayView</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, <span class="ident">A</span>, <span class="ident">E</span><span class="op">&gt;</span>
+    <span class="kw">fn</span> <span class="ident">broadcast_unwrap</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">dim</span>: <span class="ident">E</span>) -&gt; <span class="ident">ArrayView</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, <span class="ident">A</span>, <span class="ident">E</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">E</span>: <span class="ident">Dimension</span>,
     {
         <span class="attribute">#[<span class="ident">cold</span>]</span>
         <span class="attribute">#[<span class="ident">inline</span>(<span class="ident">never</span>)]</span>
-        <span class="kw">fn</span> <span class="ident">broadcast_panic</span><span class="op">&lt;</span><span class="ident">D</span>, <span class="ident">E</span><span class="op">&gt;</span>(<span class="ident">from</span>: <span class="kw-2">&amp;</span><span class="ident">D</span>, <span class="ident">to</span>: <span class="kw-2">&amp;</span><span class="ident">E</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="op">!</span>
+        <span class="kw">fn</span> <span class="ident">broadcast_panic</span><span class="op">&lt;</span><span class="ident">D</span>, <span class="ident">E</span><span class="op">&gt;</span>(<span class="ident">from</span>: <span class="kw-2">&amp;</span><span class="ident">D</span>, <span class="ident">to</span>: <span class="kw-2">&amp;</span><span class="ident">E</span>) -&gt; <span class="op">!</span>
         <span class="kw">where</span>
             <span class="ident">D</span>: <span class="ident">Dimension</span>,
             <span class="ident">E</span>: <span class="ident">Dimension</span>,
@@ -3199,15 +3198,15 @@
         }
 
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">broadcast</span>(<span class="ident">dim</span>.<span class="ident">clone</span>()) {
-            <span class="prelude-val">Some</span>(<span class="ident">it</span>) <span class="op">=</span><span class="op">&gt;</span> <span class="ident">it</span>,
-            <span class="prelude-val">None</span> <span class="op">=</span><span class="op">&gt;</span> <span class="ident">broadcast_panic</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">dim</span>, <span class="kw-2">&amp;</span><span class="ident">dim</span>),
+            <span class="prelude-val">Some</span>(<span class="ident">it</span>) =&gt; <span class="ident">it</span>,
+            <span class="prelude-val">None</span> =&gt; <span class="ident">broadcast_panic</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">dim</span>, <span class="kw-2">&amp;</span><span class="ident">dim</span>),
         }
     }
 
     <span class="comment">// Broadcast to dimension `E`, without checking that the dimensions match</span>
     <span class="comment">// (Checked in debug assertions).</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">fn</span> <span class="ident">broadcast_assume</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">dim</span>: <span class="ident">E</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ArrayView</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, <span class="ident">A</span>, <span class="ident">E</span><span class="op">&gt;</span>
+    <span class="kw">fn</span> <span class="ident">broadcast_assume</span><span class="op">&lt;</span><span class="ident">E</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">dim</span>: <span class="ident">E</span>) -&gt; <span class="ident">ArrayView</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span>, <span class="ident">A</span>, <span class="ident">E</span><span class="op">&gt;</span>
     <span class="kw">where</span>
         <span class="ident">E</span>: <span class="ident">Dimension</span>,
     {
@@ -3219,12 +3218,12 @@
         <span class="kw">unsafe</span> { <span class="ident">ArrayView::new</span>(<span class="ident">ptr</span>, <span class="ident">dim</span>, <span class="ident">strides</span>) }
     }
 
-    <span class="kw">fn</span> <span class="ident">raw_strides</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">D</span> {
+    <span class="kw">fn</span> <span class="ident">raw_strides</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">D</span> {
         <span class="self">self</span>.<span class="ident">strides</span>.<span class="ident">clone</span>()
     }
 
     <span class="doccomment">/// Remove array axis `axis` and return the result.</span>
-    <span class="kw">fn</span> <span class="ident">try_remove_axis</span>(<span class="self">self</span>, <span class="ident">axis</span>: <span class="ident">Axis</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">ArrayBase</span><span class="op">&lt;</span><span class="ident">S</span>, <span class="ident">D::Smaller</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">try_remove_axis</span>(<span class="self">self</span>, <span class="ident">axis</span>: <span class="ident">Axis</span>) -&gt; <span class="ident">ArrayBase</span><span class="op">&lt;</span><span class="ident">S</span>, <span class="ident">D::Smaller</span><span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">d</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">dim</span>.<span class="ident">try_remove_axis</span>(<span class="ident">axis</span>);
         <span class="kw">let</span> <span class="ident">s</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">strides</span>.<span class="ident">try_remove_axis</span>(<span class="ident">axis</span>);
         <span class="comment">// safe because new dimension, strides allow access to a subset of old data</span>
@@ -3264,10 +3263,10 @@
 <span class="kw">mod</span> <span class="ident">impl_cow</span>;
 
 <span class="doccomment">/// Returns `true` if the pointer is aligned.</span>
-<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">is_aligned</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">T</span>) <span class="op">-</span><span class="op">&gt;</span> <span class="ident">bool</span> {
-    (<span class="ident">ptr</span> <span class="kw">as</span> <span class="ident">usize</span>) <span class="op">%</span> <span class="ident">::std::mem::align_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() <span class="op">=</span><span class="op">=</span> <span class="number">0</span>
+<span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">is_aligned</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="ident">ptr</span>: <span class="kw-2">*</span><span class="kw">const</span> <span class="ident">T</span>) -&gt; <span class="ident">bool</span> {
+    (<span class="ident">ptr</span> <span class="kw">as</span> <span class="ident">usize</span>) <span class="op">%</span> <span class="ident">::std::mem::align_of</span>::<span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>() <span class="op">==</span> <span class="number">0</span>
 }
-</pre></div>
+</code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="ndarray" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
     <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script>
 </body></html>

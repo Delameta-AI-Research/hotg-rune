@@ -1129,6 +1129,21 @@
 <span id="1129">1129</span>
 <span id="1130">1130</span>
 <span id="1131">1131</span>
+<span id="1132">1132</span>
+<span id="1133">1133</span>
+<span id="1134">1134</span>
+<span id="1135">1135</span>
+<span id="1136">1136</span>
+<span id="1137">1137</span>
+<span id="1138">1138</span>
+<span id="1139">1139</span>
+<span id="1140">1140</span>
+<span id="1141">1141</span>
+<span id="1142">1142</span>
+<span id="1143">1143</span>
+<span id="1144">1144</span>
+<span id="1145">1145</span>
+<span id="1146">1146</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::collections</span>::{<span class="ident">HashMap</span>, <span class="ident">HashSet</span>};
 <span class="kw">use</span> <span class="ident">hotg_rune_core</span>::{<span class="ident">Shape</span>, <span class="ident">ElementType</span>};
 <span class="kw">use</span> <span class="ident">legion</span>::{<span class="ident">Entity</span>, <span class="ident">Query</span>, <span class="ident">systems::CommandBuffer</span>, <span class="ident">world::SubWorld</span>};
@@ -1272,6 +1287,7 @@
     <span class="macro">quote!</span> {
         <span class="attribute">#[<span class="ident">no_mangle</span>]</span>
         <span class="kw">pub</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span> <span class="ident">_manifest</span>() -&gt; <span class="ident">i32</span> {
+            <span class="kw">let</span> <span class="ident">_setup</span> <span class="op">=</span> <span class="ident">hotg_runicos_base_wasm::SetupGuard::default</span>();
             #<span class="ident">capabilities</span>
             #<span class="ident">proc_blocks</span>
             #<span class="ident">models</span>
@@ -1364,7 +1380,10 @@
     <span class="kw">let</span> <span class="ident">name</span> <span class="op">=</span> <span class="ident">Ident::new</span>(<span class="ident">name</span>, <span class="ident">Span::call_site</span>());
     <span class="kw">let</span> <span class="ident">inputs</span> <span class="op">=</span> <span class="ident">input_bindings</span>(<span class="kw-2">&amp;</span><span class="ident">inputs</span>.<span class="ident">tensors</span>, <span class="ident">tensor_names</span>);
 
+    <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="macro">format!</span>(<span class="string">&quot;Sending results to the \&quot;{}\&quot; output&quot;</span>, <span class="ident">name</span>);
+
     <span class="macro">quote!</span> {
+        <span class="macro">log::debug!</span>(#<span class="ident">msg</span>);
         #<span class="ident">name</span>.<span class="ident">consume</span>(#<span class="ident">inputs</span>);
     }
 }
@@ -1381,7 +1400,10 @@
     <span class="kw">let</span> <span class="ident">output_types</span> <span class="op">=</span> <span class="ident">tensor_types</span>(<span class="kw-2">&amp;</span><span class="ident">outputs</span>.<span class="ident">tensors</span>, <span class="ident">tensors</span>);
     <span class="kw">let</span> <span class="ident">outputs</span> <span class="op">=</span> <span class="ident">tensor_name_or_tuple</span>(<span class="kw-2">&amp;</span><span class="ident">outputs</span>.<span class="ident">tensors</span>, <span class="ident">tensor_names</span>);
 
+    <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="macro">format!</span>(<span class="string">&quot;Executing \&quot;{}\&quot;&quot;</span>, <span class="ident">name</span>);
+
     <span class="macro">quote!</span> {
+        <span class="macro">log::debug!</span>(#<span class="ident">msg</span>);
         <span class="kw">let</span> #<span class="ident">outputs</span>: #<span class="ident">output_types</span> <span class="op">=</span> #<span class="ident">name</span>.<span class="ident">transform</span>(#<span class="ident">inputs</span>);
     }
 }
@@ -1461,7 +1483,12 @@
     <span class="kw">let</span> <span class="ident">output_types</span> <span class="op">=</span> <span class="ident">tensor_types</span>(<span class="kw-2">&amp;</span><span class="ident">outputs</span>.<span class="ident">tensors</span>, <span class="ident">tensors</span>);
     <span class="kw">let</span> <span class="ident">outputs</span> <span class="op">=</span> <span class="ident">tensor_name_or_tuple</span>(<span class="kw-2">&amp;</span><span class="ident">outputs</span>.<span class="ident">tensors</span>, <span class="ident">tensor_names</span>);
 
-    <span class="macro">quote!</span> { <span class="kw">let</span> #<span class="ident">outputs</span>: #<span class="ident">output_types</span> <span class="op">=</span> #<span class="ident">name</span>.<span class="ident">generate</span>(); }
+    <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="macro">format!</span>(<span class="string">&quot;Reading data from \&quot;{}\&quot;&quot;</span>, <span class="ident">name</span>);
+
+    <span class="macro">quote!</span> {
+        <span class="macro">log::debug!</span>(#<span class="ident">msg</span>);
+        <span class="kw">let</span> #<span class="ident">outputs</span>: #<span class="ident">output_types</span> <span class="op">=</span> #<span class="ident">name</span>.<span class="ident">generate</span>();
+    }
 }
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Default</span>)]</span>
@@ -2160,6 +2187,7 @@
         <span class="kw">let</span> <span class="ident">got</span> <span class="op">=</span> <span class="ident">execute_capability</span>(<span class="kw-2">&amp;</span><span class="ident">name</span>, <span class="kw-2">&amp;</span><span class="ident">outputs</span>, <span class="kw-2">&amp;</span><span class="ident">tensor_names</span>, <span class="ident">tensors</span>);
 
         <span class="kw">let</span> <span class="ident">should_be</span> <span class="op">=</span> <span class="macro">quote!</span> {
+            <span class="macro">log::debug!</span>(<span class="string">&quot;Reading data from \&quot;first\&quot;&quot;</span>);
             <span class="kw">let</span> <span class="ident">first_0</span>: <span class="ident">Tensor</span><span class="op">&lt;</span><span class="ident">f32</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">first</span>.<span class="ident">generate</span>();
         };
         <span class="macro">assert_quote_eq!</span>(<span class="ident">got</span>, <span class="ident">should_be</span>);
@@ -2202,6 +2230,7 @@
         );
 
         <span class="kw">let</span> <span class="ident">should_be</span> <span class="op">=</span> <span class="macro">quote!</span> {
+            <span class="macro">log::debug!</span>(<span class="string">&quot;Executing \&quot;model\&quot;&quot;</span>);
             <span class="kw">let</span> <span class="ident">model_output</span>: <span class="ident">Tensor</span><span class="op">&lt;</span><span class="ident">f32</span><span class="op">&gt;</span> <span class="op">=</span> <span class="ident">model</span>.<span class="ident">transform</span>(<span class="ident">model_input</span>.<span class="ident">clone</span>());
         };
         <span class="macro">assert_quote_eq!</span>(<span class="ident">got</span>, <span class="ident">should_be</span>);
@@ -2237,6 +2266,7 @@
         <span class="kw">let</span> <span class="ident">got</span> <span class="op">=</span> <span class="ident">execute_output</span>(<span class="kw-2">&amp;</span><span class="ident">name</span>, <span class="kw-2">&amp;</span><span class="ident">inputs</span>, <span class="kw-2">&amp;</span><span class="ident">tensor_names</span>);
 
         <span class="kw">let</span> <span class="ident">should_be</span> <span class="op">=</span> <span class="macro">quote!</span> {
+            <span class="macro">log::debug!</span>(<span class="string">&quot;Sending results to the \&quot;serial\&quot; output&quot;</span>);
             <span class="ident">serial</span>.<span class="ident">consume</span>((<span class="ident">first_input</span>.<span class="ident">clone</span>(), <span class="ident">second_input</span>.<span class="ident">clone</span>()));
         };
         <span class="macro">assert_quote_eq!</span>(<span class="ident">got</span>, <span class="ident">should_be</span>);

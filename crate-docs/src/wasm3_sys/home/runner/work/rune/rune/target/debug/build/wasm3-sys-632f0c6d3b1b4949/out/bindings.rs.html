@@ -1395,6 +1395,15 @@
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">GetMaxUsedSlotPlusOne</span>(<span class="ident">o</span>: <span class="ident">IM3Compilation</span>) -&gt; <span class="ident">u16_</span>;
 }
+<span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">m3_LinkWASI</span>(<span class="ident">io_module</span>: <span class="ident">IM3Module</span>) -&gt; <span class="ident">M3Result</span>;
+}
+<span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">m3_LinkLibC</span>(<span class="ident">io_module</span>: <span class="ident">IM3Module</span>) -&gt; <span class="ident">M3Result</span>;
+}
+<span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">m3_LinkSpecTest</span>(<span class="ident">io_module</span>: <span class="ident">IM3Module</span>) -&gt; <span class="ident">M3Result</span>;
+}
 <span class="attribute">#[<span class="ident">repr</span>(<span class="ident">C</span>)]</span>
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Copy</span>, <span class="ident">Clone</span>)]</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">M3FuncType</span> {
@@ -1611,7 +1620,7 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ReleaseCodePage</span>(<span class="ident">io_runtime</span>: <span class="ident">IM3Runtime</span>, <span class="ident">i_codePage</span>: <span class="ident">IM3CodePage</span>);
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">m3_LinkWASI</span>(<span class="ident">io_module</span>: <span class="ident">IM3Module</span>) -&gt; <span class="ident">M3Result</span>;
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">m3_LinkTracer</span>(<span class="ident">io_module</span>: <span class="ident">IM3Module</span>) -&gt; <span class="ident">M3Result</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">BridgeToNewPageIfNecessary</span>(<span class="ident">o</span>: <span class="ident">IM3Compilation</span>) -&gt; <span class="ident">M3Result</span>;
@@ -1638,19 +1647,10 @@
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">GetPC</span>(<span class="ident">o</span>: <span class="ident">IM3Compilation</span>) -&gt; <span class="ident">pc_t</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">m3_LinkTracer</span>(<span class="ident">io_module</span>: <span class="ident">IM3Module</span>) -&gt; <span class="ident">M3Result</span>;
-}
-<span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">ConvertTypeCharToTypeId</span>(<span class="ident">i_code</span>: <span class="ident">cty::c_char</span>) -&gt; <span class="ident">u8_</span>;
 }
 <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">SignatureToFuncType</span>(<span class="ident">o_functionType</span>: <span class="kw-2">*</span><span class="kw-2">mut</span> <span class="ident">IM3FuncType</span>, <span class="ident">i_signature</span>: <span class="ident">ccstr_t</span>) -&gt; <span class="ident">M3Result</span>;
-}
-<span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">m3_LinkLibC</span>(<span class="ident">io_module</span>: <span class="ident">IM3Module</span>) -&gt; <span class="ident">M3Result</span>;
-}
-<span class="kw">extern</span> <span class="string">&quot;C&quot;</span> {
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">m3_LinkSpecTest</span>(<span class="ident">io_module</span>: <span class="ident">IM3Module</span>) -&gt; <span class="ident">M3Result</span>;
 }
 </code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../../../../../../../../../../" data-current-crate="wasm3_sys" data-search-index-js="../../../../../../../../../../../../search-index.js" data-search-js="../../../../../../../../../../../../search.js"></div>

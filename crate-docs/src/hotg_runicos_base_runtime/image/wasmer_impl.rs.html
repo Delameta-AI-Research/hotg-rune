@@ -854,7 +854,6 @@
 <span id="854">854</span>
 <span id="855">855</span>
 <span id="856">856</span>
-<span id="857">857</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std</span>::{
     <span class="ident">cell::Cell</span>,
     <span class="ident">collections::HashMap</span>,
@@ -866,13 +865,13 @@
 <span class="kw">use</span> <span class="ident">hotg_rune_core</span>::{<span class="ident">SerializableRecord</span>, <span class="ident">Shape</span>, <span class="ident">TFLITE_MIMETYPE</span>};
 <span class="kw">use</span> <span class="ident">hotg_rune_runtime</span>::{<span class="ident">Capability</span>, <span class="ident">Image</span>, <span class="ident">Output</span>};
 <span class="kw">use</span> <span class="ident">wasmer</span>::{<span class="ident">Array</span>, <span class="ident">Function</span>, <span class="ident">LazyInit</span>, <span class="ident">Memory</span>, <span class="ident">RuntimeError</span>, <span class="ident">ValueType</span>, <span class="ident">WasmPtr</span>};
-<span class="kw">use</span> <span class="ident">hotg_rune_wasmer_runtime::Registrar</span>;
+<span class="kw">use</span> <span class="ident">hotg_rune_runtime::wasmer::Registrar</span>;
 <span class="kw">use</span> <span class="kw">crate</span>::{
     <span class="ident">CapabilityFactory</span>, <span class="ident">Model</span>, <span class="ident">ModelFactory</span>, <span class="ident">OutputFactory</span>, <span class="ident">ResourceFactory</span>,
 };
 <span class="kw">use</span> <span class="kw">super</span>::{<span class="ident">BaseImage</span>, <span class="ident">Identifiers</span>, <span class="ident">LogFunc</span>};
 
-<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;vm</span><span class="op">&gt;</span> <span class="ident">Image</span><span class="op">&lt;</span><span class="ident">hotg_rune_wasmer_runtime::Registrar</span><span class="op">&lt;</span><span class="lifetime">&#39;vm</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">BaseImage</span> {
+<span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;vm</span><span class="op">&gt;</span> <span class="ident">Image</span><span class="op">&lt;</span><span class="ident">Registrar</span><span class="op">&lt;</span><span class="lifetime">&#39;vm</span><span class="op">&gt;</span><span class="op">&gt;</span> <span class="kw">for</span> <span class="ident">BaseImage</span> {
     <span class="kw">fn</span> <span class="ident">initialize_imports</span>(<span class="self">self</span>, <span class="ident">registrar</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Registrar</span><span class="op">&lt;</span><span class="lifetime">&#39;vm</span><span class="op">&gt;</span>) {
         <span class="kw">let</span> <span class="ident">BaseImage</span> {
             <span class="ident">capabilities</span>,
@@ -1663,7 +1662,6 @@
 <span class="kw">mod</span> <span class="ident">tests</span> {
     <span class="kw">use</span> <span class="ident">syn</span>::{<span class="ident">ForeignItem</span>, <span class="ident">ForeignItemFn</span>, <span class="ident">Item</span>};
     <span class="kw">use</span> <span class="ident">wasmer</span>::{<span class="ident">Export</span>, <span class="ident">Store</span>};
-    <span class="kw">use</span> <span class="ident">hotg_rune_wasmer_runtime::Registrar</span>;
     <span class="kw">use</span> <span class="kw">super</span>::<span class="kw-2">*</span>;
 
     <span class="kw">fn</span> <span class="ident">extern_functions</span>(<span class="ident">src</span>: <span class="kw-2">&amp;</span><span class="ident">str</span>) -&gt; <span class="kw">impl</span> <span class="ident">Iterator</span><span class="op">&lt;</span><span class="ident">Item</span> <span class="op">=</span> <span class="ident">ForeignItemFn</span><span class="op">&gt;</span> {

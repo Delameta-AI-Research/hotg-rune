@@ -5,8 +5,9 @@ members = [
     "bindings/*",
     "images/runicos-base/*",
     "integration-tests",
+    "bindings/dart/rust",
 ]
-exclude = ["bindings/web"]
+exclude = ["bindings/web", "bindings/dart"]
 
 [patch.crates-io]
 #serde_yaml = { git = "https://github.com/hotg-ai/serde-yaml", branch = "spans" }

@@ -783,7 +783,7 @@ fn debug(
     Ok(0)
 }
 
-#[derive(Clone, wasmer::WasmerEnv)]
+#[derive(Clone)]
 struct ResourceEnv {
     factories: Arc<HashMap<String, Box<dyn ResourceFactory>>>,
     instances: Arc<Mutex<HashMap<u32, Box<dyn Read + Send + Sync + 'static>>>>,

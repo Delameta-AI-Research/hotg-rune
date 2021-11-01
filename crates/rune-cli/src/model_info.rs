@@ -36,7 +36,7 @@ impl ModelInfo {
             &raw,
             AccelerationBackend::NONE,
         )
-        .context("Unable to an inference context")?;
+        .context("Unable to create an inference context")?;
 
         match self.format {
             Format::Text => print_info(&ctx),

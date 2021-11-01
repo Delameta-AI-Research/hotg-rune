@@ -7,3 +7,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+anyhow = "1.0.44"
+hotg-rune-core = { version = "0.10.0", path = "../../../crates/rune-core" }
+hotg-rune-runtime = { version = "0.10.0", path = "../../../crates/runtime", features = ["wasm3"] }
+hotg-runicos-base-runtime = { version = "0.10.0", path = "../../../images/runicos-base/runtime", features = ["wasm3-runtime"], default-features = false }

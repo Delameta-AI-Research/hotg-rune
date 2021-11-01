@@ -2405,6 +2405,12 @@ dependencies = [
 [[package]]
 name = "rune-dart"
 version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "hotg-rune-core",
+ "hotg-rune-runtime",
+ "hotg-runicos-base-runtime",
+]
 
 [[package]]
 name = "rune_py"

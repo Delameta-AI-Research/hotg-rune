@@ -11,17 +11,27 @@
 <span id="11">11</span>
 <span id="12">12</span>
 <span id="13">13</span>
+<span id="14">14</span>
+<span id="15">15</span>
+<span id="16">16</span>
+<span id="17">17</span>
+<span id="18">18</span>
 </pre><pre class="rust"><code><span class="doccomment">//! The type checking phase.</span>
 
 <span class="kw">mod</span> <span class="ident">check_for_loops</span>;
 <span class="kw">mod</span> <span class="ident">components</span>;
+<span class="kw">mod</span> <span class="ident">model_args_are_consumed</span>;
 
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident">components</span>::<span class="kw-2">*</span>;
 
 <span class="kw">use</span> <span class="ident">legion::Registry</span>;
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::phases::Phase</span>;
 
-<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">phase</span>() -&gt; <span class="ident">Phase</span> { <span class="ident">Phase::new</span>().<span class="ident">and_then</span>(<span class="ident">check_for_loops::run_system</span>) }
+<span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">phase</span>() -&gt; <span class="ident">Phase</span> {
+    <span class="ident">Phase::new</span>()
+        .<span class="ident">and_then</span>(<span class="ident">check_for_loops::run_system</span>)
+        .<span class="ident">and_then</span>(<span class="ident">model_args_are_consumed::run_system</span>)
+}
 
 <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">register_components</span>(<span class="ident">_registry</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Registry</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>) {}
 </code></pre></div>

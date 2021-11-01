@@ -1135,6 +1135,9 @@
 <span id="1135">1135</span>
 <span id="1136">1136</span>
 <span id="1137">1137</span>
+<span id="1138">1138</span>
+<span id="1139">1139</span>
+<span id="1140">1140</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Definitions for the Runefile&#39;s YAML format.</span>
 
 <span class="kw">use</span> <span class="ident">std</span>::{
@@ -1452,6 +1455,8 @@ The full syntax is `base@version#sub_path` where
     <span class="doccomment">/// The tensors that this model outputs.</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span>, <span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;Vec::is_empty&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">outputs</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">Type</span><span class="op">&gt;</span>,
+    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span>, <span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;IndexMap::is_empty&quot;</span>)]</span>
+    <span class="kw">pub</span> <span class="ident">args</span>: <span class="ident">IndexMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">String</span><span class="op">&gt;</span>,
 }
 
 <span class="doccomment">/// A stage which executes a procedural block.</span>
@@ -2203,6 +2208,7 @@ pipeline:
                     <span class="ident">model</span>: <span class="string">&quot;./model.tflite&quot;</span>.<span class="ident">into</span>(),
                     <span class="ident">inputs</span>: <span class="macro">vec!</span>[<span class="string">&quot;fft&quot;</span>.<span class="ident">parse</span>().<span class="ident">unwrap</span>()],
                     <span class="ident">outputs</span>: <span class="macro">vec!</span>[<span class="macro">ty!</span>(<span class="ident">i8</span>[<span class="number">6</span>])],
+                    <span class="ident">args</span>: <span class="ident">IndexMap::new</span>(),
                 }),
             },
             <span class="ident">resources</span>: <span class="macro">map!</span>[],

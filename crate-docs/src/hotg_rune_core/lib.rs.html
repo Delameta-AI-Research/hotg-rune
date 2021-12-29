@@ -108,6 +108,8 @@
 <span id="108">108</span>
 <span id="109">109</span>
 <span id="110">110</span>
+<span id="111">111</span>
+<span id="112">112</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Core types and abstractions used by the Rune ecosystem.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! # Feature Flags</span>
@@ -152,6 +154,8 @@
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TF_MIMETYPE</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;application/tf-model&quot;</span>;
 <span class="doccomment">/// The mimetype used for a ONNX model.</span>
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">ONNX_MIMETYPE</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;application/onnx-model&quot;</span>;
+<span class="doccomment">/// The mimetype used for a TensorFlow JS model.</span>
+<span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TFJS_MIMETYPE</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="string">&quot;application/tfjs-model&quot;</span>;
 
 <span class="doccomment">/// The version number for this crate.</span>
 <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">VERSION</span>: <span class="kw-2">&amp;</span><span class="ident">str</span> <span class="op">=</span> <span class="macro">env!</span>(<span class="string">&quot;CARGO_PKG_VERSION&quot;</span>);

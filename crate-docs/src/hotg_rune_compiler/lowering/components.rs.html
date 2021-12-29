@@ -326,6 +326,8 @@
 <span id="326">326</span>
 <span id="327">327</span>
 <span id="328">328</span>
+<span id="329">329</span>
+<span id="330">330</span>
 </pre><pre class="rust"><code><span class="doccomment">//! The various types that make up Rune&#39;s *High-level Internal Representation*.</span>
 
 <span class="kw">use</span> <span class="ident">std</span>::{
@@ -631,6 +633,8 @@
         <span class="ident">Mimetype</span>(<span class="ident">Cow::Borrowed</span>(<span class="ident">hotg_rune_core::TF_MIMETYPE</span>));
     <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TENSORFLOW_LITE</span>: <span class="ident">Mimetype</span> <span class="op">=</span>
         <span class="ident">Mimetype</span>(<span class="ident">Cow::Borrowed</span>(<span class="ident">hotg_rune_core::TFLITE_MIMETYPE</span>));
+    <span class="kw">pub</span> <span class="kw">const</span> <span class="ident">TENSORFLOW_JS</span>: <span class="ident">Mimetype</span> <span class="op">=</span>
+        <span class="ident">Mimetype</span>(<span class="ident">Cow::Borrowed</span>(<span class="ident">hotg_rune_core::TFJS_MIMETYPE</span>));
 }
 
 <span class="kw">impl</span> <span class="ident">Deref</span> <span class="kw">for</span> <span class="ident">Mimetype</span> {

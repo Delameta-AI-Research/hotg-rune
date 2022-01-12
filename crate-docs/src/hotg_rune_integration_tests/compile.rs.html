@@ -24,6 +24,7 @@
 <span id="24">24</span>
 <span id="25">25</span>
 <span id="26">26</span>
+<span id="27">27</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std</span>::{
     <span class="ident">path::Path</span>,
     <span class="ident">process</span>::{<span class="ident">Output</span>, <span class="ident">Stdio</span>},
@@ -41,6 +42,7 @@
     <span class="ident">cmd</span>.<span class="ident">arg</span>(<span class="string">&quot;build&quot;</span>)
         .<span class="ident">arg</span>(<span class="ident">directory</span>.<span class="ident">join</span>(<span class="string">&quot;Runefile.yml&quot;</span>))
         .<span class="ident">arg</span>(<span class="string">&quot;--debug&quot;</span>)
+        .<span class="ident">arg</span>(<span class="string">&quot;--colour=never&quot;</span>)
         .<span class="ident">arg</span>(<span class="string">&quot;--cache-dir&quot;</span>)
         .<span class="ident">arg</span>(<span class="ident">ctx</span>.<span class="ident">cache_dir</span>(<span class="ident">name</span>))
         .<span class="ident">stdout</span>(<span class="ident">Stdio::piped</span>())

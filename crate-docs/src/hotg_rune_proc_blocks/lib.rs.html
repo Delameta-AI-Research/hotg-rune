@@ -146,7 +146,6 @@
 <span id="146">146</span>
 <span id="147">147</span>
 <span id="148">148</span>
-<span id="149">149</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Common abstractions used by all Rune proc blocks.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! # Feature Flags</span>
@@ -247,24 +246,23 @@
 <span class="doccomment">/// ## Field Attributes</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// By default, all fields in a proc block struct will be registered as</span>
-<span class="doccomment">/// &quot;properties&quot; and will get some generated setters.</span>
+<span class="doccomment">/// &quot;properties&quot; and will get some generated setters. These setters accept a</span>
+<span class="doccomment">/// string and use [`core::str::FromStr`] to parse it into the correct type.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ```rust</span>
 <span class="doccomment">/// use hotg_rune_proc_blocks::ProcBlock;</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// #[derive(Default, hotg_rune_proc_block_macros::ProcBlock)]</span>
 <span class="doccomment">/// struct Foo {</span>
-<span class="doccomment">///     first: &amp;&#39;static str,</span>
-<span class="doccomment">///     second: u32,</span>
+<span class="doccomment">///     property: f64,</span>
 <span class="doccomment">/// }</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// let descriptor = Foo::DESCRIPTOR;</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// let mut foo = Foo::default();</span>
 <span class="doccomment">///</span>
-<span class="doccomment">/// foo.set_first(&quot;Hello, World!&quot;).set_second(42_u32);</span>
-<span class="doccomment">/// assert_eq!(foo.first, &quot;Hello, World!&quot;);</span>
-<span class="doccomment">/// assert_eq!(foo.second, 42);</span>
+<span class="doccomment">/// foo.set_property(&quot;42&quot;).unwrap();</span>
+<span class="doccomment">/// assert_eq!(foo.property, 42.0);</span>
 <span class="doccomment">/// ```</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// A parameter can opt-out of this with the `#[proc_block(skip)]` attribute.</span>

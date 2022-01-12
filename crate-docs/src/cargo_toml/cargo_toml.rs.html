@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;cargo_toml-0.10.1&#x2F;src&#x2F;cargo_toml.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>cargo_toml.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../cargo_toml/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;cargo_toml-0.10.3&#x2F;src&#x2F;cargo_toml.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>cargo_toml.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../cargo_toml/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -749,12 +749,24 @@
 <span id="749">749</span>
 <span id="750">750</span>
 <span id="751">751</span>
+<span id="752">752</span>
+<span id="753">753</span>
+<span id="754">754</span>
+<span id="755">755</span>
+<span id="756">756</span>
+<span id="757">757</span>
+<span id="758">758</span>
+<span id="759">759</span>
+<span id="760">760</span>
+<span id="761">761</span>
+<span id="762">762</span>
+<span id="763">763</span>
 </pre><pre class="rust"><code><span class="doccomment">//! This crate defines `struct`s that can be deserialized with Serde</span>
 <span class="doccomment">//! to load and inspect `Cargo.toml` metadata.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! See `Manifest::from_slice`.</span>
 
-<span class="kw">use</span> <span class="ident">std::collections::HashSet</span>;
+
 <span class="kw">use</span> <span class="ident">std::fs</span>;
 <span class="kw">use</span> <span class="ident">std::io</span>;
 <span class="kw">use</span> <span class="ident">std::path::Path</span>;
@@ -863,6 +875,10 @@
     <span class="bool-val">true</span>
 }
 
+<span class="kw">fn</span> <span class="ident">is_true</span>(<span class="ident">val</span>: <span class="kw-2">&amp;</span><span class="ident">bool</span>) -&gt; <span class="ident">bool</span> {
+    <span class="kw-2">*</span><span class="ident">val</span>
+}
+
 <span class="kw">impl</span> <span class="ident">Manifest</span><span class="op">&lt;</span><span class="ident">Value</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Parse contents of a `Cargo.toml` file already loaded as a byte slice.</span>
     <span class="doccomment">///</span>
@@ -939,19 +955,20 @@
         <span class="ident">fs</span>: <span class="kw">impl</span> <span class="ident">AbstractFilesystem</span>,
     ) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>(), <span class="ident">Error</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="ident">package</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">package</span> {
-            <span class="kw">let</span> <span class="ident">src</span> <span class="op">=</span> <span class="ident">fs</span>.<span class="ident">file_names_in</span>(<span class="string">&quot;src&quot;</span>).<span class="ident">unwrap_or</span>(<span class="ident">HashSet::new</span>());
+            <span class="kw">let</span> <span class="ident">src</span> <span class="op">=</span> <span class="ident">fs</span>.<span class="ident">file_names_in</span>(<span class="string">&quot;src&quot;</span>).<span class="ident">unwrap_or_default</span>();
             <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">lib</span>) <span class="op">=</span> <span class="self">self</span>.<span class="ident">lib</span> {
                 <span class="ident">lib</span>.<span class="ident">required_features</span>.<span class="ident">clear</span>(); <span class="comment">// not applicable</span>
             }
 
             <span class="kw">let</span> <span class="ident">has_path</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">lib</span>.<span class="ident">as_ref</span>().<span class="ident">map_or</span>(<span class="bool-val">false</span>, <span class="op">|</span><span class="ident">l</span><span class="op">|</span> <span class="ident">l</span>.<span class="ident">path</span>.<span class="ident">is_some</span>());
             <span class="kw">if</span> <span class="op">!</span><span class="ident">has_path</span> <span class="op">&amp;&amp;</span> <span class="ident">src</span>.<span class="ident">contains</span>(<span class="string">&quot;lib.rs&quot;</span>) {
+                <span class="kw">let</span> <span class="ident">old_lib</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">lib</span>.<span class="ident">take</span>().<span class="ident">unwrap_or_default</span>();
                 <span class="self">self</span>.<span class="ident">lib</span> <span class="op">=</span> <span class="prelude-val">Some</span>(<span class="ident">Product</span> {
                     <span class="ident">name</span>: <span class="prelude-val">Some</span>(<span class="ident">package</span>.<span class="ident">name</span>.<span class="ident">replace</span>(<span class="string">&quot;-&quot;</span>, <span class="string">&quot;_&quot;</span>)),
                     <span class="ident">path</span>: <span class="prelude-val">Some</span>(<span class="string">&quot;src/lib.rs&quot;</span>.<span class="ident">to_string</span>()),
                     <span class="ident">edition</span>: <span class="prelude-val">Some</span>(<span class="ident">package</span>.<span class="ident">edition</span>),
                     <span class="ident">crate_type</span>: <span class="prelude-val">Some</span>(<span class="macro">vec!</span>[<span class="string">&quot;rlib&quot;</span>.<span class="ident">to_string</span>()]),
-                    ..<span class="ident">Product::default</span>()
+                    ..<span class="ident">old_lib</span>
                 })
             }
 
@@ -1067,21 +1084,21 @@
     <span class="kw">pub</span> <span class="ident">name</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
 
     <span class="doccomment">/// A flag for enabling unit tests for this product. This is used by `cargo test`.</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span> <span class="op">=</span> <span class="string">&quot;default_true&quot;</span>)]</span>
+    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span> <span class="op">=</span> <span class="string">&quot;default_true&quot;</span>, <span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;is_true&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">test</span>: <span class="ident">bool</span>,
 
     <span class="doccomment">/// A flag for enabling documentation tests for this product. This is only relevant</span>
     <span class="doccomment">/// for libraries, it has no effect on other sections. This is used by</span>
     <span class="doccomment">/// `cargo test`.</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span> <span class="op">=</span> <span class="string">&quot;default_true&quot;</span>)]</span>
+    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span> <span class="op">=</span> <span class="string">&quot;default_true&quot;</span>, <span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;is_true&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">doctest</span>: <span class="ident">bool</span>,
 
     <span class="doccomment">/// A flag for enabling benchmarks for this product. This is used by `cargo bench`.</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span> <span class="op">=</span> <span class="string">&quot;default_true&quot;</span>)]</span>
+    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span> <span class="op">=</span> <span class="string">&quot;default_true&quot;</span>, <span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;is_true&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">bench</span>: <span class="ident">bool</span>,
 
     <span class="doccomment">/// A flag for enabling documentation of this product. This is used by `cargo doc`.</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span> <span class="op">=</span> <span class="string">&quot;default_true&quot;</span>)]</span>
+    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span> <span class="op">=</span> <span class="string">&quot;default_true&quot;</span>, <span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;is_true&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">doc</span>: <span class="ident">bool</span>,
 
     <span class="doccomment">/// If the product is meant to be a compiler plugin, this field must be set to true</span>
@@ -1091,13 +1108,13 @@
 
     <span class="doccomment">/// If the product is meant to be a &quot;macros 1.1&quot; procedural macro, this field must</span>
     <span class="doccomment">/// be set to true.</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span>)]</span>
+    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span>, <span class="ident">alias</span> <span class="op">=</span> <span class="string">&quot;proc_macro&quot;</span>, <span class="ident">alias</span> <span class="op">=</span> <span class="string">&quot;proc-macro&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">proc_macro</span>: <span class="ident">bool</span>,
 
     <span class="doccomment">/// If set to false, `cargo test` will omit the `--test` flag to rustc, which</span>
     <span class="doccomment">/// stops it from generating a test harness. This is useful when the binary being</span>
     <span class="doccomment">/// built manages the test runner itself.</span>
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span> <span class="op">=</span> <span class="string">&quot;default_true&quot;</span>)]</span>
+    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span> <span class="op">=</span> <span class="string">&quot;default_true&quot;</span>, <span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;is_true&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">harness</span>: <span class="ident">bool</span>,
 
     <span class="doccomment">/// If set then a product can be configured to use a different edition than the</span>
@@ -1249,6 +1266,7 @@
     <span class="kw">pub</span> <span class="ident">workspace</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span>)]</span>
     <span class="doccomment">/// e.g. [&quot;Author &lt;e@mail&gt;&quot;, &quot;etc&quot;] Deprecated.</span>
+    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;Vec::is_empty&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">authors</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
     <span class="kw">pub</span> <span class="ident">links</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
     <span class="doccomment">/// A short blurb about the package. This is not rendered in any format when</span>
@@ -1260,9 +1278,9 @@
     <span class="doccomment">/// implied if README.md, README.txt or README exists.</span>
     <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span>, <span class="ident">deserialize_with</span> <span class="op">=</span> <span class="string">&quot;readme_parser&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">readme</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span>)]</span>
+    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span>, <span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;Vec::is_empty&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">keywords</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span>)]</span>
+    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span>, <span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;Vec::is_empty&quot;</span>)]</span>
     <span class="doccomment">/// This is a list of up to five categories where this crate would fit.</span>
     <span class="doccomment">/// e.g. [&quot;command-line-utilities&quot;, &quot;development-tools::cargo-plugins&quot;]</span>
     <span class="kw">pub</span> <span class="ident">categories</span>: <span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
@@ -1274,15 +1292,15 @@
     <span class="doccomment">/// The default binary to run by cargo run.</span>
     <span class="kw">pub</span> <span class="ident">default_run</span>: <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>,
 
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span> <span class="op">=</span> <span class="string">&quot;default_true&quot;</span>)]</span>
+    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span> <span class="op">=</span> <span class="string">&quot;default_true&quot;</span>, <span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;is_true&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">autobins</span>: <span class="ident">bool</span>,
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span> <span class="op">=</span> <span class="string">&quot;default_true&quot;</span>)]</span>
+    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span> <span class="op">=</span> <span class="string">&quot;default_true&quot;</span>, <span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;is_true&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">autoexamples</span>: <span class="ident">bool</span>,
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span> <span class="op">=</span> <span class="string">&quot;default_true&quot;</span>)]</span>
+    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span> <span class="op">=</span> <span class="string">&quot;default_true&quot;</span>, <span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;is_true&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">autotests</span>: <span class="ident">bool</span>,
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span> <span class="op">=</span> <span class="string">&quot;default_true&quot;</span>)]</span>
+    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span> <span class="op">=</span> <span class="string">&quot;default_true&quot;</span>, <span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;is_true&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">autobenches</span>: <span class="ident">bool</span>,
-    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span>)]</span>
+    <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">default</span>, <span class="ident">skip_serializing_if</span> <span class="op">=</span> <span class="string">&quot;Publish::is_default&quot;</span>)]</span>
     <span class="kw">pub</span> <span class="ident">publish</span>: <span class="ident">Publish</span>,
 
     <span class="doccomment">/// &quot;2&quot; is the only useful value</span>
@@ -1296,6 +1314,12 @@
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">Publish</span> {
     <span class="ident">Flag</span>(<span class="ident">bool</span>),
     <span class="ident">Registry</span>(<span class="ident">Vec</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>),
+}
+
+<span class="kw">impl</span> <span class="ident">Publish</span> {
+    <span class="kw">fn</span> <span class="ident">is_default</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="ident">bool</span> {
+        <span class="macro">matches!</span>(<span class="self">self</span>, <span class="ident">Publish::Flag</span>(<span class="ident">flag</span>) <span class="kw">if</span> <span class="kw-2">*</span><span class="ident">flag</span>)
+    }
 }
 
 <span class="kw">impl</span> <span class="ident">Default</span> <span class="kw">for</span> <span class="ident">Publish</span> {

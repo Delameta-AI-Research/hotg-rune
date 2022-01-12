@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;ndarray-0.15.3&#x2F;src&#x2F;impl_views&#x2F;conversions.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>conversions.rs - source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../ndarray/index.html'><div class='logo-container rust-logo'><img src='https:&#x2F;&#x2F;rust-ndarray.github.io&#x2F;images&#x2F;rust-ndarray_logo.svg' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;ndarray-0.15.4&#x2F;src&#x2F;impl_views&#x2F;conversions.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>conversions.rs - source</title><link rel="stylesheet" type="text/css" href="../../../normalize.css"><link rel="stylesheet" type="text/css" href="../../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../../storage.js"></script><script src="../../../crates.js"></script><noscript><link rel="stylesheet" href="../../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../../ndarray/index.html'><div class='logo-container rust-logo'><img src='https:&#x2F;&#x2F;rust-ndarray.github.io&#x2F;images&#x2F;rust-ndarray_logo.svg' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -235,6 +235,48 @@
 <span id="235">235</span>
 <span id="236">236</span>
 <span id="237">237</span>
+<span id="238">238</span>
+<span id="239">239</span>
+<span id="240">240</span>
+<span id="241">241</span>
+<span id="242">242</span>
+<span id="243">243</span>
+<span id="244">244</span>
+<span id="245">245</span>
+<span id="246">246</span>
+<span id="247">247</span>
+<span id="248">248</span>
+<span id="249">249</span>
+<span id="250">250</span>
+<span id="251">251</span>
+<span id="252">252</span>
+<span id="253">253</span>
+<span id="254">254</span>
+<span id="255">255</span>
+<span id="256">256</span>
+<span id="257">257</span>
+<span id="258">258</span>
+<span id="259">259</span>
+<span id="260">260</span>
+<span id="261">261</span>
+<span id="262">262</span>
+<span id="263">263</span>
+<span id="264">264</span>
+<span id="265">265</span>
+<span id="266">266</span>
+<span id="267">267</span>
+<span id="268">268</span>
+<span id="269">269</span>
+<span id="270">270</span>
+<span id="271">271</span>
+<span id="272">272</span>
+<span id="273">273</span>
+<span id="274">274</span>
+<span id="275">275</span>
+<span id="276">276</span>
+<span id="277">277</span>
+<span id="278">278</span>
+<span id="279">279</span>
 </pre><pre class="rust"><code><span class="comment">// Copyright 2014-2016 bluss and ndarray developers.</span>
 <span class="comment">//</span>
 <span class="comment">// Licensed under the Apache License, Version 2.0 &lt;LICENSE-APACHE or</span>
@@ -244,12 +286,14 @@
 <span class="comment">// except according to those terms.</span>
 
 <span class="kw">use</span> <span class="ident">alloc::slice</span>;
+<span class="kw">use</span> <span class="ident">rawpointer::PointerExt</span>;
 <span class="kw">use</span> <span class="ident">std::mem::MaybeUninit</span>;
 
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::imp_prelude</span>::<span class="kw-2">*</span>;
 
 <span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Baseiter</span>, <span class="ident">ElementsBase</span>, <span class="ident">ElementsBaseMut</span>, <span class="ident">Iter</span>, <span class="ident">IterMut</span>};
 
+<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::dimension::offset_from_low_addr_ptr_to_logical_ptr</span>;
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::iter</span>::{<span class="self">self</span>, <span class="ident">AxisIter</span>, <span class="ident">AxisIterMut</span>};
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::math_cell::MathCell</span>;
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::IndexLonger</span>;
@@ -271,11 +315,31 @@
     <span class="doccomment">/// Return the array’s data as a slice, if it is contiguous and in standard order.</span>
     <span class="doccomment">/// Return `None` otherwise.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// Note that while the method is similar to [`ArrayBase::as_slice()`], this method tranfers</span>
+    <span class="doccomment">/// Note that while the method is similar to [`ArrayBase::as_slice()`], this method transfers</span>
     <span class="doccomment">/// the view&#39;s lifetime to the slice, so it is a bit more powerful.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_slice</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">A</span>]<span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">is_standard_layout</span>() {
             <span class="kw">unsafe</span> { <span class="prelude-val">Some</span>(<span class="ident">slice::from_raw_parts</span>(<span class="self">self</span>.<span class="ident">ptr</span>.<span class="ident">as_ptr</span>(), <span class="self">self</span>.<span class="ident">len</span>())) }
+        } <span class="kw">else</span> {
+            <span class="prelude-val">None</span>
+        }
+    }
+
+    <span class="doccomment">/// Return the array’s data as a slice, if it is contiguous.</span>
+    <span class="doccomment">/// Return `None` otherwise.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Note that while the method is similar to</span>
+    <span class="doccomment">/// [`ArrayBase::as_slice_memory_order()`], this method transfers the view&#39;s</span>
+    <span class="doccomment">/// lifetime to the slice, so it is a bit more powerful.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">to_slice_memory_order</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> [<span class="ident">A</span>]<span class="op">&gt;</span> {
+        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">is_contiguous</span>() {
+            <span class="kw">let</span> <span class="ident">offset</span> <span class="op">=</span> <span class="ident">offset_from_low_addr_ptr_to_logical_ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">dim</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">strides</span>);
+            <span class="kw">unsafe</span> {
+                <span class="prelude-val">Some</span>(<span class="ident">slice::from_raw_parts</span>(
+                    <span class="self">self</span>.<span class="ident">ptr</span>.<span class="ident">sub</span>(<span class="ident">offset</span>).<span class="ident">as_ptr</span>(),
+                    <span class="self">self</span>.<span class="ident">len</span>(),
+                ))
+            }
         } <span class="kw">else</span> {
             <span class="prelude-val">None</span>
         }
@@ -290,9 +354,6 @@
 <span class="doccomment">/// Methods specific to `ArrayView0`.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ***See also all methods for [`ArrayView`] and [`ArrayBase`]***</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// [`ArrayBase`]: struct.ArrayBase.html</span>
-<span class="doccomment">/// [`ArrayView`]: struct.ArrayView.html</span>
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span><span class="op">&gt;</span> <span class="ident">ArrayView</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">Ix0</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Consume the view and return a reference to the single element in the array.</span>
     <span class="doccomment">///</span>
@@ -319,9 +380,6 @@
 <span class="doccomment">/// Methods specific to `ArrayViewMut0`.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ***See also all methods for [`ArrayViewMut`] and [`ArrayBase`]***</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// [`ArrayBase`]: struct.ArrayBase.html</span>
-<span class="doccomment">/// [`ArrayViewMut`]: struct.ArrayViewMut.html</span>
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span><span class="op">&gt;</span> <span class="ident">ArrayViewMut</span><span class="op">&lt;</span><span class="lifetime">&#39;a</span>, <span class="ident">A</span>, <span class="ident">Ix0</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Consume the mutable view and return a mutable reference to the single element in the array.</span>
     <span class="doccomment">///</span>
@@ -351,10 +409,20 @@
     <span class="doccomment">/// Return the array’s data as a slice, if it is contiguous and in standard order.</span>
     <span class="doccomment">/// Return `None` otherwise.</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// Note that while this is similar to [`ArrayBase::as_slice_mut()`], this method tranfers the</span>
+    <span class="doccomment">/// Note that while this is similar to [`ArrayBase::as_slice_mut()`], this method transfers the</span>
     <span class="doccomment">/// view&#39;s lifetime to the slice.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_slice</span>(<span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> [<span class="ident">A</span>]<span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">try_into_slice</span>().<span class="ident">ok</span>()
+    }
+
+    <span class="doccomment">/// Return the array’s data as a slice, if it is contiguous.</span>
+    <span class="doccomment">/// Return `None` otherwise.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// Note that while this is similar to</span>
+    <span class="doccomment">/// [`ArrayBase::as_slice_memory_order_mut()`], this method transfers the</span>
+    <span class="doccomment">/// view&#39;s lifetime to the slice.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">into_slice_memory_order</span>(<span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> [<span class="ident">A</span>]<span class="op">&gt;</span> {
+        <span class="self">self</span>.<span class="ident">try_into_slice_memory_order</span>().<span class="ident">ok</span>()
     }
 
     <span class="doccomment">/// Return a shared view of the array with elements as if they were embedded in cells.</span>
@@ -453,6 +521,22 @@
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">try_into_slice</span>(<span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> [<span class="ident">A</span>], <span class="self">Self</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">is_standard_layout</span>() {
             <span class="kw">unsafe</span> { <span class="prelude-val">Ok</span>(<span class="ident">slice::from_raw_parts_mut</span>(<span class="self">self</span>.<span class="ident">ptr</span>.<span class="ident">as_ptr</span>(), <span class="self">self</span>.<span class="ident">len</span>())) }
+        } <span class="kw">else</span> {
+            <span class="prelude-val">Err</span>(<span class="self">self</span>)
+        }
+    }
+
+    <span class="doccomment">/// Return the array’s data as a slice, if it is contiguous.</span>
+    <span class="doccomment">/// Otherwise return self in the Err branch of the result.</span>
+    <span class="kw">fn</span> <span class="ident">try_into_slice_memory_order</span>(<span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="kw-2">mut</span> [<span class="ident">A</span>], <span class="self">Self</span><span class="op">&gt;</span> {
+        <span class="kw">if</span> <span class="self">self</span>.<span class="ident">is_contiguous</span>() {
+            <span class="kw">let</span> <span class="ident">offset</span> <span class="op">=</span> <span class="ident">offset_from_low_addr_ptr_to_logical_ptr</span>(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">dim</span>, <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="ident">strides</span>);
+            <span class="kw">unsafe</span> {
+                <span class="prelude-val">Ok</span>(<span class="ident">slice::from_raw_parts_mut</span>(
+                    <span class="self">self</span>.<span class="ident">ptr</span>.<span class="ident">sub</span>(<span class="ident">offset</span>).<span class="ident">as_ptr</span>(),
+                    <span class="self">self</span>.<span class="ident">len</span>(),
+                ))
+            }
         } <span class="kw">else</span> {
             <span class="prelude-val">Err</span>(<span class="self">self</span>)
         }

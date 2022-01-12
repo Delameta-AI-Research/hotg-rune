@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;ndarray-0.15.3&#x2F;src&#x2F;impl_owned_array.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>impl_owned_array.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../ndarray/index.html'><div class='logo-container rust-logo'><img src='https:&#x2F;&#x2F;rust-ndarray.github.io&#x2F;images&#x2F;rust-ndarray_logo.svg' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;ndarray-0.15.4&#x2F;src&#x2F;impl_owned_array.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>impl_owned_array.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../ndarray/index.html'><div class='logo-container rust-logo'><img src='https:&#x2F;&#x2F;rust-ndarray.github.io&#x2F;images&#x2F;rust-ndarray_logo.svg' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">  1</span>
 <span id="2">  2</span>
 <span id="3">  3</span>
 <span id="4">  4</span>
@@ -817,12 +817,6 @@
 <span id="817">817</span>
 <span id="818">818</span>
 <span id="819">819</span>
-<span id="820">820</span>
-<span id="821">821</span>
-<span id="822">822</span>
-<span id="823">823</span>
-<span id="824">824</span>
-<span id="825">825</span>
 </pre><pre class="rust"><code>
 <span class="kw">use</span> <span class="ident">alloc::vec::Vec</span>;
 <span class="kw">use</span> <span class="ident">std::mem</span>;
@@ -842,8 +836,6 @@
 <span class="doccomment">/// Methods specific to `Array0`.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ***See also all methods for [`ArrayBase`]***</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// [`ArrayBase`]: struct.ArrayBase.html</span>
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span> <span class="ident">Array</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">Ix0</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Returns the single element in the array without cloning it.</span>
     <span class="doccomment">///</span>
@@ -881,8 +873,6 @@
 <span class="doccomment">/// Methods specific to `Array`.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ***See also all methods for [`ArrayBase`]***</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// [`ArrayBase`]: struct.ArrayBase.html</span>
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">D</span><span class="op">&gt;</span> <span class="ident">Array</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">D</span><span class="op">&gt;</span>
 <span class="kw">where</span>
     <span class="ident">D</span>: <span class="ident">Dimension</span>,
@@ -900,8 +890,6 @@
 <span class="doccomment">/// Methods specific to `Array2`.</span>
 <span class="doccomment">///</span>
 <span class="doccomment">/// ***See also all methods for [`ArrayBase`]***</span>
-<span class="doccomment">///</span>
-<span class="doccomment">/// [`ArrayBase`]: struct.ArrayBase.html</span>
 <span class="kw">impl</span><span class="op">&lt;</span><span class="ident">A</span><span class="op">&gt;</span> <span class="ident">Array</span><span class="op">&lt;</span><span class="ident">A</span>, <span class="ident">Ix2</span><span class="op">&gt;</span> {
     <span class="doccomment">/// Append a row to an array</span>
     <span class="doccomment">///</span>
@@ -951,7 +939,7 @@
 
     <span class="doccomment">/// Append a column to an array</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// The elements from `column` are cloned and added as a new row in the array.</span>
+    <span class="doccomment">/// The elements from `column` are cloned and added as a new column in the array.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// ***Errors*** with a shape error if the length of the column does not match the length of</span>
     <span class="doccomment">/// the columns in the array.</span>
@@ -1211,7 +1199,7 @@
     <span class="doccomment">/// appending to an array along the same axis.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// The amortized average complexity of the append, when appending along its growing axis, is</span>
-    <span class="doccomment">/// O(*m*) where *m* is the length of the row.</span>
+    <span class="doccomment">/// O(*m*) where *m* is the number of individual elements to append.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// The memory layout of the argument `array` does not matter to the same extent.</span>
     <span class="doccomment">///</span>
@@ -1269,14 +1257,14 @@
     <span class="doccomment">/// appending to an array along the same axis.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// The amortized average complexity of the append, when appending along its growing axis, is</span>
-    <span class="doccomment">/// O(*m*) where *m* is the length of the row.</span>
+    <span class="doccomment">/// O(*m*) where *m* is the number of individual elements to append.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// The memory layout of the argument `array` does not matter to the same extent.</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// ```rust</span>
     <span class="doccomment">/// use ndarray::{Array, ArrayView, array, Axis};</span>
     <span class="doccomment">///</span>
-    <span class="doccomment">/// // create an empty array and append</span>
+    <span class="doccomment">/// // create an empty array and append two rows at a time</span>
     <span class="doccomment">/// let mut a = Array::zeros((0, 4));</span>
     <span class="doccomment">/// let ones  = ArrayView::from(&amp;[1.; 8]).into_shape((2, 4)).unwrap();</span>
     <span class="doccomment">/// let zeros = ArrayView::from(&amp;[0.; 8]).into_shape((2, 4)).unwrap();</span>

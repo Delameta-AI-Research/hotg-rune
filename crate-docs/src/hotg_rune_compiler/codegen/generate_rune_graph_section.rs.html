@@ -168,7 +168,54 @@
 <span id="168">168</span>
 <span id="169">169</span>
 <span id="170">170</span>
-</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">legion</span>::{
+<span id="171">171</span>
+<span id="172">172</span>
+<span id="173">173</span>
+<span id="174">174</span>
+<span id="175">175</span>
+<span id="176">176</span>
+<span id="177">177</span>
+<span id="178">178</span>
+<span id="179">179</span>
+<span id="180">180</span>
+<span id="181">181</span>
+<span id="182">182</span>
+<span id="183">183</span>
+<span id="184">184</span>
+<span id="185">185</span>
+<span id="186">186</span>
+<span id="187">187</span>
+<span id="188">188</span>
+<span id="189">189</span>
+<span id="190">190</span>
+<span id="191">191</span>
+<span id="192">192</span>
+<span id="193">193</span>
+<span id="194">194</span>
+<span id="195">195</span>
+<span id="196">196</span>
+<span id="197">197</span>
+<span id="198">198</span>
+<span id="199">199</span>
+<span id="200">200</span>
+<span id="201">201</span>
+<span id="202">202</span>
+<span id="203">203</span>
+<span id="204">204</span>
+<span id="205">205</span>
+<span id="206">206</span>
+<span id="207">207</span>
+<span id="208">208</span>
+<span id="209">209</span>
+<span id="210">210</span>
+<span id="211">211</span>
+<span id="212">212</span>
+<span id="213">213</span>
+<span id="214">214</span>
+</pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">std::collections::HashMap</span>;
+
+<span class="kw">use</span> <span class="ident">indexmap::IndexMap</span>;
+<span class="kw">use</span> <span class="ident">legion</span>::{
     <span class="ident">Entity</span>, <span class="ident">Query</span>,
     <span class="ident">serialize</span>::{<span class="ident">Canon</span>, <span class="ident">CustomEntitySerializer</span>},
     <span class="ident">systems::CommandBuffer</span>,
@@ -180,8 +227,8 @@
         <span class="ident">ModelSummary</span>, <span class="ident">OutputSummary</span>, <span class="ident">ProcBlockSummary</span>, <span class="ident">RuneGraph</span>, <span class="ident">TensorId</span>,
     },
     <span class="ident">lowering</span>::{
-        <span class="ident">Inputs</span>, <span class="ident">Model</span>, <span class="ident">ModelFile</span>, <span class="ident">Name</span>, <span class="ident">Outputs</span>, <span class="ident">ProcBlock</span>, <span class="ident">Resource</span>, <span class="ident">Sink</span>,
-        <span class="ident">Source</span>, <span class="ident">Tensor</span>,
+        <span class="self">self</span>, <span class="ident">Inputs</span>, <span class="ident">Model</span>, <span class="ident">ModelFile</span>, <span class="ident">Name</span>, <span class="ident">Outputs</span>, <span class="ident">ProcBlock</span>, <span class="ident">Resource</span>,
+        <span class="ident">Sink</span>, <span class="ident">Source</span>, <span class="ident">Tensor</span>,
     },
     <span class="ident">parse</span>::{<span class="ident">ResourceName</span>, <span class="ident">ResourceOrString</span>},
 };
@@ -202,38 +249,38 @@
     <span class="ident">resources</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Query</span><span class="op">&lt;</span>(<span class="kw-2">&amp;</span><span class="ident">Name</span>, <span class="kw-2">&amp;</span><span class="ident">Resource</span>)<span class="op">&gt;</span>,
 ) {
     <span class="kw">let</span> <span class="ident">canon</span> <span class="op">=</span> <span class="ident">Canon::default</span>();
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">resource_name</span> <span class="op">=</span> <span class="op">|</span><span class="ident">ent</span>: <span class="ident">Entity</span><span class="op">|</span> {
+        <span class="ident">resources</span>
+            .<span class="ident">get</span>(<span class="ident">world</span>, <span class="ident">ent</span>)
+            .<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">name</span>, <span class="kw">_</span>)<span class="op">|</span> <span class="ident">ResourceName</span>(<span class="ident">name</span>.<span class="ident">to_string</span>()))
+            .<span class="ident">unwrap</span>()
+    };
 
     <span class="kw">let</span> <span class="ident">graph</span> <span class="op">=</span> <span class="ident">RuneGraph</span> {
         <span class="ident">rune</span>: <span class="ident">rune_summary</span>(<span class="ident">ctx</span>),
         <span class="ident">capabilities</span>: <span class="ident">capabilities</span>
             .<span class="ident">iter</span>(<span class="ident">world</span>)
-            .<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">n</span>, <span class="ident">s</span>, <span class="ident">o</span>)<span class="op">|</span> <span class="ident">capability_summary</span>(<span class="ident">n</span>, <span class="ident">s</span>, <span class="ident">o</span>, <span class="kw-2">&amp;</span><span class="ident">canon</span>))
+            .<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">n</span>, <span class="ident">s</span>, <span class="ident">o</span>)<span class="op">|</span> {
+                <span class="ident">capability_summary</span>(<span class="ident">n</span>, <span class="ident">s</span>, <span class="ident">o</span>, <span class="kw-2">&amp;</span><span class="ident">canon</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">resource_name</span>)
+            })
             .<span class="ident">collect</span>(),
         <span class="ident">models</span>: <span class="ident">models</span>
             .<span class="ident">iter</span>(<span class="ident">world</span>)
             .<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">n</span>, <span class="ident">m</span>, <span class="ident">i</span>, <span class="ident">o</span>)<span class="op">|</span> {
-                <span class="ident">model_summary</span>(
-                    <span class="ident">n</span>,
-                    <span class="ident">m</span>,
-                    <span class="ident">i</span>,
-                    <span class="ident">o</span>,
-                    <span class="op">|</span><span class="ident">ent</span><span class="op">|</span> {
-                        <span class="ident">resources</span>
-                            .<span class="ident">get</span>(<span class="ident">world</span>, <span class="ident">ent</span>)
-                            .<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">name</span>, <span class="kw">_</span>)<span class="op">|</span> <span class="ident">ResourceName</span>(<span class="ident">name</span>.<span class="ident">to_string</span>()))
-                            .<span class="ident">unwrap</span>()
-                    },
-                    <span class="kw-2">&amp;</span><span class="ident">canon</span>,
-                )
+                <span class="ident">model_summary</span>(<span class="ident">n</span>, <span class="ident">m</span>, <span class="ident">i</span>, <span class="ident">o</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">resource_name</span>, <span class="kw-2">&amp;</span><span class="ident">canon</span>)
             })
             .<span class="ident">collect</span>(),
         <span class="ident">proc_blocks</span>: <span class="ident">proc_blocks</span>
             .<span class="ident">iter</span>(<span class="ident">world</span>)
-            .<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">n</span>, <span class="ident">p</span>, <span class="ident">i</span>, <span class="ident">o</span>)<span class="op">|</span> <span class="ident">proc_block_summary</span>(<span class="ident">n</span>, <span class="ident">p</span>, <span class="ident">i</span>, <span class="ident">o</span>, <span class="kw-2">&amp;</span><span class="ident">canon</span>))
+            .<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">n</span>, <span class="ident">p</span>, <span class="ident">i</span>, <span class="ident">o</span>)<span class="op">|</span> {
+                <span class="ident">proc_block_summary</span>(<span class="ident">n</span>, <span class="ident">p</span>, <span class="ident">i</span>, <span class="ident">o</span>, <span class="kw-2">&amp;</span><span class="ident">canon</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">resource_name</span>)
+            })
             .<span class="ident">collect</span>(),
         <span class="ident">outputs</span>: <span class="ident">outputs</span>
             .<span class="ident">iter</span>(<span class="ident">world</span>)
-            .<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">n</span>, <span class="ident">s</span>, <span class="ident">i</span>)<span class="op">|</span> <span class="ident">output_summary</span>(<span class="ident">n</span>, <span class="ident">s</span>, <span class="ident">i</span>, <span class="kw-2">&amp;</span><span class="ident">canon</span>))
+            .<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">n</span>, <span class="ident">s</span>, <span class="ident">i</span>)<span class="op">|</span> {
+                <span class="ident">output_summary</span>(<span class="ident">n</span>, <span class="ident">s</span>, <span class="ident">i</span>, <span class="kw-2">&amp;</span><span class="ident">canon</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">resource_name</span>)
+            })
             .<span class="ident">collect</span>(),
         <span class="ident">resources</span>: <span class="ident">resources</span>
             .<span class="ident">iter</span>(<span class="ident">world</span>)
@@ -272,10 +319,11 @@
     <span class="ident">source</span>: <span class="kw-2">&amp;</span><span class="ident">Source</span>,
     <span class="ident">outputs</span>: <span class="kw-2">&amp;</span><span class="ident">Outputs</span>,
     <span class="ident">get_tensor</span>: <span class="kw-2">&amp;</span><span class="ident">Canon</span>,
+    <span class="kw-2">mut</span> <span class="ident">resource_name</span>: <span class="kw">impl</span> <span class="ident">FnMut</span>(<span class="ident">Entity</span>) -&gt; <span class="ident">ResourceName</span>,
 ) -&gt; (<span class="ident">Name</span>, <span class="ident">CapabilitySummary</span>) {
     <span class="kw">let</span> <span class="ident">summary</span> <span class="op">=</span> <span class="ident">CapabilitySummary</span> {
         <span class="ident">kind</span>: <span class="ident">source</span>.<span class="ident">kind</span>.<span class="ident">clone</span>(),
-        <span class="ident">args</span>: <span class="ident">source</span>.<span class="ident">parameters</span>.<span class="ident">clone</span>(),
+        <span class="ident">args</span>: <span class="ident">convert_args</span>(<span class="kw-2">&amp;</span><span class="ident">source</span>.<span class="ident">parameters</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">resource_name</span>),
         <span class="ident">outputs</span>: <span class="ident">tensor_shapes</span>(<span class="kw-2">&amp;</span><span class="ident">outputs</span>.<span class="ident">tensors</span>, <span class="ident">get_tensor</span>),
     };
 
@@ -301,6 +349,7 @@
 
     <span class="kw">let</span> <span class="ident">summary</span> <span class="op">=</span> <span class="ident">ModelSummary</span> {
         <span class="ident">file</span>,
+        <span class="ident">args</span>: <span class="ident">convert_args</span>(<span class="kw-2">&amp;</span><span class="ident">model</span>.<span class="ident">args</span>, <span class="ident">resources</span>),
         <span class="ident">inputs</span>: <span class="ident">tensor_shapes</span>(<span class="kw-2">&amp;</span><span class="ident">inputs</span>.<span class="ident">tensors</span>, <span class="ident">get_tensor</span>),
         <span class="ident">outputs</span>: <span class="ident">tensor_shapes</span>(<span class="kw-2">&amp;</span><span class="ident">outputs</span>.<span class="ident">tensors</span>, <span class="ident">get_tensor</span>),
     };
@@ -314,10 +363,25 @@
     <span class="ident">inputs</span>: <span class="kw-2">&amp;</span><span class="ident">Inputs</span>,
     <span class="ident">outputs</span>: <span class="kw-2">&amp;</span><span class="ident">Outputs</span>,
     <span class="ident">get_tensor</span>: <span class="kw-2">&amp;</span><span class="ident">Canon</span>,
+    <span class="kw-2">mut</span> <span class="ident">resource_name</span>: <span class="kw">impl</span> <span class="ident">FnMut</span>(<span class="ident">Entity</span>) -&gt; <span class="ident">ResourceName</span>,
 ) -&gt; (<span class="ident">Name</span>, <span class="ident">ProcBlockSummary</span>) {
     <span class="kw">let</span> <span class="ident">summary</span> <span class="op">=</span> <span class="ident">ProcBlockSummary</span> {
         <span class="ident">path</span>: <span class="ident">proc_block</span>.<span class="ident">path</span>.<span class="ident">clone</span>(),
-        <span class="ident">args</span>: <span class="ident">proc_block</span>.<span class="ident">parameters</span>.<span class="ident">clone</span>(),
+        <span class="ident">args</span>: <span class="ident">proc_block</span>
+            .<span class="ident">parameters</span>
+            .<span class="ident">iter</span>()
+            .<span class="ident">map</span>(<span class="op">|</span>(<span class="ident">key</span>, <span class="ident">value</span>)<span class="op">|</span> {
+                <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">value</span> {
+                    <span class="ident">lowering::ResourceOrString::String</span>(<span class="ident">s</span>) =&gt; {
+                        <span class="ident">ResourceOrString::String</span>(<span class="ident">s</span>.<span class="ident">clone</span>())
+                    },
+                    <span class="ident">lowering::ResourceOrString::Resource</span>(<span class="ident">ent</span>) =&gt; {
+                        <span class="ident">ResourceOrString::Resource</span>(<span class="ident">resource_name</span>(<span class="kw-2">*</span><span class="ident">ent</span>))
+                    },
+                };
+                (<span class="ident">key</span>.<span class="ident">clone</span>(), <span class="ident">value</span>)
+            })
+            .<span class="ident">collect</span>(),
         <span class="ident">inputs</span>: <span class="ident">tensor_shapes</span>(<span class="kw-2">&amp;</span><span class="ident">inputs</span>.<span class="ident">tensors</span>, <span class="ident">get_tensor</span>),
         <span class="ident">outputs</span>: <span class="ident">tensor_shapes</span>(<span class="kw-2">&amp;</span><span class="ident">outputs</span>.<span class="ident">tensors</span>, <span class="ident">get_tensor</span>),
     };
@@ -330,13 +394,37 @@
     <span class="ident">sink</span>: <span class="kw-2">&amp;</span><span class="ident">Sink</span>,
     <span class="ident">inputs</span>: <span class="kw-2">&amp;</span><span class="ident">Inputs</span>,
     <span class="ident">get_tensor</span>: <span class="kw-2">&amp;</span><span class="ident">Canon</span>,
+    <span class="kw-2">mut</span> <span class="ident">get_resources</span>: <span class="kw">impl</span> <span class="ident">FnMut</span>(<span class="ident">Entity</span>) -&gt; <span class="ident">ResourceName</span>,
 ) -&gt; (<span class="ident">Name</span>, <span class="ident">OutputSummary</span>) {
     <span class="kw">let</span> <span class="ident">summary</span> <span class="op">=</span> <span class="ident">OutputSummary</span> {
         <span class="ident">kind</span>: <span class="ident">sink</span>.<span class="ident">kind</span>.<span class="ident">clone</span>(),
+        <span class="ident">args</span>: <span class="ident">convert_args</span>(<span class="kw-2">&amp;</span><span class="ident">sink</span>.<span class="ident">args</span>, <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">get_resources</span>),
         <span class="ident">inputs</span>: <span class="ident">tensor_shapes</span>(<span class="kw-2">&amp;</span><span class="ident">inputs</span>.<span class="ident">tensors</span>, <span class="ident">get_tensor</span>),
     };
 
     (<span class="ident">name</span>.<span class="ident">clone</span>(), <span class="ident">summary</span>)
+}
+
+<span class="kw">fn</span> <span class="ident">convert_args</span>(
+    <span class="ident">args</span>: <span class="kw-2">&amp;</span><span class="ident">IndexMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">lowering::ResourceOrString</span><span class="op">&gt;</span>,
+    <span class="kw-2">mut</span> <span class="ident">resources</span>: <span class="kw">impl</span> <span class="ident">FnMut</span>(<span class="ident">Entity</span>) -&gt; <span class="ident">ResourceName</span>,
+) -&gt; <span class="ident">HashMap</span><span class="op">&lt;</span><span class="ident">String</span>, <span class="ident">ResourceOrString</span><span class="op">&gt;</span> {
+    <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">converted</span> <span class="op">=</span> <span class="ident">HashMap::new</span>();
+
+    <span class="kw">for</span> (<span class="ident">key</span>, <span class="ident">value</span>) <span class="kw">in</span> <span class="ident">args</span> {
+        <span class="kw">let</span> <span class="ident">value</span> <span class="op">=</span> <span class="kw">match</span> <span class="ident">value</span> {
+            <span class="ident">lowering::ResourceOrString::String</span>(<span class="ident">s</span>) =&gt; {
+                <span class="ident">ResourceOrString::String</span>(<span class="ident">s</span>.<span class="ident">clone</span>())
+            },
+            <span class="ident">lowering::ResourceOrString::Resource</span>(<span class="ident">r</span>) =&gt; {
+                <span class="ident">ResourceOrString::Resource</span>(<span class="ident">resources</span>(<span class="kw-2">*</span><span class="ident">r</span>))
+            },
+        };
+
+        <span class="ident">converted</span>.<span class="ident">insert</span>(<span class="ident">key</span>.<span class="ident">clone</span>(), <span class="ident">value</span>);
+    }
+
+    <span class="ident">converted</span>
 }
 </code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../../" data-current-crate="hotg_rune_compiler" data-search-index-js="../../../search-index.js" data-search-js="../../../search.js"></div>

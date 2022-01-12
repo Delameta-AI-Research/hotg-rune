@@ -215,7 +215,7 @@
     <span class="ident">span</span>: <span class="ident">Span</span>,
 ) -&gt; <span class="ident">Diagnostic</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
     <span class="kw">let</span> <span class="ident">msg</span> <span class="op">=</span> <span class="macro">format!</span>(<span class="string">&quot;The resource \&quot;{}\&quot; can&#39;t specify both a \&quot;path\&quot; and \&quot;inline\&quot; default value&quot;</span>, <span class="ident">name</span>);
-    
+
     <span class="ident">Diagnostic::error</span>()
         .<span class="ident">with_message</span>(<span class="ident">msg</span>)
         .<span class="ident">with_labels</span>(<span class="macro">vec!</span>[<span class="ident">Label::primary</span>((), <span class="ident">span</span>)])

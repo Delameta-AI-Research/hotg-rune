@@ -1138,6 +1138,8 @@
 <span id="1138">1138</span>
 <span id="1139">1139</span>
 <span id="1140">1140</span>
+<span id="1141">1141</span>
+<span id="1142">1142</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Definitions for the Runefile&#39;s YAML format.</span>
 
 <span class="kw">use</span> <span class="ident">std</span>::{
@@ -1364,11 +1366,11 @@ The full syntax is `base@version#sub_path` where
         } <span class="op">=</span> <span class="self">self</span>;
 
         <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{}&quot;</span>, <span class="ident">base</span>)<span class="question-mark">?</span>;
-        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">sub</span>) <span class="op">=</span> <span class="ident">sub_path</span> {
-            <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;#{}&quot;</span>, <span class="ident">sub</span>)<span class="question-mark">?</span>;
-        }
         <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">version</span>) <span class="op">=</span> <span class="ident">version</span> {
             <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;@{}&quot;</span>, <span class="ident">version</span>)<span class="question-mark">?</span>;
+        }
+        <span class="kw">if</span> <span class="kw">let</span> <span class="prelude-val">Some</span>(<span class="ident">sub</span>) <span class="op">=</span> <span class="ident">sub_path</span> {
+            <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;#{}&quot;</span>, <span class="ident">sub</span>)<span class="question-mark">?</span>;
         }
 
         <span class="prelude-val">Ok</span>(())
@@ -1990,6 +1992,8 @@ A reference to some [`ResourceDeclaration`]. It typically looks like
         <span class="kw">for</span> (<span class="ident">src</span>, <span class="ident">should_be</span>) <span class="kw">in</span> <span class="ident">inputs</span> {
             <span class="kw">let</span> <span class="ident">got</span>: <span class="ident">Path</span> <span class="op">=</span> <span class="ident">src</span>.<span class="ident">parse</span>().<span class="ident">unwrap</span>();
             <span class="macro">assert_eq!</span>(<span class="ident">got</span>, <span class="ident">should_be</span>, <span class="string">&quot;{}&quot;</span>, <span class="ident">src</span>);
+            <span class="kw">let</span> <span class="ident">round_tripped</span> <span class="op">=</span> <span class="ident">got</span>.<span class="ident">to_string</span>();
+            <span class="macro">assert_eq!</span>(<span class="ident">round_tripped</span>, <span class="ident">src</span>);
         }
     }
 

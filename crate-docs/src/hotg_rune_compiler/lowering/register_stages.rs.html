@@ -873,7 +873,7 @@
         <span class="macro">assert_eq!</span>(<span class="ident">diags</span>.<span class="ident">len</span>(), <span class="number">4</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">diags</span>[<span class="number">0</span>], <span class="kw-2">&amp;</span><span class="ident">Diagnostic::warning</span>()
             .<span class="ident">with_message</span>(<span class="string">&quot;The \&quot;my-proc-block\&quot; proc block used by \&quot;transform\&quot; should have a version specifier&quot;</span>)
-            .<span class="ident">with_notes</span>(<span class="macro">vec!</span>[<span class="string">&quot;hint: change it to something like \&quot;my-proc-block@0.10.0\&quot;&quot;</span>.<span class="ident">to_string</span>()]));
+            .<span class="ident">with_notes</span>(<span class="macro">vec!</span>[<span class="macro">format!</span>(<span class="string">&quot;hint: change it to something like \&quot;my-proc-block@{}\&quot;&quot;</span>, <span class="macro">env!</span>(<span class="string">&quot;CARGO_PKG_VERSION&quot;</span>).<span class="ident">to_string</span>()).<span class="ident">to_string</span>()]));
         <span class="macro">assert_eq!</span>(<span class="ident">diags</span>[<span class="number">1</span>].<span class="ident">message</span>, <span class="string">&quot;\&quot;$cap\&quot; is not a resource&quot;</span>);
         <span class="macro">assert_eq!</span>(<span class="ident">diags</span>[<span class="number">2</span>].<span class="ident">message</span>, <span class="string">&quot;No definition for \&quot;$NON_EXISTENT\&quot;&quot;</span>);
         <span class="macro">assert_eq!</span>(

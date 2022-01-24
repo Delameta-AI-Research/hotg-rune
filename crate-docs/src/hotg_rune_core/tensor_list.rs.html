@@ -224,6 +224,9 @@
 <span id="224">224</span>
 <span id="225">225</span>
 <span id="226">226</span>
+<span id="227">227</span>
+<span id="228">228</span>
+<span id="229">229</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Abstractions for dealing with tuples of tensors.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! The main source of complexity in this module comes from jumping between the</span>
@@ -396,7 +399,10 @@
     ($(,)<span class="kw-2">*</span>) =&gt; {};
 }
 
-<span class="macro">reflection_type_list!</span>(<span class="ident">A</span>, <span class="ident">B</span>, <span class="ident">C</span>, <span class="ident">D</span>, <span class="ident">E</span>, <span class="ident">F</span>, <span class="ident">G</span>, <span class="ident">H</span>, <span class="ident">I</span>, <span class="ident">J</span>, <span class="ident">K</span>, <span class="ident">L</span>, <span class="ident">M</span>, <span class="ident">N</span>, <span class="ident">O</span>, <span class="ident">P</span>, <span class="ident">Q</span>, <span class="ident">R</span>, <span class="ident">S</span>, <span class="ident">T</span>, <span class="ident">U</span>, <span class="ident">V</span>, <span class="ident">W</span>, <span class="ident">X</span>, <span class="ident">Y</span>, <span class="ident">Z</span>, <span class="ident">AA</span>, <span class="ident">AB</span>, <span class="ident">AC</span>, <span class="ident">AD</span>, <span class="ident">AF</span>, <span class="ident">AG</span>, <span class="ident">AH</span>);
+<span class="macro">reflection_type_list!</span>(
+    <span class="ident">A</span>, <span class="ident">B</span>, <span class="ident">C</span>, <span class="ident">D</span>, <span class="ident">E</span>, <span class="ident">F</span>, <span class="ident">G</span>, <span class="ident">H</span>, <span class="ident">I</span>, <span class="ident">J</span>, <span class="ident">K</span>, <span class="ident">L</span>, <span class="ident">M</span>, <span class="ident">N</span>, <span class="ident">O</span>, <span class="ident">P</span>, <span class="ident">Q</span>, <span class="ident">R</span>, <span class="ident">S</span>, <span class="ident">T</span>, <span class="ident">U</span>, <span class="ident">V</span>, <span class="ident">W</span>, <span class="ident">X</span>, <span class="ident">Y</span>,
+    <span class="ident">Z</span>, <span class="ident">AA</span>, <span class="ident">AB</span>, <span class="ident">AC</span>, <span class="ident">AD</span>, <span class="ident">AF</span>, <span class="ident">AG</span>, <span class="ident">AH</span>
+);
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">test</span>)]</span>
 <span class="kw">mod</span> <span class="ident">tests</span> {

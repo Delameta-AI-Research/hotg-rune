@@ -342,6 +342,9 @@
 <span id="342">342</span>
 <span id="343">343</span>
 <span id="344">344</span>
+<span id="345">345</span>
+<span id="346">346</span>
+<span id="347">347</span>
 </pre><pre class="rust"><code><span class="doccomment">//! The various types that make up Rune&#39;s *High-level Internal Representation*.</span>
 
 <span class="kw">use</span> <span class="ident">std</span>::{
@@ -369,6 +372,7 @@
 <span class="attribute">#[<span class="ident">serde</span>(<span class="ident">rename_all</span> <span class="op">=</span> <span class="string">&quot;kebab-case&quot;</span>, <span class="ident">tag</span> <span class="op">=</span> <span class="string">&quot;type&quot;</span>)]</span>
 <span class="kw">pub</span> <span class="kw">enum</span> <span class="ident">SinkKind</span> {
     <span class="ident">Serial</span>,
+    <span class="ident">Tensor</span>,
     <span class="ident">Other</span>(<span class="ident">String</span>),
 }
 
@@ -376,6 +380,7 @@
     <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="ident">fmt::Result</span> {
         <span class="kw">match</span> <span class="self">self</span> {
             <span class="ident">SinkKind::Serial</span> =&gt; <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;serial&quot;</span>),
+            <span class="ident">SinkKind::Tensor</span> =&gt; <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;tensor&quot;</span>),
             <span class="ident">SinkKind::Other</span>(<span class="ident">s</span>) =&gt; <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;{}&quot;</span>, <span class="ident">s</span>),
         }
     }
@@ -385,6 +390,7 @@
     <span class="kw">fn</span> <span class="ident">from</span>(<span class="ident">s</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a</span> <span class="ident">str</span>) -&gt; <span class="ident">SinkKind</span> {
         <span class="kw">match</span> <span class="ident">s</span> {
             <span class="string">&quot;serial&quot;</span> <span class="op">|</span> <span class="string">&quot;SERIAL&quot;</span> =&gt; <span class="ident">SinkKind::Serial</span>,
+            <span class="string">&quot;tensor&quot;</span> <span class="op">|</span> <span class="string">&quot;TENSOR&quot;</span> =&gt; <span class="ident">SinkKind::Tensor</span>,
             <span class="kw">_</span> =&gt; <span class="ident">SinkKind::Other</span>(<span class="ident">s</span>.<span class="ident">to_string</span>()),
         }
     }

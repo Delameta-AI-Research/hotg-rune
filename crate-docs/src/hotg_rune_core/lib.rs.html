@@ -110,6 +110,20 @@
 <span id="110">110</span>
 <span id="111">111</span>
 <span id="112">112</span>
+<span id="113">113</span>
+<span id="114">114</span>
+<span id="115">115</span>
+<span id="116">116</span>
+<span id="117">117</span>
+<span id="118">118</span>
+<span id="119">119</span>
+<span id="120">120</span>
+<span id="121">121</span>
+<span id="122">122</span>
+<span id="123">123</span>
+<span id="124">124</span>
+<span id="125">125</span>
+<span id="126">126</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Core types and abstractions used by the Rune ecosystem.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! # Feature Flags</span>
@@ -220,6 +234,20 @@
         <span class="ident">BLE</span> <span class="op">=</span> <span class="number">2</span>,
         <span class="ident">PIN</span> <span class="op">=</span> <span class="number">3</span>,
         <span class="ident">WIFI</span> <span class="op">=</span> <span class="number">4</span>,
+        <span class="doccomment">/// A raw tensor output.</span>
+        <span class="doccomment">///</span>
+        <span class="doccomment">/// The buffer passed from the Rune to the runtime will be laid out</span>
+        <span class="doccomment">/// as:</span>
+        <span class="doccomment">///</span>
+        <span class="doccomment">/// | Field     | Length   | Description                                                                   |</span>
+        <span class="doccomment">/// | --------- | -------- | ----------------------------------------------------------------------------- |</span>
+        <span class="doccomment">/// | shape_len | 4        | A little-endian u32 containing the shape field&#39;s length                       |</span>
+        <span class="doccomment">/// | shape     | variable | A UTF-8 string encoding the tensor&#39;s shape (i.e. element type and dimensions) |</span>
+        <span class="doccomment">/// | elements  | variable | The tensor data itself, in little-endian format                               |</span>
+        <span class="doccomment">///</span>
+        <span class="doccomment">/// This pattern may be repeated an arbitrary number of times, depending</span>
+        <span class="doccomment">/// on how many tensors are being outputted.</span>
+        <span class="ident">TENSOR</span> <span class="op">=</span> <span class="number">5</span>,
     }
 }
 </code></pre></div>

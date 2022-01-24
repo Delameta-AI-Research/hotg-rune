@@ -345,6 +345,9 @@
 <span id="345">345</span>
 <span id="346">346</span>
 <span id="347">347</span>
+<span id="348">348</span>
+<span id="349">349</span>
+<span id="350">350</span>
 </pre><pre class="rust"><code><span class="doccomment">//! The various types that make up Rune&#39;s *High-level Internal Representation*.</span>
 
 <span class="kw">use</span> <span class="ident">std</span>::{
@@ -430,6 +433,7 @@
     <span class="ident">Sound</span>,
     <span class="ident">Image</span>,
     <span class="ident">Raw</span>,
+    <span class="ident">FloatImage</span>,
     <span class="ident">Other</span>(<span class="ident">String</span>),
 }
 
@@ -443,6 +447,7 @@
             <span class="ident">SourceKind::Sound</span> =&gt; <span class="prelude-val">Some</span>(<span class="ident">hotg_rune_core::capabilities::SOUND</span>),
             <span class="ident">SourceKind::Image</span> =&gt; <span class="prelude-val">Some</span>(<span class="ident">hotg_rune_core::capabilities::IMAGE</span>),
             <span class="ident">SourceKind::Raw</span> =&gt; <span class="prelude-val">Some</span>(<span class="ident">hotg_rune_core::capabilities::RAW</span>),
+            <span class="ident">SourceKind::FloatImage</span> =&gt; <span class="prelude-val">Some</span>(<span class="ident">hotg_rune_core::capabilities::FLOAT_IMAGE</span>),
             <span class="kw">_</span> =&gt; <span class="prelude-val">None</span>,
         }
     }
@@ -461,6 +466,7 @@
             <span class="string">&quot;sound&quot;</span> <span class="op">|</span> <span class="string">&quot;SOUND&quot;</span> =&gt; <span class="ident">SourceKind::Sound</span>,
             <span class="string">&quot;image&quot;</span> <span class="op">|</span> <span class="string">&quot;IMAGE&quot;</span> =&gt; <span class="ident">SourceKind::Image</span>,
             <span class="string">&quot;raw&quot;</span> <span class="op">|</span> <span class="string">&quot;RAW&quot;</span> =&gt; <span class="ident">SourceKind::Raw</span>,
+            <span class="string">&quot;float-image&quot;</span> <span class="op">|</span> <span class="string">&quot;FLOAT_IMAGE&quot;</span> =&gt; <span class="ident">SourceKind::FloatImage</span>,
             <span class="kw">_</span> =&gt; <span class="ident">SourceKind::Other</span>(<span class="ident">s</span>.<span class="ident">to_string</span>()),
         }
     }

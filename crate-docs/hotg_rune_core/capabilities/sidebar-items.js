@@ -1,1 +1,1 @@
-initSidebarItems({"constant":[["ACCEL",""],["IMAGE",""],["RAND",""],["RAW",""],["SOUND",""]],"fn":[["all",""],["from_name",""],["name",""]]});
+initSidebarItems({"constant":[["ACCEL",""],["FLOAT_IMAGE",""],["IMAGE",""],["RAND",""],["RAW",""],["SOUND",""]],"fn":[["all",""],["from_name",""],["name",""]]});

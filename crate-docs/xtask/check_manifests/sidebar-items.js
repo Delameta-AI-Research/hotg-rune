@@ -1,1 +1,0 @@
-initSidebarItems({"constant":[["AUTHORS",""],["HOMEPAGE",""],["LICENSE",""],["NAME_PREFIXES",""],["REPOSITORY",""]],"fn":[["check_manifest",""]],"struct":[["BulkErrors",""],["CheckManifests",""],["CrateInfo",""],["Diagnostic",""],["Diagnostics",""],["Expect",""],["ExpectArray",""]]});

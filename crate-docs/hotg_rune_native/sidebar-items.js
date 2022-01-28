@@ -1,1 +1,0 @@
-initSidebarItems({"fn":[["rune_version","The version of Rune this library was compiled against."]],"struct":[["RuneResult",""]]});

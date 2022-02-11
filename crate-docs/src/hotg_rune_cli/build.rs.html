@@ -427,7 +427,7 @@
         .<span class="ident">or_else</span>(<span class="ident">dirs::home_dir</span>)
         .<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">PathBuf::from</span>(<span class="string">&quot;.&quot;</span>));
 
-    <span class="ident">cache_dir</span>.<span class="ident">join</span>(<span class="string">&quot;runes&quot;</span>).<span class="ident">to_string_lossy</span>().<span class="ident">into_owned</span>()
+    <span class="ident">cache_dir</span>.<span class="ident">join</span>(<span class="string">&quot;rune&quot;</span>).<span class="ident">join</span>(<span class="string">&quot;runes&quot;</span>).<span class="ident">to_string_lossy</span>().<span class="ident">into_owned</span>()
 });
 
 <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>

@@ -45,6 +45,8 @@
 <span id="45">45</span>
 <span id="46">46</span>
 <span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
 </pre><pre class="rust"><code><span class="doccomment">//! The Rune compiler.</span>
 <span class="doccomment">//!</span>
 <span class="doccomment">//! # Phases</span>
@@ -85,12 +87,14 @@
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">parse</span>;
 <span class="kw">mod</span> <span class="ident">phases</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">serialize</span>;
+<span class="kw">mod</span> <span class="ident">toolchain</span>;
 <span class="kw">pub</span> <span class="kw">mod</span> <span class="ident">type_check</span>;
 
 <span class="kw">pub</span> <span class="kw">use</span> <span class="kw">crate</span>::{
     <span class="ident">phases</span>::{<span class="ident">build</span>, <span class="ident">build_with_hooks</span>, <span class="ident">Phase</span>},
     <span class="ident">diagnostics::Diagnostics</span>,
     <span class="ident">build_context</span>::{<span class="ident">BuildContext</span>, <span class="ident">Verbosity</span>, <span class="ident">FeatureFlags</span>},
+    <span class="ident">toolchain::rust_toolchain</span>,
 };
 </code></pre></div>
 </section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="hotg_rune_compiler" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>

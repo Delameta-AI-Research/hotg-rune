@@ -1,4 +1,9 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;image-0.23.14&#x2F;.&#x2F;src&#x2F;flat.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>flat.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../image/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">   1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/image-0.23.14/./src/flat.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>flat.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
+    <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../image/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../image/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../image/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><div class="theme-picker hidden"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="22" height="22" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">   1</span>
 <span id="2">   2</span>
 <span id="3">   3</span>
 <span id="4">   4</span>
@@ -2072,7 +2077,7 @@
     <span class="doccomment">/// This does not modify the strides, so that the resulting sample buffer may have holes</span>
     <span class="doccomment">/// created by the shrinking operation. Shrinking could also lead to an non-aliasing image when</span>
     <span class="doccomment">/// samples had aliased each other before.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">shrink_to</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">channels</span>: <span class="ident">u8</span>, <span class="ident">width</span>: <span class="ident">u32</span>, <span class="ident">height</span>: <span class="ident">u32</span>) {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">shrink_to</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">channels</span>: <span class="ident">u8</span>, <span class="ident">width</span>: <span class="ident">u32</span>, <span class="ident">height</span>: <span class="ident">u32</span>) {
         <span class="self">self</span>.<span class="ident">channels</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">channels</span>.<span class="ident">min</span>(<span class="ident">channels</span>);
         <span class="self">self</span>.<span class="ident">width</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">width</span>.<span class="ident">min</span>(<span class="ident">width</span>);
         <span class="self">self</span>.<span class="ident">height</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">height</span>.<span class="ident">min</span>(<span class="ident">height</span>);
@@ -2129,7 +2134,7 @@
     }
 
     <span class="doccomment">/// Get a mutable reference based version.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_mut</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="ident">FlatSamples</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">T</span>]<span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">Buffer</span>: <span class="ident">AsMut</span><span class="op">&lt;</span>[<span class="ident">T</span>]<span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_mut</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="ident">FlatSamples</span><span class="op">&lt;</span><span class="kw-2">&amp;mut</span> [<span class="ident">T</span>]<span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">Buffer</span>: <span class="ident">AsMut</span><span class="op">&lt;</span>[<span class="ident">T</span>]<span class="op">&gt;</span> {
         <span class="ident">FlatSamples</span> {
             <span class="ident">samples</span>: <span class="self">self</span>.<span class="ident">samples</span>.<span class="ident">as_mut</span>(),
             <span class="ident">layout</span>: <span class="self">self</span>.<span class="ident">layout</span>,
@@ -2202,7 +2207,7 @@
     <span class="doccomment">/// `in_bounds_index` as a small speedup over the index calculation of this method which relies</span>
     <span class="doccomment">/// on `index_ignoring_bounds` since it can not have a-priori knowledge that the sample</span>
     <span class="doccomment">/// coordinate is in fact backed by any memory buffer.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_mut_sample</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">channel</span>: <span class="ident">u8</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">T</span><span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_mut_sample</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">channel</span>: <span class="ident">u8</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;mut</span> <span class="ident">T</span><span class="op">&gt;</span>
         <span class="kw">where</span> <span class="ident">Buffer</span>: <span class="ident">AsMut</span><span class="op">&lt;</span>[<span class="ident">T</span>]<span class="op">&gt;</span>,
     {
         <span class="kw">match</span> <span class="self">self</span>.<span class="ident">index</span>(<span class="ident">channel</span>, <span class="ident">x</span>, <span class="ident">y</span>) {
@@ -2254,7 +2259,7 @@
     <span class="doccomment">/// **WARNING**: Note that of course samples may alias, so that the mutable reference returned</span>
     <span class="doccomment">/// for one sample can in fact modify other samples as well. Sometimes exactly this is</span>
     <span class="doccomment">/// intended.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_view_with_mut_samples</span><span class="op">&lt;</span><span class="ident">P</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">View</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">P::Subpixel</span>], <span class="ident">P</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_view_with_mut_samples</span><span class="op">&lt;</span><span class="ident">P</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">View</span><span class="op">&lt;</span><span class="kw-2">&amp;mut</span> [<span class="ident">P::Subpixel</span>], <span class="ident">P</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span>
         <span class="kw">where</span> <span class="ident">P</span>: <span class="ident">Pixel</span>, <span class="ident">Buffer</span>: <span class="ident">AsMut</span><span class="op">&lt;</span>[<span class="ident">P::Subpixel</span>]<span class="op">&gt;</span>,
     {
         <span class="kw">if</span> <span class="self">self</span>.<span class="ident">layout</span>.<span class="ident">channels</span> <span class="op">!</span><span class="op">=</span> <span class="ident">P::CHANNEL_COUNT</span> {
@@ -2287,7 +2292,7 @@
     <span class="doccomment">/// provides many more operations, is possibly faster (if not you may want to open an issue) is</span>
     <span class="doccomment">/// generally polished. You can also try to convert this buffer inline, see</span>
     <span class="doccomment">/// `ImageBuffer::from_raw`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_view_mut</span><span class="op">&lt;</span><span class="ident">P</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ViewMut</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">P::Subpixel</span>], <span class="ident">P</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_view_mut</span><span class="op">&lt;</span><span class="ident">P</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">ViewMut</span><span class="op">&lt;</span><span class="kw-2">&amp;mut</span> [<span class="ident">P::Subpixel</span>], <span class="ident">P</span><span class="op">&gt;</span>, <span class="ident">Error</span><span class="op">&gt;</span>
         <span class="kw">where</span> <span class="ident">P</span>: <span class="ident">Pixel</span>, <span class="ident">Buffer</span>: <span class="ident">AsMut</span><span class="op">&lt;</span>[<span class="ident">P::Subpixel</span>]<span class="op">&gt;</span>,
     {
         <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">layout</span>.<span class="ident">is_normal</span>(<span class="ident">NormalForm::PixelPacked</span>) {
@@ -2325,7 +2330,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// The slice is not limited to the region of the image and not all sample indices are valid</span>
     <span class="doccomment">/// indices into this buffer. See `image_mut_slice` as an alternative.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_mut_slice</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">T</span>] <span class="kw">where</span> <span class="ident">Buffer</span>: <span class="ident">AsMut</span><span class="op">&lt;</span>[<span class="ident">T</span>]<span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_mut_slice</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut</span> [<span class="ident">T</span>] <span class="kw">where</span> <span class="ident">Buffer</span>: <span class="ident">AsMut</span><span class="op">&lt;</span>[<span class="ident">T</span>]<span class="op">&gt;</span> {
         <span class="self">self</span>.<span class="ident">samples</span>.<span class="ident">as_mut</span>()
     }
 
@@ -2349,7 +2354,7 @@
     }
 
     <span class="doccomment">/// Mutable portion of the buffer that holds sample values.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">image_mut_slice</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">T</span>]<span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">Buffer</span>: <span class="ident">AsMut</span><span class="op">&lt;</span>[<span class="ident">T</span>]<span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">image_mut_slice</span><span class="op">&lt;</span><span class="ident">T</span><span class="op">&gt;</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;mut</span> [<span class="ident">T</span>]<span class="op">&gt;</span> <span class="kw">where</span> <span class="ident">Buffer</span>: <span class="ident">AsMut</span><span class="op">&lt;</span>[<span class="ident">T</span>]<span class="op">&gt;</span> {
         <span class="kw">let</span> <span class="ident">min_length</span> <span class="op">=</span> <span class="kw">match</span> <span class="self">self</span>.<span class="ident">min_length</span>() {
             <span class="prelude-val">None</span> =&gt; <span class="kw">return</span> <span class="prelude-val">None</span>,
             <span class="prelude-val">Some</span>(<span class="ident">index</span>) =&gt; <span class="ident">index</span>,
@@ -2360,7 +2365,7 @@
             <span class="kw">return</span> <span class="prelude-val">None</span>
         }
 
-        <span class="prelude-val">Some</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">slice</span>[..<span class="ident">min_length</span>])
+        <span class="prelude-val">Some</span>(<span class="kw-2">&amp;mut</span> <span class="ident">slice</span>[..<span class="ident">min_length</span>])
     }
 
     <span class="doccomment">/// Move the data into an image buffer.</span>
@@ -2510,7 +2515,7 @@
     <span class="doccomment">/// This does not modify the strides, so that the resulting sample buffer may have holes</span>
     <span class="doccomment">/// created by the shrinking operation. Shrinking could also lead to an non-aliasing image when</span>
     <span class="doccomment">/// samples had aliased each other before.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">shrink_to</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">channels</span>: <span class="ident">u8</span>, <span class="ident">width</span>: <span class="ident">u32</span>, <span class="ident">height</span>: <span class="ident">u32</span>) {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">shrink_to</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">channels</span>: <span class="ident">u8</span>, <span class="ident">width</span>: <span class="ident">u32</span>, <span class="ident">height</span>: <span class="ident">u32</span>) {
         <span class="self">self</span>.<span class="ident">layout</span>.<span class="ident">shrink_to</span>(<span class="ident">channels</span>, <span class="ident">width</span>, <span class="ident">height</span>)
     }
 }
@@ -2721,7 +2726,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// **WARNING**: Note that of course samples may alias, so that the mutable reference returned</span>
     <span class="doccomment">/// here can in fact modify more than the coordinate in the argument.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_mut_sample</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">channel</span>: <span class="ident">u8</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">P::Subpixel</span><span class="op">&gt;</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_mut_sample</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">channel</span>: <span class="ident">u8</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;mut</span> <span class="ident">P::Subpixel</span><span class="op">&gt;</span>
         <span class="kw">where</span> <span class="ident">Buffer</span>: <span class="ident">AsMut</span><span class="op">&lt;</span>[<span class="ident">P::Subpixel</span>]<span class="op">&gt;</span>
     {
         <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">in_bounds</span>(<span class="ident">channel</span>, <span class="ident">x</span>, <span class="ident">y</span>) {
@@ -2753,11 +2758,11 @@
     <span class="doccomment">/// This is relevant only when constructed with `FlatSamples::as_view_with_mut_samples`. While</span>
     <span class="doccomment">/// this can not fail–the validity of all coordinates has been validated during the conversion</span>
     <span class="doccomment">/// from `FlatSamples`–the resulting slice may still contain holes.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">image_mut_slice</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">P::Subpixel</span>]
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">image_mut_slice</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut</span> [<span class="ident">P::Subpixel</span>]
         <span class="kw">where</span> <span class="ident">Buffer</span>: <span class="ident">AsMut</span><span class="op">&lt;</span>[<span class="ident">P::Subpixel</span>]<span class="op">&gt;</span>
     {
         <span class="kw">let</span> <span class="ident">min_length</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">min_length</span>();
-        <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">samples</span>.<span class="ident">as_mut</span>()[..<span class="ident">min_length</span>]
+        <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">samples</span>.<span class="ident">as_mut</span>()[..<span class="ident">min_length</span>]
     }
 
     <span class="doccomment">/// Shrink the inner image.</span>
@@ -2765,7 +2770,7 @@
     <span class="doccomment">/// The new dimensions will be the minimum of the previous dimensions. Since the set of</span>
     <span class="doccomment">/// in-bounds pixels afterwards is a subset of the current ones, this is allowed on a `View`.</span>
     <span class="doccomment">/// Note that you can not change the number of channels as an intrinsic property of `P`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">shrink_to</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">width</span>: <span class="ident">u32</span>, <span class="ident">height</span>: <span class="ident">u32</span>) {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">shrink_to</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">width</span>: <span class="ident">u32</span>, <span class="ident">height</span>: <span class="ident">u32</span>) {
         <span class="kw">let</span> <span class="ident">channels</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">layout</span>.<span class="ident">channels</span>;
         <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">shrink_to</span>(<span class="ident">channels</span>, <span class="ident">width</span>, <span class="ident">height</span>)
     }
@@ -2860,7 +2865,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// This method will return `None` when the sample is out-of-bounds. All errors that could</span>
     <span class="doccomment">/// occur due to overflow have been eliminated while construction the `View`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_mut_sample</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">channel</span>: <span class="ident">u8</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">P::Subpixel</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">get_mut_sample</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">channel</span>: <span class="ident">u8</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;mut</span> <span class="ident">P::Subpixel</span><span class="op">&gt;</span> {
         <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">in_bounds</span>(<span class="ident">channel</span>, <span class="ident">x</span>, <span class="ident">y</span>) {
             <span class="kw">return</span> <span class="prelude-val">None</span>
         }
@@ -2879,9 +2884,9 @@
     }
 
     <span class="doccomment">/// Return the mutable buffer that holds sample values.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">image_mut_slice</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> [<span class="ident">P::Subpixel</span>] {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">image_mut_slice</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut</span> [<span class="ident">P::Subpixel</span>] {
         <span class="kw">let</span> <span class="ident">length</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">min_length</span>();
-        <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">samples</span>.<span class="ident">as_mut</span>()[..<span class="ident">length</span>]
+        <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">samples</span>.<span class="ident">as_mut</span>()[..<span class="ident">length</span>]
     }
 
     <span class="doccomment">/// Shrink the inner image.</span>
@@ -2889,7 +2894,7 @@
     <span class="doccomment">/// The new dimensions will be the minimum of the previous dimensions. Since the set of</span>
     <span class="doccomment">/// in-bounds pixels afterwards is a subset of the current ones, this is allowed on a `View`.</span>
     <span class="doccomment">/// Note that you can not change the number of channels as an intrinsic property of `P`.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">shrink_to</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">width</span>: <span class="ident">u32</span>, <span class="ident">height</span>: <span class="ident">u32</span>) {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">shrink_to</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">width</span>: <span class="ident">u32</span>, <span class="ident">height</span>: <span class="ident">u32</span>) {
         <span class="kw">let</span> <span class="ident">channels</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">layout</span>.<span class="ident">channels</span>;
         <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">shrink_to</span>(<span class="ident">channels</span>, <span class="ident">width</span>, <span class="ident">height</span>)
     }
@@ -2945,12 +2950,12 @@
     <span class="doccomment">/// # Panics</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// When the coordinates are out of bounds or the index calculation fails.</span>
-    <span class="kw">fn</span> <span class="ident">index_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, (<span class="ident">c</span>, <span class="ident">x</span>, <span class="ident">y</span>): (<span class="ident">u8</span>, <span class="ident">u32</span>, <span class="ident">u32</span>)) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident"><span class="self">Self</span>::Output</span> {
+    <span class="kw">fn</span> <span class="ident">index_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, (<span class="ident">c</span>, <span class="ident">x</span>, <span class="ident">y</span>): (<span class="ident">u8</span>, <span class="ident">u32</span>, <span class="ident">u32</span>)) -&gt; <span class="kw-2">&amp;mut</span> <span class="ident"><span class="self">Self</span>::Output</span> {
         <span class="kw">let</span> <span class="ident">bounds</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">bounds</span>();
         <span class="kw">let</span> <span class="ident">strides</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">strides_cwh</span>();
         <span class="kw">let</span> <span class="ident">index</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">index</span>(<span class="ident">c</span>, <span class="ident">x</span>, <span class="ident">y</span>).<span class="ident">unwrap_or_else</span>(<span class="op">|</span><span class="op">|</span>
             <span class="ident">panic_cwh_out_of_bounds</span>((<span class="ident">c</span>, <span class="ident">x</span>, <span class="ident">y</span>), <span class="ident">bounds</span>, <span class="ident">strides</span>));
-        <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">samples</span>[<span class="ident">index</span>]
+        <span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">samples</span>[<span class="ident">index</span>]
     }
 }
 
@@ -3049,7 +3054,7 @@
 {
     <span class="kw">type</span> <span class="ident">InnerImage</span> <span class="op">=</span> <span class="self">Self</span>;
 
-    <span class="kw">fn</span> <span class="ident">get_pixel_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident"><span class="self">Self</span>::Pixel</span> {
+    <span class="kw">fn</span> <span class="ident">get_pixel_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="ident"><span class="self">Self</span>::Pixel</span> {
         <span class="kw">if</span> <span class="op">!</span><span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">in_bounds</span>(<span class="number">0</span>, <span class="ident">x</span>, <span class="ident">y</span>) {
             <span class="ident">panic_pixel_out_of_bounds</span>((<span class="ident">x</span>, <span class="ident">y</span>), <span class="self">self</span>.<span class="ident">dimensions</span>())
         }
@@ -3057,18 +3062,18 @@
         <span class="kw">let</span> <span class="ident">base_index</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">in_bounds_index</span>(<span class="number">0</span>, <span class="ident">x</span>, <span class="ident">y</span>);
         <span class="kw">let</span> <span class="ident">channel_count</span> <span class="op">=</span> <span class="op">&lt;</span><span class="ident">P</span> <span class="kw">as</span> <span class="ident">Pixel</span><span class="op">&gt;</span><span class="ident">::CHANNEL_COUNT</span> <span class="kw">as</span> <span class="ident">usize</span>;
         <span class="kw">let</span> <span class="ident">pixel_range</span> <span class="op">=</span> <span class="ident">base_index</span>..<span class="ident">base_index</span> <span class="op">+</span> <span class="ident">channel_count</span>;
-        <span class="ident">P::from_slice_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">samples</span>.<span class="ident">as_mut</span>()[<span class="ident">pixel_range</span>])
+        <span class="ident">P::from_slice_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>.<span class="ident">inner</span>.<span class="ident">samples</span>.<span class="ident">as_mut</span>()[<span class="ident">pixel_range</span>])
     }
 
-    <span class="kw">fn</span> <span class="ident">put_pixel</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>, <span class="ident">pixel</span>: <span class="ident"><span class="self">Self</span>::Pixel</span>) {
+    <span class="kw">fn</span> <span class="ident">put_pixel</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>, <span class="ident">pixel</span>: <span class="ident"><span class="self">Self</span>::Pixel</span>) {
         <span class="kw-2">*</span><span class="self">self</span>.<span class="ident">get_pixel_mut</span>(<span class="ident">x</span>, <span class="ident">y</span>) <span class="op">=</span> <span class="ident">pixel</span>;
     }
 
-    <span class="kw">fn</span> <span class="ident">blend_pixel</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>, <span class="ident">pixel</span>: <span class="ident"><span class="self">Self</span>::Pixel</span>) {
+    <span class="kw">fn</span> <span class="ident">blend_pixel</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>, <span class="ident">pixel</span>: <span class="ident"><span class="self">Self</span>::Pixel</span>) {
         <span class="self">self</span>.<span class="ident">get_pixel_mut</span>(<span class="ident">x</span>, <span class="ident">y</span>).<span class="ident">blend</span>(<span class="kw-2">&amp;</span><span class="ident">pixel</span>);
     }
 
-    <span class="kw">fn</span> <span class="ident">inner_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">Self</span> {
+    <span class="kw">fn</span> <span class="ident">inner_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="self">Self</span> {
         <span class="self">self</span>
     }
 }
@@ -3078,7 +3083,7 @@
         <span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>)]</span>
         <span class="kw">struct</span> <span class="ident">NormalFormRequiredError</span>(<span class="ident">NormalForm</span>);
         <span class="kw">impl</span> <span class="ident">fmt::Display</span> <span class="kw">for</span> <span class="ident">NormalFormRequiredError</span> {
-            <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="ident">fmt::Result</span> {
+            <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">fmt::Formatter</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>) -&gt; <span class="ident">fmt::Result</span> {
                 <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;Required sample buffer in normal form {:?}&quot;</span>, <span class="self">self</span>.<span class="number">0</span>)
             }
         }
@@ -3097,7 +3102,7 @@
 }
 
 <span class="kw">impl</span> <span class="ident">fmt::Display</span> <span class="kw">for</span> <span class="ident">Error</span> {
-    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">fmt::Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
+    <span class="kw">fn</span> <span class="ident">fmt</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">f</span>: <span class="kw-2">&amp;mut</span> <span class="ident">fmt::Formatter</span>) -&gt; <span class="ident">fmt::Result</span> {
         <span class="kw">match</span> <span class="self">self</span> {
             <span class="ident">Error::TooLarge</span> =&gt; <span class="macro">write!</span>(<span class="ident">f</span>, <span class="string">&quot;The layout is too large&quot;</span>),
             <span class="ident">Error::NormalFormRequired</span>(<span class="ident">form</span>) =&gt; <span class="macro">write!</span>(
@@ -3289,6 +3294,5 @@
     }
 }
 </code></pre></div>
-</section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="image" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
-    <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script>
+</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="image" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0-nightly (10cc7a6d0 2022-02-26)" ></div>
 </body></html>

@@ -1,0 +1,1 @@
+initSidebarItems({"constant":[["TFJS_MIMETYPE","The mimetype used for a TensorFlow JS model."],["TFLITE_MIMETYPE","The mimetype used for a TensorFlow Lite model."],["TF_MIMETYPE","The mimetype used for a TensorFlow model."]],"fn":[["default_model_handler",""],["load_tflite","Create a new [`Model`] backed by [`hotg_runecoral`]."]]});

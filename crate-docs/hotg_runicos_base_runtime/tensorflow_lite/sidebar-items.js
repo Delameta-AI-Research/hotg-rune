@@ -1,1 +1,0 @@
-initSidebarItems({"fn":[["new_model","Create a new [`Model`] backed by [`hotg_runecoral`]."]]});

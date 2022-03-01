@@ -1,4 +1,9 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `&#x2F;home&#x2F;runner&#x2F;.cargo&#x2F;registry&#x2F;src&#x2F;github.com-1ecc6299db9ec823&#x2F;image-0.23.14&#x2F;.&#x2F;src&#x2F;dynimage.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>dynimage.rs - source</title><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../light.css"  id="themeStyle"><link rel="stylesheet" type="text/css" href="../../dark.css" disabled ><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled ><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"><style type="text/css">#crate-search{background-image:url("../../down-arrow.svg");}</style></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="sidebar-menu" role="button">&#9776;</div><a href='../../image/index.html'><div class='logo-container rust-logo'><img src='../../rust-logo.png' alt='logo'></div></a></nav><div class="theme-picker"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="18" height="18" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><nav class="sub"><form class="search-form"><div class="search-container"><div><select id="crate-search"><option value="All crates">All crates</option></select><input class="search-input" name="search" disabled autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"></div><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="18" height="18" alt="Change settings" src="../../wheel.svg"></a></div></form></nav><section id="main" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">   1</span>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/image-0.23.14/./src/dynimage.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>dynimage.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
+    <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../image/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
+        </a><h2 class="location"></h2>
+    </nav>
+    <nav class="sidebar"><a class="sidebar-logo" href="../../image/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
+        </a></nav><main><div class="width-limiter"><div class="sub-container"><a class="sub-logo-container" href="../../image/index.html"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></a><nav class="sub"><div class="theme-picker hidden"><button id="theme-picker" aria-label="Pick another theme!" aria-haspopup="menu" title="themes"><img width="22" height="22" alt="Pick another theme!" src="../../brush.svg"></button><div id="theme-choices" role="menu"></div></div><form class="search-form"><div class="search-container"><span></span><input class="search-input" name="search" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><button type="button" id="help-button" title="help">?</button><a id="settings-menu" href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../wheel.svg"></a></div></form></nav></div><section id="main-content" class="content"><div class="example-wrap"><pre class="line-numbers"><span id="1">   1</span>
 <span id="2">   2</span>
 <span id="3">   3</span>
 <span id="4">   4</span>
@@ -1861,7 +1866,7 @@
     <span class="doccomment">///</span>
     <span class="doccomment">/// Note: this method does *not* modify the object,</span>
     <span class="doccomment">/// and its signature will be replaced with `crop_imm()`&#39;s in the 0.24 release</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">crop</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>, <span class="ident">width</span>: <span class="ident">u32</span>, <span class="ident">height</span>: <span class="ident">u32</span>) -&gt; <span class="ident">DynamicImage</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">crop</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>, <span class="ident">width</span>: <span class="ident">u32</span>, <span class="ident">height</span>: <span class="ident">u32</span>) -&gt; <span class="ident">DynamicImage</span> {
         <span class="macro">dynamic_map!</span>(<span class="kw-2">*</span><span class="self">self</span>, <span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">p</span> =&gt; <span class="ident">imageops::crop</span>(<span class="ident">p</span>, <span class="ident">x</span>, <span class="ident">y</span>, <span class="ident">width</span>, <span class="ident">height</span>).<span class="ident">to_image</span>())
     }
 
@@ -1879,7 +1884,7 @@
     }
 
     <span class="doccomment">/// Return a mutable reference to an 8bit RGB image</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_mut_rgb8</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">RgbImage</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_mut_rgb8</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;mut</span> <span class="ident">RgbImage</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
             <span class="ident">DynamicImage::ImageRgb8</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">p</span>) =&gt; <span class="prelude-val">Some</span>(<span class="ident">p</span>),
             <span class="kw">_</span> =&gt; <span class="prelude-val">None</span>,
@@ -1895,7 +1900,7 @@
     }
 
     <span class="doccomment">/// Return a mutable reference to an 8bit BGR image</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_mut_bgr8</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">BgrImage</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_mut_bgr8</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;mut</span> <span class="ident">BgrImage</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
             <span class="ident">DynamicImage::ImageBgr8</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">p</span>) =&gt; <span class="prelude-val">Some</span>(<span class="ident">p</span>),
             <span class="kw">_</span> =&gt; <span class="prelude-val">None</span>,
@@ -1911,7 +1916,7 @@
     }
 
     <span class="doccomment">/// Return a mutable reference to an 8bit RGBA image</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_mut_rgba8</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">RgbaImage</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_mut_rgba8</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;mut</span> <span class="ident">RgbaImage</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
             <span class="ident">DynamicImage::ImageRgba8</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">p</span>) =&gt; <span class="prelude-val">Some</span>(<span class="ident">p</span>),
             <span class="kw">_</span> =&gt; <span class="prelude-val">None</span>,
@@ -1927,7 +1932,7 @@
     }
 
     <span class="doccomment">/// Return a mutable reference to an 8bit RGBA image</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_mut_bgra8</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">BgraImage</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_mut_bgra8</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;mut</span> <span class="ident">BgraImage</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
             <span class="ident">DynamicImage::ImageBgra8</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">p</span>) =&gt; <span class="prelude-val">Some</span>(<span class="ident">p</span>),
             <span class="kw">_</span> =&gt; <span class="prelude-val">None</span>,
@@ -1943,7 +1948,7 @@
     }
 
     <span class="doccomment">/// Return a mutable reference to an 8bit Grayscale image</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_mut_luma8</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">GrayImage</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_mut_luma8</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;mut</span> <span class="ident">GrayImage</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
             <span class="ident">DynamicImage::ImageLuma8</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">p</span>) =&gt; <span class="prelude-val">Some</span>(<span class="ident">p</span>),
             <span class="kw">_</span> =&gt; <span class="prelude-val">None</span>,
@@ -1959,7 +1964,7 @@
     }
 
     <span class="doccomment">/// Return a mutable reference to an 8bit Grayscale image with an alpha channel</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_mut_luma_alpha8</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">GrayAlphaImage</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_mut_luma_alpha8</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;mut</span> <span class="ident">GrayAlphaImage</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
             <span class="ident">DynamicImage::ImageLumaA8</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">p</span>) =&gt; <span class="prelude-val">Some</span>(<span class="ident">p</span>),
             <span class="kw">_</span> =&gt; <span class="prelude-val">None</span>,
@@ -1975,7 +1980,7 @@
     }
 
     <span class="doccomment">/// Return a mutable reference to an 16bit RGB image</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_mut_rgb16</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Rgb16Image</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_mut_rgb16</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;mut</span> <span class="ident">Rgb16Image</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
             <span class="ident">DynamicImage::ImageRgb16</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">p</span>) =&gt; <span class="prelude-val">Some</span>(<span class="ident">p</span>),
             <span class="kw">_</span> =&gt; <span class="prelude-val">None</span>,
@@ -1991,7 +1996,7 @@
     }
 
     <span class="doccomment">/// Return a mutable reference to an 16bit RGBA image</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_mut_rgba16</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Rgba16Image</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_mut_rgba16</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;mut</span> <span class="ident">Rgba16Image</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
             <span class="ident">DynamicImage::ImageRgba16</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">p</span>) =&gt; <span class="prelude-val">Some</span>(<span class="ident">p</span>),
             <span class="kw">_</span> =&gt; <span class="prelude-val">None</span>,
@@ -2007,7 +2012,7 @@
     }
 
     <span class="doccomment">/// Return a mutable reference to an 16bit Grayscale image</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_mut_luma16</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">Gray16Image</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_mut_luma16</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;mut</span> <span class="ident">Gray16Image</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
             <span class="ident">DynamicImage::ImageLuma16</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">p</span>) =&gt; <span class="prelude-val">Some</span>(<span class="ident">p</span>),
             <span class="kw">_</span> =&gt; <span class="prelude-val">None</span>,
@@ -2023,7 +2028,7 @@
     }
 
     <span class="doccomment">/// Return a mutable reference to an 16bit Grayscale image with an alpha channel</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_mut_luma_alpha16</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">GrayAlpha16Image</span><span class="op">&gt;</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">as_mut_luma_alpha16</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="kw-2">&amp;mut</span> <span class="ident">GrayAlpha16Image</span><span class="op">&gt;</span> {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
             <span class="ident">DynamicImage::ImageLumaA16</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">p</span>) =&gt; <span class="prelude-val">Some</span>(<span class="ident">p</span>),
             <span class="kw">_</span> =&gt; <span class="prelude-val">None</span>,
@@ -2105,7 +2110,7 @@
 
     <span class="doccomment">/// Invert the colors of this image.</span>
     <span class="doccomment">/// This method operates inplace.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">invert</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">invert</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) {
         <span class="macro">dynamic_map!</span>(<span class="kw-2">*</span><span class="self">self</span>, <span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">p</span> -&gt; <span class="ident">imageops::invert</span>(<span class="ident">p</span>))
     }
 
@@ -2257,7 +2262,7 @@
     <span class="doccomment">/// Encode this image and write it to ```w```</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">write_to</span><span class="op">&lt;</span><span class="ident">W</span>: <span class="ident">Write</span>, <span class="ident">F</span>: <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">ImageOutputFormat</span><span class="op">&gt;</span><span class="op">&gt;</span>(
         <span class="kw-2">&amp;</span><span class="self">self</span>,
-        <span class="ident">w</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">W</span>,
+        <span class="ident">w</span>: <span class="kw-2">&amp;mut</span> <span class="ident">W</span>,
         <span class="ident">format</span>: <span class="ident">F</span>,
     ) -&gt; <span class="ident">ImageResult</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
         <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">unused_variables</span>)]</span>
@@ -2421,7 +2426,7 @@
 <span class="kw">impl</span> <span class="ident">GenericImage</span> <span class="kw">for</span> <span class="ident">DynamicImage</span> {
     <span class="kw">type</span> <span class="ident">InnerImage</span> <span class="op">=</span> <span class="ident">DynamicImage</span>;
 
-    <span class="kw">fn</span> <span class="ident">put_pixel</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>, <span class="ident">pixel</span>: <span class="ident">color::Rgba</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>) {
+    <span class="kw">fn</span> <span class="ident">put_pixel</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>, <span class="ident">pixel</span>: <span class="ident">color::Rgba</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>) {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
             <span class="ident">DynamicImage::ImageLuma8</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">p</span>) =&gt; <span class="ident">p</span>.<span class="ident">put_pixel</span>(<span class="ident">x</span>, <span class="ident">y</span>, <span class="ident">pixel</span>.<span class="ident">to_luma</span>()),
             <span class="ident">DynamicImage::ImageLumaA8</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">p</span>) =&gt; <span class="ident">p</span>.<span class="ident">put_pixel</span>(<span class="ident">x</span>, <span class="ident">y</span>, <span class="ident">pixel</span>.<span class="ident">to_luma_alpha</span>()),
@@ -2436,7 +2441,7 @@
         }
     }
     <span class="doccomment">/// DEPRECATED: Use iterator `pixels_mut` to blend the pixels directly.</span>
-    <span class="kw">fn</span> <span class="ident">blend_pixel</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>, <span class="ident">pixel</span>: <span class="ident">color::Rgba</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>) {
+    <span class="kw">fn</span> <span class="ident">blend_pixel</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="ident">x</span>: <span class="ident">u32</span>, <span class="ident">y</span>: <span class="ident">u32</span>, <span class="ident">pixel</span>: <span class="ident">color::Rgba</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span>) {
         <span class="kw">match</span> <span class="kw-2">*</span><span class="self">self</span> {
             <span class="ident">DynamicImage::ImageLuma8</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">p</span>) =&gt; <span class="ident">p</span>.<span class="ident">blend_pixel</span>(<span class="ident">x</span>, <span class="ident">y</span>, <span class="ident">pixel</span>.<span class="ident">to_luma</span>()),
             <span class="ident">DynamicImage::ImageLumaA8</span>(<span class="kw-2">ref</span> <span class="kw-2">mut</span> <span class="ident">p</span>) =&gt; <span class="ident">p</span>.<span class="ident">blend_pixel</span>(<span class="ident">x</span>, <span class="ident">y</span>, <span class="ident">pixel</span>.<span class="ident">to_luma_alpha</span>()),
@@ -2452,11 +2457,11 @@
     }
 
     <span class="doccomment">/// DEPRECATED: Do not use is function: It is unimplemented!</span>
-    <span class="kw">fn</span> <span class="ident">get_pixel_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>, <span class="kw">_</span>: <span class="ident">u32</span>, <span class="kw">_</span>: <span class="ident">u32</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">color::Rgba</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">get_pixel_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>, <span class="kw">_</span>: <span class="ident">u32</span>, <span class="kw">_</span>: <span class="ident">u32</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="ident">color::Rgba</span><span class="op">&lt;</span><span class="ident">u8</span><span class="op">&gt;</span> {
         <span class="macro">unimplemented!</span>()
     }
 
-    <span class="kw">fn</span> <span class="ident">inner_mut</span>(<span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident"><span class="self">Self</span>::InnerImage</span> {
+    <span class="kw">fn</span> <span class="ident">inner_mut</span>(<span class="kw-2">&amp;mut</span> <span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut</span> <span class="ident"><span class="self">Self</span>::InnerImage</span> {
         <span class="self">self</span>
     }
 }
@@ -2686,7 +2691,7 @@
 
     <span class="attribute">#[<span class="ident">bench</span>]</span>
     <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;benchmarks&quot;</span>)]</span>
-    <span class="kw">fn</span> <span class="ident">bench_conversion</span>(<span class="ident">b</span>: <span class="kw-2">&amp;</span><span class="kw-2">mut</span> <span class="ident">test::Bencher</span>) {
+    <span class="kw">fn</span> <span class="ident">bench_conversion</span>(<span class="ident">b</span>: <span class="kw-2">&amp;mut</span> <span class="ident">test::Bencher</span>) {
         <span class="kw">let</span> <span class="ident">a</span> <span class="op">=</span> <span class="ident"><span class="kw">super</span>::DynamicImage::ImageRgb8</span>(<span class="ident"><span class="kw">crate</span>::ImageBuffer::new</span>(<span class="number">1000</span>, <span class="number">1000</span>));
         <span class="ident">b</span>.<span class="ident">iter</span>(<span class="op">|</span><span class="op">|</span> <span class="ident">a</span>.<span class="ident">to_luma8</span>());
         <span class="ident">b</span>.<span class="ident">bytes</span> <span class="op">=</span> <span class="number">1000</span> <span class="op">*</span> <span class="number">1000</span> <span class="op">*</span> <span class="number">3</span>
@@ -2717,6 +2722,5 @@
     }
 }
 </code></pre></div>
-</section><section id="search" class="content hidden"></section><div id="rustdoc-vars" data-root-path="../../" data-current-crate="image" data-search-index-js="../../search-index.js" data-search-js="../../search.js"></div>
-    <script src="../../main.js"></script><script src="../../source-script.js"></script><script src="../../source-files.js"></script>
+</section><section id="search" class="content hidden"></section></div></main><div id="rustdoc-vars" data-root-path="../../" data-current-crate="image" data-themes="ayu,dark,light" data-resource-suffix="" data-rustdoc-version="1.61.0-nightly (10cc7a6d0 2022-02-26)" ></div>
 </body></html>

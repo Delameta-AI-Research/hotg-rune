@@ -33,6 +33,29 @@
 <span id="28">28</span>
 <span id="29">29</span>
 <span id="30">30</span>
+<span id="31">31</span>
+<span id="32">32</span>
+<span id="33">33</span>
+<span id="34">34</span>
+<span id="35">35</span>
+<span id="36">36</span>
+<span id="37">37</span>
+<span id="38">38</span>
+<span id="39">39</span>
+<span id="40">40</span>
+<span id="41">41</span>
+<span id="42">42</span>
+<span id="43">43</span>
+<span id="44">44</span>
+<span id="45">45</span>
+<span id="46">46</span>
+<span id="47">47</span>
+<span id="48">48</span>
+<span id="49">49</span>
+<span id="50">50</span>
+<span id="51">51</span>
+<span id="52">52</span>
+<span id="53">53</span>
 </pre><pre class="rust"><code><span class="doccomment">//! Functions for handling various &quot;well-known&quot; model formats.</span>
 
 <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;tflite&quot;</span>)]</span>
@@ -45,6 +68,12 @@
 <span class="kw">pub</span> <span class="kw">use</span> <span class="ident"><span class="self">self</span>::tflite::load_tflite</span>;
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::callbacks</span>::{<span class="ident">Model</span>, <span class="ident">ModelMetadata</span>};
 
+<span class="doccomment">/// A model handler which will try to load a model based on the feature flags</span>
+<span class="doccomment">/// that have been set.</span>
+<span class="doccomment">///</span>
+<span class="doccomment">/// Supported formats are:</span>
+<span class="doccomment">/// - TensorFlow Lite</span>
+<span class="attribute">#[<span class="ident">cfg_attr</span>(<span class="ident">not</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;tflite&quot;</span>), <span class="ident">doc</span>(<span class="string">&quot;(not supported)&quot;</span>))]</span>
 <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">default_model_handler</span>(
     <span class="ident">_id</span>: <span class="ident">u32</span>,
     <span class="ident">meta</span>: <span class="kw-2">&amp;</span><span class="ident">ModelMetadata</span><span class="op">&lt;</span><span class="lifetime">&#39;_</span><span class="op">&gt;</span>,
@@ -60,7 +89,24 @@
     <span class="kw">match</span> <span class="ident">mimetype</span> {
         <span class="attribute">#[<span class="ident">cfg</span>(<span class="ident">feature</span> <span class="op">=</span> <span class="string">&quot;tflite&quot;</span>)]</span>
         <span class="ident">TFLITE_MIMETYPE</span> =&gt; <span class="ident">load_tflite</span>(<span class="ident">model</span>, <span class="ident">inputs</span>, <span class="ident">outputs</span>),
-        <span class="kw">_</span> =&gt; <span class="prelude-val">Err</span>(<span class="ident">Error::msg</span>(<span class="string">&quot;Unsupported model format&quot;</span>)),
+        <span class="kw">_</span> =&gt; <span class="prelude-val">Err</span>(<span class="ident">UnsupportedModelFormat::new</span>(<span class="ident">mimetype</span>).<span class="ident">into</span>()),
+    }
+}
+
+<span class="doccomment">/// The error returned when the model handler can&#39;t handle a particular model</span>
+<span class="doccomment">/// format.</span>
+<span class="attribute">#[<span class="ident">derive</span>(<span class="ident">Debug</span>, <span class="ident">Clone</span>, <span class="ident">PartialEq</span>, <span class="ident">thiserror::Error</span>)]</span>
+<span class="attribute">#[<span class="ident">error</span>(<span class="string">&quot;The \&quot;{}\&quot; format isn&#39;t supported&quot;</span>, <span class="ident">mimetype</span>)]</span>
+<span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">UnsupportedModelFormat</span> {
+    <span class="doccomment">/// The model&#39;s &quot;mimetype&quot;.</span>
+    <span class="kw">pub</span> <span class="ident">mimetype</span>: <span class="ident">String</span>,
+}
+
+<span class="kw">impl</span> <span class="ident">UnsupportedModelFormat</span> {
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">new</span>(<span class="ident">mimetype</span>: <span class="kw">impl</span> <span class="ident">Into</span><span class="op">&lt;</span><span class="ident">String</span><span class="op">&gt;</span>) -&gt; <span class="self">Self</span> {
+        <span class="self">Self</span> {
+            <span class="ident">mimetype</span>: <span class="ident">mimetype</span>.<span class="ident">into</span>(),
+        }
     }
 }
 </code></pre></div>

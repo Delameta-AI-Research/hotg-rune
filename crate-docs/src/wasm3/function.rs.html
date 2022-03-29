@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/github.com-1ecc6299db9ec823/wasm3-0.3.1/src/function.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>function.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/git/checkouts/wasm3-rs-a44766fb80123c43/df74c2a/src/function.rs`."><meta name="keywords" content="rust, rustlang, rust-lang"><title>function.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Regular.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../FiraSans-Medium.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Regular.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceSerif4-Bold.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../SourceCodePro-Semibold.ttf.woff2"><link rel="stylesheet" type="text/css" href="../../normalize.css"><link rel="stylesheet" type="text/css" href="../../rustdoc.css" id="mainThemeStyle"><link rel="stylesheet" type="text/css" href="../../ayu.css" disabled><link rel="stylesheet" type="text/css" href="../../dark.css" disabled><link rel="stylesheet" type="text/css" href="../../light.css" id="themeStyle"><script id="default-settings" ></script><script src="../../storage.js"></script><script src="../../crates.js"></script><script defer src="../../main.js"></script><script defer src="../../source-script.js"></script><script defer src="../../source-files.js"></script>
     <noscript><link rel="stylesheet" href="../../noscript.css"></noscript><link rel="alternate icon" type="image/png" href="../../favicon-16x16.png"><link rel="alternate icon" type="image/png" href="../../favicon-32x32.png"><link rel="icon" type="image/svg+xml" href="../../favicon.svg"></head><body class="rustdoc source"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button><a class="sidebar-logo" href="../../wasm3/index.html"><div class="logo-container"><img class="rust-logo" src="../../rust-logo.svg" alt="logo"></div>
         </a><h2 class="location"></h2>
     </nav>
@@ -206,57 +206,16 @@
 <span id="201">201</span>
 <span id="202">202</span>
 <span id="203">203</span>
-<span id="204">204</span>
-<span id="205">205</span>
-<span id="206">206</span>
-<span id="207">207</span>
-<span id="208">208</span>
-<span id="209">209</span>
-<span id="210">210</span>
-<span id="211">211</span>
-<span id="212">212</span>
-<span id="213">213</span>
-<span id="214">214</span>
-<span id="215">215</span>
-<span id="216">216</span>
-<span id="217">217</span>
-<span id="218">218</span>
-<span id="219">219</span>
-<span id="220">220</span>
-<span id="221">221</span>
-<span id="222">222</span>
-<span id="223">223</span>
-<span id="224">224</span>
-<span id="225">225</span>
-<span id="226">226</span>
-<span id="227">227</span>
-<span id="228">228</span>
-<span id="229">229</span>
-<span id="230">230</span>
-<span id="231">231</span>
-<span id="232">232</span>
-<span id="233">233</span>
-<span id="234">234</span>
-<span id="235">235</span>
-<span id="236">236</span>
-<span id="237">237</span>
-<span id="238">238</span>
-<span id="239">239</span>
-<span id="240">240</span>
-<span id="241">241</span>
-<span id="242">242</span>
 </pre><pre class="rust"><code><span class="kw">use</span> <span class="ident">core::cmp</span>::{<span class="ident">Eq</span>, <span class="ident">PartialEq</span>};
 <span class="kw">use</span> <span class="ident">core::hash</span>::{<span class="ident">Hash</span>, <span class="ident">Hasher</span>};
 <span class="kw">use</span> <span class="ident">core::marker::PhantomData</span>;
 <span class="kw">use</span> <span class="ident">core::ptr</span>::{<span class="self">self</span>, <span class="ident">NonNull</span>};
-<span class="kw">use</span> <span class="ident">core::slice</span>;
 <span class="kw">use</span> <span class="ident">core::str</span>;
 
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::error</span>::{<span class="ident">Error</span>, <span class="prelude-ty">Result</span>};
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::runtime::Runtime</span>;
 <span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::utils::cstr_to_str</span>;
-<span class="kw">use</span> <span class="ident"><span class="kw">crate</span>::wasm3_priv</span>;
-<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">WasmArgs</span>, <span class="ident">WasmType</span>};
+<span class="kw">use</span> <span class="kw">crate</span>::{<span class="ident">Module</span>, <span class="ident">WasmArg</span>, <span class="ident">WasmArgs</span>, <span class="ident">WasmType</span>};
 
 <span class="doccomment">/// Calling Context for a host function.</span>
 <span class="kw">pub</span> <span class="kw">struct</span> <span class="ident">CallContext</span><span class="op">&lt;</span><span class="lifetime">&#39;cc</span><span class="op">&gt;</span> {
@@ -272,8 +231,15 @@
         }
     }
 
-    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">mallocated</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*mut</span> <span class="ident">ffi::M3MemoryHeader</span> {
-        <span class="self">self</span>.<span class="ident">runtime</span>.<span class="ident">as_ref</span>().<span class="ident">memory</span>.<span class="ident">mallocated</span>
+    <span class="doccomment">/// Returns the raw memory of the runtime associated with this context.</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// # Safety</span>
+    <span class="doccomment">///</span>
+    <span class="doccomment">/// The returned pointer may get invalidated when wasm function objects are called due to reallocations.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">memory</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*const</span> [<span class="ident">u8</span>] {
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">memory_size</span> <span class="op">=</span> <span class="number">0u32</span>;
+        <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">ffi::m3_GetMemory</span>(<span class="self">self</span>.<span class="ident">runtime</span>.<span class="ident">as_ptr</span>(), <span class="kw-2">&amp;mut</span> <span class="ident">memory_size</span>, <span class="number">0</span>) };
+        <span class="ident">ptr::slice_from_raw_parts</span>(<span class="ident">data</span>, <span class="ident">memory_size</span> <span class="kw">as</span> <span class="ident">usize</span>)
     }
 
     <span class="doccomment">/// Returns the raw memory of the runtime associated with this context.</span>
@@ -281,31 +247,10 @@
     <span class="doccomment">/// # Safety</span>
     <span class="doccomment">///</span>
     <span class="doccomment">/// The returned pointer may get invalidated when wasm function objects are called due to reallocations.</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">memory</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*const</span> [<span class="ident">u8</span>] {
-        <span class="kw">let</span> <span class="ident">mallocated</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">mallocated</span>();
-        <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">mallocated</span>).<span class="ident">length</span> <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">len</span> <span class="op">==</span> <span class="number">0</span> {
-            <span class="ident">ptr::NonNull::dangling</span>().<span class="ident">as_ptr</span>()
-        } <span class="kw">else</span> {
-            <span class="ident">mallocated</span>.<span class="ident">offset</span>(<span class="number">1</span>).<span class="ident">cast</span>()
-        };
-        <span class="ident">ptr::slice_from_raw_parts</span>(<span class="ident">data</span>, <span class="ident">len</span>)
-    }
-
-    <span class="doccomment">/// Returns the raw memory of the runtime associated with this context.</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// # Safety</span>
-    <span class="doccomment">///</span>
-    <span class="doccomment">/// The returned pointer may get invalidated when wasm function objects are called due to reallocations.</span>
-    <span class="kw">pub</span> <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">memory_mut</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*mut</span> [<span class="ident">u8</span>] {
-        <span class="kw">let</span> <span class="ident">mallocated</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">mallocated</span>();
-        <span class="kw">let</span> <span class="ident">len</span> <span class="op">=</span> (<span class="kw-2">*</span><span class="ident">mallocated</span>).<span class="ident">length</span> <span class="kw">as</span> <span class="ident">usize</span>;
-        <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="kw">if</span> <span class="ident">len</span> <span class="op">==</span> <span class="number">0</span> {
-            <span class="ident">ptr::NonNull::dangling</span>().<span class="ident">as_ptr</span>()
-        } <span class="kw">else</span> {
-            <span class="ident">mallocated</span>.<span class="ident">offset</span>(<span class="number">1</span>).<span class="ident">cast</span>()
-        };
-        <span class="ident">ptr::slice_from_raw_parts_mut</span>(<span class="ident">data</span>, <span class="ident">len</span>)
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">memory_mut</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">*mut</span> [<span class="ident">u8</span>] {
+        <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">memory_size</span> <span class="op">=</span> <span class="number">0u32</span>;
+        <span class="kw">let</span> <span class="ident">data</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">ffi::m3_GetMemory</span>(<span class="self">self</span>.<span class="ident">runtime</span>.<span class="ident">as_ptr</span>(), <span class="kw-2">&amp;mut</span> <span class="ident">memory_size</span>, <span class="number">0</span>) };
+        <span class="ident">ptr::slice_from_raw_parts_mut</span>(<span class="ident">data</span>, <span class="ident">memory_size</span> <span class="kw">as</span> <span class="ident">usize</span>)
     }
 }
 
@@ -313,7 +258,8 @@
 <span class="doccomment">/// Type of a raw host function for wasm3.</span>
 <span class="kw">pub</span> <span class="kw">type</span> <span class="ident">RawCall</span> <span class="op">=</span> <span class="kw">unsafe</span> <span class="kw">extern</span> <span class="string">&quot;C&quot;</span> <span class="kw">fn</span>(
     <span class="ident">runtime</span>: <span class="ident">ffi::IM3Runtime</span>,
-    <span class="ident">_sp</span>: <span class="ident">ffi::m3stack_t</span>,
+    <span class="ident">ctx</span>: <span class="ident">ffi::IM3ImportContext</span>,
+    <span class="ident">_sp</span>: <span class="kw-2">*mut</span> <span class="ident">u64</span>,
     <span class="ident">_mem</span>: <span class="kw-2">*mut</span> <span class="ident">cty::c_void</span>,
 ) -&gt; <span class="kw-2">*const</span> <span class="ident">cty::c_void</span>;
 
@@ -347,14 +293,19 @@
     <span class="ident">Args</span>: <span class="ident">WasmArgs</span>,
     <span class="ident">Ret</span>: <span class="ident">WasmType</span>,
 {
-    <span class="doccomment">/// The name of the import module of this function.</span>
-    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">import_module_name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">str</span> {
-        <span class="kw">unsafe</span> { <span class="ident">cstr_to_str</span>(<span class="self">self</span>.<span class="ident">raw</span>.<span class="ident">as_ref</span>().<span class="ident">import</span>.<span class="ident">moduleUtf8</span>) }
-    }
-
     <span class="doccomment">/// The name of this function.</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">name</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span><span class="ident">str</span> {
-        <span class="kw">unsafe</span> { <span class="ident">cstr_to_str</span>(<span class="self">self</span>.<span class="ident">raw</span>.<span class="ident">as_ref</span>().<span class="ident">name</span>) }
+        <span class="kw">unsafe</span> { <span class="ident">cstr_to_str</span>(<span class="ident">ffi::m3_GetFunctionName</span>(<span class="self">self</span>.<span class="ident">raw</span>.<span class="ident">as_ptr</span>())) }
+    }
+
+    <span class="doccomment">/// The module containing this function.</span>
+    <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">module</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span><span class="op">&lt;</span><span class="ident">Module</span><span class="op">&lt;</span><span class="lifetime">&#39;rt</span><span class="op">&gt;</span><span class="op">&gt;</span> {
+        <span class="kw">let</span> <span class="ident">module</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">ffi::m3_GetFunctionModule</span>(<span class="self">self</span>.<span class="ident">raw</span>.<span class="ident">as_ptr</span>()) };
+        <span class="kw">if</span> <span class="op">!</span><span class="ident">module</span>.<span class="ident">is_null</span>() {
+            <span class="prelude-val">Some</span>(<span class="ident">Module::from_raw</span>(<span class="self">self</span>.<span class="ident">rt</span>, <span class="ident">module</span>))
+        } <span class="kw">else</span> {
+            <span class="prelude-val">None</span>
+        }
     }
 }
 
@@ -363,77 +314,42 @@
     <span class="ident">Args</span>: <span class="ident">WasmArgs</span>,
     <span class="ident">Ret</span>: <span class="ident">WasmType</span>,
 {
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">validate_sig</span>(<span class="kw-2">mut</span> <span class="ident">func</span>: <span class="ident">NNM3Function</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span>()<span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="kw-2">&amp;</span><span class="ident">ffi::M3FuncType</span> {
-            <span class="ident">returnType</span>: <span class="ident">ret</span>,
-            <span class="ident">argTypes</span>: <span class="kw-2">ref</span> <span class="ident">args</span>,
-            <span class="ident">numArgs</span>: <span class="ident">num</span>,
-            ..
-        } <span class="op">=</span> <span class="kw">unsafe</span> { <span class="kw-2">&amp;</span><span class="kw-2">*</span><span class="ident">func</span>.<span class="ident">as_mut</span>().<span class="ident">funcType</span> };
-        <span class="comment">// argTypes is actually dynamically sized.</span>
-        <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">slice::from_raw_parts</span>(<span class="ident">args</span>.<span class="ident">as_ptr</span>(), <span class="ident">num</span> <span class="kw">as</span> <span class="ident">usize</span>) };
-        <span class="kw">match</span> <span class="ident">Ret::TYPE_INDEX</span> <span class="op">==</span> <span class="ident">ret</span> <span class="op">&amp;&amp;</span> <span class="ident">Args::validate_types</span>(<span class="ident">args</span>) {
-            <span class="bool-val">true</span> =&gt; <span class="prelude-val">Ok</span>(()),
-            <span class="bool-val">false</span> =&gt; <span class="prelude-val">Err</span>(<span class="ident">Error::InvalidFunctionSignature</span>),
+    <span class="kw">fn</span> <span class="ident">validate_sig</span>(<span class="ident">func</span>: <span class="ident">NNM3Function</span>) -&gt; <span class="ident">bool</span> {
+        <span class="kw">let</span> <span class="ident">num_args</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">ffi::m3_GetArgCount</span>(<span class="ident">func</span>.<span class="ident">as_ptr</span>()) };
+        <span class="kw">let</span> <span class="ident">args</span> <span class="op">=</span> (<span class="number">0</span>..<span class="ident">num_args</span>).<span class="ident">map</span>(<span class="op">|</span><span class="ident">i</span><span class="op">|</span> <span class="kw">unsafe</span> { <span class="ident">ffi::m3_GetArgType</span>(<span class="ident">func</span>.<span class="ident">as_ptr</span>(), <span class="ident">i</span>) });
+        <span class="kw">if</span> <span class="op">!</span><span class="ident">Args::validate_types</span>(<span class="ident">args</span>) {
+            <span class="kw">return</span> <span class="bool-val">false</span>;
+        }
+
+        <span class="kw">let</span> <span class="ident">num_rets</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">ffi::m3_GetRetCount</span>(<span class="ident">func</span>.<span class="ident">as_ptr</span>()) };
+        <span class="kw">match</span> <span class="ident">num_rets</span> {
+            <span class="number">0</span> =&gt; <span class="ident">Ret::TYPE_INDEX</span> <span class="op">==</span> <span class="ident">ffi::M3ValueType::c_m3Type_none</span>,
+            <span class="number">1</span> =&gt; {
+                <span class="kw">let</span> <span class="ident">ret</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">ffi::m3_GetRetType</span>(<span class="ident">func</span>.<span class="ident">as_ptr</span>(), <span class="number">0</span>) };
+                <span class="ident">Ret::TYPE_INDEX</span> <span class="op">==</span> <span class="ident">ret</span>
+            }
+            <span class="kw">_</span> =&gt; <span class="bool-val">false</span>,
         }
     }
 
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">from_raw</span>(<span class="ident">rt</span>: <span class="kw-2">&amp;</span><span class="lifetime">&#39;rt</span> <span class="ident">Runtime</span>, <span class="ident">raw</span>: <span class="ident">NNM3Function</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
-        <span class="ident"><span class="self">Self</span>::validate_sig</span>(<span class="ident">raw</span>)<span class="question-mark">?</span>;
-        <span class="kw">let</span> <span class="ident">this</span> <span class="op">=</span> <span class="ident">Function</span> {
+        <span class="kw">if</span> <span class="op">!</span><span class="ident"><span class="self">Self</span>::validate_sig</span>(<span class="ident">raw</span>) {
+            <span class="kw">return</span> <span class="prelude-val">Err</span>(<span class="ident">Error::InvalidFunctionSignature</span>);
+        }
+        <span class="prelude-val">Ok</span>(<span class="ident">Function</span> {
             <span class="ident">raw</span>,
             <span class="ident">rt</span>,
             <span class="ident">_pd</span>: <span class="ident">PhantomData</span>,
-        };
-        <span class="comment">// make sure the function is compiled</span>
-        <span class="ident">this</span>.<span class="ident">compile</span>()
+        })
     }
 
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">pub</span>(<span class="kw">crate</span>) <span class="kw">fn</span> <span class="ident">compile</span>(<span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="self">Self</span><span class="op">&gt;</span> {
+    <span class="kw">fn</span> <span class="ident">get_call_result</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Ret</span><span class="op">&gt;</span> {
         <span class="kw">unsafe</span> {
-            <span class="kw">if</span> <span class="self">self</span>.<span class="ident">raw</span>.<span class="ident">as_ref</span>().<span class="ident">compiled</span>.<span class="ident">is_null</span>() {
-                <span class="ident">Error::from_ffi_res</span>(<span class="ident">wasm3_priv::Compile_Function</span>(<span class="self">self</span>.<span class="ident">raw</span>.<span class="ident">as_ptr</span>()))<span class="question-mark">?</span>;
-            }
-        };
-        <span class="prelude-val">Ok</span>(<span class="self">self</span>)
-    }
-
-    <span class="kw">fn</span> <span class="ident">call_impl</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">args</span>: <span class="ident">Args</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Ret</span><span class="op">&gt;</span> {
-        <span class="kw">let</span> <span class="ident">stack</span> <span class="op">=</span> <span class="self">self</span>.<span class="ident">rt</span>.<span class="ident">stack_mut</span>();
-        <span class="kw">let</span> <span class="ident">ret</span> <span class="op">=</span> <span class="kw">unsafe</span> {
-            <span class="ident">args</span>.<span class="ident">push_on_stack</span>(<span class="ident">stack</span>);
-            <span class="ident"><span class="self">Self</span>::call_impl_</span>(
-                <span class="self">self</span>.<span class="ident">raw</span>.<span class="ident">as_ref</span>().<span class="ident">compiled</span>,
-                <span class="ident">stack</span>.<span class="ident">cast</span>(),
-                <span class="self">self</span>.<span class="ident">rt</span>.<span class="ident">mallocated</span>(),
-                <span class="number">0</span>,
-                <span class="number">0.0</span>,
-            )
-        };
-        <span class="ident">Error::from_ffi_res</span>(<span class="ident">ret</span>.<span class="ident">cast</span>()).<span class="ident">map</span>(<span class="op">|</span>()<span class="op">|</span> <span class="kw">unsafe</span> { <span class="ident">Ret::pop_from_stack</span>(<span class="ident">stack</span>.<span class="ident">cast</span>()) })
-    }
-
-    <span class="attribute">#[<span class="ident">inline</span>]</span>
-    <span class="kw">unsafe</span> <span class="kw">fn</span> <span class="ident">call_impl_</span>(
-        <span class="ident">_pc</span>: <span class="ident">ffi::pc_t</span>,
-        <span class="ident">_sp</span>: <span class="ident">ffi::m3stack_t</span>,
-        <span class="ident">_mem</span>: <span class="kw-2">*mut</span> <span class="ident">ffi::M3MemoryHeader</span>,
-        <span class="ident">_r0</span>: <span class="ident">ffi::m3reg_t</span>,
-        <span class="ident">_fp0</span>: <span class="ident">f64</span>,
-    ) -&gt; <span class="ident">ffi::m3ret_t</span> {
-        <span class="kw">let</span> <span class="ident">possible_trap</span> <span class="op">=</span> <span class="ident">ffi::m3_Yield</span>();
-        <span class="kw">if</span> <span class="op">!</span><span class="ident">possible_trap</span>.<span class="ident">is_null</span>() {
-            <span class="ident">possible_trap</span>.<span class="ident">cast</span>()
-        } <span class="kw">else</span> {
-            (<span class="kw-2">*</span><span class="ident">_pc</span>.<span class="ident">cast</span>::<span class="op">&lt;</span><span class="ident">ffi::IM3Operation</span><span class="op">&gt;</span>()).<span class="ident">expect</span>(<span class="string">&quot;IM3Operation was null&quot;</span>)(
-                <span class="ident">_pc</span>.<span class="ident">add</span>(<span class="number">1</span>),
-                <span class="ident">_sp</span>,
-                <span class="ident">_mem</span>,
-                <span class="ident">_r0</span>,
-                <span class="ident">_fp0</span>,
-            )
+            <span class="kw">let</span> <span class="kw-2">mut</span> <span class="ident">ret</span> <span class="op">=</span> <span class="ident">core::mem::MaybeUninit</span>::<span class="op">&lt;</span><span class="ident">Ret</span><span class="op">&gt;</span><span class="ident">::uninit</span>();
+            <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="ident">ffi::m3_GetResultsV</span>(<span class="self">self</span>.<span class="ident">raw</span>.<span class="ident">as_ptr</span>(), <span class="ident">ret</span>.<span class="ident">as_mut_ptr</span>());
+            <span class="ident">Error::from_ffi_res</span>(<span class="ident">result</span>)<span class="question-mark">?</span>;
+            <span class="prelude-val">Ok</span>(<span class="ident">ret</span>.<span class="ident">assume_init</span>())
         }
     }
 }
@@ -456,7 +372,9 @@
             <span class="attribute">#[<span class="ident">inline</span>]</span>
             <span class="attribute">#[<span class="ident">allow</span>(<span class="ident">non_snake_case</span>, <span class="ident">clippy::too_many_arguments</span>)]</span>
             <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">call</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">types</span>: <span class="macro-nonterminal">$</span><span class="macro-nonterminal">types</span>),<span class="kw-2">*</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Ret</span><span class="op">&gt;</span> {
-                <span class="self">self</span>.<span class="ident">call_impl</span>(($(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">types</span>,)<span class="kw-2">*</span>))
+                <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">ffi::m3_CallV</span>(<span class="self">self</span>.<span class="ident">raw</span>.<span class="ident">as_ptr</span>(), $(<span class="macro-nonterminal">$</span><span class="macro-nonterminal">types</span>,)<span class="kw-2">*</span>) };
+                <span class="ident">Error::from_ffi_res</span>(<span class="ident">result</span>)<span class="question-mark">?</span>;
+                <span class="self">self</span>.<span class="ident">get_call_result</span>()
             }
         }
     };
@@ -466,13 +384,15 @@
 <span class="kw">impl</span><span class="op">&lt;</span><span class="lifetime">&#39;rt</span>, <span class="ident">ARG</span>, <span class="ident">Ret</span><span class="op">&gt;</span> <span class="ident">Function</span><span class="op">&lt;</span><span class="lifetime">&#39;rt</span>, <span class="ident">ARG</span>, <span class="ident">Ret</span><span class="op">&gt;</span>
 <span class="kw">where</span>
     <span class="ident">Ret</span>: <span class="ident">WasmType</span>,
-    <span class="ident">ARG</span>: <span class="ident"><span class="kw">crate</span>::WasmArg</span>,
+    <span class="ident">ARG</span>: <span class="ident">WasmArg</span>,
 {
     <span class="doccomment">/// Calls this function with the given parameter.</span>
     <span class="doccomment">/// This is implemented with variable arguments depending on the functions Args type.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">call</span>(<span class="kw-2">&amp;</span><span class="self">self</span>, <span class="ident">arg</span>: <span class="ident">ARG</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Ret</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">call_impl</span>(<span class="ident">arg</span>)
+        <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">ffi::m3_CallV</span>(<span class="self">self</span>.<span class="ident">raw</span>.<span class="ident">as_ptr</span>(), <span class="ident">arg</span>) };
+        <span class="ident">Error::from_ffi_res</span>(<span class="ident">result</span>)<span class="question-mark">?</span>;
+        <span class="self">self</span>.<span class="ident">get_call_result</span>()
     }
 }
 
@@ -484,7 +404,9 @@
     <span class="doccomment">/// This is implemented with variable arguments depending on the functions Args type.</span>
     <span class="attribute">#[<span class="ident">inline</span>]</span>
     <span class="kw">pub</span> <span class="kw">fn</span> <span class="ident">call</span>(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Result</span><span class="op">&lt;</span><span class="ident">Ret</span><span class="op">&gt;</span> {
-        <span class="self">self</span>.<span class="ident">call_impl</span>(())
+        <span class="kw">let</span> <span class="ident">result</span> <span class="op">=</span> <span class="kw">unsafe</span> { <span class="ident">ffi::m3_CallV</span>(<span class="self">self</span>.<span class="ident">raw</span>.<span class="ident">as_ptr</span>()) };
+        <span class="ident">Error::from_ffi_res</span>(<span class="ident">result</span>)<span class="question-mark">?</span>;
+        <span class="self">self</span>.<span class="ident">get_call_result</span>()
     }
 }
 </code></pre></div>
